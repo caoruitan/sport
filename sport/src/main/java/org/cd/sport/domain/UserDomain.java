@@ -56,7 +56,7 @@ public class UserDomain {
 	/**
 	 * 用户所属单位/公司
 	 */
-	private String company;
+	private String organization;
 
 	/**
 	 * 用户生日(非必填)
@@ -180,13 +180,13 @@ public class UserDomain {
 		this.role = role;
 	}
 
-	@Column(name = "COMPANY")
-	public String getCompany() {
-		return company;
+	@Column(name = "ORGANIZATION")
+	public String getOrganization() {
+		return organization;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
 	@Column(name = "BIRTHDAY")

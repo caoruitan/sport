@@ -6,11 +6,9 @@ package org.cd.sport.domain;
  * @author liuyk
  *
  */
-public class DeptDomain {
-	private String deptId;
-	private String deptName;
-	
-	
+public class OrganizationDomain {
+	private String orgId;
+	private String fullName;
 	
 	
 }
