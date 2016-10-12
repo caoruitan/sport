@@ -6,9 +6,10 @@
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	
 	<http entry-point-ref="loginUrlEntryPoint" auto-config="true">
+		<intercept-url pattern="/password/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/user/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/kjs.htm" access="hasRole('ROLE_KJS')"/>
 		<intercept-url pattern="/kjs/**" access="hasRole('ROLE_KJS')"/>
-		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()" />

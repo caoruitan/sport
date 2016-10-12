@@ -87,55 +87,87 @@ $(function(){
 	if(name){
 		$("#loginName").val(name);
 	}
+	// 登录验证
+	$("#loginForm").validate({
+        rules: {
+        	loginName:{
+                required: true
+            },
+            password: {
+                required: true
+            }
+        },
+        messages: {
+        	loginName:{
+                required: "用户名不能为空",
+            },
+            password: {
+            	required : "密码不能为空"
+            }
+        }
+     });
+	
 	// 登录操作
 	$(document).on("click","#loginBtn",function(){
-		$('#loginBtn').text('正在登录...');
-		$('#loginBtn').attr("disabled",true);
 		var uuid = $("#uuid").val();
-		$.ajax({
-            url: Sport.getBasePath()+"/doLogin",
-            type: "POST",
-            dataType: "JSON",
-            //contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: {
-                uuid:$('#uuid').val(),
-                return_url:$('#return_url').val(),
-                _csrf:$("#csrdId").val(),
-                loginName:$('#loginName').val(),
-                password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
-            },
-            error: function () {
-            	$('#loginBtn').removeAttr("disabled");
-            },
-            success: function (obj) {
-            	$('#loginBtn').removeAttr("disabled");
-            	if (obj) {
-                    if (obj.success) {
-                    	Sport.Cookie.set(Sport.name, $('#loginName').val(), 7);
-                        var isIE = !-[1,];
-                        var url = obj.url
-                        if(url.indexOf("https://")==-1 && url.indexOf("http://")==-1){
-                        	url = Sport.getBasePath()+"/"+obj.url;
-                        }
-                        if (isIE) {
-                            var link = document.createElement("a");
-                            link.href =url;
-                            link.style.display = 'none';
-                            document.body.appendChild(link);
-                            link.click();
-                        } else {
-                            window.location = url;
-                        }
-                        return;
-                    }else{
-                    	$("#errorMsg").text(obj.msg);
-                    	$("#errorMsg").show();
-                    }
-                }
-                $("#loginBtn").text("登&nbsp;&nbsp;&nbsp;&nbsp;录");
-            }
-        });
+		if($("#loginForm").valid()){
+			$('#loginBtn').attr("disabled",true);
+			$('#loginBtn').text('正在登录...');
+			$.ajax({
+				url: Sport.getBasePath()+"/doLogin",
+				type: "POST",
+				dataType: "JSON",
+				//contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				data: {
+					uuid:$('#uuid').val(),
+					return_url:$('#return_url').val(),
+					_csrf:$("#csrdId").val(),
+					loginName:$('#loginName').val(),
+					password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
+				},
+				error: function () {
+					$('#loginBtn').removeAttr("disabled");
+				},
+				success: function (obj) {
+					$('#loginBtn').removeAttr("disabled");
+					if (obj) {
+						if (obj.success) {
+							Sport.Cookie.set(Sport.name, $('#loginName').val(), 7);
+							var isIE = !-[1,];
+							var url = obj.url
+							if(url.indexOf("https://")==-1 && url.indexOf("http://")==-1){
+								url = Sport.getBasePath()+"/"+obj.url;
+							}
+							if (isIE) {
+								var link = document.createElement("a");
+								link.href =url;
+								link.style.display = 'none';
+								document.body.appendChild(link);
+								link.click();
+							} else {
+								window.location = url;
+							}
+							return;
+						}else{
+							$("#errorMsg").text(obj.msg);
+							$("#errorMsg").show();
+						}
+					}
+					$("#loginBtn").text("登&nbsp;&nbsp;&nbsp;&nbsp;录");
+				}
+			});
+		}
 	}).on("click","a.sport-logout",function(){
 		$.StandardPost(Sport.getBasePath()+"/logout");
+	}).on("click","button.sport-rest-btn",function(){
+		$(".sport-form")[0].reset();
 	})
+	// 创建用户
+	
+	
+	
+	
+	
+	
+	
 })

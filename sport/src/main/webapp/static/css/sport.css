@@ -1,4 +1,5 @@
 body {background: #f2f2f2;}
+.error{color:red;}
 /* 顶端菜单 */
 .layout_top {position: relative;border-top: 2px solid #5A6877;height: 85px;background: #F2F2F2 url(../img/frame/line_bg.png) repeat-x bottom;/*border-bottom: 1px solid #333*/}
 .layout_top .top_logo {width: 500px;background: url(../img/frame/logo.png) no-repeat 16px 18px;height: 70px;float: left;padding: 18px 0 0 180px;font-size: 16px;font-family: 微软雅黑}

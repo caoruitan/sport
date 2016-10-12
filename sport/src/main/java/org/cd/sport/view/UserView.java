@@ -1,114 +1,120 @@
-package org.cd.sport.domain;
+package org.cd.sport.view;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-
 /**
- * 用户实体
+ * 用户vo对象
  * 
  * @author liuyk
  *
  */
-@Entity
-@Table(name = "SPORT_USER")
-public class UserDomain {
+public class UserView {
 	/**
 	 * 用户id
 	 */
 	private String userId;
 
 	/**
-	 * 用户名/登录名(必填)
+	 * 用户名/登录名
 	 */
 	private String loginName;
 	/**
-	 * 用户登录密码(必填)
+	 * 用户登录密码
 	 */
 	private String password;
 	/**
-	 * 用户真实姓名(必填)
+	 * 用户真实姓名
 	 */
 	private String userName;
 	/**
-	 * 用户性别0:男性,1:女性(必填)
+	 * 用户性别0:男性,1:女性
 	 */
 	private int gender;
+
 	/**
-	 * 证件类型(必填)
+	 * 性别中文名
+	 */
+	private String genderName;
+	/**
+	 * 证件类型
 	 */
 	private String credType;
 
 	/**
-	 * 证件编号(必填)
+	 * 证件编号
 	 */
 	private String credNo;
 	/**
-	 * 用户角色(必填)
+	 * 用户角色
 	 */
 	private String role;
+
+	/**
+	 * 用户角色名称
+	 */
+	private String roleName;
 	/**
 	 * 用户所属单位/公司
 	 */
 	private String company;
 
 	/**
-	 * 用户生日(非必填)
+	 * 用户生日
 	 */
 	private Date birthday;
 
 	/**
-	 * 用户邮箱(非必填)
+	 * 用户邮箱
 	 */
 	private String email;
 
 	/**
-	 * 用户职称(非必填)
+	 * 用户职称
 	 */
 	private String zc;
 	/**
-	 * 用户职务(非必填)
+	 * 用户职务
 	 */
 	private String zw;
 	/**
-	 * 用户部门(非必填)
+	 * 用户部门
 	 */
 	private String dept;
 
 	/**
-	 * 用户学历(非必填)
+	 * 用户部门名称
+	 */
+	private String deptName;
+
+	/**
+	 * 用户学历
 	 */
 	private String degrees;
 
 	/**
-	 * 用户专业(非必填)
+	 * 用户学历名称
+	 */
+	private String degressName;
+
+	/**
+	 * 用户专业
 	 */
 	private String major;
 	/**
-	 * 用户座机(非必填)
+	 * 用户座机
 	 */
 	private String telephone;
 
 	/**
-	 * 用户手机(非必填)
+	 * 用户手机
 	 */
 	private String phone;
 
 	/**
-	 * 用户地址(非必填)
+	 * 用户地址
 	 */
 	private String address;
 
-	@Id
-	@Column(name = "USER_ID")
-	@GenericGenerator(name = "systemUUID", strategy = "uuid")
-	@GeneratedValue(generator = "systemUUID")
 	public String getUserId() {
 		return userId;
 	}
@@ -117,7 +123,6 @@ public class UserDomain {
 		this.userId = userId;
 	}
 
-	@Column(name = "LOGIN_NAME")
 	public String getLoginName() {
 		return loginName;
 	}
@@ -126,7 +131,6 @@ public class UserDomain {
 		this.loginName = loginName;
 	}
 
-	@Column(name = "PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -135,7 +139,6 @@ public class UserDomain {
 		this.password = password;
 	}
 
-	@Column(name = "USER_NAME")
 	public String getUserName() {
 		return userName;
 	}
@@ -144,7 +147,6 @@ public class UserDomain {
 		this.userName = userName;
 	}
 
-	@Column(name = "GENDER")
 	public int getGender() {
 		return gender;
 	}
@@ -153,7 +155,14 @@ public class UserDomain {
 		this.gender = gender;
 	}
 
-	@Column(name = "CRED_TYPE")
+	public String getGenderName() {
+		return genderName;
+	}
+
+	public void setGenderName(String genderName) {
+		this.genderName = genderName;
+	}
+
 	public String getCredType() {
 		return credType;
 	}
@@ -162,7 +171,6 @@ public class UserDomain {
 		this.credType = credType;
 	}
 
-	@Column(name = "CRED_NO")
 	public String getCredNo() {
 		return credNo;
 	}
@@ -171,7 +179,6 @@ public class UserDomain {
 		this.credNo = credNo;
 	}
 
-	@Column(name = "ROLE")
 	public String getRole() {
 		return role;
 	}
@@ -180,7 +187,14 @@ public class UserDomain {
 		this.role = role;
 	}
 
-	@Column(name = "COMPANY")
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	public String getCompany() {
 		return company;
 	}
@@ -189,7 +203,6 @@ public class UserDomain {
 		this.company = company;
 	}
 
-	@Column(name = "BIRTHDAY")
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -198,7 +211,6 @@ public class UserDomain {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -207,7 +219,6 @@ public class UserDomain {
 		this.email = email;
 	}
 
-	@Column(name = "ZC")
 	public String getZc() {
 		return zc;
 	}
@@ -216,7 +227,6 @@ public class UserDomain {
 		this.zc = zc;
 	}
 
-	@Column(name = "ZW")
 	public String getZw() {
 		return zw;
 	}
@@ -225,7 +235,6 @@ public class UserDomain {
 		this.zw = zw;
 	}
 
-	@Column(name = "DEPT")
 	public String getDept() {
 		return dept;
 	}
@@ -234,7 +243,14 @@ public class UserDomain {
 		this.dept = dept;
 	}
 
-	@Column(name = "DEGREES")
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
 	public String getDegrees() {
 		return degrees;
 	}
@@ -243,7 +259,14 @@ public class UserDomain {
 		this.degrees = degrees;
 	}
 
-	@Column(name = "MAJOR")
+	public String getDegressName() {
+		return degressName;
+	}
+
+	public void setDegressName(String degressName) {
+		this.degressName = degressName;
+	}
+
 	public String getMajor() {
 		return major;
 	}
@@ -252,7 +275,6 @@ public class UserDomain {
 		this.major = major;
 	}
 
-	@Column(name = "TELEPHONE")
 	public String getTelephone() {
 		return telephone;
 	}
@@ -261,7 +283,6 @@ public class UserDomain {
 		this.telephone = telephone;
 	}
 
-	@Column(name = "PHONE")
 	public String getPhone() {
 		return phone;
 	}
@@ -270,7 +291,6 @@ public class UserDomain {
 		this.phone = phone;
 	}
 
-	@Column(name = "ADDRESS")
 	public String getAddress() {
 		return address;
 	}

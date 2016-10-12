@@ -13,5 +13,5 @@ public class AdminAction {
 		UserDomain user = AuthenticationUtils.getUser();
 		return "kjs_admin";
 	}
-
+	
 }

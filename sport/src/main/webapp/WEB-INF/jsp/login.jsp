@@ -78,6 +78,7 @@
 	</div>
 <script src="<%=basePath %>/static/js/wow.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath %>/static/js/jsencrypt.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath %>/static/js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath %>/static/js/sport.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
