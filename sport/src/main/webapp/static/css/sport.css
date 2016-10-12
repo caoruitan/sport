@@ -1,0 +1,48 @@
+body {background: #f2f2f2;}
+/* 顶端菜单 */
+.layout_top {position: relative;border-top: 2px solid #5A6877;height: 85px;background: #F2F2F2 url(../img/frame/line_bg.png) repeat-x bottom;/*border-bottom: 1px solid #333*/}
+.layout_top .top_logo {width: 500px;background: url(../img/frame/logo.png) no-repeat 16px 18px;height: 70px;float: left;padding: 18px 0 0 180px;font-size: 16px;font-family: 微软雅黑}
+.layout_top .op {position: absolute;top: 24px;right: 10px;height: 20px;line-height: 20px;font-size: 16px;font-family: 微软雅黑}
+.layout_top .op a {display: block;float: left;width: 80px;}
+.layout_top .mainBtn {position: absolute;top: 22px;right: 190px;}
+.layout_top .mainBtn a img {width: 24px;height: 24px;margin-right: 10px;}
+.layout_top .mainBtn .count {position: absolute;top: 1px;right: 44px;width: 16px;height: 16px;background: #ff6600;border-radius: 10px;color: #ffffff;text-align: center;line-height: 16px;}
+/* 主面板 */
+.layout_main {position: absolute;left: 0;top: 85px;right: 10px;bottom: 0px;overflow: hidden;border-radius: 4px;}
+.layout_main .mainMenu {position: absolute;left: 10px;bottom: 0;width: 190px;height: 100%;background: #f2f2f2;top: 0px;border-radius: 4px 4px 0 0;overflow: hidden;}
+.layout_main .mainMenu .mainMenuBox {position: relative;height: 100%;left: 0px;}
+.layout_main .content {position: absolute;left: 215px;top: 0;right: 0;bottom: 0;height: 100%;top: 0px;overflow: auto;background: #F2F2F2;}
+
+/* 左侧菜单 */
+.mainMenuBox {background: #65738D}
+.user {width: 100%;background: #58647A;height: 80px;border-radius: 4px 0 0 4px;position: relative;font-size: 14px;color: #ffffff;font-family: "微软雅黑";font-size: 15px;}
+.user .user-head {position: absolute;top: 15px;left: 10px;height: 50px;width: 50px;background: url(../img/frame/temp.png);}
+.user .user-name {position: absolute;top: 14px;left: 70px;height: 30px;}
+.user .user-org {position: absolute;top: 40px;left: 70px;height: 30px;}
+.menu {width: 100%;margin-top: 10px;background: #65738D;position: relative;float: left;z-index: 999}
+.menu ul li {height: 45px;padding-left: 25px;border-bottom: 1px solid rgba(255, 255, 255, 0.2);font-size: 12px;line-height: 45px;color: #fff;font-weight: 14px}
+.menu ul li:hover {background: #58647A;border-left: 2px solid #F96A66;color: #ccc;cursor: pointer}
+.menu ul li img {width: 16px;height: 16px;margin-right: 10px;margin-bottom: -3px;}
+.menu ul li.sel_list {background: #58647A;border-left: 2px solid #F96A66;color: #ccc;cursor: pointer}
+
+/*右下内容样式*/
+.rwBox {box-sizing: border-box;width: 100%;height: 300px;border: 1px solid #e4e4e4;background: #ffffff;position: relative;border-radius: 4px;color: #73819A;margin-bottom: 10px;padding: 20px;}
+.rwBox .t {width: 100%;border-bottom: 1px solid #73819A;height: 30px;font-size: 16px;color: #73819A;text-align: left;}
+.rwBox .l {float: left;width: 50%;height: 200px;position: relative;border-right: 1px solid #E4E4E4;margin: 20px 0 0 0;}
+.rwBox .r {float: left;width: 50%;height: 200px;position: relative;margin: 20px 0 0 0;}
+.rwBox .wdkt {position: absolute;right: 10px;top: 2px;}
+.lBox {float: left;width: 50%;height: 300px;border: 1px solid #e4e4e4;background: #ffffff;position: relative;border-radius: 4px;color: #73819A;margin-bottom: 10px;padding: 10px;}
+.rBox {float: right;width: 49%;height: 300px;border: 1px solid #e4e4e4;background: #ffffff;position: relative;border-radius: 4px;color: #73819A;margin-bottom: 10px;padding: 10px;}
+.a1 {position: absolute;left: 50%;top: 10px;margin-left: -40px;width: 120px;height: 80px;text-align: center;padding: 80px 0 0 0;font-size: 20px;}
+.a1-1 {position: absolute;left: 20%;top: 130px;width: 120px;height: 40px;text-align: center;}
+.a1-1 a{display: inline-block;width: 100%;float: left; text-align: center;font-size: 28px;color: #F96A66;}
+.a1-2 {position: absolute;right: 20%;top: 130px;width: 100px;height: 40px;text-align: center;}
+.a1-2 a{display: inline-block;width: 100%;float: left;text-align: center;font-size: 28px;color: #F96A66}
+.t1{font-family:"微软雅黑";font-size: 16px;width: 100%;height: 30px;line-height: 30px;margin-bottom: 10px;border-bottom: 1px solid #E4E4E4;}
+.lBox li{width: 100%;float: left;position: relative;padding-left: 80px;margin-bottom: 6px;}
+.lBox li p{position: absolute;top: 0px;left: 0px;width: 70px;height: 44px;text-align: center;border-right: 1px solid #E4E4E4;}
+.lBox li a{width: 100%;float: left;height: 28px;}
+.lBox li .lb{color: #99999;}
+.lBox li p a{width: 100%;font-size: 18px;float: left;}
+.rBox li span{float: right;color: #999;}
+.rBox li{height: 30px;line-height: 30px;overflow: hidden;}

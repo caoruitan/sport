@@ -4,20 +4,20 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-	<http  auto-config="true">
-		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+	
+	<http entry-point-ref="loginUrlEntryPoint" auto-config="true">
+		<intercept-url pattern="/kjs.htm" access="hasRole('ROLE_KJS')"/>
+		<intercept-url pattern="/kjs/**" access="hasRole('ROLE_KJS')"/>
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/index" access="permitAll()"/>
 		<intercept-url pattern="/login" access="permitAll()"/>
-		<intercept-url pattern="/doLogin.htm" access="permitAll()"/>
+		<intercept-url pattern="/doLogin" access="permitAll()" />
 		<!--403错误页面配置 -->
 		<access-denied-handler error-page="/403.jsp"/>
-		<!--退出登录成功页面-->
-		<logout logout-success-url="/login.jsp"/>  
 		
-		<form-login login-page="/login.jsp" 
-			authentication-failure-url="/login.jsp?error=true" 
-			default-target-url="/index.jsp" login-processing-url="/doLogin.htm"/>
+		<!--退出登录成功页面-->
+		<logout invalidate-session="true" logout-url="/logout"  logout-success-url="/"  />
+		
+		<form-login login-page="/login"/>
 			
 	</http>
 	<authentication-manager alias="authenticationManager">
@@ -25,5 +25,6 @@
 			<password-encoder hash="md5" ref="passwordEncoder" />	           
 		</authentication-provider> 
 	</authentication-manager>
-	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" /> 
+	<!--密码md5转换-->
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 </beans:beans>

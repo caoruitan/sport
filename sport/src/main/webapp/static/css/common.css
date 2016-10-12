@@ -1,0 +1,751 @@
+﻿html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	font-family: "宋体", arial;
+	font-size: 12px;
+	line-height: 180%;
+	background: #f2f2f2;
+}
+
+
+/* 字体样式 开始 */
+
+a {
+	outline: none;
+	text-decoration: none;
+	color: #2f2f2f;
+}
+
+a:hover {
+	color: #ccc;
+	text-decoration: none;
+}
+
+
+/* 在 FF 中 */
+
+a {
+	blr: expression(this.onFocus=this.blur());
+}
+
+:focus {
+	-moz-outline-style: none;
+}
+
+a.red_font {
+	color: #de0000;
+}
+
+.fl2 {
+	font-size: 12px;
+	font-weight: 100;
+}
+
+.fl4 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+a.pinkfont {
+	color: #D91555;
+}
+
+
+/* 字体样式 结束 */
+
+img {
+	border: 0px;
+}
+
+ul,
+li,
+div {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+
+div {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+input {
+	border: none;
+	font-size: 12px;
+}
+
+textarea {
+	font-size: 12px;
+	color: #666;
+}
+
+select {
+	font-size: 12px;
+}
+
+.fl-r {
+	float: right;
+}
+
+.fl-l {
+	float: left;
+}
+
+.m {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.te_m {
+	text-align: center;
+}
+
+.te_r {
+	text-align: right;
+}
+
+.te_l {
+	text-align: left;
+}
+
+.m_b12 {
+	margin-bottom: 12px;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+
+/* 公共样式 end*/
+
+
+/* 页面布局 start */
+
+iframe {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+
+/*列表样式*/
+
+.titleBox {
+	box-sizing: border-box;
+	width: 100%;
+	height: 50px;
+	border: 1px solid #e4e4e4;
+	background: #ffffff;
+	position: relative;
+	border-radius: 4px;
+	color: #73819A;
+	margin-bottom: 10px;
+}
+
+.titleBox .title {
+	width: 400px;
+	height: 30px;
+	margin-top: 10px;
+	line-height: 30px;
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+
+.titleBox .title img {
+	width: 20px;
+	height: 20px;
+	margin: 0 10px 6px 10px;
+}
+
+.titleBox .title span {
+	font-size: 14px;
+	color: #FF6600;
+	margin-left: 10px;
+}
+
+.titleBox .searchBtn {
+	background: #ffffff url(../img/cx.png) no-repeat 10px;
+	position: absolute;
+	width: 70px;
+	text-align: center;
+	padding-left: 20px;
+	right: 10px;
+	top: 10px;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	font-family: "微软雅黑";
+	border-radius: 2px;
+}
+
+.titleBox .searchBtn:hover {
+	background: #F2F2F2 url(../img/cx.png) no-repeat 10px;
+	border: 0px solid #F2F2F2;
+	cursor: pointer;
+	/*color: #fff;*/
+	border-radius: 4px;
+}
+
+.titleBox .returnBtn {
+	background: #ffffff;
+	position: absolute;
+	width: 70px;
+	text-align: center;
+	padding-left: 4px;
+	right: 10px;
+	top: 10px;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	font-family: "微软雅黑";
+	border-radius: 2px;
+}
+
+.titleBox .returnBtn:hover {
+	background: #F2F2F2;
+	border: 1px solid #e4e4e4;
+	cursor: pointer;
+	/*color: #fff;*/
+	border-radius: 4px;
+}
+
+.inputStyle {
+	border: 1px solid #999999;
+	height: 30px;
+	border-radius: 2px;
+}
+
+.searchBox {
+	float: left;
+	border: 1px solid red;
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	border: 1px solid #e4e4e4;
+	border-bottom: none;
+	background: #FBFCFE;
+	position: relative;
+	border-radius: 4px 4px 0 0;
+	color: #73819A;
+	padding: 10px;
+	display: block;
+	z-index: 2;
+}
+
+.searchBox dt {
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	padding-right: 10px;
+	margin-left: 12px;
+}
+
+.searchBox dt:first-child {
+	margin-left: 0;
+}
+
+.searchBox dd {
+	float: left;
+}
+
+.searchBox dd input {
+	width: 150px;
+	height: 30px;
+	border: 1px solid #e4e4e4;
+	text-indent: 0.5em;
+	margin-top: 5px;
+	line-height: 30px\9;
+	/* hack 9 兼容所有IE浏览器*/
+	border-radius: 2px;
+}
+
+.searchBox .search-btn {
+	float: left;
+	margin: 5px 0px 1px 20px;
+	width: 58px;
+	height: 28px;
+	background: #F96A66;
+	border-style: none;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	color: #fff;
+	border-radius: 2px;
+}
+
+.searchBox .search-btn:hover {
+	color: #990000;
+	border: 1px solid #F96A66;
+	background: #FCBAB8;
+	cursor: pointer;
+}
+
+.listBox {
+	float: left;
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	border: 1px solid #e4e4e4;
+	background: #ffffff;
+	position: relative;
+	border-radius: 0 0 4px 4px;
+	color: #73819A;
+	padding: 10px;
+}
+
+.listBox .opBtnBox {
+	width: 100%;
+	height: 40px;
+}
+
+
+/*列表样式 ↑*/
+
+
+/*编辑部分*/
+
+.editBox {
+	background: #ffffff;
+	height: auto;
+	padding: 10px 0 20px 0;
+	float: left;
+	width: 100%;
+	min-height: 500px;
+	position: relative;
+}
+
+.editTable {
+	color: #333333;
+}
+
+.editTable th {
+	color: #666;
+	float: right;
+	width: 160px;
+	padding-right: 16px;
+	text-align: right;
+	height: 50px;
+	line-height: 50px;
+	font-size: 15px;
+	font-family: "微软雅黑"
+}
+
+.editTable th.required {
+	background: url(../img/required.png) no-repeat right 4px center;
+}
+
+.editTable td {
+	height: 30px !important;
+	vertical-align: middle;
+}
+
+.editTable td label {
+	font-size: 15px;
+	font-family: "微软雅黑";
+	margin: 4px 10px 0 4px;
+	cursor: pointer;
+	font-weight: 100;
+}
+
+.editTable td input[type="text"] {
+	float: left;
+	width: 200px;
+	height: 30px;
+	border: #ccc 1px solid;
+	text-indent: 0.5em;
+	line-height: 30px;
+	margin-top: 4px;
+	border-radius: 4px;
+}
+
+.editTable td input[type="password"] {
+	float: left;
+	width: 200px;
+	height: 30px;
+	border: #ccc 1px solid;
+	text-indent: 0.5em;
+	line-height: 30px;
+	margin-top: 4px;
+	border-radius: 4px;
+}
+
+.save-btn {
+	margin: 20px 0 0 0;
+	padding: 10px 0 0 160px;
+}
+
+
+/*编辑部分*/
+
+
+/*浏览*/
+
+.viewBox {
+	background: #ffffff;
+	height: auto;
+	padding: 10px 0 20px 0;
+	float: left;
+	width: 100%;
+	min-height: 500px;
+	/*display: none;*/
+}
+
+.viewTable {
+	color: #333333;
+}
+
+.viewTable th {
+	color: #999;
+	float: right;
+	width: 160px;
+	padding-right: 16px;
+	text-align: right;
+	height: 50px;
+	line-height: 50px;
+	font-size: 15px;
+	font-family: "微软雅黑"
+}
+
+.viewTable td {
+	color: #993300;
+	font-size: 16px;
+	height: 30px !important;
+	vertical-align: middle;
+}
+
+.viewTable td label {
+	font-size: 16px;
+	font-family: "微软雅黑";
+	margin: 4px 10px 0 4px;
+	cursor: pointer;
+}
+
+.save-btn {
+	margin: 20px 0 0 0;
+	padding: 10px 0 0 160px;
+}
+
+
+/*浏览*/
+
+
+/*按钮样式 ↓*/
+
+.btn-red {
+	float: left;
+	margin: 5px 10px 1px 0px;
+	padding: 0 20px 0 20px;
+	background: #F96A66;
+	border-style: none;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #fff;
+	border-radius: 2px;
+	border: 1px solid #F96A66;
+	height: 28px;
+}
+
+.btn-red:hover {
+	color: #990000;
+	border: 1px solid #F96A66;
+	background: #FCBAB8;
+	cursor: pointer;
+}
+
+.btn-wisteria {
+	float: left;
+	margin: 5px 5px 1px 0px;
+	padding: 0 20px 0 20px;
+	border: 1px solid #73819A;
+	background: #73819A;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #fff;
+	border-radius: 2px;
+	height: 28px;
+}
+
+.btn-wisteria:hover {
+	color: #73819A;
+	border: 1px solid #BDC4D0;
+	background: #F2F2F2;
+	cursor: pointer;
+}
+
+.btn-img {
+	float: left;
+	margin: 0px 5px 0px 0px;
+	padding: 0 10px 0 10px;
+	border: 1px solid #5A677E;
+	background: #5A677E;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #fff;
+	border-radius: 2px;
+	height: 24px;
+}
+
+.btn-img img {
+	margin: 0 4px 3px 0;
+	width: 16px;
+	height: 16px;
+}
+
+.btn-img:hover {
+	color: #fff;
+	background: #FF616B;
+	border: 1px solid #FF616B;
+	cursor: pointer;
+}
+
+.btn-size-small {
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	padding: 0 10px 0 10px;
+}
+
+.btn-size-big {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 40px 0 40px;
+	font-size: 18px;
+	word-spacing: 8px;
+	letter-spacing: 8px;
+}
+
+
+/*字体颜色*/
+
+.redfont {
+	color: red
+}
+
+.greenfont {
+	color: green
+}
+
+
+/*上传附件*/
+
+.upload-file-wrap {
+	position: relative;
+	width: 405px;
+	height: 27px;
+	margin-top: 20px;
+}
+
+.upload-file-wrap .upload-text {
+	height: 23px;
+	width: 300px !important;
+	line-height: 23px;
+	vertical-align: middle;
+	background: #FAFBFD;
+	border: 1px solid #d4d4d4;
+	margin: -10px 0 0 0 !important;
+}
+
+.upload-file-wrap .upload-btn {
+	width: 90px;
+	height: 30px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	background: url(../img/upload.png) no-repeat;
+	color: #73819a;
+	font-size: 1px;
+	text-decoration: none;
+	margin: -10px 0 0 10px !important;
+	z-index: 999;
+}
+
+.upload-file-wrap .upload-btn:hover {
+	background: url(../img/upload-hover.png) no-repeat;
+}
+
+.upload-file-wrap .upload-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	height: 27px;
+	_display: none;
+}
+
+.upload-file-wrap .file-uploader {
+	position: relative;
+	width: 400px;
+	height: 27px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	z-index: 2;
+	cursor: pointer;
+	_filter: none;
+	_text-align: left;
+	_line-height: 27px;
+}
+
+
+/*twodatepicker*/
+
+.twoDatePicker {
+	width: 100%;
+	float: left;
+}
+
+.twoDatePicker span {
+	float: left;
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	margin-right: 10px;
+}
+
+.twoColumn {
+	float: left;
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	border: 1px solid #e4e4e4;
+	background: #ffffff;
+	position: relative;
+	border-radius: 0 0 4px 4px;
+	color: #73819A;
+}
+
+.twoColumn .t-left {
+	width: 20%;
+	float: left;
+	height: auto;
+	background: #ffffff;
+	position: relative;
+	border-radius: 0 0 4px 4px;
+	min-height: 400px;
+	padding: 10px 0 10px 10px;
+}
+
+.twoColumn .t-left .leftBox {
+	width: 100%;
+	height: auto;
+	float: left;
+	border: 1px solid #E4E4E4;
+	min-height: 336px;
+	border-radius: 0 0 4px 4px;
+}
+
+.twoColumn .t-right {
+	width: 80%;
+	float: left;
+	height: auto;
+	background: #ffffff;
+	position: relative;
+	padding: 10px;
+}
+
+
+/*有左侧的菜单*/
+
+.leftBox .lm {
+	width: 100%;
+	color: #73819A;
+	line-height: 40px;
+	height: 40px;
+	padding-left: 10px;
+	position: relative;
+	border-bottom: 1px solid #E4E4E4;
+	background: #f2f2f2;
+	font-size: 16px;
+}
+
+.leftBox .lm a {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 10px;
+	right: 5px;
+	background: url(../img/reflesh.png) no-repeat;
+}
+
+.leftBox .lm a:hover {
+	background: url(../img/reflesh-hover.png) no-repeat;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	/* IE 9 */
+	-moz-transform: rotate(45deg);
+	/* Firefox */
+	-webkit-transform: rotate(45deg);
+	/* Safari 和 Chrome */
+	-o-transform: rotate(45deg);
+}

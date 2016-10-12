@@ -1,0 +1,170 @@
+.TTitle {
+	width: 100%;
+	font-size: 20px;
+	height: 50px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	/*border-bottom: 2px solid #eeeeee;*/ 	
+	padding: 10px 0 10px 0;
+	text-align: center;
+	color: #73819A;
+	position: fixed;
+	background: #f8f8f8;
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+.TTitle p {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+
+.notice-box {
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 60px;
+}
+
+.notice-box li {
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	color: #ff6600;
+}
+
+.TBox {
+	background: #ffffff;
+	height: auto;
+	padding: 10px 0 20px 0;
+	width: 90%;
+	min-height: 500px;
+	margin: 0 auto;
+}
+
+.TTable {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	border: 1px solid #e4e4e4;
+	background: #FFF;
+	overflow-x: hidden;
+	table-layout: fixed;
+}
+
+.TTable thead th {
+	background: #F2F2F2;
+	height: 30px;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-left: 2px;
+}
+
+.TTable th {
+	color: #000;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	font-weight: normal;
+	text-align: left;
+}
+
+.TTable th.level1 {
+	text-align: left;
+	padding-left: 4px;
+	font-weight: bold;
+}
+
+.TTable th.level2 {
+	text-align: left;
+	padding-left: 44px;
+}
+
+.TTable th.level3 {
+	text-align: left;
+	padding-left: 84px;
+}
+
+.TTable th.level4 {
+	text-align: left;
+	padding-left: 124px;
+}
+
+.TTable td {
+	text-align: left;
+	height: 30px;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.TTable td input {
+	height: 26px;
+	border-bottom: 1px solid #999999;
+	font-weight: 100;
+	font-size: 18px;
+	background: #EBF6FF;
+	width: 98%;
+	margin-top: 6px;
+	color: #999;
+}
+
+.TTable td input.price {
+	text-align: right;
+	width: 94%;
+	color: #0099CC;
+}
+
+.TTable .odd {
+	background-color: #fafafa;
+}
+
+.TTable tr:nth-child(odd) {
+	background: #ffffff;
+}
+
+.TTable tr:nth-child(even) {
+	background: #fafafa;
+}
+
+.TTable_title {
+	background-color: #ff6633;
+	height: 28px;
+	color: #FFF;
+	border: none;
+	text-align: center;
+}
+
+.TTable td.price-ly {
+	text-align: right;
+	font-weight: bold;
+	font-size: 18px;
+	padding-right: 10px;
+	color: #999;
+}
+
+.TTable td.sub-total-ok {
+	text-align: right;
+	font-weight: bold;
+	font-size: 18px;
+	padding-right: 10px;
+	color: #00CC00;
+}
+
+.TTable td.sub-total-error {
+	text-align: right;
+	font-weight: bold;
+	font-size: 18px;
+	padding-right: 10px;
+	color: #ff6600;
+}
+
+
+/*ado add end*/

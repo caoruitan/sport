@@ -41,11 +41,13 @@ public class UserServiceImpl implements UserService {
 		admin.setLoginName("admin");
 		admin.setPassword("e10adc3949ba59abbe56e057f20f883e");
 		admin.setStatus(1);
-		admin.setRole("ROLE_ADMIN");
+		admin.setRole("ROLE_KJS");
 		userMap.put("admin", admin);
 
 		UserDomain user = userMap.get(loginName);
-
+		if (user == null) {
+			return null;
+		}
 		// 用户权限集合
 		Collection<GrantedAuthority> grantedAuthority = this.getGrantedAuthority(user);
 		User userdetail = new User(user.getLoginName(), user.getPassword(), Constants.User.isActive(user.getStatus()),
@@ -56,11 +58,7 @@ public class UserServiceImpl implements UserService {
 	// 获取用户角色，授予权限
 	private Set<GrantedAuthority> getGrantedAuthority(UserDomain user) {
 		Set<GrantedAuthority> grantedAuthority = new HashSet<GrantedAuthority>();
-		// Set<Roles> roles = user.getRoles();
-		// for (Roles role : roles) {
-		// System.out.println("用户角色：" + role.getRolename());
 		grantedAuthority.add(new SimpleGrantedAuthority(user.getRole()));
-		// }
 		return grantedAuthority;
 	}
 }
