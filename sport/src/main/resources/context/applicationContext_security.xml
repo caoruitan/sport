@@ -10,12 +10,14 @@
 		<intercept-url pattern="/kjs/**" access="hasRole('ROLE_KJS')"/>
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/login" access="permitAll()"/>
+		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()" />
+		
 		<!--403错误页面配置 -->
 		<access-denied-handler error-page="/403.jsp"/>
 		
-		<!--退出登录成功页面-->
-		<logout invalidate-session="true" logout-url="/logout"  logout-success-url="/"  />
+		<!--退出登录成功页面 logout必须为POST请求-->
+		<logout invalidate-session="true" logout-url="/logout"  logout-success-url="/login" />
 		
 		<form-login login-page="/login"/>
 			

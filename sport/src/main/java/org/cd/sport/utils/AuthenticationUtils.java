@@ -8,7 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
+/**
+ * 用户权限工具类
+ * 
+ * @author liuyk
+ *
+ */
 public class AuthenticationUtils {
 
 	public static Authentication getAuth() {
@@ -31,5 +36,5 @@ public class AuthenticationUtils {
 		}
 		return null;
 	}
-
+	
 }

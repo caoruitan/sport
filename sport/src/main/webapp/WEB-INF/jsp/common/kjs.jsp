@@ -18,6 +18,7 @@
 	<script src="<%=basePath %>/static/js/jquery.min1.10.1.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<%=basePath %>/static/js/bootstrap.min.js"></script>
 	<script src="<%=basePath %>/static/js/common.js"></script>
+	<script src="<%=basePath %>/static/js/sport.js"></script>
 </head>
 <decorator:head/>
 <title><decorator:title/></title>

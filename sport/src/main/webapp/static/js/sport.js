@@ -1,3 +1,28 @@
+$.extend({
+    StandardPost:function(url,args){
+    	var name = $("#csrfToken").attr("name");
+        var value = $("#csrfToken").val();
+        var body = $(document.body),
+            form = $("<form method='post'></form>"),
+            input;
+        form.attr({"action":url});
+        if(args){
+        	$.each(args,function(key,value){
+        		 input = $("<input type='hidden'>");
+                 input.attr({"name":key});
+                 input.val(value);
+                 form.append(input);
+        	});
+        }
+        $input = $("<input type='hidden'>");
+        $input.attr({"name":name});
+        $input.val(value);
+        form.append($input);
+        form.appendTo(document.body);
+        form.submit();
+        document.body.removeChild(form[0]);
+    }
+});
 var Sport = {
 	name : "DOMAIN_UN",
 	Cookie : {
@@ -57,10 +82,12 @@ var Sport = {
 };
 
 $(function(){
+	// 记住登录名
 	var name = Sport.Cookie.get(Sport.name);
 	if(name){
 		$("#loginName").val(name);
 	}
+	// 登录操作
 	$(document).on("click","#loginBtn",function(){
 		$('#loginBtn').text('正在登录...');
 		$('#loginBtn').attr("disabled",true);
@@ -108,5 +135,7 @@ $(function(){
                 $("#loginBtn").text("登&nbsp;&nbsp;&nbsp;&nbsp;录");
             }
         });
+	}).on("click","a.sport-logout",function(){
+		$.StandardPost(Sport.getBasePath()+"/logout");
 	})
 })

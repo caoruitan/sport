@@ -10,5 +10,6 @@
 </div>
 <div class="op">
 	<a href="12xgmm.html" target="frmMain">修改密码</a>
-	<a href="01login.html">安全退出</a>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrfToken"/>
+	<a href="javascript:;;" class="sport-logout">安全退出</a>
 </div>

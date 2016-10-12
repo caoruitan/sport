@@ -22,15 +22,27 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.JsonObject;
 
+/**
+ * 登出登入控制层
+ * 
+ * @author liuyk
+ *
+ */
 @Controller
 public class LoginAction {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * 跳转登录界面
+	 * 
+	 * @return
+	 */
 	@RequestMapping("login")
 	public String Login(HttpServletRequest request) {
 		String return_url = request.getParameter("return_url");
@@ -47,8 +59,11 @@ public class LoginAction {
 		return "login";
 	}
 
+	/**
+	 * 登录处理
+	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("doLogin")
+	@RequestMapping(value = "doLogin", method = RequestMethod.POST)
 	public void doLogin(HttpServletRequest request, HttpServletResponse response) {
 		String loginName = request.getParameter("loginName");
 		String password = request.getParameter("password");
@@ -58,17 +73,20 @@ public class LoginAction {
 		HttpSession session = request.getSession();
 		// 解密
 		RSAGenerator generator = (RSAGenerator) session.getAttribute(Constants.User.RSA_KEY);
-		if (generator == null || StringUtils.isBlank(uuid) || !uuid.equals(session.getAttribute(Constants.User.UUID_KEY))) {
+		if (generator == null || StringUtils.isBlank(uuid)
+				|| !uuid.equals(session.getAttribute(Constants.User.UUID_KEY))) {
 			json.addProperty("success", false);
 			json.addProperty("msg", "非法操作");
 		} else {
 			try {
 				password = generator.decryptBase64(password);
-				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(loginName,password);
-				Authentication authentication = authenticationManager.authenticate(authRequest); 
+				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(loginName,
+						password);
+				Authentication authentication = authenticationManager.authenticate(authRequest);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
-				session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext()); 
-				Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+				session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+				Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication
+						.getAuthorities();
 				// 用户角色 目前只有一个
 				Iterator<SimpleGrantedAuthority> iterator = authorities.iterator();
 				while (iterator.hasNext()) {
