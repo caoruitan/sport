@@ -26,7 +26,7 @@ public class UserAction extends ExceptionWrapper {
 	public String gotoUpdatePasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
-		return "common/password_update";
+		return "password_update";
 	}
 	
 	@RequestMapping(value = "/password/update", method = RequestMethod.POST)
@@ -37,7 +37,7 @@ public class UserAction extends ExceptionWrapper {
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
-		return "common/password_reset";
+		return "password_reset";
 	}
 
 	@RequestMapping(value = "/password/reset", method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class UserAction extends ExceptionWrapper {
 	public String gotoCreateUserView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
-		return "common/user_create";
+		return "user_create";
 	}
 
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
@@ -60,7 +60,7 @@ public class UserAction extends ExceptionWrapper {
 	public String gotoUpdateUserView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
-		return "common/user_update";
+		return "user_update";
 	}
 
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
@@ -68,8 +68,13 @@ public class UserAction extends ExceptionWrapper {
 
 	}
 
-	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
-		return "common/user_list";
+		return "user_list";
+	}
+	
+	@RequestMapping(value = "/user/datas", method = RequestMethod.GET)
+	public void getUserDatas(HttpServletRequest request) {
+		this.userService.get(0, 10);
 	}
 }

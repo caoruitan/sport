@@ -162,12 +162,24 @@ $(function(){
 	}).on("click","button.sport-rest-btn",function(){
 		$(".sport-form")[0].reset();
 	})
-	// 创建用户
+	
+	// 数据字典页面加载
+	$(document).on("click",".sport-dic-menu",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/dic");
+	})
 	
 	
-	
-	
-	
-	
+	// 用户管理
+	$(document).on("click",".sport-user-menu",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/user");
+	}).on("click",".sport-user-create-btn",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/user/create");
+	}).on("click",".sport-user-save",function(){
+		if($(".sport-user-form").valid()){
+			
+		}
+	}).on("click",".user-returnBtn",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/user");
+	});
 	
 })

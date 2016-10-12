@@ -4,6 +4,9 @@ import org.cd.sport.dao.OrganizationDao;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.view.OrganizationView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户业务层

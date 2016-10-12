@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- defaultdir指定装饰器文件所在的路径 -->
-<decorators defaultdir="/WEB-INF/jsp/common">
+<decorators defaultdir="/WEB-INF/jsp">
     <!--excludes结点则指定了哪些路径的请求不使用任何模板 -->
     <excludes>
         <pattern>*login*</pattern>

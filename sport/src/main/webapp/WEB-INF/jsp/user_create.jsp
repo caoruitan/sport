@@ -3,42 +3,24 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="<%=basePath %>/static/css/base.css" rel="stylesheet" type="text/css" />
-	<link href="<%=basePath %>/static/css/common.css" rel="stylesheet" type="text/css" />
-	<link href="<%=basePath %>/static/css/sport.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="<%=basePath %>/static/css/bootstrap.min.css">
-	<script src="<%=basePath %>/static/js/jquery.min1.10.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-	<script src="<%=basePath %>/static/js/common.js"></script>
-	<script src="<%=basePath %>/static/js/sport.js"></script>
-	
-	<!--select-->
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
-	<!--checkbox-->
 	<link href="<%=basePath %>/static/css/flat/blue.css" rel="stylesheet">
-	<script src="<%=basePath%>/static/js/jqselect/bootstrap-select.js"></script>
-	<script src="<%=basePath %>/static/js/icheck/icheck.js" type="text/javascript" charset="utf-8"></script>
-	<!--My97-->
-	<script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
-	<!--My97-->
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
 		}
 	</style>
 </head>
+<body>
 <div class="titleBox">
 	<div class="title"><img src="<%=basePath %>/static/img/yh.png" />用户新增<span>所有加 * 的区域为必填项。</span></div>
-	<a href="javascript:history.go(-1)">
-		<div class="returnBtn">返回列表</div>
-	</a>
+    <div class="returnBtn user-returnBtn">返回列表</div>
 </div>
 <div class="editBox">
-	<form class="sport-form">
+	<form class="sport-user-form">
 		<table class="editTable">
 			<tr>
 				<th class="required">用户名</th>
@@ -79,7 +61,7 @@
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="company" type="text" value="" />
+				<td><input name="organization" type="text" value="" />
 				</td>
 			</tr>
 			<tr>
@@ -115,16 +97,59 @@
 		</table>
 	</form>
 	<p class="save-btn">
-		<button class="btn-red btn-size-big" type="button">保存</button>
+		<button class="btn-red btn-size-big sport-user-save" type="button">保存</button>
 		<button class="btn-wisteria btn-size-big sport-rest-btn" type="button">重置</button>
 	</p>
+	<script src="<%=basePath %>/static/js/icheck/icheck.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		$(document).ready(function() {
+		$(function(){
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_flat-blue',
 				radioClass: 'iradio_flat-blue',
 				increaseArea: '20%' // optional
 			});
+			// 登录验证
+			$(".sport-user-form").validate({
+		        rules: {
+		        	loginName:{
+		                required: true,
+		                minLength:4,
+		                maxLength:20
+		            },
+		            userName:{
+		                required: true,
+		                minLength:4,
+		                maxLength:20
+		            },
+		            password: {
+		                required: true
+		            },
+		            confirmPassword: {
+		                required: true
+		            }
+		        },
+		        messages: {
+		        	loginName:{
+		                required: "用户名不能为空",
+		                minLength:"用户名不能低于4位",
+		                maxLength:"用户名不能高于20位"
+		            },
+		            userName:{
+		                required: "真实姓名不能为空",
+		                minLength:"真实姓名不能低于4位",
+		                maxLength:"真实姓名不能高于20位"
+		            },
+		            password: {
+		            	required : "密码不能为空"
+		            },
+		            confirmPassword: {
+		            	required : "确认密码不能为空"
+		            }
+		        }
+		     });
 		});
 	</script>
 </div>
+</body>
+</html>
