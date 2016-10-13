@@ -33,11 +33,10 @@
 				<td><input name="password" type="text"/></td>
 				<th class="required">证件类型</th>
 				<td>
-					<select id="lunch" class="selectpicker" title="请选择">
-						<option>请选择</option>
-						<option>身份证</option>
-						<option>军官证</option>
-						<option>港澳台胞证</option>
+					<select class="selectpicker" name="credType" title="请选择" class="{required:true}">
+						<option value="1" >身份证</option>
+						<option value="2">军官证</option>
+						<option value="3">港澳台胞证</option>
 					</select>
 				</td>
 			</tr>
@@ -61,7 +60,7 @@
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="organization" type="text" value="" />
+				<td><input name="organization" type="text" />
 				</td>
 			</tr>
 			<tr>
@@ -104,11 +103,30 @@
 	<script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		$(function(){
+			// 处理select不初始化的问题
+			$(window).trigger("load");
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_flat-blue',
 				radioClass: 'iradio_flat-blue',
 				increaseArea: '20%' // optional
 			});
+			
+			jQuery.validator.addMethod("pwd", function(value, element, param) {
+			   	// 判断密码是否由大小写字母数字和特殊字符组成（除空格）
+			   	for(var i = 0; i < length; i++){
+			   		if(value.charCodeAt(i) < 32 || value.charCodeAt(i) > 126){
+			   			return false;
+			   		}
+			   	}
+			   	// 密码必须包含上述字符中的至少两种
+			   	var reg1 = new RegExp("^\\d+$");	//不能纯数字
+			   	var reg2 = new RegExp("^[a-z]+$");	//不能纯小写字母
+			   	var reg3 = new RegExp("^[A-Z]+$");	//不能纯大写字母
+			   	var reg4 = new RegExp("^((?=[\x21-\x7e]+)[^A-Za-z0-9])+$");	//不能纯标点
+			   	return !reg1.test(value) && !reg2.test(value) && !reg3.test(value) && !reg4.test(value);
+			});
+			
+			
 			// 登录验证
 			$(".sport-user-form").validate({
 		        rules: {
@@ -123,28 +141,57 @@
 		                maxLength:20
 		            },
 		            password: {
-		                required: true
+		                required: true,
+		                minLength:4,
+		                maxLength:16,
+		                pwd:true
 		            },
 		            confirmPassword: {
-		                required: true
+		                required: true,
+		                equalTo:"#confirmPassword"
+		            },
+		            credType:{
+		            	required: true
+		            },
+		            credNo:{
+		            	required: true
+		            },
+		            organization:{
+		            	required: true
+		            },
+		            email:{
+		            	required: false
 		            }
 		        },
 		        messages: {
 		        	loginName:{
-		                required: "用户名不能为空",
-		                minLength:"用户名不能低于4位",
-		                maxLength:"用户名不能高于20位"
+		                required: "请填写用户名",
+		                minlength:'用户名在4-20个字符之间',
+		                maxlength:'用户名在4-20个字符之间',
 		            },
 		            userName:{
-		                required: "真实姓名不能为空",
-		                minLength:"真实姓名不能低于4位",
-		                maxLength:"真实姓名不能高于20位"
+		                required: "请填写真实姓名",
+		                minlength:'真实姓名在4-20个字符之间',
+		                maxlength:'真实姓名在4-20个字符之间',
 		            },
 		            password: {
-		            	required : "密码不能为空"
+		            	 required:'请填写密码',
+		            	 minlength:'密码在6-16个字符之间',
+		                 maxlength:'密码在6-16个字符之间',
+		            	 pwd:'必须由两种以上的大小写字母数字和特殊字符(空格除外)组成'
 		            },
 		            confirmPassword: {
-		            	required : "确认密码不能为空"
+		            	required : "确认密码不能为空",
+		            	equalTo:'两次密码输入不一致,请重新输入'
+		            },
+		            credType:{
+		            	required: "请选择证件类型"
+		            },
+		            credNo:{
+		            	required: "请填写证件编号"
+		            },
+		            organization:{
+		            	required: "请填写所属单位"
 		            }
 		        }
 		     });

@@ -1607,7 +1607,6 @@
   // SELECTPICKER DATA-API
   // =====================
   $(window).on('load.bs.select.data-api', function () {
-	  debugger;
     $('.selectpicker').each(function () {
       var $selectpicker = $(this);
       Plugin.call($selectpicker, $selectpicker.data());

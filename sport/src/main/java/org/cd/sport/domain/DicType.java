@@ -32,6 +32,11 @@ public class DicType {
 	 */
 	private String pId;
 
+	/**
+	 * 数字字典类型code
+	 */
+	private int code;
+
 	@Id
 	@Column(name = "DIC_ID")
 	@GenericGenerator(name = "systemUUID", strategy = "uuid")
@@ -60,6 +65,15 @@ public class DicType {
 
 	public void setpId(String pId) {
 		this.pId = pId;
+	}
+
+	@Column(name = "CODE")
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 }

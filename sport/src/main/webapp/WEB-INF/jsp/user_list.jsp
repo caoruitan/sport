@@ -28,7 +28,7 @@
 	<dd><input type="text" /></dd>
 	<dt>系统归属</dt>
 	<dd>
-		<select id="lunch" class="selectpicker" title="请选择系统">
+		<select class="selectpicker" title="请选择系统">
 		<option>OA系统</option>
 		<option>申报系统</option>
 	</select>
@@ -48,7 +48,9 @@
 </div>
 <script type="text/javascript"> 
 	$(document).ready(function () {
-        $("#jqGrid").jqGrid({
+        // 处理select不初始化的问题
+		$(window).trigger("load");
+		$("#jqGrid").jqGrid({
 		//url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/getjsonp.php?callback=?&qwery=longorders',
 		//mtype: "GET",
 		//datatype: "jsonp",
