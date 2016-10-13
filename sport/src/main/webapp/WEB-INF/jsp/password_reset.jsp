@@ -4,32 +4,24 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <div class="titleBox">
-	<div class="title"><img src="../img/yh.png" />密码修改</div>
+	<div class="title"><img src="<%=basePath %>/static/img/yh.png" />密码重置<span>重置后，该用户的密码为 ${default_password}</span></div>
 	<a href="javascript:history.go(-1)">
 		<div class="returnBtn">返回</div>
 	</a>
 </div>
 <div class="editBox">
 	<table class="editTable">
+
 		<tr>
-			<th class="required">旧密码</th>
-			<td><input name="name" type="password" value="" /></td>
-		</tr>
-		<tr>
-			<th class="required">新密码</th>
-			<td><input name="name" type="password" value="" /></td>
-		</tr>
-		<tr>
-			<th class="required">确认密码</th>
-			<td><input name="name" type="password" value="" /></td>
+			<th class="required">用户名</th>
+			<td><input name="name" type="text" value="" /></td>
 		</tr>
 		<tr>
 			<th class="required">验证码</th>
-			<td><input name="name" type="text" value="" /><span class="hyz"><img class="yzm" src="../img/yzm.png" /><a>换一张</a></span></td>
+			<td><input name="name" type="text" value="" /><span class="hyz"><img class="yzm" src="<%=basePath %>/static/img/yzm.png" /><a>换一张</a></span></td>
 		</tr>
 	</table>
 	<p class="save-btn">
-		<button class="btn-red btn-size-big" type="">保存</button>
-		<button class="btn-wisteria btn-size-big" type="">重置</button>
+		<button class="btn-red btn-size-big" type="">重置密码</button>
 	</p>
 </div>

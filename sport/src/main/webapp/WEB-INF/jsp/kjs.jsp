@@ -51,7 +51,7 @@
 								</li>
 								<li class="sport-user-menu"><img src="<%=basePath %>/static/img/menu/ry.png" /> 用户管理
 								</li>
-								<li onclick="menuselect(this,'13mmcz.html')"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置
+								<li class="sport-password-reset-menu"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置
 								</li>
 								<div class="clear"></div>
 							</ul>

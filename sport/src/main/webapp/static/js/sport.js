@@ -242,4 +242,8 @@ $(function(){
 		$(".sport-container").load(Sport.getBasePath()+"/user");
 	});
 	
+	// 密码重置
+	$(document).on("click",".sport-password-reset-menu",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/password/reset");
+	})
 })

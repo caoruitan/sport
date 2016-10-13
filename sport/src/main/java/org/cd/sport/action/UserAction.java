@@ -48,6 +48,7 @@ public class UserAction extends ExceptionWrapper {
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
+		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
 		return "password_reset";
 	}
 
