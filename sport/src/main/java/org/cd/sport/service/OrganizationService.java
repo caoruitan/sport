@@ -21,5 +21,7 @@ public interface OrganizationService {
 
 	public OrganizationDomain getById(String orgId);
 
+	public OrganizationDomain getByName(String name);
+
 	public long getTotal();
 }
