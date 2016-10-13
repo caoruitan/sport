@@ -1,6 +1,8 @@
 package org.cd.sport.support;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.domain.UserDomain;
+import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
 
@@ -17,6 +19,13 @@ public class UserSupport extends SportSupport {
 	 * 验证用户信息合法性
 	 */
 	public void validate(UserView user) {
+		if (user == null) {
+			throw new ParameterIsWrongException("用户对象为空");
+		}
+
+		if (StringUtils.isBlank(user.getLoginName()) || user.getLoginName().length() < 4 || user.getLoginName().length() > 20) {
+			throw new ParameterIsWrongException("用户名为空");
+		}
 
 	}
 
