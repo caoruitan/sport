@@ -78,7 +78,17 @@ var Sport = {
 	getBasePath:function(){
 		var location = (window.location+'').split('/'); 
 		return location[0]+'//'+location[2]+'/'+location[3]; 
-	}
+	},
+	isNull:function(s){
+        if(s == null || s == undefined){
+            return true;
+        }
+        s = $.trim(s);
+        if(s == "null"|| s == "undefined" || s == "" || s == " "){
+            return true;
+        }
+        return false;
+    },
 };
 
 $(function(){
@@ -173,10 +183,60 @@ $(function(){
 	$(document).on("click",".sport-user-menu",function(){
 		$(".sport-container").load(Sport.getBasePath()+"/user");
 	}).on("click",".sport-user-create-btn",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/user/create");
+		$(".sport-container").load(Sport.getBasePath()+"/user/create.action");
+	}).on("change",".credType-select",function(){
+		$(".credType-error").text("");
 	}).on("click",".sport-user-save",function(){
-		if($(".sport-user-form").valid()){
-			
+		// 证书校验
+		var credType = $(".credType-select").val();
+		var credFlag = Sport.isNull(credType);
+		if(credFlag){
+			$(".credType-error").text("请选择证件类型");
+		}else{
+			$(".credType-error").text("");
+		}
+		// 验证通过
+		if($(".sport-user-form").valid() && !credFlag){
+			$('.sport-user-save').text("提交中...");
+			$('.sport-user-save').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/user/create.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userName:$('#userName').val(),
+					loginName:$('#loginName').val(),
+					credType:$('#credType').val(),
+					credNo:$('#credNo').val(),
+					gender:$('input[name="gender"]:checked').val(),
+					role:$('input[name="role"]:checked').val(),
+					organization:$('#organization').val(),
+					birthday:$('#birthday').val(),
+					zc:$('#zc').val(),
+					zw:$('#zw').val(),
+					dept:$('#dept').val(),
+					major:$('#major').val(),
+					telephone:$('#telephone').val(),
+					phone:$('#phone').val(),
+					address:$('#address').val(),
+					password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
+				},
+				error: function () {
+					$('.sport-user-save').removeAttr("disabled");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg("新增用户成功!");
+						$(".sport-container").load(Sport.getBasePath()+"/user");
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-user-save').removeAttr("disabled");
+					$('.sport-user-save').text("保存");
+				}
+			});
 		}
 	}).on("click",".user-returnBtn",function(){
 		$(".sport-container").load(Sport.getBasePath()+"/user");

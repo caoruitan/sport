@@ -1,7 +1,5 @@
 package org.cd.sport.view;
 
-import java.util.Date;
-
 /**
  * 用户vo对象
  * 
@@ -56,12 +54,12 @@ public class UserView {
 	/**
 	 * 用户所属单位/公司
 	 */
-	private String company;
+	private String organization;
 
 	/**
 	 * 用户生日
 	 */
-	private Date birthday;
+	private String birthday;
 
 	/**
 	 * 用户邮箱
@@ -195,19 +193,19 @@ public class UserView {
 		this.roleName = roleName;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getOrganization() {
+		return organization;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

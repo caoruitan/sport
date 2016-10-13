@@ -20,78 +20,88 @@
     <div class="returnBtn user-returnBtn">返回列表</div>
 </div>
 <div class="editBox">
-	<form class="sport-user-form">
+	<form class="sport-user-form sport-form">
+		<input type="hidden" name="pubKey" value="${pubKey}" id="pubKey"/>
+		<input type="hidden" name="uuid" value="${uuid}" id="uuid"/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 		<table class="editTable">
 			<tr>
 				<th class="required">用户名</th>
-				<td><input name="loginName" type="text" /></td>
+				<td><input name="loginName" type="text" id="loginName"/></td>
 				<th class="required">真实姓名</th>
-				<td><input name="userName" type="text" /></td>
+				<td><input name="userName" type="text" id="userName"/></td>
 			</tr>
 			<tr>
 				<th class="required">登录密码</th>
-				<td><input name="password" type="text"/></td>
+				<td><input name="password" type="text" id="password"/></td>
 				<th class="required">证件类型</th>
 				<td>
-					<select class="selectpicker" name="credType" title="请选择" class="{required:true}">
-						<option value="1" >身份证</option>
+					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType">
+						<option value="1">身份证</option>
 						<option value="2">军官证</option>
 						<option value="3">港澳台胞证</option>
 					</select>
+					<span class="error credType-error"></span>
 				</td>
 			</tr>
 			<tr>
 				<th class="required">确认密码</th>
 				<td><input name="confirmPassword" type="text" /></td>
 				<th class="required">证件号码</th>
-				<td><input name="credNo" type="text" value="" /></td>
+				<td><input name="credNo" type="text" id="credNo"/></td>
 			</tr>
 			<tr>
 				<th class="required">性别</th>
 				<td>
-					<input id="男" type="radio" name="性别" checked=""><label for="男">男</label>
-					<input id="女" type="radio" name="性别"><label for="女">女</label>
+					<input type="radio" name="gender" value="0" checked="checked"><label for="男">男</label>
+					<input type="radio" name="gender" value="1" ><label for="女">女</label>
 				</td>
 				<th class="required">用户角色</th>
 				<td>
-					<input id="管理员" type="radio" name="角色" checked=""><label for="管理员">管理员</label>
-					<input id="领导" type="radio" name="角色"><label for="领导">领导</label>
+					<input type="radio" name="role" checked="checked" value="0"><label for="管理员">管理员</label>
+					<input type="radio" name="role" value="1"><label for="领导">领导</label>
 				</td>
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="organization" type="text" />
+				<td><input name="organization" type="text" id="organization"/>
 				</td>
 			</tr>
 			<tr>
 				<th>出生日期</th>
-				<td><input id="d11" type="text" onClick="WdatePicker()"/></td>
+				<td><input type="text" name="birthday" id="birthday" onClick="WdatePicker()" readonly="readonly"/></td>
 				<th>电子邮件</th>
-				<td><input name="email" type="text" /></td>
+				<td><input name="email" type="text" id="email"/></td>
 			</tr>
 			<tr>
 				<th>职称</th>
-				<td><input name="zc" type="text" /></td>
+				<td><input name="zc" type="text" id="zc"/></td>
 				<th>职务</th>
-				<td><input name="zw" type="text"/></td>
+				<td><input name="zw" type="text" id="zw"/></td>
 			</tr>
 			<tr>
 				<th>所属部门</th>
-				<td><input name="name" type="text" /></td>
+				<td><input name="dept" type="text" id="dept"/></td>
 				<th>学历</th>
-				<td><input name="degrees" type="text" /></td>
+				<td>
+					<select class="selectpicker" name="degrees" title="请选择" id="degrees">
+						<option >大专</option>
+						<option >本科</option>
+						<option >硕士</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th>专业</th>
-				<td><input name="major" type="text"/></td>
+				<td><input name="major" type="text" id="major"/></td>
 				<th>电话</th>
-				<td><input name="telephone" type="text" /></td>
+				<td><input name="telephone" type="text" id="telephone"/></td>
 			</tr>
 			<tr>
 				<th>手机</th>
-				<td><input name="phone" type="text" /></td>
+				<td><input name="phone" type="text" id="phone"/></td>
 				<th>地址</th>
-				<td><input name="address" type="text" /></td>
+				<td><input name="address" type="text" id="address"/></td>
 			</tr>
 		</table>
 	</form>
@@ -101,6 +111,7 @@
 	</p>
 	<script src="<%=basePath %>/static/js/icheck/icheck.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/js/jsencrypt.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		$(function(){
 			// 处理select不初始化的问题
@@ -126,32 +137,57 @@
 			   	return !reg1.test(value) && !reg2.test(value) && !reg3.test(value) && !reg4.test(value);
 			});
 			
+			jQuery.validator.addMethod("mobile", function(value, element) {
+				var length = value.length;
+				return this.optional(element) || (length == 11 && /^1\d{10}$/.test(value));
+			});
+			    
+			jQuery.validator.addMethod("isTel", function(value, element) { 
+				var tel = /^\d{3,4}-?\d{7,9}$/; //电话号码格式010-12345678 
+				return this.optional(element) || (tel.test(value)); 
+			}); 
+			
+			jQuery.validator.addMethod("stringCheck", function(value, element) { 
+			     return this.optional(element) || /^[\u0391-\uFFE5\w]{1,100}$/.test(value); 
+			});
+			
+			jQuery.validator.addMethod("nullableCheck", function(value, element) { 
+			    if(Sport.isNull(value)){
+			    	return true;
+			    } 
+				return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
+			}); 
 			
 			// 登录验证
 			$(".sport-user-form").validate({
 		        rules: {
 		        	loginName:{
 		                required: true,
-		                minLength:4,
-		                maxLength:20
+		                minlength:4,
+		                maxlength:20,
+		                remote:{     
+		                    type:"POST",
+		                    url:"<%=basePath%>/user/check.action",
+		                    data:{
+		                    	loginName:function(){return $('#loginName').val()},
+		                    	_csrf:function(){return $("#csrdId").val()}
+		                    }
+		                 }
 		            },
 		            userName:{
 		                required: true,
-		                minLength:4,
-		                maxLength:20
+		                minlength:1,
+		                maxlength:20
 		            },
 		            password: {
 		                required: true,
-		                minLength:4,
-		                maxLength:16,
+		                minlength:4,
+		                maxlength:16,
 		                pwd:true
 		            },
 		            confirmPassword: {
 		                required: true,
-		                equalTo:"#confirmPassword"
-		            },
-		            credType:{
-		            	required: true
+		                equalTo:"#password"
 		            },
 		            credNo:{
 		            	required: true
@@ -160,7 +196,31 @@
 		            	required: true
 		            },
 		            email:{
-		            	required: false
+		            	 required:false,
+		                 email:true
+		            },
+		            zc:{
+		            	nullableCheck:true
+		            },
+		            zw:{
+		            	 nullableCheck:true
+		            },
+		            dept:{
+		            	nullableCheck:true
+		            },
+		            major:{
+		            	nullableCheck:true
+		            },
+		            telephone:{
+		            	required:false,
+		            	isTel:true
+		            },
+		            phone:{
+		            	required:false,
+		            	mobile:true
+		            },
+		            address:{
+			             stringCheck:true
 		            }
 		        },
 		        messages: {
@@ -168,11 +228,12 @@
 		                required: "请填写用户名",
 		                minlength:'用户名在4-20个字符之间',
 		                maxlength:'用户名在4-20个字符之间',
+		                remote:"用户名已被占用"
 		            },
 		            userName:{
 		                required: "请填写真实姓名",
-		                minlength:'真实姓名在4-20个字符之间',
-		                maxlength:'真实姓名在4-20个字符之间',
+		                minlength:'真实姓名在1-20个字符之间',
+		                maxlength:'真实姓名在1-20个字符之间'
 		            },
 		            password: {
 		            	 required:'请填写密码',
@@ -184,14 +245,35 @@
 		            	required : "确认密码不能为空",
 		            	equalTo:'两次密码输入不一致,请重新输入'
 		            },
-		            credType:{
-		            	required: "请选择证件类型"
-		            },
 		            credNo:{
 		            	required: "请填写证件编号"
 		            },
 		            organization:{
 		            	required: "请填写所属单位"
+		            },
+		            email:{
+		                 email:"请填写正确的邮箱格式"
+		            },
+		            zc:{
+		            	nullableCheck:"职称长度不能超过40个字符"
+		            },
+		            zw:{
+		            	nullableCheck:"职务长度不能超过40个字符"
+		            },
+		            dept:{
+		            	nullableCheck:"部门长度不能超过40个字符"
+		            },
+		            major:{
+		            	nullableCheck:"专业长度不能超过40个字符"
+		            },
+		            telephone:{
+		            	isTel:"请正确填写您的电话号码"
+		            },
+		            phone:{
+		            	mobile:"手机号码格式错误"
+		            },
+		            address:{
+		            	stringCheck:"只能包括中文字、英文字母、数字和下划线"
 		            }
 		        }
 		     });

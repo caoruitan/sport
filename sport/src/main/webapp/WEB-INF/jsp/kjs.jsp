@@ -16,10 +16,11 @@
 	<link href="<%=basePath %>/static/css/sport.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="<%=basePath %>/static/css/bootstrap.min.css">
 	<script src="<%=basePath %>/static/js/jquery.min1.10.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-	<script src="<%=basePath %>/static/js/common.js"></script>
-	<script src="<%=basePath %>/static/js/sport.js"></script>
+	<script src="<%=basePath %>/static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/js/sport.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%=basePath %>/static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <decorator:head/>
 <title><decorator:title/></title>
