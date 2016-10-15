@@ -8,7 +8,7 @@
 	<http entry-point-ref="loginUrlEntryPoint" auto-config="true">
 		<intercept-url pattern="/password/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/user/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/user/create.action" access="hasRole('ROLE_KJS_ADMIN','ROLE_SB_EXPERT','ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/user/create.action" access="hasAnyRole('ROLE_KJS_ADMIN','ROLE_SB_EXPERT','ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/kjs.htm" access="hasAnyRole('ROLE_KJS_ADMIN','ROLE_KJS_LEADER')"/>
 		<intercept-url pattern="/kjs/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/login" access="permitAll()"/>

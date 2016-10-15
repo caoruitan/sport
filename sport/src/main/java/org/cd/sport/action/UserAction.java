@@ -12,6 +12,8 @@ import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.SportException;
 import org.cd.sport.service.UserService;
 import org.cd.sport.utils.AuthenticationUtils;
+import org.cd.sport.utils.GsonUtils;
+import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
@@ -125,8 +127,14 @@ public class UserAction extends ExceptionWrapper {
 	}
 
 	@RequestMapping(value = "/user/datas", method = RequestMethod.GET)
-	public void getUserDatas(HttpServletRequest request) {
-		this.userService.get(0, 10);
+	public void getUserDatas(HttpServletRequest request, HttpServletResponse response) {
+		List<UserDomain> datas = this.userService.get(0, 20);
+		PageModel<UserDomain> page = new PageModel<UserDomain>();
+		page.setPage(1);
+		page.setTotal(2/20+1);
+		page.setRecords(2);
+		page.setRows(datas);
+		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}
 
 	@RequestMapping(value = "/user/check.action", method = RequestMethod.POST)

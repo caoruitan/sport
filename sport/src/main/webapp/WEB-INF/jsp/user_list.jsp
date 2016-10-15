@@ -54,34 +54,24 @@
         // 处理select不初始化的问题
 		$(window).trigger("load");
 		$("#jqGrid").jqGrid({
-		//url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/getjsonp.php?callback=?&qwery=longorders',
-		//mtype: "GET",
-		//datatype: "jsonp",
-		datatype: "local",
-              colModel: [
-                  {name:'No',index:'No.', width:5, sorttype:"int",align:"center"},
-	   		{name:'登录名',index:'登录名', width:20, sorttype:"date"},
-	   		{name:'真实姓名',index:'真实姓名', align:"center", width:15},
-	   		{name:'证件类型',index:'证件类型', width:10, align:"center",sorttype:"float"},
-	   		{name:'证件号码',index:'证件号码', width:30, align:"left",sorttype:"float"},		
-	   		{name:'所属部门',index:'所属部门', width:10,align:"center",sorttype:"float"},		
-	   		{name:'操作',index:'操作', width:10, align:"center",sortable:false}
+		url: '<%=basePath %>/user/datas',
+		mtype: "GET",
+		datatype: "json",
+			colModel: [
+				{label:"用户名",name:'loginName',align:"center", width:20, sorttype:"date"},
+				{label:"用户名",name:'userName', align:"center", width:15},
+				{label:"用户名",name:'credType', width:10, align:"center",sorttype:"float"},
+				{label:"用户名",name:'credNo', width:30, align:"left",sorttype:"float"},		
+				{label:"用户名",name:'dept', width:10,align:"center",sorttype:"float"},		
+				{label:"用户名",name:'操作', width:10, align:"center",sortable:false,hidden:"${hasOper}"}
               ],
-              autowidth:true,
-		viewrecords: true,
-              height: 200,
-              rowNum: 20,
-              multiselect: true,
-              pager: "#jqGridPager"
+			autowidth:true,
+			viewrecords: true,
+			height: 200,
+			rowNum: 20,
+			multiselect: true,
+			pager: "#jqGridPager"
           });
-          
-          var mydata = [
-			{No:"1",登录名:"龙一飞",真实姓名:"张宇",证件类型:"身份证",证件号码:"151525198111020921",所属部门:"技术检验科",操作:"编辑"},
-			
-			];
-			for(var i=0;i<=mydata.length;i++){
-				jQuery("#jqGrid").jqGrid('addRowData',i+1,mydata[i]);
-			}
 			doResize(); 
 			$("#jqGrid").setGridWidth($(".listBox").width());
       });
