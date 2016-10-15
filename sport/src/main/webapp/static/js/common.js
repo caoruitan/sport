@@ -6,7 +6,7 @@ $(function() {
 
 function doResize() {
 	var ss = getPageSize();
-	$("#jqGrid").jqGrid('setGridWidth', ss.WinW - 20).jqGrid('setGridHeight', ss.WinH - 300);
+	$("#jqGrid").jqGrid('setGridWidth', $(".listBox").width()).jqGrid('setGridHeight', ss.WinH - 300);
 }
 
 function getPageSize() {
@@ -28,8 +28,4 @@ function getPageSize() {
 }
 
 $(document).ready(function() {
-	if($("#jqGrid").length > 0) {
-		$("#jqGrid").setGridWidth($(window).width() * 0.99);
-		$("#jqGrid").setGridWidth(document.body.clientWidth * 0.99);
-	}
 });

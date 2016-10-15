@@ -18,6 +18,7 @@
 			background: #F2F2F2;}
 	</style>
 </head>
+<body>
 <div class="titleBox">
 	<div class="title"><img src="<%=basePath %>/static/img/yh.png" />用户管理</div>
 	<div class="searchBtn">查询</div>
@@ -41,7 +42,8 @@
 		<c:if test="${hasOper}">
 			<div class="fl-l">
 					<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
-			</div><div class="fl-r">
+			</div>
+			<div class="fl-r">
 				<button class="btn-wisteria">删除</button>
 			</div>
 		</c:if>
@@ -59,13 +61,12 @@
 		datatype: "json",
 			colModel: [
 				{label:"用户名",name:'loginName',align:"center", width:20, sorttype:"date"},
-				{label:"用户名",name:'userName', align:"center", width:15},
-				{label:"用户名",name:'credType', width:10, align:"center",sorttype:"float"},
-				{label:"用户名",name:'credNo', width:30, align:"left",sorttype:"float"},		
-				{label:"用户名",name:'dept', width:10,align:"center",sorttype:"float"},		
-				{label:"用户名",name:'操作', width:10, align:"center",sortable:false,hidden:"${hasOper}"}
+				{label:"真实姓名",name:'userName', align:"center", width:15},
+				{label:"证件类型",name:'credType', width:10, align:"center",sorttype:"float"},
+				{label:"证件编号",name:'credNo', width:30, align:"left",sorttype:"float"},		
+				{label:"所属部门",name:'dept', width:10,align:"center",sorttype:"float"},		
+				{label:"用户名",name:'操作', width:10, align:"center",sortable:false}
               ],
-			autowidth:true,
 			viewrecords: true,
 			height: 200,
 			rowNum: 20,
@@ -76,3 +77,4 @@
 			$("#jqGrid").setGridWidth($(".listBox").width());
       });
 </script>
+</body>
