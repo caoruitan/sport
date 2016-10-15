@@ -90,11 +90,16 @@ public class UserVo {
 	 * 用户地址(非必填)
 	 */
 	private String address;
-	
+
 	/**
 	 * 单位名称
 	 */
 	private String orgName;
+
+	/**
+	 * 是否有操作权限
+	 */
+	private boolean hasOpr;
 
 	public String getUserId() {
 		return userId;
@@ -128,7 +133,6 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-
 	public String getCredType() {
 		return credType;
 	}
@@ -152,7 +156,6 @@ public class UserVo {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
 
 	public Date getBirthday() {
 		return birthday;
@@ -194,7 +197,6 @@ public class UserVo {
 		this.dept = dept;
 	}
 
-
 	public String getDegrees() {
 		return degrees;
 	}
@@ -202,7 +204,6 @@ public class UserVo {
 	public void setDegrees(String degrees) {
 		this.degrees = degrees;
 	}
-
 
 	public String getMajor() {
 		return major;
@@ -250,5 +251,13 @@ public class UserVo {
 
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	public boolean isHasOpr() {
+		return hasOpr;
+	}
+
+	public void setHasOpr(boolean hasOpr) {
+		this.hasOpr = hasOpr;
 	}
 }

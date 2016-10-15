@@ -87,12 +87,12 @@ public class SportSupport {
 		}
 	}
 
-	public static int processPageSize(String limit) {
-		if (StringUtils.isBlank(limit)) {
+	public static int processPageSize(String page) {
+		if (StringUtils.isBlank(page)) {
 			return Constants.Common.PAGE_SIZE;
 		}
 		try {
-			int parseInt = Integer.parseInt(limit);
+			int parseInt = Integer.parseInt(page);
 			return parseInt < 0 ? Constants.Common.PAGE_SIZE
 					: (parseInt > Integer.MAX_VALUE ? Constants.Common.PAGE_SIZE : parseInt);
 		} catch (Exception e) {

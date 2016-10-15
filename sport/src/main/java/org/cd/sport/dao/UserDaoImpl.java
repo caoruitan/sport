@@ -25,9 +25,10 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UserDomain> findByRole(String role, int start, int limit) {
-		String queryHql = "from UserDomain where role=:role";
-		return this.getHibernateQuery(queryHql).setParameter("role", role).setFirstResult(start).setMaxResults(limit).list();
+	public List<UserDomain> findByRole(String[] role, int start, int limit) {
+		String queryHql = "from UserDomain where role in (:role)";
+		return this.getHibernateQuery(queryHql).setParameterList("role", role).setFirstResult(start).setMaxResults(limit)
+				.list();
 	}
 
 	@Override
@@ -38,9 +39,9 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 	}
 
 	@Override
-	public long count(String role) {
-		String updateHql = "select count(1) from UserDomain where role=:role";
-		Long count = (Long) this.getHibernateQuery(updateHql).setParameter("role", role).uniqueResult();
+	public long count(String[] role) {
+		String updateHql = "select count(1) from UserDomain where role in (:role)";
+		Long count = (Long) this.getHibernateQuery(updateHql).setParameterList("role", role).uniqueResult();
 		return count == null ? 0 : count.intValue();
 	}
 
@@ -91,6 +92,22 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 		hibernateSqlQuery.addScalar("orgName");
 		hibernateSqlQuery.setResultTransformer(Transformers.aliasToBean(UserVo.class));
 		return (UserVo) hibernateSqlQuery.uniqueResult();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserDomain> findByRole(String[] role, String name, int start, int limit) {
+		String queryHql = "from UserDomain where role in (:role) and (loginName like :name or userName like :name)";
+		return this.getHibernateQuery(queryHql).setParameterList("role", role).setParameter("name", "%" + name + "%")
+				.setFirstResult(start).setMaxResults(limit).list();
+	}
+
+	@Override
+	public long count(String[] role, String name) {
+		String updateHql = "select count(1) from UserDomain where role in (:role) and (loginName like :name or userName like :name)";
+		Long count = (Long) this.getHibernateQuery(updateHql).setParameterList("role", role)
+				.setParameter("name", "%" + name + "%").uniqueResult();
+		return count == null ? 0 : count.intValue();
 	}
 
 }

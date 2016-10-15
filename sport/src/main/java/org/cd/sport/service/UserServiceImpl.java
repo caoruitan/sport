@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.UserDao;
 import org.cd.sport.domain.UserDomain;
@@ -16,6 +17,7 @@ import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.UserSupport;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -167,22 +169,41 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	}
 
 	@Override
-	public List<UserDomain> getByRole(String role, int start, int limit) {
-		return this.userDao.findByRole(role, start, limit);
+	public List<UserVo> getByRole(String[] role, int start, int limit) {
+		List<UserDomain> datas = this.userDao.findByRole(role, start, limit);
+		return this.process(datas);
 	}
 
 	@Override
-	public List<UserDomain> get(int start, int limit) {
-		return this.userDao.find(start, limit);
+	public List<UserVo> get(int start, int limit) {
+		List<UserDomain> datas = this.userDao.find(start, limit);
+		return this.process(datas);
 	}
 
 	@Override
-	public long getTotal(String role) {
+	public long getTotal(String[] role) {
 		return this.userDao.count(role);
 	}
 
 	@Override
 	public long getTotal() {
 		return this.userDao.count();
+	}
+
+	@Override
+	public List<UserVo> getByRole(String[] role, String name, int start, int limit) {
+		if (StringUtils.isBlank(name)) {
+			return this.getByRole(role, start, limit);
+		}
+		List<UserDomain> datas = this.userDao.findByRole(role, name, start, limit);
+		return this.process(datas);
+	}
+
+	@Override
+	public long getTotal(String[] role, String name) {
+		if (StringUtils.isBlank(name)) {
+			return this.getTotal(role);
+		}
+		return this.userDao.count(role, name);
 	}
 }

@@ -59,7 +59,7 @@ public class Constants {
 		// 科教司专家角色
 		public static String ROLE_KJS_EXPERT = "ROLE_KJS_EXPERT";
 		// 申报单位管理员角色
-		public static String ROLE_SB_EXPERT = "ROLE_SB_ADMIN";
+		public static String ROLE_SB_ADMIN = "ROLE_SB_ADMIN";
 		// 申报单位操作员角色
 		public static String ROLE_SB_OPER = "ROLE_SB_OPER";
 		// 组织单位管理员角色
@@ -69,7 +69,7 @@ public class Constants {
 		 * 判断用户是否有创建用户权限
 		 */
 		public static boolean hasOper(String role) {
-			return ROLE_KJS_ADMIN.equals(role) || ROLE_SB_EXPERT.equals(role) || ROLE_ORG_ADMIN.equals(role);
+			return ROLE_KJS_ADMIN.equals(role) || ROLE_SB_ADMIN.equals(role) || ROLE_ORG_ADMIN.equals(role);
 		}
 
 		/**
@@ -81,13 +81,26 @@ public class Constants {
 			if (ROLE_KJS_ADMIN.equals(role)) {
 				kvs.add(new KV("领导", ROLE_KJS_LEADER));
 				kvs.add(new KV("专家", ROLE_KJS_EXPERT));
-			} else if (ROLE_SB_EXPERT.equals(role)) {
+			} else if (ROLE_SB_ADMIN.equals(role)) {
 				kvs.add(new KV("申报人员", ROLE_SB_OPER));
 			} else if (ROLE_ORG_ADMIN.equals(role)) {
 				kvs.add(new KV("管理人员", ROLE_ORG_ADMIN));
 			}
 			return kvs;
 		}
+
+		public static String[] getQueryRoles(String role) {
+			// 科教司管理员角色
+			if (ROLE_KJS_ADMIN.equals(role)) {
+				return new String[] { ROLE_KJS_ADMIN, ROLE_KJS_LEADER, ROLE_KJS_EXPERT };
+			} else if (ROLE_SB_ADMIN.equals(role)) {
+				return new String[] { ROLE_SB_ADMIN, ROLE_SB_OPER };
+			} else if (ROLE_ORG_ADMIN.equals(role)) {
+				return new String[] { ROLE_ORG_ADMIN };
+			}
+			return null;
+		}
+
 	}
 
 }

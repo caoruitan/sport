@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.UserDomain;
+import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
 import org.cd.sport.service.UserService;
+import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
@@ -19,6 +21,7 @@ import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
 import org.cd.sport.view.UserView;
 import org.cd.sport.vo.KV;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -128,11 +131,21 @@ public class UserAction extends ExceptionWrapper {
 
 	@RequestMapping(value = "/user/datas", method = RequestMethod.GET)
 	public void getUserDatas(HttpServletRequest request, HttpServletResponse response) {
-		List<UserDomain> datas = this.userService.get(0, 20);
-		PageModel<UserDomain> page = new PageModel<UserDomain>();
-		page.setPage(1);
-		page.setTotal(2/20+1);
-		page.setRecords(2);
+		String name = request.getParameter("name");
+		String startStr = request.getParameter("page");
+		int start = SportSupport.processLimit(startStr);
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		String[] roles = Constants.Role.getQueryRoles(userDomain.getRole());
+		if (roles == null) {
+			throw new ForbiddenExcetion("");
+		}
+		List<UserVo> datas = this.userService.getByRole(roles, name, (start - 1) * Constants.Common.PAGE_SIZE,
+				Constants.Common.PAGE_SIZE);
+		long total = this.userService.getTotal(roles, name);
+		PageModel<UserVo> page = new PageModel<UserVo>();
+		page.setPage(start);
+		page.setTotal((long) Math.ceil(total / Constants.Common.PAGE_SIZE));
+		page.setRecords(total);
 		page.setRows(datas);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}

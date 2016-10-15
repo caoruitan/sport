@@ -25,23 +25,14 @@
 </div>
 <div class="searchBox">
 	<dt>姓名</dt>
-	<dd><input type="text" /></dd>
-	<dt>职称</dt>
-	<dd><input type="text" /></dd>
-	<dt>系统归属</dt>
-	<dd>
-		<select class="selectpicker" title="请选择系统">
-		<option>OA系统</option>
-		<option>申报系统</option>
-	</select>
-	</dd>
-	<button class="search-btn">查询</button>
+	<dd><input type="text" class="sport-user-key"/></dd>
+	<button class="search-btn search-user-btn">查询</button>
 </div>
 <div class="listBox">
 	<div class="opBtnBox">
 		<c:if test="${hasOper}">
 			<div class="fl-l">
-					<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
+				<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
 			</div>
 			<div class="fl-r">
 				<button class="btn-wisteria">删除</button>
@@ -65,7 +56,12 @@
 				{label:"证件类型",name:'credType', width:10, align:"center",sorttype:"float"},
 				{label:"证件编号",name:'credNo', width:30, align:"left",sorttype:"float"},		
 				{label:"所属部门",name:'dept', width:10,align:"center",sorttype:"float"},		
-				{label:"用户名",name:'操作', width:10, align:"center",sortable:false}
+				{label:"操作",name:'操作', width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
+					if(rows.hasOpr == true){
+						return "<a href='javascript:;;' class='sport-user-edit' data-id='"+rows.userId+"'>编辑</a>";
+					}
+					return "";
+				}}
               ],
 			viewrecords: true,
 			height: 200,

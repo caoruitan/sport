@@ -240,6 +240,16 @@ $(function(){
 		}
 	}).on("click",".user-returnBtn",function(){
 		$(".sport-container").load(Sport.getBasePath()+"/user");
+	}).on("click",".search-user-btn",function(){
+		var value = $(".sport-user-key").val();
+		value = Sport.isNull(value)?"":value;
+        $("#jqGrid").jqGrid('setGridParam',{  
+            datatype:'json',  
+            postData:{'name':encodeURI(encodeURI(value))},
+            page:1  
+        }).trigger("reloadGrid"); 
+	}).on("click",".sport-user-edit",function(){
+		$(".sport-container").load(Sport.getBasePath()+"/user");
 	});
 	
 	// 密码重置
