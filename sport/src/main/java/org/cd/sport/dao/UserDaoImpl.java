@@ -65,7 +65,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 
 	@Override
 	public UserVo findVoById(String id) {
-		String querySql = "select U.*,O.FULL_NAME as \"orgName\" from SPORT_USER U LEFT JOIN SPORT_ORGANIZATION O ON U.ORGANIZATION=O.ORG_ID";
+		String querySql = "select U.USER_ID AS \"userId\",O.FULL_NAME as \"orgName\" from SPORT_USER U LEFT JOIN SPORT_ORGANIZATION O ON U.ORGANIZATION=O.ORG_ID";
 		SQLQuery hibernateSqlQuery = this.getHibernateSqlQuery(querySql);
 		hibernateSqlQuery.addScalar("userId");
 		hibernateSqlQuery.addScalar("loginName");
