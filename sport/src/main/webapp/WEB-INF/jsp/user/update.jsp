@@ -4,10 +4,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <div class="titleBox">
-	<div class="title"><img src="../img/yh.png" />用户新增<span>所有加 * 的区域为必填项。</span></div>
-	<a href="javascript:history.go(-1)">
-		<div class="returnBtn">返回列表</div>
-	</a>
+	<div class="title"><img src="<%=basePath %>/static/img/yh.png" />用户新增<span>所有加 * 的区域为必填项。</span></div>
+	<div data-type="${user_type}" class="returnBtn user-returnBtn">返回列表</div>
 </div>
 <div class="editBox">
 	<table class="editTable">

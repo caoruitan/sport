@@ -18,7 +18,7 @@
 <body>
 <div class="titleBox">
 	<div class="title"><img src="<%=basePath %>/static/img/yh.png" />用户新增<span>所有加 * 的区域为必填项。</span></div>
-    <div class="returnBtn user-returnBtn">返回列表</div>
+    <div data-type="${user_type}" class="returnBtn user-returnBtn">返回列表</div>
 </div>
 <div class="editBox">
 	<form class="sport-user-form sport-form">

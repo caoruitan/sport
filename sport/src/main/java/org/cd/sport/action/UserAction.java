@@ -40,18 +40,19 @@ public class UserAction extends ExceptionWrapper {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/kjsadmin/resetpassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/resetpassword.htm", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
+		request.setAttribute("user_type", "kjsadmin");
 		return "user/resetpassword";
 	}
 
-	@RequestMapping(value = "/kjs/resetpassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjs/resetpassword.action", method = RequestMethod.POST)
 	public void resetPassword(HttpServletRequest request) {
 	}
 
-	@RequestMapping(value = "/kjsadmin/create.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/create.htm", method = RequestMethod.GET)
 	public String gotoCreateUserView(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限
 		UserDomain userDomain = AuthenticationUtils.getUser();
@@ -67,6 +68,7 @@ public class UserAction extends ExceptionWrapper {
 		// 缓存 rsa对象
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
+		request.setAttribute("user_type", "kjsadmin");
 		return "user/create";
 	}
 
@@ -95,10 +97,11 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, json);
 	}
 
-	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
 	public String gotoUpdateUserView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
+		request.setAttribute("user_type", "kjsadmin");
 		return "user/update";
 	}
 
@@ -114,6 +117,7 @@ public class UserAction extends ExceptionWrapper {
 		boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
 		// 按钮控制
 		request.setAttribute("hasOper", hasRole);
+		request.setAttribute("user_type", "kjsadmin");
 		return "user/list";
 	}
 

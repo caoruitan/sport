@@ -38,7 +38,7 @@ public class Constants {
 		public static Map<String, String> urlMapping = new HashMap<String, String>();
 
 		static {
-			urlMapping.put("ROLE_KJS_ADMIN", "kjs.htm");
+			urlMapping.put("ROLE_KJS_ADMIN", "portal/kjsadmin/index.htm");
 			urlMapping.put("ROLE_KJS_LEADER", "kjs.htm");
 			urlMapping.put("ROLE_KJS_EXPERT", "/admin");
 			urlMapping.put("ROLE_SB_EXPERT", "/admin");

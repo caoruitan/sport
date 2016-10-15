@@ -3,6 +3,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+    request.setAttribute("basePath", basePath);
 %>
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
@@ -32,10 +33,10 @@
 	<div class="opBtnBox">
 		<c:if test="${hasOper}">
 			<div class="fl-l">
-				<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
+				<a href="javascript:;;" data-type="${user_type}" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
 			</div>
 			<div class="fl-r">
-				<button class="btn-wisteria">删除</button>
+				<button class="btn-wisteria sport-user-delete">删除</button>
 			</div>
 		</c:if>
 	</div>
@@ -46,8 +47,9 @@
 	$(document).ready(function () {
         // 处理select不初始化的问题
 		$(window).trigger("load");
+        var user_type="${user_type}";
 		$("#jqGrid").jqGrid({
-		url: '<%=basePath %>/user/datas',
+		url: "${basePath}/user/"+user_type+"/datas.action",
 		mtype: "GET",
 		datatype: "json",
 			colModel: [
@@ -58,7 +60,7 @@
 				{label:"所属部门",name:'dept', width:10,align:"center",sorttype:"float"},		
 				{label:"操作",name:'操作', width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
 					if(rows.hasOpr == true){
-						return "<a href='javascript:;;' class='sport-user-edit' data-id='"+rows.userId+"'>编辑</a>";
+						return "<a href='javascript:;;' class='sport-user-edit' data-type="+user_type+" data-id='"+rows.userId+"'>编辑</a>";
 					}
 					return "";
 				}}
@@ -67,7 +69,11 @@
 			height: 200,
 			rowNum: 20,
 			multiselect: true,
-			pager: "#jqGridPager"
+			pager: "#jqGridPager",
+			onSelectRow: function (rowid, status) {
+            },
+            onSelectAll: function (aRowids, status) {
+            }
           });
 			doResize(); 
 			$("#jqGrid").setGridWidth($(".listBox").width());

@@ -175,15 +175,15 @@ $(function(){
 	
 	// 数据字典页面加载
 	$(document).on("click",".sport-dic-menu",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/dic");
+		window.location.href = Sport.getBasePath()+"/dic/list.htm";
 	})
 	
 	
 	// 用户管理
 	$(document).on("click",".sport-user-menu",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/user");
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/list.htm";
 	}).on("click",".sport-user-create-btn",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/user/create.action");
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/create.htm";
 	}).on("change",".credType-select",function(){
 		$(".credType-error").text("");
 	}).on("click",".sport-user-save",function(){
@@ -239,7 +239,7 @@ $(function(){
 			});
 		}
 	}).on("click",".user-returnBtn",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/user");
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/list.htm";
 	}).on("click",".search-user-btn",function(){
 		var value = $(".sport-user-key").val();
 		value = Sport.isNull(value)?"":value;
@@ -249,12 +249,19 @@ $(function(){
             page:1  
         }).trigger("reloadGrid"); 
 	}).on("click",".sport-user-edit",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/user");
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/update.htm";
+	}).on("click",".sport-user-delete",function(){
+		var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<=1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		
 	});
 	
 	// 密码重置
 	$(document).on("click",".sport-password-reset-menu",function(){
-		$(".sport-container").load(Sport.getBasePath()+"/password/reset");
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/resetpassword.htm";
 	}).on("click",".sport-yzm-btn",function(){
 		var url = $(".sport-yzm").attr("src");
         if (url.indexOf("?") >= 0) {
