@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
+@RequestMapping("/dic")
 public class DicAction {
 
-	@RequestMapping("/dic")
+	@RequestMapping("/list")
 	public String gotoIndex() {
 		UserDomain user = AuthenticationUtils.getUser();
-		return "dic_list";
+		return "dic/list";
 	}
 	
 }

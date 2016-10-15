@@ -5,11 +5,14 @@
     <excludes>
         <pattern>*login*</pattern>
         <pattern>*doLogin*</pattern>
+        <pattern>*logout*</pattern>
     </excludes>
     <!--decorator结点指定了模板的位置和文件名，通过pattern来指定哪些路径引用哪个模板 -->
     <!-- 科教司 -->
-    <decorator name="kjs" page="kjs.jsp">
-        <pattern>/kjs.htm</pattern>
-        <pattern>/kjs/*.htm</pattern>
+    <decorator name="kjs" page="frame/kjsadmin.jsp">
+        <pattern>/portal/kjsadmin/*.htm</pattern>
+        <pattern>/user/kjsadmin/*.htm</pattern>
+        <pattern>/dic/*.htm</pattern>
+        <pattern>/news/kjsadmin/*.htm</pattern>
     </decorator>
 </decorators>

@@ -31,39 +31,27 @@ import com.google.gson.JsonObject;
 
 /**
  * 用户相关
- * 
  * @author liuyk
- *
  */
 @Controller
+@RequestMapping("user")
 public class UserAction extends ExceptionWrapper {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/password/update", method = RequestMethod.GET)
-	public String gotoUpdatePasswordView(HttpServletRequest request) {
-		UserDomain user = AuthenticationUtils.getUser();
-		request.setAttribute("user", user);
-		return "password_update";
-	}
-
-	@RequestMapping(value = "/password/update", method = RequestMethod.POST)
-	public void updatePassword(HttpServletRequest request) {
-	}
-
-	@RequestMapping(value = "/password/reset", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/resetpassword", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
-		return "password_reset";
+		return "user/resetpassword";
 	}
 
-	@RequestMapping(value = "/password/reset", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjs/resetpassword", method = RequestMethod.POST)
 	public void resetPassword(HttpServletRequest request) {
 	}
 
-	@RequestMapping(value = "/user/create.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/create.action", method = RequestMethod.GET)
 	public String gotoCreateUserView(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限
 		UserDomain userDomain = AuthenticationUtils.getUser();
@@ -79,10 +67,10 @@ public class UserAction extends ExceptionWrapper {
 		// 缓存 rsa对象
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
-		return "user_create";
+		return "user/create";
 	}
 
-	@RequestMapping(value = "/user/create.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjsadmin/create.action", method = RequestMethod.POST)
 	public void createUser(UserView user, HttpServletRequest request, HttpServletResponse response) {
 		String uuid = request.getParameter("uuid");
 		String password = request.getParameter("password");
@@ -107,29 +95,29 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, json);
 	}
 
-	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.GET)
 	public String gotoUpdateUserView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("user", user);
-		return "user_update";
+		return "user/update";
 	}
 
-	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.POST)
 	public void updateUser(HttpServletRequest request) {
 
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限
 		UserDomain userDomain = AuthenticationUtils.getUser();
 		boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
 		// 按钮控制
 		request.setAttribute("hasOper", hasRole);
-		return "user_list";
+		return "user/list";
 	}
 
-	@RequestMapping(value = "/user/datas", method = RequestMethod.GET)
+	@RequestMapping(value = "/kjsadmin/datas.action", method = RequestMethod.GET)
 	public void getUserDatas(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
 		String startStr = request.getParameter("page");
@@ -150,7 +138,7 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}
 
-	@RequestMapping(value = "/user/check.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjsadmin/check.action", method = RequestMethod.POST)
 	public void checkUser(String loginName, HttpServletRequest request, HttpServletResponse response) {
 		UserDomain user = this.userService.getByLoginName(loginName);
 		PageWrite.writeTOPage(response, user == null);

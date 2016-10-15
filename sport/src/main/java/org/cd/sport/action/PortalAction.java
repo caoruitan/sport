@@ -6,12 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AdminAction {
+@RequestMapping("portal")
+public class PortalAction {
 
-	@RequestMapping("kjs.htm")
+	@RequestMapping("kjsadmin/index.htm")
 	public String gotoIndex(){
 		UserDomain user = AuthenticationUtils.getUser();
-		return "kjs_admin";
+		return "portal/kjs";
 	}
 	
 }
