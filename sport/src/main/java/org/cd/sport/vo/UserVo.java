@@ -15,105 +15,86 @@ public class UserVo {
 	private String userId;
 
 	/**
-	 * 用户名/登录名
+	 * 用户名/登录名(必填)
 	 */
 	private String loginName;
 	/**
-	 * 用户登录密码
-	 */
-	private String password;
-	/**
-	 * 用户真实姓名
+	 * 用户真实姓名(必填)
 	 */
 	private String userName;
 	/**
-	 * 用户性别0:男性,1:女性
+	 * 用户性别0:男性,1:女性(必填)
 	 */
 	private int gender;
-
 	/**
-	 * 性别中文名
-	 */
-	private String genderName;
-	/**
-	 * 证件类型
+	 * 证件类型(必填)
 	 */
 	private String credType;
 
 	/**
-	 * 证件编号
+	 * 证件编号(必填)
 	 */
 	private String credNo;
 	/**
-	 * 用户角色
+	 * 用户角色(必填)
 	 */
 	private String role;
-
-	/**
-	 * 用户角色名称
-	 */
-	private String roleName;
 	/**
 	 * 用户所属单位/公司
 	 */
-	private String company;
+	private String organization;
 
 	/**
-	 * 用户生日
+	 * 用户生日(非必填)
 	 */
 	private Date birthday;
 
 	/**
-	 * 用户邮箱
+	 * 用户邮箱(非必填)
 	 */
 	private String email;
 
 	/**
-	 * 用户职称
+	 * 用户职称(非必填)
 	 */
 	private String zc;
 	/**
-	 * 用户职务
+	 * 用户职务(非必填)
 	 */
 	private String zw;
 	/**
-	 * 用户部门
+	 * 用户部门(非必填)
 	 */
 	private String dept;
 
 	/**
-	 * 用户部门名称
-	 */
-	private String deptName;
-
-	/**
-	 * 用户学历
+	 * 用户学历(非必填)
 	 */
 	private String degrees;
 
 	/**
-	 * 用户学历名称
-	 */
-	private String degressName;
-
-	/**
-	 * 用户专业
+	 * 用户专业(非必填)
 	 */
 	private String major;
 	/**
-	 * 用户座机
+	 * 用户座机(非必填)
 	 */
 	private String telephone;
 
 	/**
-	 * 用户手机
+	 * 用户手机(非必填)
 	 */
 	private String phone;
 
 	/**
-	 * 用户地址
+	 * 用户地址(非必填)
 	 */
 	private String address;
+	
+	/**
+	 * 单位名称
+	 */
+	private String orgName;
 
 	public String getUserId() {
 		return userId;
@@ -129,14 +110,6 @@ public class UserVo {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getUserName() {
@@ -155,13 +128,6 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-	public String getGenderName() {
-		return genderName;
-	}
-
-	public void setGenderName(String genderName) {
-		this.genderName = genderName;
-	}
 
 	public String getCredType() {
 		return credType;
@@ -187,21 +153,6 @@ public class UserVo {
 		this.role = role;
 	}
 
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public String getCompany() {
-		return company;
-	}
-
-	public void setCompany(String company) {
-		this.company = company;
-	}
 
 	public Date getBirthday() {
 		return birthday;
@@ -243,13 +194,6 @@ public class UserVo {
 		this.dept = dept;
 	}
 
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
 
 	public String getDegrees() {
 		return degrees;
@@ -259,13 +203,6 @@ public class UserVo {
 		this.degrees = degrees;
 	}
 
-	public String getDegressName() {
-		return degressName;
-	}
-
-	public void setDegressName(String degressName) {
-		this.degressName = degressName;
-	}
 
 	public String getMajor() {
 		return major;
@@ -297,5 +234,21 @@ public class UserVo {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 }

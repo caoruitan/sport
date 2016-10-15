@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
@@ -58,8 +59,14 @@
 				</td>
 				<th class="required">用户角色</th>
 				<td>
-					<input type="radio" name="role" checked="checked" value="0"><label for="管理员">管理员</label>
-					<input type="radio" name="role" value="1"><label for="领导">领导</label>
+					<c:forEach var="kv" items="${roles}" varStatus="status">
+						<c:if test="${status.index==0 }">
+							<input type="radio" name="role" checked="checked" value="${kv.value}"><label for="${kv.name}">${kv.name}</label>
+						</c:if>
+						<c:if test="${status.index!=0 }">
+							<input type="radio" name="role" value="${kv.value}"><label for="${kv.name}">${kv.name}</label>
+						</c:if>
+					</c:forEach>
 				</td>
 			</tr>
 			<tr>

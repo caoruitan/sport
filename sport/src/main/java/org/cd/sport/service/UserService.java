@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.view.UserView;
-import org.cd.sport.vo.UserVo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -31,9 +30,9 @@ public interface UserService extends UserDetailsService {
 
 	public UserDomain getByLoginName(String loginName);
 
-	public List<UserVo> getByRole(String role, int start, int limit);
+	public List<UserDomain> getByRole(String role, int start, int limit);
 
-	public List<UserVo> get(int start, int limit);
+	public List<UserDomain> get(int start, int limit);
 
 	public long getTotal(String role);
 

@@ -1,10 +1,8 @@
 package org.cd.sport.service;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,7 +16,6 @@ import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.UserSupport;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
-import org.cd.sport.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -84,23 +81,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 
 	public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException, DataAccessException {
 		// 得到登录用户对象
-		// UserDomain user = this.userDao.findUserByLoginName(loginName);
-
-		// 模拟用户
-		Map<String, UserDomain> userMap = new HashMap<String, UserDomain>();
-		UserDomain lyk = new UserDomain();
-		lyk.setLoginName("lyk");
-		lyk.setPassword("e10adc3949ba59abbe56e057f20f883e");
-		lyk.setRole("ROLE_USER");
-		userMap.put("lyk", lyk);
-
-		UserDomain admin = new UserDomain();
-		admin.setLoginName("admin");
-		admin.setPassword("e10adc3949ba59abbe56e057f20f883e");
-		admin.setRole("ROLE_KJS");
-		userMap.put("admin", admin);
-
-		UserDomain user = userMap.get(loginName);
+		UserDomain user = this.getByLoginName(loginName);
 		if (user == null) {
 			return null;
 		}
@@ -186,12 +167,12 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	}
 
 	@Override
-	public List<UserVo> getByRole(String role, int start, int limit) {
+	public List<UserDomain> getByRole(String role, int start, int limit) {
 		return this.userDao.findByRole(role, start, limit);
 	}
 
 	@Override
-	public List<UserVo> get(int start, int limit) {
+	public List<UserDomain> get(int start, int limit) {
 		return this.userDao.find(start, limit);
 	}
 

@@ -1,5 +1,7 @@
 package org.cd.sport.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
 import org.cd.sport.view.UserView;
+import org.cd.sport.vo.KV;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +50,6 @@ public class UserAction extends ExceptionWrapper {
 	@RequestMapping(value = "/password/reset", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		UserDomain user = AuthenticationUtils.getUser();
-		request.setAttribute("user", user);
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
 		return "password_reset";
 	}
@@ -58,6 +60,11 @@ public class UserAction extends ExceptionWrapper {
 
 	@RequestMapping(value = "/user/create.action", method = RequestMethod.GET)
 	public String gotoCreateUserView(HttpServletRequest request) {
+		// 判断当前用户的角色,是否有创建用户的权限
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		List<KV> roles = Constants.Role.getRoles(userDomain.getRole());
+		request.setAttribute("roles", roles);
+		request.setAttribute("userDomain", userDomain);
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();
 		String pubKey = generator.generateBase64PublicKey();
@@ -109,6 +116,11 @@ public class UserAction extends ExceptionWrapper {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
+		// 判断当前用户的角色,是否有创建用户的权限
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
+		// 按钮控制
+		request.setAttribute("hasOper", hasRole);
 		return "user_list";
 	}
 

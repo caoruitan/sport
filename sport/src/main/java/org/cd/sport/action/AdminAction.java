@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminAction {
 
-	@RequestMapping("kjs")
+	@RequestMapping("kjs.htm")
 	public String gotoIndex(){
 		UserDomain user = AuthenticationUtils.getUser();
 		return "kjs_admin";

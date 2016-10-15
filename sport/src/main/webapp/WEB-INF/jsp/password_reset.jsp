@@ -11,14 +11,17 @@
 </div>
 <div class="editBox">
 	<table class="editTable">
-
 		<tr>
 			<th class="required">用户名</th>
 			<td><input name="name" type="text" value="" /></td>
 		</tr>
 		<tr>
 			<th class="required">验证码</th>
-			<td><input name="name" type="text" value="" /><span class="hyz"><img class="yzm" src="<%=basePath %>/static/img/yzm.png" /><a>换一张</a></span></td>
+			<td><input name="name" type="text" value="" />
+				<span class="hyz">
+					<img class="yzm sport-yzm" src="<%=basePath %>/verifCode?_t=1" /><a class="sport-yzm-btn">换一张</a>
+				</span>
+			</td>
 		</tr>
 	</table>
 	<p class="save-btn">

@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
@@ -37,11 +38,13 @@
 </div>
 <div class="listBox">
 	<div class="opBtnBox">
-		<div class="fl-l">
-			<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
-		</div><div class="fl-r">
-			<button class="btn-wisteria">删除</button>
-		</div>
+		<c:if test="${hasOper}">
+			<div class="fl-l">
+					<a href="javascript:;;" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
+			</div><div class="fl-r">
+				<button class="btn-wisteria">删除</button>
+			</div>
+		</c:if>
 	</div>
 	<table id="jqGrid"></table>
     <div id="jqGridPager"></div>

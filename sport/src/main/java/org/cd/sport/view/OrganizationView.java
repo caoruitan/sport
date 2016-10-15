@@ -1,7 +1,5 @@
 package org.cd.sport.view;
 
-import java.util.Date;
-
 /**
  * 用户vo对象
  * 

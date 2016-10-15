@@ -245,5 +245,13 @@ $(function(){
 	// 密码重置
 	$(document).on("click",".sport-password-reset-menu",function(){
 		$(".sport-container").load(Sport.getBasePath()+"/password/reset");
+	}).on("click",".sport-yzm-btn",function(){
+		var url = $(".sport-yzm").attr("src");
+        if (url.indexOf("?") >= 0) {
+            url = url + "&_time=" + new Date().getTime();
+        } else {
+            url = url + "?_time=" + new Date().getTime();
+        }
+        $(".sport-yzm").attr("src", url);
 	})
 })
