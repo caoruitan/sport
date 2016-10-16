@@ -6,6 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <!DOCTYPE html>
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />

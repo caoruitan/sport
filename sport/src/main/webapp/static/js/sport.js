@@ -319,7 +319,7 @@ $(function(){
 		var userIds = new Array();
 		for (var int = 0; int < selectedIds.length; int++) {
 			var rowData = $("#jqGrid").jqGrid("getRowData",selectedIds[int]);
-			if(rowData.hasOpr==true){
+			if(rowData.hasOpr==true || rowData.hasOpr=="true"){
 				userIds.push(rowData.userId);
 			}else{
 				layer.msg("管理员["+rowData.userName+"]不能被删除!");
@@ -338,17 +338,15 @@ $(function(){
 				layer.msg("系统异常，请稍后重试");
 			},
 			success: function (obj) {
-				if(obj.success){
+				if(obj){
 					layer.msg("删除用户成功!");
 					window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/list.htm";
 				}else{
-					layer.msg(obj.msg);
+					layer.msg("删除用户失败,请稍后重试。");
 				}
 				$('.sport-user-delete').removeAttr("disabled");
 			}
 		});
-		
-		
 	});
 	
 	// 密码重置
@@ -362,5 +360,29 @@ $(function(){
             url = url + "?_time=" + new Date().getTime();
         }
         $(".sport-yzm").attr("src", url);
+	}).on("click",".user-index-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/index.htm";
+	}).on("click",".sport-reset-pwd-btn",function(){
+		if($("#reset-pwd-form").valid()){
+			$('.sport-reset-pwd-btn').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/user/"+$(".sport-reset-pwd-btn").attr("data-type")+"/resetpassword.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {_csrf:$("#csrdId").val(),loginName:$("#loginName").val(),verifCode:$("#verifCode").val()},
+				error: function () {
+					$('.sport-reset-pwd-btn').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg("重置密码成功!");
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-reset-pwd-btn').removeAttr("disabled");
+				}
+			});
+		}
 	})
 })

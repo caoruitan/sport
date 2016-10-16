@@ -50,6 +50,7 @@ public class Constants {
 			urlMapping.put("ROLE_KJS_EXPERT", "portal/kjsexpert/index.htm");
 			urlMapping.put("ROLE_SB_ADMIN", "portal/sbadmin/index.htm");
 			urlMapping.put("ROLE_SB_OPER", "portal/sboper/index.htm");
+			urlMapping.put("ROLE_ORG_ADMIN", "portal/orgadmin/index.htm");
 			urlMapping.put("ROLE_ORG_OPER", "portal/orgoper/index.htm");
 		}
 

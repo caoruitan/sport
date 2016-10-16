@@ -98,7 +98,7 @@ public class UserSupport extends SportSupport {
 			for (UserDomain u : datas) {
 				UserVo vo = this.result(UserVo.class, u);
 				// TODO 证书类型查询
-				UserDomain userDomain = AuthenticationUtils.getUser();
+				UserVo userDomain = AuthenticationUtils.getUser();
 				if (userDomain != null) {
 					boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
 					// 如果用户是管理员、不能修改信息

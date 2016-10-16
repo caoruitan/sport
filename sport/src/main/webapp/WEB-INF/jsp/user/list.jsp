@@ -23,7 +23,7 @@
 </div>
 <div class="searchBox">
 	<dt>姓名</dt>
-	<dd><input type="text" class="sport-user-key"/></dd>
+	<dd><input type="text" class="sport-user-key"/><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/></dd>
 	<button class="search-btn search-user-btn">查询</button>
 </div>
 <div class="listBox">

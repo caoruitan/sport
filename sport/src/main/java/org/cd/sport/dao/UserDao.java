@@ -22,6 +22,8 @@ public interface UserDao extends IBaseDao {
 
 	public UserVo findVoById(String id);
 
+	public UserVo findVoByLoginName(String loginName);
+
 	public UserDomain findByLoginName(String loginName);
 
 	public List<UserDomain> findByRole(String[] role, int start, int limit);

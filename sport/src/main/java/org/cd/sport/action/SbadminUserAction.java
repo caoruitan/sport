@@ -20,6 +20,7 @@ import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
+import org.cd.sport.utils.VerifCode;
 import org.cd.sport.view.UserView;
 import org.cd.sport.vo.KV;
 import org.cd.sport.vo.UserVo;
@@ -37,27 +38,44 @@ import com.google.gson.JsonObject;
  */
 @Controller
 @RequestMapping("user")
-public class UserAction extends ExceptionWrapper {
+public class SbadminUserAction extends ExceptionWrapper {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/kjsadmin/resetpassword.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/sbadmin/resetpassword.htm", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
-		UserDomain user = AuthenticationUtils.getUser();
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
 		request.setAttribute("user_type", "kjsadmin");
 		return "user/resetpassword";
 	}
 
-	@RequestMapping(value = "/kjs/resetpassword.action", method = RequestMethod.POST)
-	public void resetPassword(HttpServletRequest request) {
+	@RequestMapping(value = "/sbadmin/resetpassword.action", method = RequestMethod.POST)
+	public void resetPassword(String loginName, HttpServletRequest request, HttpServletResponse response) {
+		JsonObject json = new JsonObject();
+		json.addProperty("sucess", false);
+		String verifCode = request.getParameter("verifCode");
+		String code = (String) request.getSession().getAttribute(VerifCode.KEY);
+		if (StringUtils.isBlank(verifCode) || !verifCode.equals(code)) {
+			json.addProperty("msg", "验证码不正确!");
+			PageWrite.writeTOPage(response, json);
+			return;
+		}
+
+		UserDomain user = this.userService.getByLoginName(loginName);
+		if (user == null) {
+			json.addProperty("msg", "用户不存在!");
+		} else {
+			boolean resetPassword = userService.resetPassword(loginName);
+			json.addProperty("sucess", resetPassword);
+		}
+		PageWrite.writeTOPage(response, json);
 	}
 
-	@RequestMapping(value = "/kjsadmin/create.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/sbadmin/create.htm", method = RequestMethod.GET)
 	public String gotoCreateUserView(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限
-		UserDomain userDomain = AuthenticationUtils.getUser();
+		UserVo userDomain = AuthenticationUtils.getUser();
 		List<KV> roles = Constants.Role.getRoles(userDomain.getRole());
 		request.setAttribute("roles", roles);
 		request.setAttribute("userDomain", userDomain);
@@ -74,7 +92,7 @@ public class UserAction extends ExceptionWrapper {
 		return "user/create";
 	}
 
-	@RequestMapping(value = "/kjsadmin/create.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/sbadmin/create.action", method = RequestMethod.POST)
 	public void createUser(UserView user, HttpServletRequest request, HttpServletResponse response) {
 		String uuid = request.getParameter("uuid");
 		String password = request.getParameter("password");
@@ -99,10 +117,10 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, json);
 	}
 
-	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/sbadmin/update.htm", method = RequestMethod.GET)
 	public String gotoUpdateUserView(String userId, HttpServletRequest request) {
 		UserVo user = this.userService.getVoById(userId);
-		UserDomain userDomain = AuthenticationUtils.getUser();
+		UserVo userDomain = AuthenticationUtils.getUser();
 		if (StringUtils.isBlank(userId) || user == null || Constants.Role.isAdmin(user.getRole())) {
 			throw new EntityNotFoundExcetion("用户不存在或该用户是管理员不允许修改");
 		}
@@ -116,7 +134,7 @@ public class UserAction extends ExceptionWrapper {
 		return "user/update";
 	}
 
-	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/sbadmin/update.action", method = RequestMethod.POST)
 	public void updateUser(UserView user, HttpServletRequest request, HttpServletResponse response) {
 		String uuid = request.getParameter("uuid");
 		HttpSession session = request.getSession();
@@ -131,21 +149,21 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, json);
 	}
 
-	@RequestMapping(value = "/kjsadmin/delete.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/sbadmin/delete.action", method = RequestMethod.POST)
 	public void deleteUser(HttpServletRequest request, HttpServletResponse response) {
 		String userIds = request.getParameter("userIds");
-		UserDomain userDomain = AuthenticationUtils.getUser();
-		if (StringUtils.isBlank(userIds) || Constants.Role.hasOper(userDomain.getRole())) {
+		UserVo userDomain = AuthenticationUtils.getUser();
+		if (StringUtils.isBlank(userIds) || !Constants.Role.hasOper(userDomain.getRole())) {
 			throw new ForbiddenExcetion("");
 		}
 		boolean result = this.userService.delete(userIds.split(","));
 		PageWrite.writeTOPage(response, result);
 	}
 
-	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/sbadmin/list", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限
-		UserDomain userDomain = AuthenticationUtils.getUser();
+		UserVo userDomain = AuthenticationUtils.getUser();
 		boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
 		// 按钮控制
 		request.setAttribute("hasOper", hasRole);
@@ -153,12 +171,12 @@ public class UserAction extends ExceptionWrapper {
 		return "user/list";
 	}
 
-	@RequestMapping(value = "/kjsadmin/datas.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/sbadmin/datas.action", method = RequestMethod.GET)
 	public void getUserDatas(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
 		String startStr = request.getParameter("page");
 		int start = SportSupport.processLimit(startStr);
-		UserDomain userDomain = AuthenticationUtils.getUser();
+		UserVo userDomain = AuthenticationUtils.getUser();
 		String[] roles = Constants.Role.getQueryRoles(userDomain.getRole());
 		if (roles == null) {
 			throw new ForbiddenExcetion("");
@@ -172,22 +190,5 @@ public class UserAction extends ExceptionWrapper {
 		page.setRecords(total);
 		page.setRows(datas);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
-	}
-
-	@RequestMapping(value = "/create/check.action", method = RequestMethod.POST)
-	public void checkUser(String loginName, HttpServletRequest request, HttpServletResponse response) {
-		UserDomain user = this.userService.getByLoginName(loginName);
-		PageWrite.writeTOPage(response, user == null);
-	}
-
-	@RequestMapping(value = "/update/check.action", method = RequestMethod.POST)
-	public void checUpdatekUser(String loginName, String userId, HttpServletRequest request,
-			HttpServletResponse response) {
-		UserDomain user = this.userService.getByLoginName(loginName);
-		boolean result = false;
-		if (user == null || userId.equals(user.getUserId())) {
-			result = true;
-		}
-		PageWrite.writeTOPage(response, result);
 	}
 }

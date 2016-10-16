@@ -18,19 +18,17 @@ import org.cd.sport.support.UserSupport;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
+import org.cd.sport.vo.UserAuth;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 /**
  * 用户业务层
@@ -90,9 +88,15 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		if (user == null) {
 			return null;
 		}
+		//TODO 优化
+		UserVo userVo = this.getVoById(user.getUserId());
 		// 用户权限集合
 		Collection<GrantedAuthority> grantedAuthority = this.getGrantedAuthority(user);
-		User userdetail = new User(user.getLoginName(), user.getPassword(), true, true, true, true, grantedAuthority);
+		UserAuth userdetail = new UserAuth(user.getLoginName(), user.getPassword(), true, true, true, true,
+				grantedAuthority);
+		userdetail.setUserId(user.getUserId());
+		userdetail.setUserName(user.getUserName());
+		userdetail.setOrgName(userVo.getOrgName());
 		return userdetail;
 	}
 
@@ -142,14 +146,17 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	@Override
 	@Transactional
 	public boolean resetPassword(String loginName) {
-		// 角色验证 TODO
+		UserVo userDomain = AuthenticationUtils.getUser();
 		UserDomain user = this.getByLoginName(loginName);
 		if (user == null) {
 			throw new EntityNotFoundExcetion("数据不存在");
 		}
-		user.setPassword(Md5Util.digestMD5(Constants.User.DEFAULT_PASSWORD));
-		this.userDao.update(user);
-		return true;
+		if (Constants.Role.hasOper(userDomain.getRole(), user.getRole()) && !Constants.Role.isAdmin(user.getRole())) {
+			user.setPassword(Md5Util.digestMD5(Constants.User.DEFAULT_PASSWORD));
+			this.userDao.update(user);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -159,8 +166,8 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		if (user == null) {
 			return false;
 		}
-		UserDomain userDomain = AuthenticationUtils.getUser();
-		if (Constants.Role.hasOper(userDomain.getRole(), user.getRole()) && Constants.Role.isAdmin(user.getRole())) {
+		UserVo userDomain = AuthenticationUtils.getUser();
+		if (Constants.Role.hasOper(userDomain.getRole(), user.getRole()) && !Constants.Role.isAdmin(user.getRole())) {
 			return this.userDao.deleteById(userId);
 		}
 		return false;
@@ -235,5 +242,13 @@ public class UserServiceImpl extends UserSupport implements UserService {
 			return null;
 		}
 		return this.userDao.findVoById(userId);
+	}
+
+	@Override
+	public UserVo getVoByLoginName(String loginName) {
+		if (StringUtils.isBlank(loginName)) {
+			return null;
+		}
+		return this.userDao.findVoByLoginName(loginName);
 	}
 }
