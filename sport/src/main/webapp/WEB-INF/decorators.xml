@@ -12,6 +12,7 @@
     <decorator name="kjsadmin" page="frame/kjsadmin.jsp">
         <pattern>/portal/kjsadmin/*.htm</pattern>
         <pattern>/user/kjsadmin/*.htm</pattern>
+        <pattern>/password/kjsadmin/*.htm</pattern>
         <pattern>/dic/*.htm</pattern>
         <pattern>/news/kjsadmin/*.htm</pattern>
         <pattern>/subject/kjsadmin/*.htm</pattern>

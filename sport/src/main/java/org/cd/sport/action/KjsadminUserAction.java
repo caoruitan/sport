@@ -56,7 +56,7 @@ public class KjsadminUserAction extends ExceptionWrapper {
 		json.addProperty("sucess", false);
 		String verifCode = request.getParameter("verifCode");
 		String code = (String) request.getSession().getAttribute(VerifCode.KEY);
-		if (StringUtils.isBlank(verifCode) || !verifCode.equals(code)) {
+		if (StringUtils.isBlank(verifCode) || !verifCode.equalsIgnoreCase(code)) {
 			json.addProperty("msg", "验证码不正确!");
 			PageWrite.writeTOPage(response, json);
 			return;

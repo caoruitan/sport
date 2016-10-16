@@ -1,6 +1,5 @@
 package org.cd.sport.action;
 
-import org.cd.sport.domain.UserDomain;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.vo.UserVo;
 import org.springframework.stereotype.Controller;

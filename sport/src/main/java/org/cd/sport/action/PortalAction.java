@@ -11,6 +11,7 @@ public class PortalAction {
 
 	@RequestMapping("kjsadmin/index.htm")
 	public String gotoIndex(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
 		return "portal/kjsadmin";
 	}
 
