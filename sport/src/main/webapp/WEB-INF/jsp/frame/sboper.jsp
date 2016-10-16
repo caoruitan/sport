@@ -36,7 +36,7 @@
 					</div>
 					<div class="menu">
 						<ul>
-							<li onclick="menuselect(this,'<%=basePath %>/subject/sboper/list.htm')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
+							<li onclick="clickmenu('<%=basePath %>/subject/sboper/list.htm')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
 							<div class="clear"></div>
 						</ul>
 					</div>
@@ -47,5 +47,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

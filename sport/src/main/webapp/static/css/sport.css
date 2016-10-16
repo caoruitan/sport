@@ -2,7 +2,7 @@ body {background: #f2f2f2;}
 .error{color:red;}
 /* 顶端菜单 */
 .layout_top {position: relative;border-top: 2px solid #5A6877;height: 85px;background: #F2F2F2 url(../img/frame/line_bg.png) repeat-x bottom;/*border-bottom: 1px solid #333*/}
-.layout_top .top_logo {width: 500px;background: url(../img/frame/logo.png) no-repeat 16px 18px;height: 70px;float: left;padding: 18px 0 0 180px;font-size: 16px;font-family: 微软雅黑}
+.layout_top .top_logo {width: 700px;background: url(../img/frame/logo.png) no-repeat 16px 18px;height: 70px;float: left;padding: 18px 0 0 180px;font-size: 16px;font-family: 微软雅黑}
 .layout_top .op {position: absolute;top: 24px;right: 10px;height: 20px;line-height: 20px;font-size: 16px;font-family: 微软雅黑}
 .layout_top .op a {display: block;float: left;width: 80px;}
 .layout_top .mainBtn {position: absolute;top: 22px;right: 190px;}
@@ -23,7 +23,7 @@ body {background: #f2f2f2;}
 .menu {width: 100%;margin-top: 10px;background: #65738D;position: relative;float: left;z-index: 999}
 .menu ul li {height: 45px;padding-left: 25px;border-bottom: 1px solid rgba(255, 255, 255, 0.2);font-size: 12px;line-height: 45px;color: #fff;font-weight: 14px}
 .menu ul li:hover {background: #58647A;border-left: 2px solid #F96A66;color: #ccc;cursor: pointer}
-.menu ul li img {width: 16px;height: 16px;margin-right: 10px;margin-bottom: -3px;}
+.menu ul li img {width: 16px;height: 16px;margin-right: 10px;margin-bottom: -3px;vertical-align: baseline}
 .menu ul li.sel_list {background: #58647A;border-left: 2px solid #F96A66;color: #ccc;cursor: pointer}
 
 /*右下内容样式*/
