@@ -13,8 +13,12 @@ public class PortalAction {
 
 	@RequestMapping("kjsadmin/index.htm")
 	public String gotoIndex(HttpServletRequest request) {
-		UserDomain user = AuthenticationUtils.getUser();
-		return "portal/kjs";
+		return "portal/kjsadmin";
+	}
+
+	@RequestMapping("sboper/index.htm")
+	public String sboperIndex(HttpServletRequest request) {
+		return "portal/sboper";
 	}
 
 }

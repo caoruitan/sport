@@ -39,11 +39,11 @@ public class Constants {
 
 		static {
 			urlMapping.put("ROLE_KJS_ADMIN", "portal/kjsadmin/index.htm");
-			urlMapping.put("ROLE_KJS_LEADER", "kjs.htm");
-			urlMapping.put("ROLE_KJS_EXPERT", "/admin");
-			urlMapping.put("ROLE_SB_EXPERT", "/admin");
-			urlMapping.put("ROLE_SB_OPER", "/admin");
-			urlMapping.put("ROLE_ORG_OPER", "/admin");
+			urlMapping.put("ROLE_KJS_LEADER", "portal/kjsleader/index.htm");
+			urlMapping.put("ROLE_KJS_EXPERT", "portal/kjsexpert/index.htm");
+			urlMapping.put("ROLE_SB_ADMIN", "portal/sbadmin/index.htm");
+			urlMapping.put("ROLE_SB_OPER", "portal/sboper/index.htm");
+			urlMapping.put("ROLE_ORG_OPER", "portal/orgoper/index.htm");
 		}
 
 		public static boolean isActive(int status) {

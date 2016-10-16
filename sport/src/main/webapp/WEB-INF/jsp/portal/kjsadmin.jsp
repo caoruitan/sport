@@ -1,5 +1,9 @@
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,12 +17,12 @@
 				<a class="wdkt"><button class="btn-red btn-size-big">我的课题</button></a>
 			</div>
 			<div class="l">
-				<p class="a1" style="background: url(../img/a1.png) no-repeat center center;">招标课题</p>
+				<p class="a1" style="background: url(<%=basePath%>/static/img/a1.png) no-repeat center center;">招标课题</p>
 				<p class="a1-1"><a>2</a>已退回在课题数</p>
 				<p class="a1-2"><a>4</a>已结题的课题数</p>
 			</div>
 			<div class="r">
-				<p class="a1" style="background: url(../img/a2.png) no-repeat center center;">科研攻关课题</p>
+				<p class="a1" style="background: url(<%=basePath%>/static/img/a2.png) no-repeat center center;">科研攻关课题</p>
 				<p class="a1-1"><a>2</a>已退回在课题数</p>
 				<p class="a1-2"><a>1</a>已结题的课题数</p>
 			</div>

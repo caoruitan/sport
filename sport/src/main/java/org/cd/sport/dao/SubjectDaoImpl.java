@@ -10,7 +10,9 @@ import java.util.Map;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 
 	@SuppressWarnings("unchecked")

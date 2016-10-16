@@ -36,13 +36,7 @@
 					</div>
 					<div class="menu">
 						<ul>
-							<li onclick="menuselect(this,'04ktlb.html')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
-							<li onclick="menuselect(this,'07xwlb.html')"><img src="<%=basePath %>/static/img/menu/xw.png" /> 新闻管理</li>
-							<li class="sport-dic-menu"><img src="<%=basePath %>/static/img/menu/zd.png" /> 数据字典管理</li>
-							<li onclick="menuselect(this,'09zcdwlb.html')"><img src="<%=basePath %>/static/img/menu/sh.png" /> 注册单位审核</li>
-							<li onclick="menuselect(this,'99temp.html')"><img src="<%=basePath %>/static/img/menu/dw.png" /> 组织单位管理</li>
-							<li data-type="kjsadmin" class="sport-user-menu"><img src="<%=basePath %>/static/img/menu/ry.png" /> 用户管理</li>
-							<li data-type="kjsadmin" class="sport-password-reset-menu"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置</li>
+							<li onclick="menuselect(this,'<%=basePath %>/subject/sboper/list.htm')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
 							<div class="clear"></div>
 						</ul>
 					</div>

@@ -10,7 +10,11 @@ import org.cd.sport.support.SubjectSupport;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.vo.SubjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class SubjectServiceImpl extends SubjectSupport implements SubjectService {
 
 	@Autowired

@@ -9,10 +9,17 @@
     </excludes>
     <!--decorator结点指定了模板的位置和文件名，通过pattern来指定哪些路径引用哪个模板 -->
     <!-- 科教司 -->
-    <decorator name="kjs" page="frame/kjsadmin.jsp">
+    <decorator name="kjsadmin" page="frame/kjsadmin.jsp">
         <pattern>/portal/kjsadmin/*.htm</pattern>
         <pattern>/user/kjsadmin/*.htm</pattern>
         <pattern>/dic/*.htm</pattern>
         <pattern>/news/kjsadmin/*.htm</pattern>
+        <pattern>/subject/kjsadmin/*.htm</pattern>
+    </decorator>
+    
+    <!-- 申报人 -->
+    <decorator name="sboper" page="frame/sboper.jsp">
+        <pattern>/portal/sboper/*.htm</pattern>
+        <pattern>/subject/sboper/*.htm</pattern>
     </decorator>
 </decorators>
