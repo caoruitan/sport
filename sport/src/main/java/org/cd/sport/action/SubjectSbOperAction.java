@@ -20,6 +20,7 @@ import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("subject/sboper")
@@ -67,6 +68,12 @@ public class SubjectSbOperAction {
 		page.setRecords(total);
 		page.setRows(list);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
+	}
+	
+	@RequestMapping(value = "createSubject", method = RequestMethod.GET)
+	public String createSubject(HttpServletRequest request) {
+		request.setAttribute("types", Constants.Subject.getSubjectTypes());
+		return "subject/sboper/create";
 	}
 	
 }

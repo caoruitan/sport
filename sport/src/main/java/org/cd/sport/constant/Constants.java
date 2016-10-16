@@ -171,7 +171,6 @@ public class Constants {
 		
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put("ALL", "全部");
 			types.put("ZBKT", "招标课题");
 			types.put("KYGGKT", "科技攻关课题");
 			return types;
@@ -179,7 +178,6 @@ public class Constants {
 		
 		public static Map<String, String> getSubjectStages() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put("ALL", "全部");
 			types.put("SBSTB", "申报书填报");
 			types.put("RWSTB", "任务书填报");
 			types.put("JDBG", "阶段报告");

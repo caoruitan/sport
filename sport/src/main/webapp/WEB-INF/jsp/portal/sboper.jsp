@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>系统管理</title>
+		<title>首页</title>
 		<style type="text/css">body {background: #F2F2F2;}</style>
 	</head>
 	<body>

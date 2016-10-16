@@ -6,18 +6,14 @@
 %>
 <head>
 	<title>课题管理</title>
-	<!--lhgdialog-->
-	<link rel="stylesheet" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/lhgdialog/lhgdialog.js"></script>
+	<!--jqgrid-->
+	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
+	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
 	
-    <!--jqgrid-->
-    <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
-    <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-    
-    <!--select-->
+	<!--select-->
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
@@ -46,6 +42,7 @@
 			<dt>课题类型</dt>
 			<dd>
 				<select id="typeselect" class="selectpicker" name="type" data-live-search="false" title="请选择">
+					<option value="ALL">全部</option>
 					<c:forEach items="${types}" var="type">
 						<option value="${type.key}">${type.value}</option>
 					</c:forEach>
@@ -54,6 +51,7 @@
 			<dt>状态</dt>
 			<dd>
 				<select id="stageselect" class="selectpicker" name="stage" data-live-search="false" title="请选择">
+					<option value="ALL">全部</option>
 					<c:forEach items="${stages}" var="stage">
 						<option value="${stage.key}">${stage.value}</option>
 					</c:forEach>
@@ -64,7 +62,7 @@
 	<div class="listBox">
 		<div class="opBtnBox">
 			<div class="fl-l">
-				<a href="04ktlb-xz.html"><button class="btn-red">+ 申报课题</button></a>
+				<a href="<%=basePath%>/subject/sboper/createSubject.htm"><button class="btn-red">+ 申报课题</button></a>
 				<!--<button class="btn-red" id="xzzj">+ 选择专家</button>-->
 				<!--<button class="btn-red">阶段性报告设置</button>-->
 			</div>
@@ -111,15 +109,6 @@
 						postData : {'year': year, 'type' : type, 'stage' : stage},
 						page : 1
 					}).trigger("reloadGrid");
-				});
-				
-				//选择专家弹出框
-				$('#xzzj').dialog({ 
-					id:'xzzj',
-					title:'选择专家',
-					content: '<>',
-					ok: true,
-					cancel: true /*为true等价于function(){}*/
 				});
 			}); 
 			
