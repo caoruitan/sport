@@ -9,11 +9,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
-	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
     <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
     <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-	<script src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 	<style type="text/css">
 		body{
 			background: #F2F2F2;}

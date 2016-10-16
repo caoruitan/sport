@@ -32,6 +32,11 @@ public class UserVo {
 	private String credType;
 
 	/**
+	 * 证书类型名称
+	 */
+	private String credTypeName;
+
+	/**
 	 * 证件编号(必填)
 	 */
 	private String credNo;
@@ -259,5 +264,13 @@ public class UserVo {
 
 	public void setHasOpr(boolean hasOpr) {
 		this.hasOpr = hasOpr;
+	}
+
+	public String getCredTypeName() {
+		return credTypeName;
+	}
+
+	public void setCredTypeName(String credTypeName) {
+		this.credTypeName = credTypeName;
 	}
 }

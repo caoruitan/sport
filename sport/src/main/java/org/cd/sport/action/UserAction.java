@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.UserDomain;
+import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
 import org.cd.sport.service.UserService;
@@ -31,6 +32,7 @@ import com.google.gson.JsonObject;
 
 /**
  * 用户相关
+ * 
  * @author liuyk
  */
 @Controller
@@ -98,16 +100,35 @@ public class UserAction extends ExceptionWrapper {
 	}
 
 	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
-	public String gotoUpdateUserView(HttpServletRequest request) {
-		UserDomain user = AuthenticationUtils.getUser();
+	public String gotoUpdateUserView(String userId, HttpServletRequest request) {
+		UserVo user = this.userService.getVoById(userId);
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		if (StringUtils.isBlank(userId) || user == null || Constants.Role.isAdmin(user.getRole())) {
+			throw new EntityNotFoundExcetion("用户不存在或该用户是管理员不允许修改");
+		}
+		List<KV> roles = Constants.Role.getRoles(userDomain.getRole());
+		request.setAttribute("roles", roles);
+		String guid = UUIDUtil.getGuid();
+		request.setAttribute("uuid", guid);
+		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user", user);
 		request.setAttribute("user_type", "kjsadmin");
 		return "user/update";
 	}
 
 	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.POST)
-	public void updateUser(HttpServletRequest request) {
-
+	public void updateUser(UserView user, HttpServletRequest request, HttpServletResponse response) {
+		String uuid = request.getParameter("uuid");
+		HttpSession session = request.getSession();
+		JsonObject json = new JsonObject();
+		if (StringUtils.isBlank(uuid) || !uuid.equals(session.getAttribute(Constants.User.UUID_KEY))) {
+			json.addProperty("success", false);
+			json.addProperty("msg", "非法操作");
+		} else {
+			boolean result = this.userService.update(user);
+			json.addProperty("success", result);
+		}
+		PageWrite.writeTOPage(response, json);
 	}
 
 	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
@@ -136,15 +157,26 @@ public class UserAction extends ExceptionWrapper {
 		long total = this.userService.getTotal(roles, name);
 		PageModel<UserVo> page = new PageModel<UserVo>();
 		page.setPage(start);
-		page.setTotal((long) Math.ceil(total / Constants.Common.PAGE_SIZE));
+		page.setTotal((long) Math.ceil(total * 0.1 / Constants.Common.PAGE_SIZE));
 		page.setRecords(total);
 		page.setRows(datas);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}
 
-	@RequestMapping(value = "/kjsadmin/check.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/create/check.action", method = RequestMethod.POST)
 	public void checkUser(String loginName, HttpServletRequest request, HttpServletResponse response) {
 		UserDomain user = this.userService.getByLoginName(loginName);
 		PageWrite.writeTOPage(response, user == null);
+	}
+
+	@RequestMapping(value = "/update/check.action", method = RequestMethod.POST)
+	public void checUpdatekUser(String loginName, String userId, HttpServletRequest request,
+			HttpServletResponse response) {
+		UserDomain user = this.userService.getByLoginName(loginName);
+		boolean result = false;
+		if (user == null || userId.equals(user.getUserId())) {
+			result = true;
+		}
+		PageWrite.writeTOPage(response, result);
 	}
 }

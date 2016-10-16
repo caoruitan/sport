@@ -29,6 +29,8 @@ public interface UserService extends UserDetailsService {
 
 	public UserDomain getById(String userId);
 
+	public UserVo getVoById(String userId);
+
 	public UserDomain getByLoginName(String loginName);
 
 	public List<UserVo> getByRole(String[] role, int start, int limit);

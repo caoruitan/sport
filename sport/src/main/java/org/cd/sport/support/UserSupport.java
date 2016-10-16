@@ -24,7 +24,7 @@ public class UserSupport extends SportSupport {
 	/**
 	 * 验证用户信息合法性
 	 */
-	public void validate(UserView user) {
+	public void validateUpdate(UserView user) {
 		if (user == null) {
 			throw new ParameterIsWrongException("用户对象为空");
 		}
@@ -33,7 +33,31 @@ public class UserSupport extends SportSupport {
 				|| user.getLoginName().length() > 20) {
 			throw new ParameterIsWrongException("用户名为空或者格式不对");
 		}
+		if (StringUtils.isBlank(user.getUserName()) || user.getUserName().length() < 4
+				|| user.getUserName().length() > 20) {
+			throw new ParameterIsWrongException("真实姓名为空或者格式不对");
+		}
 
+		if (StringUtils.isBlank(user.getGender())) {
+			throw new ParameterIsWrongException("性别不能为空");
+		}
+
+		if (StringUtils.isBlank(user.getCredType())) {
+			throw new ParameterIsWrongException("证件类型不能为空");
+		}
+		if (StringUtils.isBlank(user.getCredNo())) {
+			throw new ParameterIsWrongException("证件编号不能为空");
+		}
+		if (StringUtils.isBlank(user.getRole())) {
+			throw new ParameterIsWrongException("用户角色不能为空");
+		}
+	}
+
+	/**
+	 * 验证用户信息合法性
+	 */
+	public void validate(UserView user) {
+		validateUpdate(user);
 		// 校验password
 		if (StringUtils.isBlank(user.getPassword()) || user.getPassword().length() < 6
 				|| user.getPassword().length() > 16) {
@@ -55,24 +79,6 @@ public class UserSupport extends SportSupport {
 				}
 			}
 		}
-		if (StringUtils.isBlank(user.getUserName()) || user.getUserName().length() < 4
-				|| user.getUserName().length() > 20) {
-			throw new ParameterIsWrongException("真实姓名为空或者格式不对");
-		}
-
-		if (user.getGender() == 0) {
-			throw new ParameterIsWrongException("性别不能为空");
-		}
-
-		if (StringUtils.isBlank(user.getCredType())) {
-			throw new ParameterIsWrongException("证件类型不能为空");
-		}
-		if (StringUtils.isBlank(user.getCredNo())) {
-			throw new ParameterIsWrongException("证件编号不能为空");
-		}
-		if (StringUtils.isBlank(user.getRole())) {
-			throw new ParameterIsWrongException("用户角色不能为空");
-		}
 	}
 
 	public UserDomain process(UserView user) {
@@ -81,6 +87,8 @@ public class UserSupport extends SportSupport {
 		// 特殊处理密码
 		String password = Md5Util.digestMD5(user.getPassword());
 		userDomain.setPassword(password);
+		// 性别
+		userDomain.setGender(Constants.User.parseGender(user.getGender()));
 		return userDomain;
 	}
 
@@ -89,10 +97,13 @@ public class UserSupport extends SportSupport {
 		if (datas != null && !datas.isEmpty()) {
 			for (UserDomain u : datas) {
 				UserVo vo = this.result(UserVo.class, u);
+				// TODO 证书类型查询
 				UserDomain userDomain = AuthenticationUtils.getUser();
 				if (userDomain != null) {
 					boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
-					vo.setHasOpr(hasRole);
+					// 如果用户是管理员、不能修改信息
+					boolean admin = Constants.Role.isAdmin(u.getRole());
+					vo.setHasOpr(hasRole && !admin);
 				}
 				vos.add(vo);
 			}

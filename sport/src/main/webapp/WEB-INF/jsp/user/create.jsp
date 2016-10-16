@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<link href="<%=basePath %>/static/css/flat/blue.css" rel="stylesheet">
+	<script src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
@@ -34,7 +35,7 @@
 			</tr>
 			<tr>
 				<th class="required">登录密码</th>
-				<td><input name="password" type="text" id="password"/></td>
+				<td><input name="password" type="password" id="password"/></td>
 				<th class="required">证件类型</th>
 				<td>
 					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType">
@@ -47,7 +48,7 @@
 			</tr>
 			<tr>
 				<th class="required">确认密码</th>
-				<td><input name="confirmPassword" type="text" /></td>
+				<td><input name="confirmPassword" type="password" /></td>
 				<th class="required">证件号码</th>
 				<td><input name="credNo" type="text" id="credNo"/></td>
 			</tr>
@@ -113,7 +114,7 @@
 		</table>
 	</form>
 	<p class="save-btn">
-		<button class="btn-red btn-size-big sport-user-save" type="button">保存</button>
+		<button class="btn-red btn-size-big sport-user-save" type="button" data-type="${user_type}">保存</button>
 		<button class="btn-wisteria btn-size-big sport-rest-btn" type="button">重置</button>
 	</p>
 	<script src="<%=basePath %>/static/js/icheck/icheck.js" type="text/javascript" charset="utf-8"></script>
@@ -174,7 +175,7 @@
 		                maxlength:20,
 		                remote:{     
 		                    type:"POST",
-		                    url:"<%=basePath%>/user/check.action",
+		                    url:"<%=basePath%>/user/create/check.action",
 		                    data:{
 		                    	loginName:function(){return $('#loginName').val()},
 		                    	_csrf:function(){return $("#csrdId").val()}

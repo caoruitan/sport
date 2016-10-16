@@ -91,12 +91,16 @@ var Sport = {
     },
 };
 
+var clickmenu = function(url) {
+	window.location.href=url;
+}
+
 $(function(){
 	// 记住登录名
 	var name = Sport.Cookie.get(Sport.name);
-	if(name){
-		$("#loginName").val(name);
-	}
+//	if(name){
+//		$("#loginName").val(name);
+//	}
 	// 登录验证
 	$("#loginForm").validate({
         rules: {
@@ -200,7 +204,7 @@ $(function(){
 			$('.sport-user-save').text("提交中...");
 			$('.sport-user-save').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/user/create.action",
+				url: Sport.getBasePath()+"/user/"+$(".sport-user-save").attr("data-type")+"/create.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -221,6 +225,7 @@ $(function(){
 					telephone:$('#telephone').val(),
 					phone:$('#phone').val(),
 					address:$('#address').val(),
+					degrees:$("#degrees").val(),
 					password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
 				},
 				error: function () {
@@ -229,7 +234,7 @@ $(function(){
 				success: function (obj) {
 					if(obj.success){
 						layer.msg("新增用户成功!");
-						$(".sport-container").load(Sport.getBasePath()+"/user");
+						window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-save").attr("data-type")+"/list.htm";
 					}else{
 						layer.msg(obj.msg);
 					}
@@ -249,7 +254,62 @@ $(function(){
             page:1  
         }).trigger("reloadGrid"); 
 	}).on("click",".sport-user-edit",function(){
-		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/update.htm";
+		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/update.htm?userId="+$(this).attr("data-id");
+	}).on("click",".sport-cancel-btn",function(){
+		window.location.href = Sport.getBasePath()+"/user/"+$(".sport-cancel-btn").attr("data-type")+"/list.htm";
+	}).on("click",".sport-user-update",function(){
+		// 证书校验
+		var credType = $(".credType-select").val();
+		var credFlag = Sport.isNull(credType);
+		if(credFlag){
+			$(".credType-error").text("请选择证件类型");
+		}else{
+			$(".credType-error").text("");
+		}
+		// 验证通过
+		if($(".sport-user-form").valid() && !credFlag){
+			$('.sport-user-update').text("提交中...");
+			$('.sport-user-update').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/user/"+$(".sport-user-update").attr("data-type")+"/update.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userId:$('#userId').val(),
+					userName:$('#userName').val(),
+					loginName:$('#loginName').val(),
+					credType:$('#credType').val(),
+					credNo:$('#credNo').val(),
+					gender:$('input[name="gender"]:checked').val(),
+					role:$('input[name="role"]:checked').val(),
+					organization:$('#organization').val(),
+					birthday:$('#birthday').val(),
+					zc:$('#zc').val(),
+					zw:$('#zw').val(),
+					dept:$('#dept').val(),
+					major:$('#major').val(),
+					telephone:$('#telephone').val(),
+					phone:$('#phone').val(),
+					degrees:$("#degrees").val(),
+					address:$('#address').val()
+				},
+				error: function () {
+					$('.sport-user-update').removeAttr("disabled");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg("修改用户成功!");
+						window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-update").attr("data-type")+"/list.htm";
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-user-update').removeAttr("disabled");
+					$('.sport-user-update').text("保存");
+				}
+			});
+		}
 	}).on("click",".sport-user-delete",function(){
 		var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
 		if(selectedIds.length<=1){

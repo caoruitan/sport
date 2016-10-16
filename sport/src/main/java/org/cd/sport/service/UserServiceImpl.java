@@ -112,13 +112,16 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	@Override
 	@Transactional
 	public boolean update(UserView user) {
-		this.validate(user);
+		this.validateUpdate(user);
 		UserDomain userDomain = this.userDao.findById(user.getUserId());
 		if (userDomain == null) {
 			throw new EntityNotFoundExcetion("数据不存在");
 		}
 		this.validLoginName(user.getLoginName(), userDomain);
+		String password = userDomain.getPassword();
 		BeanUtils.copyProperties(user, userDomain);
+		userDomain.setGender(Constants.User.parseGender(user.getGender()));
+		userDomain.setPassword(password);
 		this.userDao.update(userDomain);
 		return true;
 	}
@@ -205,5 +208,13 @@ public class UserServiceImpl extends UserSupport implements UserService {
 			return this.getTotal(role);
 		}
 		return this.userDao.count(role, name);
+	}
+
+	@Override
+	public UserVo getVoById(String userId) {
+		if (StringUtils.isBlank(userId)) {
+			return null;
+		}
+		return this.userDao.findVoById(userId);
 	}
 }
