@@ -312,10 +312,42 @@ $(function(){
 		}
 	}).on("click",".sport-user-delete",function(){
 		var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
-		if(selectedIds.length<=1){
+		if(selectedIds.length<1){
 			layer.msg("请最少选择一行数据");
 			return;
 		}
+		var userIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#jqGrid").jqGrid("getRowData",selectedIds[int]);
+			if(rowData.hasOpr==true){
+				userIds.push(rowData.userId);
+			}else{
+				layer.msg("管理员["+rowData.userName+"]不能被删除!");
+				return;
+			}
+		}
+		//删除用户
+		$('.sport-user-delete').attr("disabled",true);
+		$.ajax({
+			url: Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/delete.action",
+			type: "POST",
+			dataType: "JSON",
+			data: {_csrf:$("#csrdId").val(),userIds:userIds.join(",")},
+			error: function () {
+				$('.sport-user-delete').removeAttr("disabled");
+				layer.msg("系统异常，请稍后重试");
+			},
+			success: function (obj) {
+				if(obj.success){
+					layer.msg("删除用户成功!");
+					window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/list.htm";
+				}else{
+					layer.msg(obj.msg);
+				}
+				$('.sport-user-delete').removeAttr("disabled");
+			}
+		});
+		
 		
 	});
 	

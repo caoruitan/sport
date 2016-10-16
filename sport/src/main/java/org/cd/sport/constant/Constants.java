@@ -95,7 +95,37 @@ public class Constants {
 		}
 
 		/**
-		 * 判断用户是否 是管理员
+		 * 判断当前登录的角色是否对其他角色有操作权限 role1是否对role2有操作权限
+		 */
+		public static boolean hasOper(String role1, String role2) {
+			if (hasOper(role1)) {
+				// 如果被操作的为科教司管理员
+				if (isAdmin(role2)) {
+					return false;
+				}
+				// 如果操作的为科教司管理员
+				if (isAdmin(role1)) {
+					return true;
+				}
+				// 如果单位管理员角色
+				if (ROLE_SB_ADMIN.equals(role1)) {
+					if (ROLE_SB_OPER.equals(role2)) {
+						return true;
+					}
+				}
+				// 组织单位管理员角色
+				if (ROLE_ORG_ADMIN.equals(role1)) {
+					if (ROLE_ORG_OPER.equals(role2)) {
+						return true;
+					}
+				}
+
+			}
+			return false;
+		}
+
+		/**
+		 * 判断用户是否科教司管理员
 		 */
 		public static boolean isAdmin(String role) {
 			return ROLE_KJS_ADMIN.equals(role);

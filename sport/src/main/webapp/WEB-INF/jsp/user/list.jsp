@@ -33,7 +33,7 @@
 				<a href="javascript:;;" data-type="${user_type}" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
 			</div>
 			<div class="fl-r">
-				<button class="btn-wisteria sport-user-delete">删除</button>
+				<button data-type="${user_type}" class="btn-wisteria sport-user-delete">删除</button>
 			</div>
 		</c:if>
 	</div>
@@ -50,6 +50,8 @@
 		mtype: "GET",
 		datatype: "json",
 			colModel: [
+				{name:'userId',align:"center", width:20,hidden:true},
+				{name:'hasOpr',align:"center", width:20,hidden:true},
 				{label:"用户名",name:'loginName',align:"center", width:20, sorttype:"date"},
 				{label:"真实姓名",name:'userName', align:"center", width:15},
 				{label:"证件类型",name:'credType', width:10, align:"center",sorttype:"float"},
@@ -68,6 +70,7 @@
 			multiselect: true,
 			pager: "#jqGridPager",
 			onSelectRow: function (rowid, status) {
+				var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
             },
             onSelectAll: function (aRowids, status) {
             }

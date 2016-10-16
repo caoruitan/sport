@@ -131,6 +131,17 @@ public class UserAction extends ExceptionWrapper {
 		PageWrite.writeTOPage(response, json);
 	}
 
+	@RequestMapping(value = "/kjsadmin/delete.action", method = RequestMethod.POST)
+	public void deleteUser(HttpServletRequest request, HttpServletResponse response) {
+		String userIds = request.getParameter("userIds");
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		if (StringUtils.isBlank(userIds) || Constants.Role.hasOper(userDomain.getRole())) {
+			throw new ForbiddenExcetion("");
+		}
+		boolean result = this.userService.delete(userIds.split(","));
+		PageWrite.writeTOPage(response, result);
+	}
+
 	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
 		// 判断当前用户的角色,是否有创建用户的权限

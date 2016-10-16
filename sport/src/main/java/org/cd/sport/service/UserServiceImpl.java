@@ -15,6 +15,7 @@ import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.UserSupport;
+import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
 import org.cd.sport.vo.UserVo;
@@ -28,6 +29,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 /**
  * 用户业务层
@@ -150,15 +153,31 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public boolean delete(String userId) {
-		// 角色验证 TODO
-		return this.userDao.deleteById(userId);
+		UserDomain user = this.getById(userId);
+		if (user == null) {
+			return false;
+		}
+		UserDomain userDomain = AuthenticationUtils.getUser();
+		if (Constants.Role.hasOper(userDomain.getRole(), user.getRole()) && Constants.Role.isAdmin(user.getRole())) {
+			return this.userDao.deleteById(userId);
+		}
+		return false;
 	}
 
 	@Override
+	@Transactional
 	public boolean delete(String[] userId) {
-		// 角色验证 TODO
-		return this.userDao.deleteById(userId);
+		if (userId == null) {
+			return false;
+		}
+		boolean result = true;
+		for (int i = 0; i < userId.length; i++) {
+			String uI = userId[i];
+			result &= this.delete(uI);
+		}
+		return result;
 	}
 
 	@Override
