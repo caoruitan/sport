@@ -371,12 +371,15 @@ $(function(){
 				dataType: "JSON",
 				data: {_csrf:$("#csrdId").val(),loginName:$("#loginName").val(),verifCode:$("#verifCode").val()},
 				error: function () {
+					$(".sport-yzm-btn").trigger("click");
 					$('.sport-reset-pwd-btn').removeAttr("disabled");
 					layer.msg("系统异常，请稍后重试");
 				},
 				success: function (obj) {
 					if(obj.success){
+						$(".sport-yzm-btn").trigger("click");
 						layer.msg("重置密码成功!");
+						window.location.href = Sport.getBasePath()+"/portal/"+$(".sport-password-updae-btn").attr("data-type")+"/index.htm";
 					}else{
 						layer.msg(obj.msg);
 					}
@@ -385,4 +388,45 @@ $(function(){
 			});
 		}
 	})
+	// 修改密码
+	$(document).on("click",".sport-pwd-update-btn",function(){
+		window.location.href = Sport.getBasePath()+"/password/"+$(this).attr("data-type")+"/update.htm";
+	}).on("click",".user-password-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/portal/"+$(this).attr("data-type")+"/index.htm";
+	}).on("click",".sport-password-updae-btn",function(){
+		if($(".sport-pwd-update-form").valid()){
+			$('.sport-password-updae-btn').text("提交中...");
+			$('.sport-password-updae-btn').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/password/"+$(".sport-password-updae-btn").attr("data-type")+"/update.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userId:$('#userId').val(),
+					oldPassword:Sport.getEntryptPwd($('#pubKey').val(),$('#oldPassword').val()),
+					newPassword:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val()),
+					verifCode:$('#verifCode').val()
+				},
+				error: function () {
+					//重置验证码
+					$(".sport-yzm-btn").trigger("click");
+					$('.sport-password-updae-btn').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试！");
+				},
+				success: function (obj) {
+					if(obj.success){
+						$(".sport-yzm-btn").trigger("click");
+						layer.msg("修改密码成功!");
+						window.location.href = Sport.getBasePath()+"/portal/"+$(".sport-password-updae-btn").attr("data-type")+"/index.htm";
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-password-updae-btn').removeAttr("disabled");
+					$('.sport-password-updae-btn').text("保存");
+				}
+			});
+		}
+	});
 })

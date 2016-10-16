@@ -9,7 +9,7 @@
 	<a href="03welcome.html" target="frmMain"><img src="<%=basePath %>/static/img/frame/sy.png" /></a>
 </div>
 <div class="op">
-	<a href="12xgmm.html" target="frmMain">修改密码</a>
+	<a href="javascript:;;" data-type="${user_type}" class="sport-pwd-update-btn">修改密码</a>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrfToken"/>
 	<a href="javascript:;;" class="sport-logout">安全退出</a>
 </div>
