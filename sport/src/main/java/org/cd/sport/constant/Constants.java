@@ -3,6 +3,7 @@ package org.cd.sport.constant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -166,7 +167,25 @@ public class Constants {
 	
 	public static final class Subject {
 		
-		public static final String SUBJECT_START_YEAR = "2015"; 
+		public static final String SUBJECT_START_YEAR = "2015";
+		
+		public static Map<String, String> getSubjectTypes() {
+			Map<String, String> types = new LinkedHashMap<String, String>();
+			types.put("ALL", "全部");
+			types.put("ZBKT", "招标课题");
+			types.put("KYGGKT", "科技攻关课题");
+			return types;
+		}
+		
+		public static Map<String, String> getSubjectStages() {
+			Map<String, String> types = new LinkedHashMap<String, String>();
+			types.put("ALL", "全部");
+			types.put("SBSTB", "申报书填报");
+			types.put("RWSTB", "任务书填报");
+			types.put("JDBG", "阶段报告");
+			types.put("JTBG", "结题报告");
+			return types;
+		}
 		
 	}
 

@@ -38,24 +38,25 @@
 			<dd>
 				<select id="yearselect" class="selectpicker" name="year" data-live-search="false" title="请选择">
 					<c:forEach items="${years}" var="year">
-						<option value="${year}">${year}</option>
+						<c:if test="${year eq endYear}"><option value="${year}" selected="selected">${year}</option></c:if>
+						<c:if test="${year ne endYear}"><option value="${year}">${year}</option></c:if>
 					</c:forEach>
 				</select>
 			</dd>
 			<dt>课题类型</dt>
 			<dd>
 				<select id="typeselect" class="selectpicker" name="type" data-live-search="false" title="请选择">
-					<option value="ALL">全部</option>
-					<option value="ZBKT">招标课题</option>
-					<option value="KYGGKT">科技攻关课题</option>
+					<c:forEach items="${types}" var="type">
+						<option value="${type.key}">${type.value}</option>
+					</c:forEach>
 				</select>
 			</dd>
 			<dt>状态</dt>
 			<dd>
 				<select id="stageselect" class="selectpicker" name="stage" data-live-search="false" title="请选择">
-					<option>请选择</option>
-					<option>已审批</option>
-					<option>待审批</option>
+					<c:forEach items="${stages}" var="stage">
+						<option value="${stage.key}">${stage.value}</option>
+					</c:forEach>
 				</select>
 			</dd>
 			<button class="search-btn">查询</button>
@@ -91,16 +92,27 @@
 					{label:'阶段状态', name:'stage', width:10, sortable: false, align:"center"},
 					{label:'操作', name:'操作', width:10, sortable:false, align:"center"}
 				],
-				autowidth:true,
+				autowidth: true,
 				viewrecords: true,
 				height: 200,
 				rowNum: 20,
-				multiselect: true,
+				multiselect: false,
 				pager: "#jqGridPager"
 			});
 			doResize(); 
 			
-			$(function(){   
+			$(function(){
+				$(".search-btn").on("click", function(){
+					var year = $("#yearselect").val();
+					var type = $("#typeselect").val();
+					var stage = $("#stageselect").val();
+					$("#jqGrid").jqGrid('setGridParam',{
+						datatype : 'json',
+						postData : {'year': year, 'type' : type, 'stage' : stage},
+						page : 1
+					}).trigger("reloadGrid");
+				});
+				
 				//选择专家弹出框
 				$('#xzzj').dialog({ 
 					id:'xzzj',

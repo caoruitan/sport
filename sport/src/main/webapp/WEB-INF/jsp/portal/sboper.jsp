@@ -13,7 +13,7 @@
 	<body>
 		<div class="rwBox">
 			<div class="t">我的任务
-				<a class="wdkt"><button class="btn-red btn-size-big">我的课题</button></a>
+				<a class="wdkt" href="<%=basePath %>/subject/sboper/list.htm"><button class="btn-red btn-size-big">我的课题</button></a>
 			</div>
 			<div class="l">
 				<p class="a1" style="background: url(<%=basePath%>/static/img/a1.png) no-repeat center center;">招标课题</p>

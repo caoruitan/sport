@@ -18,23 +18,15 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Subject> getAllSubjectList(String year, String type, String stage, int start, int limit) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-		Date date = null;
-		try {
-			date = sdf.parse(year);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Subject s where s.createTime > :year");
-		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		hql.append("from Subject s where date_format(s.createTime,'%Y') = :year");
+		params.put("year", year);
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -57,13 +49,13 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("select count(1) from Subject s where s.createTime > :year");
+		hql.append("select count(1) from Subject s where date_format(s.createTime,'%Y') = :year");
 		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -78,24 +70,16 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Subject> getSubjectListByCreator(String creator, String year, String type, String stage, int start, int limit) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-		Date date = null;
-		try {
-			date = sdf.parse(year);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Subject s where s.creator = :creator and s.createTime > :year");
+		hql.append("from Subject s where s.creator = :creator and date_format(s.createTime,'%Y') = :year");
 		params.put("creator", creator);
-		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		params.put("year", year);
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -108,24 +92,16 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 
 	@Override
 	public int getSubjectCountByCreator(String creator, String year, String type, String stage) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-		Date date = null;
-		try {
-			date = sdf.parse(year);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("select count(1) from Subject s where s.creator = :creator and s.createTime > :year");
+		hql.append("select count(1) from Subject s where s.creator = :creator and date_format(s.createTime,'%Y') = :year");
 		params.put("creator", creator);
-		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		params.put("year", year);
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -150,14 +126,14 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Subject s where s.createUnitId = :createUnitId and s.createTime > :year");
+		hql.append("from Subject s where s.createUnitId = :createUnitId and date_format(s.createTime,'%Y') = :year");
 		params.put("createUnitId", createUnitId);
 		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -180,14 +156,14 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("select count(1) from Subject s where s.createUnitId = :createUnitId and s.createTime > :year");
+		hql.append("select count(1) from Subject s where s.createUnitId = :createUnitId and date_format(s.createTime,'%Y') = :year");
 		params.put("createUnitId", createUnitId);
 		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -212,14 +188,14 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Subject s where s.organizationId = :organizationId and s.createTime > :year");
+		hql.append("from Subject s where s.organizationId = :organizationId and date_format(s.createTime,'%Y') = :year");
 		params.put("organizationId", organizationId);
 		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
@@ -242,14 +218,14 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("select count(1) from Subject s where s.organizationId = :organizationId and s.createTime > :year");
+		hql.append("select count(1) from Subject s where s.organizationId = :organizationId and date_format(s.createTime,'%Y') = :year");
 		params.put("organizationId", organizationId);
 		params.put("year", date);
-		if(type != null && !type.equals("ALL")) {
+		if(type != null && !type.equals("") && !type.equals("ALL")) {
 			hql.append(" and s.type = :type");
 			params.put("type", type);
 		}
-		if(stage != null && !stage.equals("ALL")) {
+		if(stage != null && !stage.equals("") && !stage.equals("ALL")) {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}

@@ -35,22 +35,29 @@ public class SubjectSbOperAction {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		int endYear = Integer.parseInt(sdf.format(date));
 		List<String> years = new LinkedList<String>();
-		for(int i = 0; startYear + i <= endYear; i ++) {
-			years.add(String.valueOf(startYear + i));
+		for(int i = 0; endYear - i >= startYear; i ++) {
+			years.add(String.valueOf(endYear - i));
 		}
+
+		request.setAttribute("endYear", String.valueOf(endYear));
 		request.setAttribute("years", years);
+		request.setAttribute("types", Constants.Subject.getSubjectTypes());
+		request.setAttribute("stages", Constants.Subject.getSubjectStages());
 		return "subject/sboper/list";
 	}
 
 	@RequestMapping("/datas.action")
 	public void datas(HttpServletRequest request, HttpServletResponse response) {
-		UserVo user = AuthenticationUtils.getUser();
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-		String year = sdf.format(date);
+		String year = request.getParameter("year");
 		String type = request.getParameter("type");
 		String stage = request.getParameter("stage");
 		String startStr = request.getParameter("page");
+		UserVo user = AuthenticationUtils.getUser();
+		if(year == null || year.equals("")) {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+			year = sdf.format(date);
+		}
 		int start = SportSupport.processLimit(startStr);
 		List<Subject> list = subjectService.getSubjectListByCreator(user.getLoginName(), year, type, stage, (start - 1) * Constants.Common.PAGE_SIZE, Constants.Common.PAGE_SIZE);
 		long total = subjectService.getSubjectCountByCreator(user.getLoginName(), year, type, stage);
