@@ -102,5 +102,11 @@ public class Constants {
 		}
 
 	}
+	
+	public static final class Subject {
+		
+		public static final String SUBJECT_START_YEAR = "2015"; 
+		
+	}
 
 }

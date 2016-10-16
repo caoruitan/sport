@@ -1,12 +1,18 @@
 $(function() {
 	$(".searchBtn").click(function() {
-		$(".searchBox").slideToggle();
+		$(".searchBox").slideToggle("fast", "swing", function() {
+			doResize();
+		});
 	});
 });
 
 function doResize() {
 	var ss = getPageSize();
-	$("#jqGrid").jqGrid('setGridWidth', $(".listBox").width()).jqGrid('setGridHeight', ss.WinH - 300);
+	var height = ss.WinH - 280;
+	if($(".searchBox").is(':visible')) {
+		height = height - 60;
+	}
+	$("#jqGrid").jqGrid('setGridWidth', $(".listBox").width()).jqGrid('setGridHeight', height);
 }
 
 function getPageSize() {

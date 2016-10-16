@@ -26,8 +26,18 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
+	public int getAllSubjectCount(String year, String type, String stage) {
+		return subjectDao.getAllSubjectCount(year, type, stage);
+	}
+
+	@Override
 	public List<Subject> getSubjectListByCreator(String userId, String year, String type, String stage, int start, int limit) {
 		return subjectDao.getSubjectListByCreator(userId, year, type, stage, start, limit);
+	}
+
+	@Override
+	public int getSubjectCountByCreator(String userId, String year, String type, String stage) {
+		return subjectDao.getSubjectCountByCreator(userId, year, type, stage);
 	}
 
 	@Override
@@ -36,8 +46,18 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
+	public int getSubjectCountByCreateUnit(String unitId, String year, String type, String stage) {
+		return subjectDao.getSubjectCountByCreateUnit(unitId, year, type, stage);
+	}
+
+	@Override
 	public List<Subject> getSubjectListByOrg(String orgId, String year, String type, String stage, int start, int limit) {
 		return subjectDao.getSubjectListByOrg(orgId, year, type, stage, start, limit);
+	}
+
+	@Override
+	public int getSubjectCountByOrg(String orgId, String year, String type, String stage, int start, int limit) {
+		return subjectDao.getSubjectCountByOrg(orgId, year, type, stage, start, limit);
 	}
 
 	@Override
