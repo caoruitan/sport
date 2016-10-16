@@ -91,6 +91,10 @@ var Sport = {
     },
 };
 
+var clickmenu = function(url) {
+	window.location.href=url;
+}
+
 $(function(){
 	// 记住登录名
 	var name = Sport.Cookie.get(Sport.name);
