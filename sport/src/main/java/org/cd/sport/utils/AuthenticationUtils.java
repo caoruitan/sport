@@ -3,7 +3,8 @@ package org.cd.sport.utils;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.cd.sport.domain.UserDomain;
+import org.cd.sport.vo.UserAuth;
+import org.cd.sport.vo.UserVo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,20 +22,24 @@ public class AuthenticationUtils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static UserDomain getUser() {
+	public static UserVo getUser() {
 		Authentication auth = getAuth();
+		UserAuth userAuth = (UserAuth) auth.getPrincipal();
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) auth.getAuthorities();
 		// 用户角色 目前只有一个
 		Iterator<SimpleGrantedAuthority> iterator = authorities.iterator();
 		while (iterator.hasNext()) {
 			SimpleGrantedAuthority next = iterator.next();
 			String authority = next.getAuthority();
-			UserDomain user = new UserDomain();
+			UserVo user = new UserVo();
 			user.setRole(authority);
 			user.setLoginName(auth.getName());
+			user.setUserId(userAuth.getUserId());
+			user.setUserName(userAuth.getUserName());
+			user.setOrgName(userAuth.getOrgName());
 			return user;
 		}
 		return null;
 	}
-	
+
 }

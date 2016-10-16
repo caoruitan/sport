@@ -1,5 +1,6 @@
 package org.cd.sport.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,9 @@ import java.util.Date;
  * @author liuyk
  *
  */
-public class UserVo {
+public class UserVo implements Serializable {
+	private static final long serialVersionUID = -7607109789844332477L;
+
 	/**
 	 * 用户id
 	 */
@@ -30,6 +33,11 @@ public class UserVo {
 	 * 证件类型(必填)
 	 */
 	private String credType;
+
+	/**
+	 * 证书类型名称
+	 */
+	private String credTypeName;
 
 	/**
 	 * 证件编号(必填)
@@ -259,5 +267,13 @@ public class UserVo {
 
 	public void setHasOpr(boolean hasOpr) {
 		this.hasOpr = hasOpr;
+	}
+
+	public String getCredTypeName() {
+		return credTypeName;
+	}
+
+	public void setCredTypeName(String credTypeName) {
+		this.credTypeName = credTypeName;
 	}
 }

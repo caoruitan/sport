@@ -1,11 +1,16 @@
+<%@page import="org.cd.sport.vo.UserVo"%>
+<%@page import="org.cd.sport.utils.AuthenticationUtils"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+	UserVo user = AuthenticationUtils.getUser();
+	request.setAttribute("loginUser", user);
 %>
 <!DOCTYPE html>
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
@@ -31,8 +36,8 @@
 				<div class="mainMenuBox">
 					<div class="user">
 						<div class="user-head"></div>
-						<div class="user-name">龙五</div>
-						<div class="user-org">国家体育总局</div>
+						<div class="user-name">${loginUser.userName}</div>
+						<div class="user-org">${loginUser.orgName}</div>
 					</div>
 					<div class="menu">
 						<ul>

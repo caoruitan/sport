@@ -9,11 +9,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
-	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
     <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
     <script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-	<script src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 	<style type="text/css">
 		body{
 			background: #F2F2F2;}
@@ -26,7 +23,7 @@
 </div>
 <div class="searchBox">
 	<dt>姓名</dt>
-	<dd><input type="text" class="sport-user-key"/></dd>
+	<dd><input type="text" class="sport-user-key"/><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/></dd>
 	<button class="search-btn search-user-btn">查询</button>
 </div>
 <div class="listBox">
@@ -36,7 +33,7 @@
 				<a href="javascript:;;" data-type="${user_type}" class="sport-user-create-btn"><button class="btn-red">+ 创建</button></a>
 			</div>
 			<div class="fl-r">
-				<button class="btn-wisteria sport-user-delete">删除</button>
+				<button data-type="${user_type}" class="btn-wisteria sport-user-delete">删除</button>
 			</div>
 		</c:if>
 	</div>
@@ -53,6 +50,8 @@
 		mtype: "GET",
 		datatype: "json",
 			colModel: [
+				{name:'userId',align:"center", width:20,hidden:true},
+				{name:'hasOpr',align:"center", width:20,hidden:true},
 				{label:"用户名",name:'loginName',align:"center", width:20, sorttype:"date"},
 				{label:"真实姓名",name:'userName', align:"center", width:15},
 				{label:"证件类型",name:'credType', width:10, align:"center",sorttype:"float"},
@@ -71,6 +70,7 @@
 			multiselect: true,
 			pager: "#jqGridPager",
 			onSelectRow: function (rowid, status) {
+				var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
             },
             onSelectAll: function (aRowids, status) {
             }

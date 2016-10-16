@@ -25,7 +25,8 @@
 		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		
+		<intercept-url pattern="/user/update/check.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/user/create/check.action" access="isAuthenticated()"/>
 		<!-- 数据字典权限 -->
 		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		

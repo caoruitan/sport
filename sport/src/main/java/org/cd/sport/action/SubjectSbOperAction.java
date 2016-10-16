@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
-import org.cd.sport.domain.UserDomain;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +44,7 @@ public class SubjectSbOperAction {
 
 	@RequestMapping("/datas.action")
 	public void datas(HttpServletRequest request, HttpServletResponse response) {
-		UserDomain user = AuthenticationUtils.getUser();
+		UserVo user = AuthenticationUtils.getUser();
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		String year = sdf.format(date);

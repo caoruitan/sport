@@ -27,7 +27,7 @@ public class UserView {
 	/**
 	 * 用户性别0:男性,1:女性
 	 */
-	private int gender;
+	private String gender;
 
 	/**
 	 * 性别中文名
@@ -145,11 +145,11 @@ public class UserView {
 		this.userName = userName;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
