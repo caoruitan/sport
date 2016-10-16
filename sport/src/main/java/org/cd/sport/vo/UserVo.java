@@ -1,5 +1,6 @@
 package org.cd.sport.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,9 @@ import java.util.Date;
  * @author liuyk
  *
  */
-public class UserVo {
+public class UserVo implements Serializable {
+	private static final long serialVersionUID = -7607109789844332477L;
+
 	/**
 	 * 用户id
 	 */
