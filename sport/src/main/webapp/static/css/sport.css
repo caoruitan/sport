@@ -1,5 +1,5 @@
 body {background: #f2f2f2;}
-.error{color:red;}
+.error {color: rgb(255, 102, 0); height: 30px; line-height: 30px; padding-left: 10px;}
 .sport-disabled-btn {color: #73819A;border: 1px solid #BDC4D0;background: #F2F2F2;}
 /* 顶端菜单 */
 .layout_top {position: relative;border-top: 2px solid #5A6877;height: 85px;background: #F2F2F2 url(../img/frame/line_bg.png) repeat-x bottom;/*border-bottom: 1px solid #333*/}
