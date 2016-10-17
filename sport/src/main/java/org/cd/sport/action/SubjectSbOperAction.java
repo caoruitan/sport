@@ -113,4 +113,13 @@ public class SubjectSbOperAction {
 		return "redirect:list.htm";
 	}
 	
+	@RequestMapping(value = "detail")
+	public String detail(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("types", Constants.Subject.getSubjectTypes());
+		return "subject/sboper/detail";
+	}
+	
 }

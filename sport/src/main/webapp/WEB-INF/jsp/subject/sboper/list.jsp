@@ -88,7 +88,9 @@
 					{label:'申报单位', name:'creatUnitId', width:20, sortable: false},
 					{label:'负责人', name:'creator', width:10, sortable: false, align:"center"},
 					{label:'阶段状态', name:'stage', width:10, sortable: false, align:"center"},
-					{label:'操作', name:'操作', width:10, sortable:false, align:"center"}
+					{label:'操作', name:'操作', width:10, sortable:false, align:"center", formatter:function(value, grid, rows, state){
+						return "<a href='<%=basePath%>/subject/sboper/detail.htm?subjectId=" + rows.id + "' class='sport-user-edit'>查看</a>";
+					}}
 				],
 				autowidth: true,
 				viewrecords: true,

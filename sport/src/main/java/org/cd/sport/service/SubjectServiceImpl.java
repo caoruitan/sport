@@ -62,6 +62,11 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
+	public Subject getSubjectById(String id) {
+		return subjectDao.getEntityById(Subject.class, id);
+	}
+
+	@Override
 	public Subject createSubject(SubjectVo subjectVo) {
 		Subject subject = this.process(subjectVo);
 		UserVo userDomain = AuthenticationUtils.getUser();
