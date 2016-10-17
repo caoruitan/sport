@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
-import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
@@ -94,8 +93,8 @@ public class KjsadminUserAction extends ExceptionWrapper {
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user_type", "kjsadmin");
-		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
-		request.setAttribute("dics", dics);
+		request.setAttribute("credCode", Constants.Dic.DIC_CRED_CODE);
+		request.setAttribute("degreesCode", Constants.Dic.DIC_DEGREES_CODE);
 		return "user/create";
 	}
 

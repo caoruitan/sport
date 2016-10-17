@@ -38,7 +38,7 @@ public class Constants {
 		/**
 		 * 数据字典-学历
 		 */
-		public static final String DIC_DEGREES = "002";
+		public static final String DIC_DEGREES_CODE = "002";
 	}
 
 	public static final class User {
