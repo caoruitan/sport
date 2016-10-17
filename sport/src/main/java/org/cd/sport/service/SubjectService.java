@@ -28,6 +28,8 @@ public interface SubjectService {
 	
 	public int getSubjectCountByOrg(String orgId, String year, String type, String stage, int start, int limit);
 	
+	public Subject getSubjectById(String id);
+	
 	public Subject createSubject(SubjectVo subjectVo);
 	
 }

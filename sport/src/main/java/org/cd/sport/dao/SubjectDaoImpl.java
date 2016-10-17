@@ -30,6 +30,7 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
+		hql.append(" order by s.createTime desc");
 		Query query = this.getHibernateQuery(hql.toString());
 		for(String key : params.keySet()) {
 			query.setParameter(key, params.get(key));
@@ -83,6 +84,7 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
+		hql.append(" order by s.createTime desc");
 		Query query = this.getHibernateQuery(hql.toString());
 		for(String key : params.keySet()) {
 			query.setParameter(key, params.get(key));
@@ -137,6 +139,7 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
+		hql.append(" order by s.createTime desc");
 		Query query = this.getHibernateQuery(hql.toString());
 		for(String key : params.keySet()) {
 			query.setParameter(key, params.get(key));
@@ -199,6 +202,7 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 			hql.append(" and s.stage = :stage");
 			params.put("stage", stage);
 		}
+		hql.append(" order by s.createTime desc");
 		Query query = this.getHibernateQuery(hql.toString());
 		for(String key : params.keySet()) {
 			query.setParameter(key, params.get(key));
