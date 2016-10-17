@@ -19,9 +19,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class Dic {
 	private String id;
 	private String name;
-	private String typeId;
+	private String pCode;
 	private String code;
 	private String value;
+	private String description;
 	private int sort;
 
 	@Id
@@ -45,18 +46,17 @@ public class Dic {
 		this.name = name;
 	}
 
-	@Column(name = "TYPE_ID")
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
-	}
-
 	@Column(name = "CODE")
 	public String getCode() {
 		return code;
+	}
+	@Column(name = "P_CODE")
+	public String getpCode() {
+		return pCode;
+	}
+
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
 	}
 
 	public void setCode(String code) {
@@ -81,4 +81,12 @@ public class Dic {
 		this.sort = sort;
 	}
 
+	@Column(name = "DESCRIPTION")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

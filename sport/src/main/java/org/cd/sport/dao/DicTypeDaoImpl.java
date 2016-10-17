@@ -32,11 +32,17 @@ public class DicTypeDaoImpl extends BaseDaoImpl<DicType> implements DicTypeDao {
 		String queryHql = "from DicType where name=:name";
 		return (DicType) this.getHibernateQuery(queryHql).setParameter("name", name).uniqueResult();
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<DicType> findByPid(String pId) {
 		String queryHql = "from DicType where pId=:pId";
 		return this.getHibernateQuery(queryHql).setParameter("pId", pId).list();
+	}
+
+	@Override
+	public DicType findByCode(String code) {
+		String queryHql = "from DicType where code=:code";
+		return (DicType) this.getHibernateQuery(queryHql).setParameter("code", code).uniqueResult();
 	}
 }

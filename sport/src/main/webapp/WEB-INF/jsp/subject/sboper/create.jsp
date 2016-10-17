@@ -96,7 +96,7 @@
 <body>
 	<div class="titleBox">
 		<div class="title"><img src="<%=basePath %>/static/img/yh.png" />课题申报<span>所有加 * 的区域为必填项。</span></div>
-		<a href="javascript:history.go(-1)">
+		<a href="<%=basePath %>/subject/sboper/list.htm">
 			<div class="returnBtn">返回列表</div>
 		</a>
 	</div>

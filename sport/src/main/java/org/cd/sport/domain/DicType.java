@@ -35,7 +35,12 @@ public class DicType {
 	/**
 	 * 数字字典类型code
 	 */
-	private int code;
+	private String code;
+
+	/**
+	 * 是否有子节点
+	 */
+	private boolean hasChild;
 
 	@Id
 	@Column(name = "DIC_ID")
@@ -68,12 +73,20 @@ public class DicType {
 	}
 
 	@Column(name = "CODE")
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
+	@Column(name = "HAS_CHILD")
+	public boolean isHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
+	}
 }

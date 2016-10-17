@@ -180,8 +180,103 @@ $(function(){
 	// 数据字典页面加载
 	$(document).on("click",".sport-dic-menu",function(){
 		window.location.href = Sport.getBasePath()+"/dic/list.htm";
-	})
-	
+	}).on("click",".sport-dic-create-btnskip",function(){
+		var zTree=$.fn.zTree.getZTreeObj("dicTreeDiv");
+        nodes=zTree.getSelectedNodes(true);
+		window.location.href = Sport.getBasePath()+"/dic/create.htm?pCode="+nodes[0].code;
+	}).on("click",".dic-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/dic/list.htm";
+	}).on("click",".sport-dic-reset",function(){
+		$("#dic-create-form")[0].reset();
+	}).on("click",".sport-dic-create-btn",function(){
+		if($("#dic-create-form").valid()){
+			$('.sport-dic-create-btn').attr("disabled",true);
+			$('.sport-dic-create-btn').text('正在提交...');
+			$.ajax({
+				url: Sport.getBasePath()+"/dic/create.action",
+				type: "POST",
+				dataType: "JSON",
+				data: $("#dic-create-form").serialize(),
+				error: function () {
+					$('.sport-dic-create-btn').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试！");
+					$(".sport-dic-create-btn").text("保存");
+				},
+				success: function (obj) {
+					$('.sport-dic-create-btn').removeAttr("disabled");
+					if(obj){
+						window.location.href = Sport.getBasePath()+"/dic/list.htm?pCode="+$("#pCode").val();
+					}else{
+						layer.msg("保存失败，请稍后重试！");
+					}
+					$(".sport-dic-create-btn").text("保存");
+				}
+			});
+		};
+	}).on("click",".sport-dic-edit",function(){
+		window.location.href = Sport.getBasePath()+"/dic/update.htm?dicId="+$(this).attr("data-id");
+	}).on("click",".sport-dic-edit-btn",function(){
+		if($("#dic-update-form").valid()){
+			$('.sport-dic-edit-btn').attr("disabled",true);
+			$('.sport-dic-edit-btn').text('正在提交...');
+			$.ajax({
+				url: Sport.getBasePath()+"/dic/update.action",
+				type: "POST",
+				dataType: "JSON",
+				data: $("#dic-update-form").serialize(),
+				error: function () {
+					$('.sport-dic-edit-btn').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试！");
+					$(".sport-dic-create-btn").text("保存");
+				},
+				success: function (obj) {
+					$('.sport-dic-edit-btn').removeAttr("disabled");
+					if(obj){
+						window.location.href = Sport.getBasePath()+"/dic/list.htm?pCode="+$("#pCode").val();
+					}else{
+						layer.msg("保存失败，请稍后重试！");
+					}
+					$(".sport-dic-edit-btn").text("保存");
+				}
+			});
+		};
+	}).on("click",".sport-dic-delete",function(){
+		var selectedIds = $("#dicGridDiv").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		var dicIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#dicGridDiv").jqGrid("getRowData",selectedIds[int]);
+			dicIds.push(rowData.id);
+		}
+		$('.sport-dic-delete').attr("disabled",true);
+		$.ajax({
+			url: Sport.getBasePath()+"/dic/delete.action",
+			type: "POST",
+			dataType: "JSON",
+			data: {_csrf:$("#csrdId").val(),dicIds:dicIds.join(",")},
+			error: function () {
+				$('.sport-dic-delete').removeAttr("disabled");
+				layer.msg("系统异常，请稍后重试！");
+			},
+			success: function (obj) {
+				$('.sport-dic-delete').removeAttr("disabled");
+				if(obj){
+					window.location.href = Sport.getBasePath()+"/dic/list.htm";
+				}else{
+					layer.msg("删除失败，请稍后重试！");
+				}
+			}
+		});
+	}).on("click","#dicQuery",function(){
+		var zTree=$.fn.zTree.getZTreeObj("dicTreeDiv");
+        nodes=zTree.getSelectedNodes(true);
+        var name = $("#dicSearchName").val();
+        var code = $("#dicSearchCode").val();
+        $("#dicGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{typeId:nodes[0].id,name:name,code:code}}).trigger('reloadGrid');
+	});
 	
 	// 用户管理
 	$(document).on("click",".sport-user-menu",function(){

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cd.sport.domain.Dic;
 import org.cd.sport.view.DicView;
+import org.cd.sport.vo.DicQuery;
 
 /**
  * 
@@ -13,7 +14,7 @@ import org.cd.sport.view.DicView;
  *
  */
 public interface DicService {
-	
+
 	public boolean create(DicView dic);
 
 	public boolean update(DicView dic);
@@ -26,6 +27,14 @@ public interface DicService {
 
 	public Dic getByName(String name);
 
-	public List<Dic> getByType(String typeId);
+	public List<Dic> getByPcode(String pcode);
+
+	public List<Dic> getByPcode(String pcode, int start, int limit);
+
+	public List<Dic> getByWhere(DicQuery query, int start, int limit);
+
+	public long getTotalByPCode(String pcode);
+
+	public long getTotalByWhere(DicQuery query);
 
 }

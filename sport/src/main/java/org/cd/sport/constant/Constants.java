@@ -26,8 +26,19 @@ public class Constants {
 
 	public static final class Dic {
 
+		/**
+		 * 数据字典顶级id
+		 */
 		public static final String DEFAULT_PID = "-1";
+		/**
+		 * 数据字典-证件类型code
+		 */
+		public static final String DIC_CRED_CODE = "001";
 
+		/**
+		 * 数据字典-学历
+		 */
+		public static final String DIC_DEGREES = "002";
 	}
 
 	public static final class User {
@@ -164,9 +175,9 @@ public class Constants {
 		}
 
 	}
-	
+
 	public static final class Subject {
-		
+
 		public static final String SUBJECT_START_YEAR = "2015";
 		
 		public static final String SUBJECT_STAGE_SBSTB = "SBSTB";
@@ -183,7 +194,7 @@ public class Constants {
 			types.put("KYGGKT", "科技攻关课题");
 			return types;
 		}
-		
+
 		public static Map<String, String> getSubjectStages() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
 			types.put("SBSTB", "申报书填报");
@@ -192,7 +203,7 @@ public class Constants {
 			types.put("JTBG", "结题报告");
 			return types;
 		}
-		
+
 	}
 
 }

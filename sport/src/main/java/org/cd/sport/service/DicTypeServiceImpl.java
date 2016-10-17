@@ -1,5 +1,6 @@
 package org.cd.sport.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +11,7 @@ import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.support.DicTypeSupport;
 import org.cd.sport.view.DicTypeView;
+import org.cd.sport.vo.Node;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class DicTypeServiceImpl extends DicTypeSupport implements DicTypeService {
 
 	@Autowired
@@ -114,5 +116,31 @@ public class DicTypeServiceImpl extends DicTypeSupport implements DicTypeService
 			return null;
 		}
 		return this.dicTypeDao.findByName(name);
+	}
+
+	@Override
+	public List<Node> getNodeByPid(String pid) {
+		List<DicType> datas = this.getByPid(pid);
+		List<Node> nodes = new ArrayList<Node>();
+		if (datas != null && !datas.isEmpty()) {
+			for (DicType dic : datas) {
+				Node node = new Node();
+				node.setId(dic.getDicId());
+				node.setName(dic.getName());
+				node.setpId(dic.getpId());
+				node.setCode(dic.getCode());
+				node.setParent(dic.isHasChild());
+				nodes.add(node);
+			}
+		}
+		return nodes;
+	}
+
+	@Override
+	public DicType getByCode(String code) {
+		if (StringUtils.isBlank(code)) {
+			return null;
+		}
+		return this.dicTypeDao.findByCode(code);
 	}
 }

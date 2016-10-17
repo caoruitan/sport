@@ -88,7 +88,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		if (user == null) {
 			return null;
 		}
-		//TODO 优化
+		// TODO 优化
 		UserVo userVo = this.getVoById(user.getUserId());
 		// 用户权限集合
 		Collection<GrantedAuthority> grantedAuthority = this.getGrantedAuthority(user);
@@ -112,6 +112,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	public boolean create(UserView user) {
 		UserDomain process = this.process(user);
 		this.validLoginName(process.getLoginName());
+		process.setUserId(null);
 		this.userDao.save(process);
 		return true;
 	}
