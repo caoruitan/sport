@@ -19,6 +19,8 @@ public interface DicTypeDao extends IBaseDao {
 
 	public DicType findByName(String name);
 
+	public DicType findByCode(String code);
+
 	public List<DicType> findByPid(String pid);
 
 }

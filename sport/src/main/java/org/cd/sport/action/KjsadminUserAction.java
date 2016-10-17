@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.service.UserService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -42,6 +44,9 @@ public class KjsadminUserAction extends ExceptionWrapper {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DicService dicService;
 
 	@RequestMapping(value = "/kjsadmin/resetpassword.htm", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
@@ -89,6 +94,8 @@ public class KjsadminUserAction extends ExceptionWrapper {
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user_type", "kjsadmin");
+		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
+		request.setAttribute("dics", dics);
 		return "user/create";
 	}
 

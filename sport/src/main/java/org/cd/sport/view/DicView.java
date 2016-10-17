@@ -9,10 +9,10 @@ package org.cd.sport.view;
 public class DicView {
 	private String id;
 	private String name;
-	private String typeId;
+	private String pCode;
 	private String code;
 	private String value;
-	private int sort;
+	private String description;
 
 	public String getId() {
 		return id;
@@ -30,12 +30,12 @@ public class DicView {
 		this.name = name;
 	}
 
-	public String getTypeId() {
-		return typeId;
+	public String getpCode() {
+		return pCode;
 	}
 
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
 	}
 
 	public String getCode() {
@@ -54,11 +54,12 @@ public class DicView {
 		this.value = value;
 	}
 
-	public int getSort() {
-		return sort;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setSort(int sort) {
-		this.sort = sort;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
 }

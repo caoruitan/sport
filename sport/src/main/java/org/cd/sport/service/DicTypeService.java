@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cd.sport.domain.DicType;
 import org.cd.sport.view.DicTypeView;
+import org.cd.sport.vo.Node;
 
 /**
  * 
@@ -24,8 +25,12 @@ public interface DicTypeService {
 
 	public DicType getById(String dicId);
 
+	public DicType getByCode(String code);
+
 	public DicType getByName(String name);
 
 	public List<DicType> getByPid(String pid);
-	
+
+	public List<Node> getNodeByPid(String pid);
+
 }

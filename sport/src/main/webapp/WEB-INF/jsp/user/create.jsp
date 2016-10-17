@@ -92,11 +92,11 @@
 				<td><input name="dept" type="text" id="dept"/></td>
 				<th>学历</th>
 				<td>
-					<select class="selectpicker" name="degrees" title="请选择" id="degrees">
-						<option >大专</option>
-						<option >本科</option>
-						<option >硕士</option>
-					</select>
+				<select class="selectpicker" name="degrees" title="请选择" id="degrees">
+					<option >大专</option>
+					<option >本科</option>
+					<option >硕士</option>
+				</select>
 				</td>
 			</tr>
 			<tr>
@@ -211,7 +211,7 @@
 		            	nullableCheck:true
 		            },
 		            zw:{
-		            	 nullableCheck:true
+		            	nullableCheck:true
 		            },
 		            dept:{
 		            	nullableCheck:true
