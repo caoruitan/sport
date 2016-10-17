@@ -3,6 +3,7 @@ package org.cd.sport.service;
 import java.util.Date;
 import java.util.List;
 
+import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.SubjectDao;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.support.SubjectSupport;
@@ -41,8 +42,7 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
-	public List<Subject> getSubjectListByCreateUnit(String unitId, String year, String type, String stage, int start,
-			int limit) {
+	public List<Subject> getSubjectListByCreateUnit(String unitId, String year, String type, String stage, int start, int limit) {
 		return subjectDao.getSubjectListByCreateUnit(unitId, year, type, stage, start, limit);
 	}
 
@@ -65,10 +65,10 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	public Subject createSubject(SubjectVo subjectVo) {
 		Subject subject = this.process(subjectVo);
 		UserVo userDomain = AuthenticationUtils.getUser();
-		subject.setCreator(userDomain.getUserId());
+		subject.setCreator(userDomain.getLoginName());
 		subject.setCreateUnitId(userDomain.getOrganization());
 		subject.setCreateTime(new Date());
-		subject.setStage("CREATE");
+		subject.setStage(Constants.Subject.SUBJECT_STAGE_RWSTB);
 		subjectDao.save(subject);
 		return subject;
 	}

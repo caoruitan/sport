@@ -102,6 +102,7 @@
 	</div>
 	<div class="editBox">
 		<form id="subjectCreateForm" action="<%=basePath %>/subject/sboper/createSubject.htm" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 			<table class="editTable">
 				<tr>
 					<th class="required">课题名称</th>
@@ -123,7 +124,7 @@
 				<tr>
 					<th class="required">组织单位</th>
 					<td colspan="3">
-						<select id="organizationselect" name="organizationId" class="selectpicker" title="请选择" style="width: 300px;">
+						<select name="organizationId" class="selectpicker" style="width: 300px;">
 							<option value="gjtyzj">国家体育总局</option>
 							<option value="gjtyjsjd">国家体育局射击队</option>
 						</select>
@@ -153,15 +154,15 @@
 				<tr>
 					<th>预期成果</th>
 					<td class="yqcg">
-						<p><input id="results_lwhzz" type="checkbox" name="results"><label for="results_lwhzz">论文和著作</label></p>
-						<p><input id="results_yjzxbg" type="checkbox" name="results"><label for="results_yjzxbg">研究咨询报告</label></p>
-						<p><input id="results_xgy" type="checkbox" name="results"><label for="results_xgy">新工艺（或新方法、新模式）</label></p>
-						<p><input id="results_xzz" type="checkbox" name="results"><label for="results_xzz">新装置</label></p>
-						<p><input id="results_xcl" type="checkbox" name="results"><label for="results_xcl">新材料</label></p>
-						<p><input id="results_jsjrj" type="checkbox" name="results"><label for="results_jsjrj">计算机软件</label></p>
-						<p><input id="results_rcpy" type="checkbox" name="results"><label for="results_rcpy">人才培养</label></p>
-						<p><input id="results_jsbz" type="checkbox" name="results"><label for="results_jsbz">技术标准</label></p>
-						<p><input id="results_zl" type="checkbox" name="results"><label for="results_zl">专利</label></p>
+						<p><input id="results_lwhzz" type="checkbox" name="results" value="lwhzz"><label for="results_lwhzz">论文和著作</label></p>
+						<p><input id="results_yjzxbg" type="checkbox" name="results" value="yjzxbg"><label for="results_yjzxbg">研究咨询报告</label></p>
+						<p><input id="results_xgy" type="checkbox" name="results" value="xgy"><label for="results_xgy">新工艺（或新方法、新模式）</label></p>
+						<p><input id="results_xzz" type="checkbox" name="results" value="xzz"><label for="results_xzz">新装置</label></p>
+						<p><input id="results_xcl" type="checkbox" name="results" value="xcl"><label for="results_xcl">新材料</label></p>
+						<p><input id="results_jsjrj" type="checkbox" name="results" value="jsjrj"><label for="results_jsjrj">计算机软件</label></p>
+						<p><input id="results_rcpy" type="checkbox" name="results" value="rcpy"><label for="results_rcpy">人才培养</label></p>
+						<p><input id="results_jsbz" type="checkbox" name="results" value="jsbz"><label for="results_jsbz">技术标准</label></p>
+						<p><input id="results_zl" type="checkbox" name="results" value="zl"><label for="results_zl">专利</label></p>
 					</td>
 				</tr>
 				<tr>
@@ -183,7 +184,7 @@
 			$("#subjectCreateForm").submit();
 		}
 		var reset = function() {
-			$("#subjectCreateForm").reset();
+			$("#subjectCreateForm")[0].reset();
 		}
 		$(function() {
 			$('input').iCheck({
@@ -198,9 +199,6 @@
 						required : true,
 						minlength : 1,
 						maxlength : 50
-					},
-					organizationId : {
-						required : true
 					}
 				},
 				messages: {
@@ -208,9 +206,6 @@
 						required : "请填写课题名称",
 						minlength : "请填写课题名称",
 						maxlength : "课题名称不能超过50个字符"
-					},
-					organizationId : {
-						required : "请选择组织单位"
 					}
 				}
 			});

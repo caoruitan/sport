@@ -169,6 +169,14 @@ public class Constants {
 		
 		public static final String SUBJECT_START_YEAR = "2015";
 		
+		public static final String SUBJECT_STAGE_SBSTB = "SBSTB";
+		
+		public static final String SUBJECT_STAGE_RWSTB = "RWSTB";
+		
+		public static final String SUBJECT_STAGE_JDBG = "JDBG";
+		
+		public static final String SUBJECT_STAGE_JTBG = "JTBG";
+		
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
 			types.put("ZBKT", "招标课题");

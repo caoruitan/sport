@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -16,6 +17,7 @@ import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.vo.SubjectVo;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,9 +73,44 @@ public class SubjectSbOperAction {
 	}
 	
 	@RequestMapping(value = "createSubject", method = RequestMethod.GET)
-	public String createSubject(HttpServletRequest request) {
+	public String toCreateSubject(HttpServletRequest request) {
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/create";
+	}
+	
+	@RequestMapping(value = "createSubject", method = RequestMethod.POST)
+	public String createSubject(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		String name = request.getParameter("name");
+		String type = request.getParameter("type");
+		String organizationId = request.getParameter("organizationId");
+		String security = request.getParameter("security");
+		String organizationCount = request.getParameter("organizationCount");
+		String beginDate = request.getParameter("beginDate");
+		String endDate = request.getParameter("endDate");
+		String[] resultsList = request.getParameterValues("results");
+		String results = "";
+		if(resultsList != null && resultsList.length > 0) {
+			for(String result : resultsList) {
+				results += result + ",";
+			}
+			if(!results.equals("")) {
+				results = results.substring(0, results.length() - 1);
+			}
+		}
+		String integration = request.getParameter("integration");
+		SubjectVo vo = new SubjectVo();
+		vo.setName(name);
+		vo.setType(type);
+		vo.setOrganizationId(organizationId);
+		vo.setSecurity(security);
+		vo.setOrganizationCount(organizationCount);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		vo.setBeginDate(sdf.parse(beginDate));
+		vo.setEndDate(sdf.parse(endDate));
+		vo.setResults(results);
+		vo.setIntegration(Boolean.valueOf(integration));
+		subjectService.createSubject(vo);
+		return "redirect:list.htm";
 	}
 	
 }
