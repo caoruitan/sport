@@ -83,11 +83,31 @@
 				colModel: [
 					{label:'课题标号', name:'num', width:10, sortable: false, align:"center"},
 					{label:'课题名称', name:'name', width:20, sortable: false},
-					{label:'课题类型', name:'type', width:10, sortable: false},
+					{label:'课题类型', name:'type', width:10, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
+						if(value == "ZBKT") {
+							return "招标课题";
+						} else if(value == "KYGGKT") {
+							return "科技攻关课题";
+						} else {
+							return "";
+						}
+					}},
 					{label:'密级', name:'security', width:10, sortable: false, align:"center"},
-					{label:'申报单位', name:'creatUnitId', width:20, sortable: false},
-					{label:'负责人', name:'creator', width:10, sortable: false, align:"center"},
-					{label:'阶段状态', name:'stage', width:10, sortable: false, align:"center"},
+					{label:'申报单位', name:'createUnitName', width:20, sortable: false},
+					{label:'负责人', name:'creatorName', width:10, sortable: false, align:"center"},
+					{label:'阶段状态', name:'stage', width:10, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
+						if(value == "SBSTB") {
+							return "申报书填报";
+						} else if(value == "RWSTB") {
+							return "任务书填报";
+						} else if(value == "JDBG") {
+							return "阶段报告";
+						} else if(value == "JTBG") {
+							return "结题报告";
+						} else {
+							return "";
+						}
+					}},
 					{label:'操作', name:'操作', width:10, sortable:false, align:"center", formatter:function(value, grid, rows, state){
 						return "<a href='<%=basePath%>/subject/sboper/detail.htm?subjectId=" + rows.id + "' class='sport-user-edit'>查看</a>";
 					}}

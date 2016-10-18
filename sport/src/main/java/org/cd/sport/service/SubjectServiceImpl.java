@@ -71,9 +71,11 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		Subject subject = this.process(subjectVo);
 		UserVo userDomain = AuthenticationUtils.getUser();
 		subject.setCreator(userDomain.getLoginName());
+		subject.setCreatorName(userDomain.getUserName());
 		subject.setCreateUnitId(userDomain.getOrganization());
+		subject.setCreateUnitName(userDomain.getOrgName());
 		subject.setCreateTime(new Date());
-		subject.setStage(Constants.Subject.SUBJECT_STAGE_RWSTB);
+		subject.setStage(Constants.Subject.SUBJECT_STAGE_SBSTB);
 		subjectDao.save(subject);
 		return subject;
 	}
