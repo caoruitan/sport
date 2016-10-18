@@ -42,7 +42,7 @@
 					<div class="menu">
 						<ul>
 							<li onclick="menuselect(this,'04ktlb.html')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
-							<li onclick="menuselect(this,'07xwlb.html')"><img src="<%=basePath %>/static/img/menu/xw.png" /> 新闻管理</li>
+							<li class="sport-news-menu"><img src="<%=basePath %>/static/img/menu/xw.png" /> 新闻管理</li>
 							<li class="sport-dic-menu"><img src="<%=basePath %>/static/img/menu/zd.png" /> 数据字典管理</li>
 							<li onclick="menuselect(this,'09zcdwlb.html')"><img src="<%=basePath %>/static/img/menu/sh.png" /> 注册单位审核</li>
 							<li onclick="menuselect(this,'99temp.html')"><img src="<%=basePath %>/static/img/menu/dw.png" /> 组织单位管理</li>

@@ -251,24 +251,29 @@ $(function(){
 			var rowData = $("#dicGridDiv").jqGrid("getRowData",selectedIds[int]);
 			dicIds.push(rowData.id);
 		}
-		$('.sport-dic-delete').attr("disabled",true);
-		$.ajax({
-			url: Sport.getBasePath()+"/dic/delete.action",
-			type: "POST",
-			dataType: "JSON",
-			data: {_csrf:$("#csrdId").val(),dicIds:dicIds.join(",")},
-			error: function () {
-				$('.sport-dic-delete').removeAttr("disabled");
-				layer.msg("系统异常，请稍后重试！");
-			},
-			success: function (obj) {
-				$('.sport-dic-delete').removeAttr("disabled");
-				if(obj){
-					window.location.href = Sport.getBasePath()+"/dic/list.htm";
-				}else{
-					layer.msg("删除失败，请稍后重试！");
-				}
-			}
+		layer.confirm('您确定要删除该数据字典吗？', {
+			  btn: ['是的','稍后'] 
+			}, function(){
+				$('.sport-dic-delete').attr("disabled",true);
+				$.ajax({
+					url: Sport.getBasePath()+"/dic/delete.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {_csrf:$("#csrdId").val(),dicIds:dicIds.join(",")},
+					error: function () {
+						$('.sport-dic-delete').removeAttr("disabled");
+						layer.msg("系统异常，请稍后重试！");
+					},
+					success: function (obj) {
+						$('.sport-dic-delete').removeAttr("disabled");
+						if(obj){
+							window.location.href = Sport.getBasePath()+"/dic/list.htm";
+						}else{
+							layer.msg("删除失败，请稍后重试！");
+						}
+					}
+				});
+			}, function(){
 		});
 	}).on("click","#dicQuery",function(){
 		var zTree=$.fn.zTree.getZTreeObj("dicTreeDiv");
@@ -421,26 +426,31 @@ $(function(){
 				return;
 			}
 		}
-		//删除用户
-		$('.sport-user-delete').attr("disabled",true);
-		$.ajax({
-			url: Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/delete.action",
-			type: "POST",
-			dataType: "JSON",
-			data: {_csrf:$("#csrdId").val(),userIds:userIds.join(",")},
-			error: function () {
-				$('.sport-user-delete').removeAttr("disabled");
-				layer.msg("系统异常，请稍后重试");
-			},
-			success: function (obj) {
-				if(obj){
-					layer.msg("删除用户成功!");
-					window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/list.htm";
-				}else{
-					layer.msg("删除用户失败,请稍后重试。");
-				}
-				$('.sport-user-delete').removeAttr("disabled");
-			}
+		layer.confirm('您确定要删除该用户吗？', {
+			  btn: ['是的','稍后'] //按钮
+			}, function(){
+				//删除用户
+				$('.sport-user-delete').attr("disabled",true);
+				$.ajax({
+					url: Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/delete.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {_csrf:$("#csrdId").val(),userIds:userIds.join(",")},
+					error: function () {
+						$('.sport-user-delete').removeAttr("disabled");
+						layer.msg("系统异常，请稍后重试");
+					},
+					success: function (obj) {
+						if(obj){
+							layer.msg("删除用户成功!");
+							window.location.href = Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/list.htm";
+						}else{
+							layer.msg("删除用户失败,请稍后重试。");
+						}
+						$('.sport-user-delete').removeAttr("disabled");
+					}
+				});
+			}, function(){
 		});
 	});
 	
@@ -523,5 +533,295 @@ $(function(){
 				}
 			});
 		}
+	});
+	
+	//新闻管理
+	$(document).on("click",".sport-news-menu",function(){
+		window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+	}).on("click",".sport-news-skip",function(){
+		window.location.href = Sport.getBasePath()+"/news/kjsadmin/create.htm";
+	}).on("click",".sport-update-skip",function(){
+		window.location.href = Sport.getBasePath()+"/news/kjsadmin/update.htm";
+	}).on("click",".news-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+	}).on("click",".sport-news-edit",function(){
+		window.location.href = Sport.getBasePath()+"/news/kjsadmin/update.htm?newsId="+$(this).attr("data-id");
+	}).on("click",".sport-news-reset",function(){
+		$("#sport-news-form")[0].reset();
+	}).on("change","#news-column",function(){
+		$(".column-error").text("");
+	}).on("click",".sport-lm li",function(){
+		$(".sport-lm li").removeClass('sel');
+		$(this).addClass('sel');
+		var column = $(this).attr("data-id");
+		// 加载数据
+		$("#newsGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{column:column}}).trigger('reloadGrid');
+	}).on("click",".sport-news-create-btn",function(){
+		var columnId = $("#news-column").val();
+		var columnFlag = Sport.isNull(columnId);
+		if(columnFlag){
+			$(".column-error").text("请选择栏目！");
+		}else{
+			$(".column-error").text("");
+		}
+		//内容
+		var content = CKEDITOR.instances.content.getData();
+		var contentFlag = Sport.isNull(content);
+		if(columnFlag){
+			$(".news-content-error").text("请填入新闻内容！");
+		}else{
+			$(".news-content-error").text("");
+		}
+		//文件
+		var fileId = $("#newsFileId").val();
+		var fileIdFlag = Sport.isNull(fileId);
+		if(fileIdFlag){
+			$(".news-file-error").text("请先上传附件！");
+		}else{
+			$(".news-file-error").text("");
+		}
+		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && !fileIdFlag){
+			$('.sport-news-create-btn').text("提交中...");
+			$('.sport-news-create-btn').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/news/kjsadmin/create.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdToken").val(),
+					columnId:columnId,
+					title:$("#title").val(),
+					content:html2ubb(content),
+					fileId:fileId,
+					fileName:$('#FileUploader').val()
+				},
+				error: function () {
+					$('.sport-news-create-btn').removeAttr("disabled");
+					$('.sport-news-create-btn').text("保存");
+					layer.msg("系统异常，请稍后重试！");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg("恭喜您，保存新闻成功！");
+						window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+					}else{
+						layer.msg("系统异常，请稍后重试！");
+					}
+					$('.sport-news-create-btn').removeAttr("disabled");
+					$('.sport-news-create-btn').text("保存");
+				}
+			});
+		}
+	}).on("click",".sport-news-update-btn",function(){
+		var columnId = $("#news-column").val();
+		var columnFlag = Sport.isNull(columnId);
+		if(columnFlag){
+			$(".column-error").text("请选择栏目！");
+		}else{
+			$(".column-error").text("");
+		}
+		//内容
+		var content = CKEDITOR.instances.content.getData();
+		var contentFlag = Sport.isNull(content);
+		if(columnFlag){
+			$(".news-content-error").text("请填入新闻内容！");
+		}else{
+			$(".news-content-error").text("");
+		}
+		//文件
+		var fileId = $("#newsFileId").val();
+		var fileIdFlag = Sport.isNull(fileId);
+		if(fileIdFlag){
+			$(".news-file-error").text("请先上传附件！");
+		}else{
+			$(".news-file-error").text("");
+		}
+		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && !fileIdFlag){
+			$('.sport-news-update-btn').text("提交中...");
+			$('.sport-news-update-btn').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/news/kjsadmin/update.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdToken").val(),
+					id:$("#newsId").val(),
+					columnId:columnId,
+					title:$("#title").val(),
+					content:html2ubb(content),
+					fileId:fileId,
+					fileName:$('#PathDisplayer').val()
+				},
+				error: function () {
+					$('.sport-news-update-btn').removeAttr("disabled");
+					$('.sport-news-update-btn').text("保存");
+					layer.msg("系统异常，请稍后重试！");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg("恭喜您，保存新闻成功！");
+						window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+					}else{
+						layer.msg("系统异常，请稍后重试！");
+					}
+					$('.sport-news-update-btn').removeAttr("disabled");
+					$('.sport-news-update-btn').text("保存");
+				}
+			});
+		}
+	}).on("click",".sport-news-publish",function(){
+		var selectedIds = $("#newsGridDiv").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		var newsIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#newsGridDiv").jqGrid("getRowData",selectedIds[int]);
+			if(rowData.status==0 || rowData.status==-1){
+				newsIds.push(rowData.id);
+			}else{
+				layer.msg("该消息["+rowData.title+"]已经发布!");
+				return;
+			}
+		}
+		layer.confirm('您确定要发布该新闻吗？', {
+			  btn: ['是的','稍后'] 
+			}, function(){
+				$('.sport-news-publish').text("发布中...");
+				$('.sport-news-publish').attr("disabled",true);
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    $(document).ajaxSend(function(e, xhr, options) {
+			         xhr.setRequestHeader(header, token);
+			    });
+				$.ajax({
+					url: Sport.getBasePath()+"/news/kjsadmin/publish.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {
+						newsIds:newsIds.join(",")
+					},
+					error: function () {
+						$('.sport-news-publish').removeAttr("disabled");
+						$('.sport-news-publish').text("发布");
+						layer.msg("系统异常，请稍后重试！");
+					},
+					success: function (obj) {
+						if(obj){
+							layer.msg("恭喜您，发布新闻成功！");
+							window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+						}else{
+							layer.msg("系统异常，请稍后重试！");
+						}
+						$('.sport-news-publish').removeAttr("disabled");
+						$('.sport-news-publish').text("发布");
+					}
+				});
+			}, function(){
+		});
+	}).on("click",".sport-news-unpublish",function(){
+		var selectedIds = $("#newsGridDiv").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		var newsIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#newsGridDiv").jqGrid("getRowData",selectedIds[int]);
+			if(rowData.status==1){
+				newsIds.push(rowData.id);
+			}else{
+				layer.msg("该消息["+rowData.title+"]还没有发布!");
+				return;
+			}
+		}
+		layer.confirm('您确定要取消发布该新闻吗？', {
+			  btn: ['是的','稍后'] 
+			}, function(){
+				$('.sport-news-unpublish').text("取消发布中...");
+				$('.sport-news-unpublish').attr("disabled",true);
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    $(document).ajaxSend(function(e, xhr, options) {
+			         xhr.setRequestHeader(header, token);
+			    });
+				$.ajax({
+					url: Sport.getBasePath()+"/news/kjsadmin/unpublish.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {
+						newsIds:newsIds.join(",")
+					},
+					error: function () {
+						$('.sport-news-unpublish').removeAttr("disabled");
+						$('.sport-news-unpublish').text("取消发布");
+						layer.msg("系统异常，请稍后重试！");
+					},
+					success: function (obj) {
+						if(obj){
+							layer.msg("恭喜您，取消发布新闻成功！");
+							window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+						}else{
+							layer.msg("系统异常，请稍后重试！");
+						}
+						$('.sport-news-unpublish').removeAttr("disabled");
+						$('.sport-news-unpublish').text("取消发布");
+					}
+				});
+			}, function(){
+		});
+	}).on("click",".sport-news-delete",function(){
+		var selectedIds = $("#newsGridDiv").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		var newsIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#newsGridDiv").jqGrid("getRowData",selectedIds[int]);
+			newsIds.push(rowData.id);
+		}
+		layer.confirm('您确定要删除该新闻吗？', {
+			  btn: ['是的','稍后'] 
+			}, function(){
+				$('.sport-news-delete').text("删除中...");
+				$('.sport-news-delete').attr("disabled",true);
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    $(document).ajaxSend(function(e, xhr, options) {
+			         xhr.setRequestHeader(header, token);
+			    });
+				$.ajax({
+					url: Sport.getBasePath()+"/news/kjsadmin/delete.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {
+						newsIds:newsIds.join(",")
+					},
+					error: function () {
+						$('.sport-news-delete').removeAttr("disabled");
+						$('.sport-news-delete').text("删除");
+						layer.msg("系统异常，请稍后重试！");
+					},
+					success: function (obj) {
+						if(obj){
+							layer.msg("恭喜您，删除新闻成功！");
+							window.location.href = Sport.getBasePath()+"/news/kjsadmin/list.htm";
+						}else{
+							layer.msg("系统异常，请稍后重试！");
+						}
+						$('.sport-news-delete').removeAttr("disabled");
+						$('.sport-news-delete').text("删除");
+					}
+				});
+			}, function(){
+		});
+	}).on("click",".sport-news-search-btn",function(){
+		var title = $("#search-title").val();
+		var status = $("#search-status").val();
+		$("#newsGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{title:title,status:status}}).trigger('reloadGrid');
 	});
 })

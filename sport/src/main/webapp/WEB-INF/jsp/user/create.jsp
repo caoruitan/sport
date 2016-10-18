@@ -38,12 +38,8 @@
 				<td><input name="password" type="password" id="password"/></td>
 				<th class="required">证件类型</th>
 				<td>
-					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType">
-						<option value="1">身份证</option>
-						<option value="2">军官证</option>
-						<option value="3">港澳台胞证</option>
-					</select>
-					<span class="error credType-error"></span>
+					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType"></select>
+					<span style="color:rgb(255, 102, 0);padding-left:10px;" class="credType-error"></span>
 				</td>
 			</tr>
 			<tr>
@@ -92,11 +88,7 @@
 				<td><input name="dept" type="text" id="dept"/></td>
 				<th>学历</th>
 				<td>
-				<select class="selectpicker" name="degrees" title="请选择" id="degrees">
-					<option >大专</option>
-					<option >本科</option>
-					<option >硕士</option>
-				</select>
+				<select class="selectpicker" name="degrees" title="请选择" id="degrees"></select>
 				</td>
 			</tr>
 			<tr>
@@ -129,6 +121,38 @@
 				radioClass: 'iradio_flat-blue',
 				increaseArea: '20%' // optional
 			});
+			// 查询证书
+			$.ajax({
+				url:"<%=basePath %>/dic/datas/byPcode.action?pCode=${credCode}",
+				dataType:"json",
+				success:function(datas){
+					 var html;
+					 $.each(datas,function(i,data){
+                        html += "<option value='"+data.id+"'>"+data.name+"</option>";
+                     });
+					 $("#credType").empty();
+                     $("#credType").append(html);    
+                     $('#credType').selectpicker('render');
+                     $('#credType').selectpicker('refresh');
+				}
+			});
+			
+			// 查询证书
+			$.ajax({
+				url:"<%=basePath %>/dic/datas/byPcode.action?pCode=${degreesCode}",
+				dataType:"json",
+				success:function(datas){
+					 var html;
+					 $.each(datas,function(i,data){
+                        html += "<option value='"+data.id+"'>"+data.name+"</option>";
+                     });
+					 $("#degrees").empty();
+                     $("#degrees").append(html);    
+                     $('#degrees').selectpicker('render');
+                     $('#degrees').selectpicker('refresh');
+				}
+			});
+			
 			
 			jQuery.validator.addMethod("pwd", function(value, element, param) {
 			   	// 判断密码是否由大小写字母数字和特殊字符组成（除空格）
