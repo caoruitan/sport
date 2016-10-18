@@ -12,7 +12,6 @@ import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
-import org.cd.sport.service.DicService;
 import org.cd.sport.service.UserService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -43,9 +42,6 @@ public class KjsadminUserAction extends ExceptionWrapper {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private DicService dicService;
 
 	@RequestMapping(value = "/kjsadmin/resetpassword.htm", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {

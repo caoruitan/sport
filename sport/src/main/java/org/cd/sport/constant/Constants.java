@@ -179,15 +179,15 @@ public class Constants {
 	public static final class Subject {
 
 		public static final String SUBJECT_START_YEAR = "2015";
-		
+
 		public static final String SUBJECT_STAGE_SBSTB = "SBSTB";
-		
+
 		public static final String SUBJECT_STAGE_RWSTB = "RWSTB";
-		
+
 		public static final String SUBJECT_STAGE_JDBG = "JDBG";
-		
+
 		public static final String SUBJECT_STAGE_JTBG = "JTBG";
-		
+
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
 			types.put("ZBKT", "招标课题");
@@ -203,7 +203,64 @@ public class Constants {
 			types.put("JTBG", "结题报告");
 			return types;
 		}
+	}
 
+	public static class News {
+		/**
+		 * 新闻创建状态（取消发布状态）
+		 */
+		public static final int news_create = 0;
+		/**
+		 * 新闻发布状态
+		 */
+		public static final int news_publish = 1;
+
+		/**
+		 * 新闻取消发布状态
+		 */
+		public static final int news_unpublish = -1;
+
+		/**
+		 * 解析状态值
+		 */
+		public static Integer[] parseStatus(String status) {
+			if (StringUtils.isBlank(status)) {
+				return new Integer[] { news_create, news_publish };
+			}
+			try {
+				int parseInt = Integer.parseInt(status);
+				return parseInt == news_create ? new Integer[] { news_create }
+						: (parseInt == news_publish ? new Integer[] { news_publish }
+								: new Integer[] { news_create, news_publish });
+			} catch (Exception e) {
+				return new Integer[] { news_create, news_publish };
+			}
+		}
+
+		/**
+		 * 查询所有的栏目
+		 */
+		public static Map<Long, String> getColumns() {
+			Map<Long, String> colums = new LinkedHashMap<Long, String>();
+			colums.put(0L, "通知公告");
+			colums.put(1L, "申报系统和相关文档");
+			colums.put(2L, "政策法规");
+			colums.put(3L, "填报说明");
+			return colums;
+		}
+
+		/**
+		 * 查询所有的栏目
+		 */
+		public static String getStatusName(int status) {
+			if (status == news_create) {
+				return "未发布";
+			}
+			if (status == news_publish) {
+				return "已发布";
+			}
+			return "已取消";
+		}
 	}
 
 }

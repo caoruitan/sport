@@ -39,6 +39,15 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter>
+        <filter-name>XssSqlFilter</filter-name>
+        <filter-class>org.cd.sport.filter.XssFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XssSqlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 	<!-- 集成sitemesh 可以装饰请求  -->
 	<filter>
 		<filter-name>sitemesh</filter-name>
@@ -60,6 +69,10 @@
 	<filter-mapping>
 		<filter-name>Set Character Encoding</filter-name>
 		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
     
 	<!-- 登陆页面及错误页面 -->

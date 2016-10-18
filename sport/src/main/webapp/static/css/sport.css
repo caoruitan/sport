@@ -48,8 +48,14 @@ body {background: #f2f2f2;}
 .lBox li p a{width: 100%;font-size: 18px;float: left;}
 .rBox li span{float: right;color: #999;}
 .rBox li{height: 30px;line-height: 30px;overflow: hidden;}
+
 /*验证码样式*/
 .yzm {margin: 4px 6px -3px 10px;}
 .hyz {padding: 14px 6px 10px 0;}
 .hyz img{float: left;}
 .hyz a{float: left;display: block;height: 40px; line-height: 40px;}
+
+/*新闻样式*/
+.leftBox li {width: 100%;height: 30px;line-height: 30px;padding: 0 0 0 10px;}
+.leftBox li.sel {background: #73819A;color: #ffffff;}
+.leftBox li:hover{background: #73819A;color: #ffffff;cursor: pointer;}

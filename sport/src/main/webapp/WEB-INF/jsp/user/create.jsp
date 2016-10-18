@@ -39,7 +39,7 @@
 				<th class="required">证件类型</th>
 				<td>
 					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType"></select>
-					<span style="color:red;" class="credType-error"></span>
+					<span style="color:rgb(255, 102, 0);padding-left:10px;" class="credType-error"></span>
 				</td>
 			</tr>
 			<tr>
