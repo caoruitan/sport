@@ -250,6 +250,17 @@ public class Constants {
 		}
 
 		/**
+		 * 查询所有状态
+		 */
+		public static Map<Integer, String> getStatus() {
+			Map<Integer, String> colums = new LinkedHashMap<Integer, String>();
+			colums.put(news_create, "未发布");
+			colums.put(news_publish, "已发布");
+			colums.put(news_unpublish, "已取消");
+			return colums;
+		}
+
+		/**
 		 * 查询所有的栏目
 		 */
 		public static String getStatusName(int status) {

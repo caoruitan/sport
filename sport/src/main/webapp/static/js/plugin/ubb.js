@@ -45,7 +45,6 @@ function ubb2html(str)
 
 function html2ubb(str)
 {
-	debugger;
 	var i=0 ,codes=[], s=''+str, split_str='';
 	do{split_str= '__CODE__'+Math.random()+'_';}while(s.indexOf(split_str)>=0);
 	s = s.replace(/[\r\n]/g,'').replace(/<br[^>]*>/ig,"\n");

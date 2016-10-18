@@ -572,7 +572,6 @@ $(function(){
 		}else{
 			$(".news-content-error").text("");
 		}
-		
 		//文件
 		var fileId = $("#newsFileId").val();
 		var fileIdFlag = Sport.isNull(fileId);
@@ -820,5 +819,9 @@ $(function(){
 				});
 			}, function(){
 		});
+	}).on("click",".sport-news-search-btn",function(){
+		var title = $("#search-title").val();
+		var status = $("#search-status").val();
+		$("#newsGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{title:title,status:status}}).trigger('reloadGrid');
 	});
 })

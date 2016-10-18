@@ -33,16 +33,17 @@
 		<div class="searchBox" style="display: none">
 			<dt>标题</dt>
 			<dd>
-				<input type="text" />
+				<input type="text" id="search-title"/>
 			</dd>
 			<dt>状态</dt>
 			<dd>
-				<select id="lunch" class="selectpicker" title="请选择">
-					<option>已发布</option>
-					<option>未发布</option>
+				<select id="search-status" class="selectpicker" title="请选择">
+					<c:forEach items="${status}" var="s">
+						<option value="${s.key }">${s.value}</option>
+					</c:forEach>
 				</select>
 			</dd>
-			<button class="search-btn">查询</button>
+			<button class="search-btn sport-news-search-btn">查询</button>
 		</div>
 		<div class="twoColumn">
 			<div class="t-left">
@@ -73,7 +74,6 @@
 
 		<script type="text/javascript">
 			$(function() {
-				$(".sport-lm").find("li:first").trigger("click");
 				$("#newsGridDiv").jqGrid({
 					datatype: "local",
 					url: "<%=basePath%>/news/kjsadmin/datas.action",
@@ -126,6 +126,7 @@
 					multiselect: true,
 					pager: "#jqGridPager"
 				});
+				$(".sport-lm").find("li").first().trigger("click");
 			});
 		</script>
 	</body>

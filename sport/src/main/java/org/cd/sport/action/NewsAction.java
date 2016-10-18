@@ -41,6 +41,8 @@ public class NewsAction {
 	private String kjsadminIndex(HttpServletRequest request) {
 		Map<Long, String> columns = Constants.News.getColumns();
 		request.setAttribute("columns", columns);
+		Map<Integer, String> status = Constants.News.getStatus();
+		request.setAttribute("status", status);
 		return "news/list";
 	}
 
