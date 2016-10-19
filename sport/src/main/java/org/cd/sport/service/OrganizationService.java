@@ -17,7 +17,9 @@ public interface OrganizationService {
 
 	public boolean delete(String orgId);
 
-	public boolean delete(String[] orgId);
+	public boolean pass(String orgId);
+
+	public boolean unpass(String orgId);
 
 	public OrganizationDomain getById(String orgId);
 

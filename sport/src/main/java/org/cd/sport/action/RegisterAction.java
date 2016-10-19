@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-public class RegisterAction {
+public class RegisterAction extends BaseUserAction {
 
 	@Autowired
 	private OrganizationService organizationService;
@@ -40,4 +40,25 @@ public class RegisterAction {
 		PageWrite.writeTOPage(response, create);
 	}
 
+	@RequestMapping("/update.htm")
+	public String updateRegisterPage(HttpServletRequest request) {
+		return "register/one";
+	}
+
+	@RequestMapping("/update.action")
+	public void updateRegister(OrganizationView org, HttpServletRequest request, HttpServletResponse response) {
+		boolean create = this.organizationService.create(org);
+		PageWrite.writeTOPage(response, create);
+	}
+
+	@RequestMapping("/second/register.htm")
+	public String secondRegisterPage(HttpServletRequest request) {
+		return "register/two";
+	}
+
+	@RequestMapping("/second/register.action")
+	public void secondRegister(OrganizationView org, HttpServletRequest request, HttpServletResponse response) {
+		boolean create = this.organizationService.create(org);
+		PageWrite.writeTOPage(response, create);
+	}
 }

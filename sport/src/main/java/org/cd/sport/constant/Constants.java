@@ -274,4 +274,10 @@ public class Constants {
 		}
 	}
 
+	public static final class Org {
+		public static final int wait_verify = 0;
+		public static final int pass_verify = 1;
+		public static final int unpass_verify = -1;
+	}
+
 }

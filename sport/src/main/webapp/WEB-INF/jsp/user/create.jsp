@@ -88,7 +88,7 @@
 				<td><input name="dept" type="text" id="dept"/></td>
 				<th>学历</th>
 				<td>
-				<select class="selectpicker" name="degrees" title="请选择" id="degrees"></select>
+					<select class="selectpicker" name="degrees" title="请选择" id="degrees"></select>
 				</td>
 			</tr>
 			<tr>

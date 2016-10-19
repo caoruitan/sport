@@ -1,5 +1,7 @@
 package org.cd.sport.domain;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -99,6 +101,10 @@ public class OrganizationDomain {
 	 * 状态
 	 */
 	private int status;
+	/**
+	 * 注册时间
+	 */
+	private Date createTime;
 
 	@Id
 	@Column(name = "ORG_ID")
@@ -281,6 +287,15 @@ public class OrganizationDomain {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	@Column(name = "CREATE_TIME")
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

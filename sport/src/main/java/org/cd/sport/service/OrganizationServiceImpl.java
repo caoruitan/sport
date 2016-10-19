@@ -1,10 +1,18 @@
 package org.cd.sport.service;
 
+import java.sql.Date;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.apache.commons.lang.StringUtils;
+import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.OrganizationDao;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.NameIsExistException;
+import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.OrganizationSupport;
 import org.cd.sport.view.OrganizationView;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +59,8 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	public boolean create(OrganizationView organization) {
 		OrganizationDomain process = this.process(organization);
 		this.validName(process.getFullName());
+		process.setStatus(Constants.Org.wait_verify);
+		process.setCreateTime(new Date(System.currentTimeMillis()));
 		this.organizationDao.save(process);
 		return true;
 	}
@@ -60,45 +70,86 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	 */
 	@Transactional
 	public boolean update(OrganizationView organization) {
-		// TODO Auto-generated method stub
-		return false;
+		this.validateUpdate(organization);
+		OrganizationDomain org = this.getById(organization.getOrgId());
+		this.validName(organization.getOrgFullName(), org);
+		BeanUtils.copyProperties(organization, org);
+		this.organizationDao.update(org);
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean pass(String orgId) {
+		OrganizationDomain org = this.getById(orgId);
+		if (org == null) {
+			throw new EntityNotFoundException("单位不存在");
+		}
+		if (org.getStatus() == Constants.Org.pass_verify) {
+			throw new ParameterIsWrongException("单位状态不对");
+		}
+		org.setStatus(Constants.Org.pass_verify);
+		this.organizationDao.update(org);
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean unpass(String orgId) {
+		OrganizationDomain org = this.getById(orgId);
+		if (org == null) {
+			throw new EntityNotFoundException("单位不存在");
+		}
+		if (org.getStatus() != Constants.Org.wait_verify) {
+			throw new ParameterIsWrongException("单位状态不对");
+		}
+		org.setStatus(Constants.Org.unpass_verify);
+		this.organizationDao.update(org);
+		return true;
 	}
 
 	/**
 	 * 通过id,获得单位
 	 */
 	public OrganizationDomain getById(String orgId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (StringUtils.isBlank(orgId)) {
+			return null;
+		}
+		return this.organizationDao.getEntityById(OrganizationDomain.class, orgId);
 	}
 
 	/**
 	 * 通过id删除
 	 */
 	public boolean delete(String orgId) {
-		// TODO Auto-generated method stub
-		return false;
+		if (StringUtils.isBlank(orgId)) {
+			return false;
+		}
+		return this.organizationDao.delete(orgId);
 	}
 
 	/**
 	 * 通过多个id删除多个单位
 	 */
 	public boolean delete(String[] orgId) {
-		// TODO Auto-generated method stub
-		return false;
+		if (orgId == null) {
+			return false;
+		}
+		return this.organizationDao.delete(orgId);
 	}
 
 	/**
 	 * 查询所有单位
 	 */
 	public long getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.organizationDao.findTotal();
 	}
 
 	@Override
-	public OrganizationDomain getByFullName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrganizationDomain getByFullName(String fullName) {
+		if (StringUtils.isBlank(fullName)) {
+			return null;
+		}
+		return this.organizationDao.findByFullName(fullName);
 	}
 }
