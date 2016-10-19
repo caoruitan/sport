@@ -36,7 +36,7 @@ public class News {
 	/**
 	 * 内容
 	 */
-	private String content;
+	private byte[] content;
 	/**
 	 * 附件id
 	 */
@@ -92,18 +92,18 @@ public class News {
 		this.title = title;
 	}
 
-	@Column(name = "CONTENT")
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	@Column(name = "FILE_ID")
 	public String getFileId() {
 		return fileId;
+	}
+
+	@Column(name = "CONTENT")
+	public byte[] getContent() {
+		return content;
+	}
+
+	public void setContent(byte[] content) {
+		this.content = content;
 	}
 
 	public void setFileId(String fileId) {
