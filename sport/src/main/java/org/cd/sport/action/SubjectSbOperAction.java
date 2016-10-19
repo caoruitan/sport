@@ -1,5 +1,9 @@
 package org.cd.sport.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -129,6 +133,23 @@ public class SubjectSbOperAction {
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		return "subject/sboper/sbstb";
+	}
+	
+	@RequestMapping(value = "testWord")
+	public void testWord(HttpServletRequest request) {
+		FileInputStream in = null;
+		String basePath = this.getClass().getClassLoader().getResource("").getPath();
+		try {
+			in = new FileInputStream(new File(basePath + "aaa.doc"));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		HWPFDocument hdt = null;
+		try {
+			hdt = new HWPFDocument(in);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 }
