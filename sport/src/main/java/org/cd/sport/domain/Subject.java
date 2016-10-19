@@ -24,6 +24,8 @@ public class Subject {
 	
 	private String organizationId;
 	
+	private String organizationName;
+	
 	private String security;
 	
 	private String organizationCount;
@@ -46,9 +48,13 @@ public class Subject {
 	
 	private String creator;
 	
+	private String creatorName;
+	
 	private Date createTime;
 	
 	private String createUnitId;
+	
+	private String createUnitName;
 
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -96,6 +102,15 @@ public class Subject {
 
 	public void setOrganizationId(String organizationId) {
 		this.organizationId = organizationId;
+	}
+
+	@Column(name = "ORGANIZATION_NAME")
+	public String getOrganizationName() {
+		return organizationName;
+	}
+
+	public void setOrganizationName(String organizationName) {
+		this.organizationName = organizationName;
 	}
 
 	@Column(name = "SUBJECT_SECURITY")
@@ -197,6 +212,15 @@ public class Subject {
 		this.creator = creator;
 	}
 
+	@Column(name = "SUBJECT_CREATOR_NAME")
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
+	}
+
 	@Column(name = "SUBJECT_CREATE_TIME")
 	public Date getCreateTime() {
 		return createTime;
@@ -213,6 +237,15 @@ public class Subject {
 
 	public void setCreateUnitId(String createUnitId) {
 		this.createUnitId = createUnitId;
+	}
+
+	@Column(name = "SUBJECT_CREATE_UNIT_NAME")
+	public String getCreateUnitName() {
+		return createUnitName;
+	}
+
+	public void setCreateUnitName(String createUnitName) {
+		this.createUnitName = createUnitName;
 	}
 	
 }

@@ -122,4 +122,13 @@ public class SubjectSbOperAction {
 		return "subject/sboper/detail";
 	}
 	
+	@RequestMapping(value = "sbstb")
+	public String sbstb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		return "subject/sboper/sbstb";
+	}
+	
 }
