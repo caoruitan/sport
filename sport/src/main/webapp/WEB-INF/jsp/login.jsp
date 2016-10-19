@@ -15,7 +15,7 @@
 	<link href="<%=basePath %>/static/css/animate.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath %>/static/css/login.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
-	<title>登录-国家体育总局科研项目申报系统</title>
+	<title>国家体育总局科研项目申报系统-登录</title>
 </head>
 <body>
 	<div class="login_H ">

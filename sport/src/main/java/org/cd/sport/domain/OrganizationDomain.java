@@ -95,6 +95,11 @@ public class OrganizationDomain {
 	 */
 	private String managerEmail;
 
+	/**
+	 * 状态
+	 */
+	private int status;
+
 	@Id
 	@Column(name = "ORG_ID")
 	@GenericGenerator(name = "systemUUID", strategy = "uuid")
@@ -267,6 +272,15 @@ public class OrganizationDomain {
 
 	public void setManagerEmail(String managerEmail) {
 		this.managerEmail = managerEmail;
+	}
+
+	@Column(name = "STATUS")
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

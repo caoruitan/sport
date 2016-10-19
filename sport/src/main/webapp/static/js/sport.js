@@ -824,4 +824,15 @@ $(function(){
 		var status = $("#search-status").val();
 		$("#newsGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{title:title,status:status}}).trigger('reloadGrid');
 	});
+	
+	
+	// 注册
+	$(document).on("click",".sport-regist-first",function(){
+		if($(".register-form").valid()){
+			
+		}
+	});
+	
+	
+	
 })

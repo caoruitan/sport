@@ -9,6 +9,12 @@ body {background: #f2f2f2;}
 .layout_top .mainBtn {position: absolute;top: 22px;right: 190px;}
 .layout_top .mainBtn a img {width: 24px;height: 24px;margin-right: 10px;}
 .layout_top .mainBtn .count {position: absolute;top: 1px;right: 44px;width: 16px;height: 16px;background: #ff6600;border-radius: 10px;color: #ffffff;text-align: center;line-height: 16px;}
+/*注册页面*/
+.layout_top .top_logo_register {width: 800px;background: url(../img/frame/logo.png) no-repeat 16px 18px;height: 70px;float: left;padding: 24px 0 0 680px;font-size: 20px;font-family: 微软雅黑}
+.editBox {width: 90%;margin: 0 auto;float: none;border: 1px solid #E4E4E4;padding-bottom: 100px;}
+.editTable {width: 640px;margin: 0 auto;}
+.b-title {width: 750px;margin: 0 auto;border-bottom: 1px solid #E4E4E4;height: 40px;font-size: 16px;margin-top: 20px;margin-bottom: 10px;}
+.b-title span {font-size: 12px;margin: 0 0 0 10px;}
 /* 主面板 */
 .layout_main {position: absolute;left: 0;top: 85px;right: 10px;bottom: 0px;overflow: hidden;border-radius: 4px;}
 .layout_main .mainMenu {position: absolute;left: 10px;bottom: 0;width: 190px;height: 100%;background: #f2f2f2;top: 0px;border-radius: 4px 4px 0 0;overflow: hidden;}

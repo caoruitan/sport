@@ -25,8 +25,8 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	/**
 	 * 校验登录名是否重复
 	 */
-	public synchronized void validName(String loginName) {
-		OrganizationDomain user = this.getByName(loginName);
+	public synchronized void validName(String fullName) {
+		OrganizationDomain user = this.getByFullName(fullName);
 		if (user != null) {
 			throw new NameIsExistException("单位名称已经存在。");
 		}
@@ -35,8 +35,8 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	/**
 	 * 校验登录名是否重复
 	 */
-	public synchronized void validName(String loginName, OrganizationDomain org) {
-		OrganizationDomain _org = this.getByName(loginName);
+	public synchronized void validName(String fullName, OrganizationDomain org) {
+		OrganizationDomain _org = this.getByFullName(fullName);
 		if (_org != null) {
 			if (!_org.getOrgId().equals(org.getOrgId())) {
 				throw new NameIsExistException("单位名称已经存在。");
@@ -97,7 +97,7 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	}
 
 	@Override
-	public OrganizationDomain getByName(String name) {
+	public OrganizationDomain getByFullName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
