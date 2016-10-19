@@ -87,6 +87,7 @@ public class NewsSupport extends SportSupport {
 		if (publishTime != null) {
 			newsVo.setPublishTime(format.format(publishTime));
 		}
+		newsVo.setContent(new String(news.getContent()));
 		return newsVo;
 	}
 

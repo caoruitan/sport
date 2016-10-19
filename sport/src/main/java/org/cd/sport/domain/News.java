@@ -2,13 +2,10 @@ package org.cd.sport.domain;
 
 import java.sql.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -39,7 +36,7 @@ public class News {
 	/**
 	 * 内容
 	 */
-	private String content;
+	private byte[] content;
 	/**
 	 * 附件id
 	 */
@@ -95,20 +92,18 @@ public class News {
 		this.title = title;
 	}
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY) 
-	@Column(name = "CONTENT", columnDefinition = "CLOB")
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	@Column(name = "FILE_ID")
 	public String getFileId() {
 		return fileId;
+	}
+
+	@Column(name = "CONTENT")
+	public byte[] getContent() {
+		return content;
+	}
+
+	public void setContent(byte[] content) {
+		this.content = content;
 	}
 
 	public void setFileId(String fileId) {

@@ -48,7 +48,7 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 			throw new EntityNotFoundException("新闻实体没有找到");
 		}
 		oldNews.setColumnId(news.getColumnId());
-		oldNews.setContent(news.getContent());
+		oldNews.setContent(news.getContent().getBytes());
 		oldNews.setFileId(news.getFileId());
 		oldNews.setFileName(news.getFileName());
 		oldNews.setTitle(news.getTitle());
@@ -122,8 +122,9 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 	}
 
 	@Override
-	public News getById(String id) {
-		return this.newsDao.getEntityById(News.class, id);
+	public NewsVo getById(String id) {
+		 News news = this.newsDao.getEntityById(News.class, id);
+		 return this.process(news);
 	}
 
 	@Override

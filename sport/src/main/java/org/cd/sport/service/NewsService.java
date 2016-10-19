@@ -2,7 +2,6 @@ package org.cd.sport.service;
 
 import java.util.List;
 
-import org.cd.sport.domain.News;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsQuery;
 import org.cd.sport.vo.NewsVo;
@@ -29,7 +28,7 @@ public interface NewsService {
 
 	public boolean delete(String[] ids);
 
-	public News getById(String id);
+	public NewsVo getById(String id);
 
 	public List<NewsVo> getByWhere(NewsQuery query, int start, int limit);
 

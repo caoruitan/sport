@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
-import org.cd.sport.domain.News;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.support.SportSupport;
@@ -64,7 +63,7 @@ public class NewsAction {
 		if (StringUtils.isBlank(newsId)) {
 			throw new ParameterIsWrongException("参数错误!");
 		}
-		News news = this.newsSevice.getById(newsId);
+		NewsVo news = this.newsSevice.getById(newsId);
 		if (news == null) {
 			throw new EntityNotFoundException("新闻对象不存在!");
 		}

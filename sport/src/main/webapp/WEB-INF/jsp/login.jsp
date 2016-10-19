@@ -7,18 +7,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<!-- BEGIN META -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="your,keywords">
 	<meta name="description" content="Short explanation about this website">
-	<!-- END META -->
-	<!-- BEGIN STYLESHEETS -->
 	<link href="<%=basePath %>/static/css/base.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath %>/static/css/animate.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath %>/static/css/login.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
-	<title>登录-国家体育总局科研项目申报系统</title>
+	<title>国家体育总局科研项目申报系统-登录</title>
 </head>
 <body>
 	<div class="login_H ">
@@ -84,6 +81,9 @@
 	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
 		new WOW().init();
 	};
+	$("#wjmm").on("click",function(){
+		window.location.href = Sport.getBasePath()+"/register.htm";
+	})
 </script>
 </body>
 </html>
