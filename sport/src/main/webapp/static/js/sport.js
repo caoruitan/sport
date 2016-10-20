@@ -831,7 +831,71 @@ $(function(){
 		if($(".register-form").valid()){
 			
 		}
-	});
+	}).on("click",".sport-register-manager-save",function(){
+		// 证书校验
+		var credType = $(".credType-select").val();
+		var credFlag = Sport.isNull(credType);
+		if(credFlag){
+			$(".credType-error").text("请选择证件类型");
+		}else{
+			$(".credType-error").text("");
+		}
+		
+		// 性别校验
+		var gender = $(".gender-select").val();
+		var genderFlag = Sport.isNull(gender);
+		if(genderFlag){
+			$(".gender-error").text("请选择性别");
+		}else{
+			$(".gender-error").text("");
+		}
+		
+		// 验证通过
+		if($(".sport-user-form").valid() && !credFlag && !genderFlag){
+			$('.sport-user-save').text("提交中...");
+			$('.sport-user-save').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/org/manager/register.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userName:$('#userName').val(),
+					loginName:$('#loginName').val(),
+					credType:$('#credType').val(),
+					credNo:$('#credNo').val(),
+					gender:$('input[name="gender"]:checked').val(),
+					role:$('input[name="role"]:checked').val(),
+					organization:$('#organization').val(),
+					birthday:$('#birthday').val(),
+					zc:$('#zc').val(),
+					zw:$('#zw').val(),
+					dept:$('#dept').val(),
+					major:$('#major').val(),
+					telephone:$('#telephone').val(),
+					phone:$('#phone').val(),
+					address:$('#address').val(),
+					degrees:$("#degrees").val(),
+					password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
+				},
+				error: function () {
+					$('.sport-user-save').removeAttr("disabled");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg("新增单位管理员成功!");
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-user-save').removeAttr("disabled");
+					$('.sport-user-save').text("保存");
+				}
+			})
+		}
+	}).on("click",".sport-register-btn",function(){
+		
+	});;
 	
 	
 	

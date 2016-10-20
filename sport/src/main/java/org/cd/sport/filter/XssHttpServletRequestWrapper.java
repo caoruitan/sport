@@ -3,8 +3,7 @@ package org.cd.sport.filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -13,7 +12,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	// XSS处理Map
 	private static Map<String, String> xssMap = new LinkedHashMap<String, String>();
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init() {
 		// 含有脚本： script
 		xssMap.put("[s|S][c|C][r|R][i|C][p|P][t|T]", "");
 		// 含有脚本 javascript
@@ -34,6 +33,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
 	public XssHttpServletRequestWrapper(HttpServletRequest servletRequest) {
 		super(servletRequest);
+		this.init();
 	}
 
 	public String[] getParameterValues(String parameter) {

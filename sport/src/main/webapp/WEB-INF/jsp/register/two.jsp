@@ -35,6 +35,7 @@
 			<form class="sport-user-form sport-form">
 				<input type="hidden" name="pubKey" value="${pubKey}" id="pubKey"/>
 				<input type="hidden" name="uuid" value="${uuid}" id="uuid"/>
+				<input type="hidden" name="organization" value="${organization}" id="organization"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 				<div class="b-title">一、用户登录信息<span class="redfont">（登录名只能是数字字母下划线且大于4位小于20位）</span></div>
 				<table class="editTable">
@@ -56,10 +57,11 @@
 						<td><input name="userName" type="text" id="userName"/></td>
 						<th class="required">性别</th>
 						<td>
-							<select name="gender" class="selectpicker" title="请选择" style="width: 300px;">
-							<option value="0">男</option>
-							<option value="1">女</option>
-						</select>
+							<select name="gender" class="selectpicker gender-select" title="请选择" style="width: 300px;">
+								<option value="0">男</option>
+								<option value="1">女</option>
+							</select>
+							<span style="color:rgb(255, 102, 0);padding-left:10px;" class="gender-error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -107,7 +109,7 @@
 						<td colspan="4">
 							<p class="save-btn">
 								<a href="14zc-step1.html"><button class="btn-wisteria btn-size-big" type="button">上一步</button></a>
-								<button class="btn-red btn-size-big sport-user-save" type="button">提交</button>
+								<button class="btn-red btn-size-big sport-register-manager-save" type="button">提交</button>
 							</p>
 						</td>
 					</tr>
@@ -118,6 +120,7 @@
 <script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath %>/static/js/jsencrypt.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript" src="<%=basePath %>/static/js/sport.js"></script>
 <script>
 	$(function(){
@@ -197,6 +200,10 @@
 			return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
 		}); 
 		
+		jQuery.validator.addMethod("checkDept", function(value, element) { 
+			return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
+		}); 
+		
 		// 登录验证
 		$(".sport-user-form").validate({
 	        rules: {
@@ -234,8 +241,11 @@
 	            organization:{
 	            	required: true
 	            },
+	            birthday:{
+	            	required: true
+	            },
 	            email:{
-	            	 required:false,
+	            	 required:true,
 	                 email:true
 	            },
 	            zc:{
@@ -245,7 +255,8 @@
 	            	nullableCheck:true
 	            },
 	            dept:{
-	            	nullableCheck:true
+	            	required:true,
+	            	checkDept:true
 	            },
 	            major:{
 	            	nullableCheck:true
@@ -290,8 +301,12 @@
 	            organization:{
 	            	required: "请填写所属单位"
 	            },
+	            birthday:{
+	            	required: "请填写出生日期"
+	            },
 	            email:{
-	                 email:"请填写正确的邮箱格式"
+	            	required: "请填写电子邮件", 
+	            	email:"请填写正确的邮箱格式"
 	            },
 	            zc:{
 	            	nullableCheck:"职称长度不能超过40个字符"
@@ -300,7 +315,8 @@
 	            	nullableCheck:"职务长度不能超过40个字符"
 	            },
 	            dept:{
-	            	nullableCheck:"部门长度不能超过40个字符"
+	            	required: "请填写部门名称", 
+	            	checkDept:"部门长度不能超过40个字符"
 	            },
 	            major:{
 	            	nullableCheck:"专业长度不能超过40个字符"
