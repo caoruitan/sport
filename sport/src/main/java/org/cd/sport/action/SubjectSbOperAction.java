@@ -144,12 +144,12 @@ public class SubjectSbOperAction {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		HWPFDocument hdt = null;
-		try {
-			hdt = new HWPFDocument(in);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+//		HWPFDocument hdt = null;
+//		try {
+//			hdt = new HWPFDocument(in);
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 	}
 	
 }

@@ -7,7 +7,6 @@ package org.cd.sport.view;
  *
  */
 public class OrganizationView {
-	
 
 	/**
 	 * 单位id
@@ -16,56 +15,61 @@ public class OrganizationView {
 	/**
 	 * 单位全称
 	 */
-	private String orgFullName;
+	private String fullName;
 	/**
 	 * 英文名称
 	 */
-	private String orgEnglishName;
+	private String englishName;
 	/**
 	 * 单位简称
 	 */
-	private String orgShortName;
+	private String shortName;
 	/**
 	 * 单位地址
 	 */
-	private String orgAddress;
+	private String address;
 	/**
 	 * 单位主页
 	 */
-	private String orgHomepage;
+	private String homepage;
 	/**
 	 * 法人代表
 	 */
-	private String orgLegalLeader;
+	private String legalLeader;
 	/**
 	 * 所在地区
 	 */
-	private String orgRegion;
+	private String region;
 	/**
 	 * 单位电话
 	 */
-	private String orgTelphone;
+	private String telphone;
 	/**
 	 * 单位传真
 	 */
-	private String orgFax;
+	private String fax;
 	/**
 	 * 单位性质
 	 */
-	private String orgQuality;
+	private String quality;
 	/**
 	 * 单位信箱
 	 */
-	private String orgEmail;
+	private String email;
 	/**
 	 * 组织机构代码
 	 */
-	private String orgCode;
+	private String codePre;
+
+	/**
+	 * 组织机构代码
+	 */
+	private String codeSufix;
 	/**
 	 * 邮政编码
 	 */
-	private String orgPost;
-	
+	private String post;
+
 	/**
 	 * 业务负责人姓名
 	 */
@@ -86,120 +90,165 @@ public class OrganizationView {
 	 * 业务负责人电子邮箱
 	 */
 	private String managerEmail;
+
 	public String getOrgId() {
 		return orgId;
 	}
+
 	public void setOrgId(String orgId) {
 		this.orgId = orgId;
 	}
-	public String getOrgFullName() {
-		return orgFullName;
+
+	public String getFullName() {
+		return fullName;
 	}
-	public void setOrgFullName(String orgFullName) {
-		this.orgFullName = orgFullName;
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-	public String getOrgEnglishName() {
-		return orgEnglishName;
+
+	public String getEnglishName() {
+		return englishName;
 	}
-	public void setOrgEnglishName(String orgEnglishName) {
-		this.orgEnglishName = orgEnglishName;
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
 	}
-	public String getOrgShortName() {
-		return orgShortName;
+
+	public String getShortName() {
+		return shortName;
 	}
-	public void setOrgShortName(String orgShortName) {
-		this.orgShortName = orgShortName;
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
-	public String getOrgAddress() {
-		return orgAddress;
+
+	public String getAddress() {
+		return address;
 	}
-	public void setOrgAddress(String orgAddress) {
-		this.orgAddress = orgAddress;
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getOrgHomepage() {
-		return orgHomepage;
+
+	public String getHomepage() {
+		return homepage;
 	}
-	public void setOrgHomepage(String orgHomepage) {
-		this.orgHomepage = orgHomepage;
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
 	}
-	public String getOrgLegalLeader() {
-		return orgLegalLeader;
+
+	public String getLegalLeader() {
+		return legalLeader;
 	}
-	public void setOrgLegalLeader(String orgLegalLeader) {
-		this.orgLegalLeader = orgLegalLeader;
+
+	public void setLegalLeader(String legalLeader) {
+		this.legalLeader = legalLeader;
 	}
-	public String getOrgRegion() {
-		return orgRegion;
+
+	public String getRegion() {
+		return region;
 	}
-	public void setOrgRegion(String orgRegion) {
-		this.orgRegion = orgRegion;
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
-	public String getOrgTelphone() {
-		return orgTelphone;
+
+	public String getTelphone() {
+		return telphone;
 	}
-	public void setOrgTelphone(String orgTelphone) {
-		this.orgTelphone = orgTelphone;
+
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
 	}
-	public String getOrgFax() {
-		return orgFax;
+
+	public String getFax() {
+		return fax;
 	}
-	public void setOrgFax(String orgFax) {
-		this.orgFax = orgFax;
+
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
-	public String getOrgQuality() {
-		return orgQuality;
+
+	public String getQuality() {
+		return quality;
 	}
-	public void setOrgQuality(String orgQuality) {
-		this.orgQuality = orgQuality;
+
+	public void setQuality(String quality) {
+		this.quality = quality;
 	}
-	public String getOrgEmail() {
-		return orgEmail;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setOrgEmail(String orgEmail) {
-		this.orgEmail = orgEmail;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getOrgCode() {
-		return orgCode;
+
+	public String getCodePre() {
+		return codePre;
 	}
-	public void setOrgCode(String orgCode) {
-		this.orgCode = orgCode;
+
+	public void setCodePre(String codePre) {
+		this.codePre = codePre;
 	}
-	public String getOrgPost() {
-		return orgPost;
+
+	public String getCodeSufix() {
+		return codeSufix;
 	}
-	public void setOrgPost(String orgPost) {
-		this.orgPost = orgPost;
+
+	public void setCodeSufix(String codeSufix) {
+		this.codeSufix = codeSufix;
 	}
+
+	public String getPost() {
+		return post;
+	}
+
+	public void setPost(String post) {
+		this.post = post;
+	}
+
 	public String getManagerName() {
 		return managerName;
 	}
+
 	public void setManagerName(String managerName) {
 		this.managerName = managerName;
 	}
+
 	public String getManagerMobilePhone() {
 		return managerMobilePhone;
 	}
+
 	public void setManagerMobilePhone(String managerMobilePhone) {
 		this.managerMobilePhone = managerMobilePhone;
 	}
+
 	public String getManagerTel() {
 		return managerTel;
 	}
+
 	public void setManagerTel(String managerTel) {
 		this.managerTel = managerTel;
 	}
+
 	public String getManagerfax() {
 		return managerfax;
 	}
+
 	public void setManagerfax(String managerfax) {
 		this.managerfax = managerfax;
 	}
+
 	public String getManagerEmail() {
 		return managerEmail;
 	}
+
 	public void setManagerEmail(String managerEmail) {
 		this.managerEmail = managerEmail;
 	}
-	
-	
+
 }

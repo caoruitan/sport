@@ -11,9 +11,9 @@ import org.cd.sport.view.OrganizationView;
  */
 public interface OrganizationService {
 
-	public boolean create(OrganizationView organization);
+	public OrganizationDomain create(OrganizationView organization);
 
-	public boolean update(OrganizationView organization);
+	public OrganizationDomain update(OrganizationView organization);
 
 	public boolean delete(String orgId);
 

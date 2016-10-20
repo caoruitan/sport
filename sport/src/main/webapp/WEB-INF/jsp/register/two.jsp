@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>国家体育总局科研项目申报系统-单位注册</title>
+		<title>国家体育总局科研项目申报系统-单位注册-第二步</title>
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
 						<td><input name="userName" type="text" id="userName"/></td>
 						<th class="required">性别</th>
 						<td>
-							<select name="gender" class="selectpicker gender-select" title="请选择" style="width: 300px;">
+							<select name="gender" id="gender" class="selectpicker gender-select" title="请选择" style="width: 300px;">
 								<option value="0">男</option>
 								<option value="1">女</option>
 							</select>
