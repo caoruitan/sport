@@ -9,10 +9,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity()
-@Table(name = "SPORT_SUBJECT_RWS")
-public class SubjectRws {
+@Table(name = "SPORT_SUBJECT_SBS")
+public class SubjectSbs {
 	
-	private String rwsId;
+	private String sbsId;
 	
 	private String subjectId;
 	
@@ -49,13 +49,13 @@ public class SubjectRws {
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "guid")
-	@Column(name = "RWS_ID")
-	public String getRwsId() {
-		return rwsId;
+	@Column(name = "SBS_ID")
+	public String getSbsId() {
+		return sbsId;
 	}
 
-	public void setRwsId(String rwsId) {
-		this.rwsId = rwsId;
+	public void setSbsId(String sbsId) {
+		this.sbsId = sbsId;
 	}
 
 	@Column(name = "SUBJECT_ID")
@@ -67,7 +67,7 @@ public class SubjectRws {
 		this.subjectId = subjectId;
 	}
 
-	@Column(name = "RWS_ADDRESS")
+	@Column(name = "SBS_ADDRESS")
 	public String getAddress() {
 		return address;
 	}
@@ -76,7 +76,7 @@ public class SubjectRws {
 		this.address = address;
 	}
 
-	@Column(name = "RWS_PHONE")
+	@Column(name = "SBS_PHONE")
 	public String getPhone() {
 		return phone;
 	}
@@ -85,7 +85,7 @@ public class SubjectRws {
 		this.phone = phone;
 	}
 
-	@Column(name = "RWS_FAX")
+	@Column(name = "SBS_FAX")
 	public String getFax() {
 		return fax;
 	}
@@ -94,7 +94,7 @@ public class SubjectRws {
 		this.fax = fax;
 	}
 
-	@Column(name = "RWS_EMAIL")
+	@Column(name = "SBS_EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -103,7 +103,7 @@ public class SubjectRws {
 		this.email = email;
 	}
 
-	@Column(name = "RWS_YEARS")
+	@Column(name = "SBS_YEARS")
 	public String getYears() {
 		return years;
 	}
@@ -112,7 +112,7 @@ public class SubjectRws {
 		this.years = years;
 	}
 
-	@Column(name = "RWS_XTYJ")
+	@Column(name = "SBS_XTYJ")
 	public String getXtyj() {
 		return xtyj;
 	}
@@ -121,7 +121,7 @@ public class SubjectRws {
 		this.xtyj = xtyj;
 	}
 
-	@Column(name = "RWS_YJMB")
+	@Column(name = "SBS_YJMB")
 	public String getYjmb() {
 		return yjmb;
 	}
@@ -130,7 +130,7 @@ public class SubjectRws {
 		this.yjmb = yjmb;
 	}
 
-	@Column(name = "RWS_JSGJ")
+	@Column(name = "SBS_JSGJ")
 	public String getJsgj() {
 		return jsgj;
 	}
@@ -139,7 +139,7 @@ public class SubjectRws {
 		this.jsgj = jsgj;
 	}
 
-	@Column(name = "RWS_YJFF")
+	@Column(name = "SBS_YJFF")
 	public String getYjff() {
 		return yjff;
 	}
@@ -148,7 +148,7 @@ public class SubjectRws {
 		this.yjff = yjff;
 	}
 
-	@Column(name = "RWS_SYFA")
+	@Column(name = "SBS_SYFA")
 	public String getSyfa() {
 		return syfa;
 	}
@@ -157,7 +157,7 @@ public class SubjectRws {
 		this.syfa = syfa;
 	}
 
-	@Column(name = "RWS_JDAP")
+	@Column(name = "SBS_JDAP")
 	public String getJdap() {
 		return jdap;
 	}
@@ -166,7 +166,7 @@ public class SubjectRws {
 		this.jdap = jdap;
 	}
 
-	@Column(name = "RWS_YQJG")
+	@Column(name = "SBS_YQJG")
 	public String getYqjg() {
 		return yqjg;
 	}
@@ -175,7 +175,7 @@ public class SubjectRws {
 		this.yqjg = yqjg;
 	}
 
-	@Column(name = "RWS_GZTJ")
+	@Column(name = "SBS_GZTJ")
 	public String getGztj() {
 		return gztj;
 	}
@@ -184,7 +184,7 @@ public class SubjectRws {
 		this.gztj = gztj;
 	}
 
-	@Column(name = "RWS_TJYJ")
+	@Column(name = "SBS_TJYJ")
 	public String getTjyj() {
 		return tjyj;
 	}
@@ -193,7 +193,7 @@ public class SubjectRws {
 		this.tjyj = tjyj;
 	}
 
-	@Column(name = "RWS_STATUS")
+	@Column(name = "SBS_STATUS")
 	public String getStatus() {
 		return status;
 	}

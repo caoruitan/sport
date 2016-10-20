@@ -314,7 +314,7 @@
 					<div class="editBox">
 						<form id="baseInfoForm">
 							<input type="hidden" name="subjectId" value="${subjectId}">
-							<input type="hidden" name="rwsId" value="${rwsId}">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 							<table class="editTable">
 								<tr>
 									<th>课题名称</th>
@@ -322,36 +322,36 @@
 								</tr>
 								<tr>
 									<th>申报单位</th>
-									<td><input name="name" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
+									<td><input name="organizationName" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
 								</tr>
 								<tr>
 									<th>第一申请人</th>
-									<td><input name="name" type="text" value="${subject.creatorName}" disabled="disabled" /></td>
+									<td><input name="creatorName" type="text" value="${subject.creatorName}" disabled="disabled" /></td>
 								</tr>
 								<tr>
 									<th>通信地址</th>
-									<td><input name="name" type="text" value="" /></td>
+									<td><input name="address" type="text" value="" /></td>
 								</tr>
 								<tr>
 									<th>联系电话</th>
-									<td><input name="name" type="text" value="" /></td>
+									<td><input name="phone" type="text" value="" /></td>
 								</tr>
 								<tr>
 									<th>传真</th>
-									<td><input name="name" type="text" value="" /></td>
+									<td><input name="fax" type="text" value="" /></td>
 								</tr>
 								<tr>
 									<th>电子邮箱</th>
-									<td><input name="name" type="text" value="" /></td>
+									<td><input name="email" type="text" value="" /></td>
 								</tr>
 								<tr>
 									<th>完成年限</th>
-									<td><input name="name" type="text" value="" /></td>
+									<td><input name="years" type="text" value="" /></td>
 								</tr>
 							</table>
 						</form>
 						<p class="save-btn">
-							<button class="btn-red btn-size-big" onclick="submit('baseInfoForm')">保存</button>
+							<button id="baseInfoFormSubmit" class="btn-red btn-size-big" onclick="saveBaseInfo()">保存</button>
 							<button class="btn-wisteria btn-size-big" onclick="reset('baseInfoForm')">重置</button>
 						</p>
 					</div>
@@ -361,10 +361,14 @@
 			<div class="box b-xtyj">
 				<div class="t">01 选题依据</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor1"></textarea>
+					<form id="xtyjForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea class="ckeditor" name="xtyj"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="xtyjFormSubmit" class="btn-red btn-size-big" onclick="saveXtyj()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('xtyjForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -487,9 +491,59 @@
 	</div>
 
 	<script type="text/javascript">
-		var submit = function(formname) {
-			$("#" + formname).submit();
+		var saveBaseInfo = function(formname) {
+			$('#baseInfoFormSubmit').attr("disabled",true);
+			$('#baseInfoFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveBaseInfo.action",
+				type: "POST",
+				dataType: "JSON",
+				data: $("#baseInfoForm").serialize(),
+				error: function () {
+					$('#baseInfoFormSubmit').removeAttr("disabled");
+					$("#baseInfoFormSubmit").text("保存");
+				},
+				success: function (obj) {
+					$('#baseInfoFormSubmit').removeAttr("disabled");
+					$("#baseInfoFormSubmit").text("保存");
+					$('#baseInfoFormSubmit').dialog({
+						id: 'baseInfoFormSubmit',
+						title: '保存成功',
+						content: '<div class="dlg-contentbox"><img src="<%=basePath%>/static/img/prompt.gif" />保存成功</div>',
+						width: 400,
+						height: 130,
+						ok: true
+					});
+				}
+			});
 		}
+		
+		var saveXtyj = function() {
+			$('#xtyjFormSubmit').attr("disabled",true);
+			$('#xtyjFormSubmit').text('正在提交...');
+			var xtyj = CKEDITOR.instances["xtyj"];
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveXtyj.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					xtyj : xtyj.getData(),
+					subjectId : $("#xtyjForm input[name='xtyj']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#xtyjFormSubmit').removeAttr("disabled");
+					$("#xtyjFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#xtyjFormSubmit').removeAttr("disabled");
+					$("#xtyjFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
 		var reset = function(formname) {
 			$("#" + formname)[0].reset();
 		}
