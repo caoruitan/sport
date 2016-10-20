@@ -3,7 +3,9 @@ package org.cd.sport.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +15,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -28,12 +33,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.JsonObject;
+
 @Controller
 @RequestMapping("subject/sboper")
 public class SubjectSbOperAction {
 
 	@Autowired
 	private SubjectService subjectService; 
+	
+	@Autowired
+	private SubjectSbsService subjectSbsService;
 
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response) {
@@ -135,21 +145,49 @@ public class SubjectSbOperAction {
 		return "subject/sboper/sbstb";
 	}
 	
+	@RequestMapping(value = "saveBaseInfo")
+	public void saveBaseInfo(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String fax = request.getParameter("fax");
+		String years = request.getParameter("years");
+		this.subjectSbsService.saveBaseInfo(subjectId, address, phone, fax, email, years);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveXtyj")
+	public void saveXtyj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String xtyj = request.getParameter("xtyj");
+		this.subjectSbsService.saveXtyj(subjectId, xtyj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
 	@RequestMapping(value = "testWord")
-	public void testWord(HttpServletRequest request) {
-		FileInputStream in = null;
-		String basePath = this.getClass().getClassLoader().getResource("").getPath();
+	public void testWord(HttpServletRequest request) throws IOException {
+		String path = request.getSession().getServletContext().getRealPath("/");
+		FileInputStream in = new FileInputStream(new File(path + "/WEB-INF/doc/aaa.doc"));
+		HWPFDocument hdt = new HWPFDocument(in);
+		Range range = hdt.getRange();  
+		range.replaceText("${address}", "北京市海淀区宝盛南路奥北科技园");
+		range.replaceText("${phone}", "15910949461");
+		range.replaceText("${email}", "caort@sysware.com.cn");
+		range.replaceText("${fax}", "010-82845536");
+		range.replaceText("${content}", "<p>研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容</p><p>本项目的技术关键与创新点</p>");
+		OutputStream os = new FileOutputStream(path + "/WEB-INF/doc/write.doc");
+		// 把doc输出到输出流中
+		hdt.write(os);
 		try {
-			in = new FileInputStream(new File(basePath + "aaa.doc"));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+			os.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-//		HWPFDocument hdt = null;
-//		try {
-//			hdt = new HWPFDocument(in);
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
 	}
 	
 }
