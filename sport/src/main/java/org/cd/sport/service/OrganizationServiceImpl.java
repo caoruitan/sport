@@ -56,26 +56,26 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	 * 新增单位
 	 */
 	@Transactional
-	public boolean create(OrganizationView organization) {
+	public OrganizationDomain create(OrganizationView organization) {
 		OrganizationDomain process = this.process(organization);
 		this.validName(process.getFullName());
 		process.setStatus(Constants.Org.wait_verify);
 		process.setCreateTime(new Date(System.currentTimeMillis()));
 		this.organizationDao.save(process);
-		return true;
+		return process;
 	}
 
 	/**
 	 * 修改单位信息
 	 */
 	@Transactional
-	public boolean update(OrganizationView organization) {
+	public OrganizationDomain update(OrganizationView organization) {
 		this.validateUpdate(organization);
 		OrganizationDomain org = this.getById(organization.getOrgId());
-		this.validName(organization.getOrgFullName(), org);
+		this.validName(organization.getFullName(), org);
 		BeanUtils.copyProperties(organization, org);
 		this.organizationDao.update(org);
-		return true;
+		return org;
 	}
 
 	@Override

@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>国家体育总局科研项目申报系统-单位注册</title>
+		<title>国家体育总局科研项目申报系统-单位注册-成功页面</title>
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css">
@@ -27,18 +27,18 @@
 	</head>
 	<body>
 		<div class="layout_top">
-			<div class="top_logo">单位注册</div>
+			<div class="top_logo_register">单位注册</div>
 			<div class="op">
-				<a href="01login.html">直接登录</a>
+				<a href="<%=basePath %>/login.htm">直接登录</a>
 			</div>
 		</div>
 		<div class="editBox">
 			<div class="ok">
-				<li><img src="../img/ok2.png" /></li>
+				<li><img src="<%=basePath %>/static/img/ok2.png" /></li>
 				<li class="txt">恭喜你，注册成功~~</li>
 				<li class="font_red">正在提交审核，请耐心等待</li>
 				<p class="save-btn">
-					<a href="01login.html"><button class="btn-red btn-size-big" type="">立即登录</button></a>
+					<a href="<%=basePath %>/login.htm"><button class="btn-red btn-size-big" type="">立即登录</button></a>
 				</p>
 			</div>
 		</div>

@@ -33,7 +33,7 @@ public class UserSupport extends SportSupport {
 				|| user.getLoginName().length() > 20) {
 			throw new ParameterIsWrongException("用户名为空或者格式不对");
 		}
-		if (StringUtils.isBlank(user.getUserName()) || user.getUserName().length() < 4
+		if (StringUtils.isBlank(user.getUserName()) || user.getUserName().length() < 2
 				|| user.getUserName().length() > 20) {
 			throw new ParameterIsWrongException("真实姓名为空或者格式不对");
 		}

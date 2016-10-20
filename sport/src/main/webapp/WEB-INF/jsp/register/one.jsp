@@ -58,11 +58,8 @@
 					<td><input name="legalLeader" type="text" value="" /></td>
 					<th class="required">所在地区</th>
 					<td>
-						<select name="region" class="selectpicker" data-live-search="true" title="请选择" style="width: 300px;">
-							<option>请选择</option>
-							<option>国家体育总局</option>
-							<option>国家体育局射击队</option>
-						</select>
+						<select name="region" id="loc_province" class="selectpicker" style="width:300px;" title="请选择" data-live-search="true"></select>
+						<span style="color:rgb(255, 102, 0);" class="region-error"></span>
 					</td>
 				</tr>
 				<tr>
@@ -74,17 +71,19 @@
 				<tr>
 					<th class="required">单位性质</th>
 					<td>
-						<select name="quality" class="selectpicker" data-live-search="true" title="请选择" style="width: 300px;">
+						<select id="quality" name="quality" class="selectpicker" data-live-search="true" title="请选择" style="width: 300px;">
 							<option>请选择</option>
 							<option>国家体育总局</option>
 							<option>国家体育局射击队</option>
-						</select></td>
+						</select>
+						<span style="color:rgb(255, 102, 0);" class="quality-error"></span>
+					</td>
 					<th class="required">电子邮箱</th>
 					<td><input name="email" type="text" value="" /></td>
 				</tr>
 				<tr>
 					<th class="required">组织机构代码</th>
-					<td><input name="code" type="text" value="" style="width: 120px;margin-right: 10px;" /><span style="float: left;margin:6px 14px 0 0 ;">-</span><input name="name" style="width: 50px" type="text" value="" /></td>
+					<td><input name="codePre" type="text" value="" style="width: 120px;margin-right: 10px;" /><span style="float: left;margin:6px 14px 0 0 ;">-</span><input name="codeSufix" style="width: 50px" type="text" value="" /></td>
 					<th class="required">邮政编码</th>
 					<td><input name="post" type="text" value="" /></td>
 				</tr>
@@ -126,8 +125,12 @@
 	</div>
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>/static/js/sport.js"></script>
+<script type="text/javascript" src="<%=basePath %>/static/js/plugin/location.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
+		var loc	= new Location();
+		loc.fillOption('loc_province' , '0');
 		jQuery.validator.addMethod("englishNameCheck", function(value, element) { 
 		    if(Sport.isNull(value)){
 		    	return true;
@@ -172,8 +175,13 @@
 			return this.optional(element) || (tel.test(value)); 
 		}); 
 		
-		jQuery.validator.addMethod("checkCode", function(value, element) { 
-			var tel = /^([0-9A-Z]){8}-[0-9|X]$/;
+		jQuery.validator.addMethod("checkCodePre", function(value, element) { 
+			var tel = /^([0-9A-Z]){8}$/;
+			return this.optional(element) || (tel.test(value)); 
+		}); 
+		
+		jQuery.validator.addMethod("checkCodeSufix", function(value, element) { 
+			var tel = /^[0-9|X]$/;
 			return this.optional(element) || (tel.test(value)); 
 		}); 
 		
@@ -226,9 +234,13 @@
 	            	required:true,
 	            	email:true
 	            },
-	            code:{
+	            codePre:{
 	            	required:true,
-	            	checkCode:true
+	            	checkCodePre:true
+	            },
+	            codeSufix:{
+	            	required:true,
+	            	checkCodeSufix:true
 	            },
 	            post:{
 	            	required:true,
@@ -268,7 +280,7 @@
 	            homepage: {
 	            	homepageCheck : "公司主页格式不正确"
 	            },
-	            adress:{
+	            address:{
 	            	required:"公司地址不能为空",
 	            	addressCheck: "公司地址格式不正确"
 	            },
@@ -291,6 +303,14 @@
 	            code:{
 	            	required:"组织机构代码不能为空",
 	            	checkCode:"请填写正确组织机构代码"
+	            },
+	            codePre:{
+	            	required:"组织机构代码不能为空",
+	            	checkCodePre:"请填写正确组织机构代码"
+	            },
+	            codeSufix:{
+	            	required:"组织机构代码不能为空",
+	            	checkCodeSufix:"请填写正确组织机构代码"
 	            },
 	            post:{
 	            	required:"邮政编码不能为空",

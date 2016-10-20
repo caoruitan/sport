@@ -36,7 +36,7 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 
 	@Override
 	public OrganizationDomain findByFullName(String fullName) {
-		String deleteHql = "delete from OrganizationDomain where fullName=:fullName";
+		String deleteHql = "from OrganizationDomain where fullName=:fullName";
 		return (OrganizationDomain) this.getHibernateQuery(deleteHql).setParameter("fullName", fullName).uniqueResult();
 	}
 

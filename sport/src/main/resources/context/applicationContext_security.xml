@@ -9,9 +9,13 @@
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
+		
 		<!--注册相关-->
-		<intercept-url pattern="/org/check.action" access="permitAll()"/>
-		<intercept-url pattern="/register" access="permitAll()"/>
+		<intercept-url pattern="/org/**" access="permitAll()"/>
+		<intercept-url pattern="/dic/datas/byPcode.action" access="permitAll()"/>
+		<intercept-url pattern="/dic/datas/byPcode.action" access="permitAll()"/>
+		<intercept-url pattern="/user/update/check.action" access="permitAll()"/>
+		<intercept-url pattern="/user/create/check.action" access="permitAll()"/>
 		
 		<!-- 修改密码权限 -->
 		<intercept-url pattern="/password/**" access="isAuthenticated()"/>
@@ -28,8 +32,6 @@
 		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		<intercept-url pattern="/user/update/check.action" access="isAuthenticated()"/>
-		<intercept-url pattern="/user/create/check.action" access="isAuthenticated()"/>
 		<!-- 数据字典权限 -->
 		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		
