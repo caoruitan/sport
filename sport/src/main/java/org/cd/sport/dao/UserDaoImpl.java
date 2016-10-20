@@ -142,4 +142,36 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 		return count == null ? 0 : count.intValue();
 	}
 
+	@Override
+	public UserVo findMangerByOrgId(String orgId) {
+		String querySql = "select U.USER_ID AS \"userId\",U.LOGIN_NAME AS \"loginName\",U.USER_NAME AS \"userName\","
+				+ "U.GENDER AS \"gender\",U.CRED_TYPE AS \"credType\",U.CRED_NO AS \"credNo\",U.ROLE AS \"role\","
+				+ "U.ORGANIZATION AS \"organization\",U.BIRTHDAY AS \"birthday\",U.ZC AS \"zc\",U.ZW AS \"zw\","
+				+ "U.DEPT AS \"dept\",U.DEGREES AS \"degrees\",U.MAJOR AS \"major\",U.TELEPHONE AS \"telephone\","
+				+ "U.PHONE AS \"phone\",U.ADDRESS AS \"address\",O.FULL_NAME as \"orgName\",O.EMAIL AS \"email\" from SPORT_USER U LEFT JOIN SPORT_ORGANIZATION O ON U.ORGANIZATION=O.ORG_ID WHERE ORGANIZATION=:orgId";
+		SQLQuery hibernateSqlQuery = this.getHibernateSqlQuery(querySql);
+		hibernateSqlQuery.addScalar("userId");
+		hibernateSqlQuery.addScalar("loginName");
+		hibernateSqlQuery.addScalar("userName");
+		hibernateSqlQuery.addScalar("gender");
+		hibernateSqlQuery.addScalar("credType");
+		hibernateSqlQuery.addScalar("credNo");
+		hibernateSqlQuery.addScalar("role");
+		hibernateSqlQuery.addScalar("organization");
+		hibernateSqlQuery.addScalar("birthday");
+		hibernateSqlQuery.addScalar("zc");
+		hibernateSqlQuery.addScalar("zw");
+		hibernateSqlQuery.addScalar("dept");
+		hibernateSqlQuery.addScalar("degrees");
+		hibernateSqlQuery.addScalar("major");
+		hibernateSqlQuery.addScalar("telephone");
+		hibernateSqlQuery.addScalar("phone");
+		hibernateSqlQuery.addScalar("address");
+		hibernateSqlQuery.addScalar("orgName");
+		hibernateSqlQuery.addScalar("email");
+		hibernateSqlQuery.setParameter("orgId", orgId);
+		hibernateSqlQuery.setResultTransformer(Transformers.aliasToBean(UserVo.class));
+		return (UserVo) hibernateSqlQuery.uniqueResult();
+	}
+
 }

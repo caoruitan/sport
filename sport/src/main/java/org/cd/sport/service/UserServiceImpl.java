@@ -1,6 +1,9 @@
 package org.cd.sport.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -121,6 +124,9 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	@Transactional
 	public boolean update(UserView user) {
 		this.validateUpdate(user);
+		if (StringUtils.isBlank(user.getUserId())) {
+			throw new ParameterIsWrongException("id为空");
+		}
 		UserDomain userDomain = this.userDao.findById(user.getUserId());
 		if (userDomain == null) {
 			throw new EntityNotFoundExcetion("数据不存在");
@@ -130,7 +136,15 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		BeanUtils.copyProperties(user, userDomain);
 		userDomain.setGender(Constants.User.parseGender(user.getGender()));
 		userDomain.setPassword(password);
-		this.userDao.update(userDomain);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date parse;
+		try {
+			parse = simpleDateFormat.parse(user.getBirthday());
+			userDomain.setBirthday(new java.sql.Date(parse.getTime()));
+			this.userDao.update(userDomain);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 
@@ -251,5 +265,13 @@ public class UserServiceImpl extends UserSupport implements UserService {
 			return null;
 		}
 		return this.userDao.findVoByLoginName(loginName);
+	}
+
+	@Override
+	public UserVo getMangerByOrgId(String orgId) {
+		if (StringUtils.isBlank(orgId)) {
+			return null;
+		}
+		return this.userDao.findMangerByOrgId(orgId);
 	}
 }

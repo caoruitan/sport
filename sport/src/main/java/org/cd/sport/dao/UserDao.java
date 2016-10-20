@@ -22,6 +22,8 @@ public interface UserDao extends IBaseDao {
 
 	public UserVo findVoById(String id);
 
+	public UserVo findMangerByOrgId(String orgId);
+
 	public UserVo findVoByLoginName(String loginName);
 
 	public UserDomain findByLoginName(String loginName);

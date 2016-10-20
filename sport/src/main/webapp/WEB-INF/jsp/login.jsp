@@ -82,7 +82,7 @@
 		new WOW().init();
 	};
 	$("#wjmm").on("click",function(){
-		window.location.href = Sport.getBasePath()+"/register.htm";
+		window.location.href = Sport.getBasePath()+"/org/register.htm";
 	})
 </script>
 </body>

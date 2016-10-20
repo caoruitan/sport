@@ -1,6 +1,9 @@
 package org.cd.sport.support;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -89,6 +92,14 @@ public class UserSupport extends SportSupport {
 		userDomain.setPassword(password);
 		// 性别
 		userDomain.setGender(Constants.User.parseGender(user.getGender()));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date parse;
+		try {
+			parse = simpleDateFormat.parse(user.getBirthday());
+			userDomain.setBirthday(new java.sql.Date(parse.getTime()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return userDomain;
 	}
 

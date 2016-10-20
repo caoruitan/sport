@@ -77,7 +77,7 @@ public class OrganizationView {
 	/**
 	 * 业务负责人移动电话
 	 */
-	private String managerMobilePhone;
+	private String managerPhone;
 	/**
 	 * 业务负责人电话
 	 */
@@ -219,12 +219,12 @@ public class OrganizationView {
 		this.managerName = managerName;
 	}
 
-	public String getManagerMobilePhone() {
-		return managerMobilePhone;
+	public String getManagerPhone() {
+		return managerPhone;
 	}
 
-	public void setManagerMobilePhone(String managerMobilePhone) {
-		this.managerMobilePhone = managerMobilePhone;
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
 	}
 
 	public String getManagerTel() {

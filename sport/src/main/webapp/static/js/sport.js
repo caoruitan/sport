@@ -827,7 +827,10 @@ $(function(){
 	
 	
 	// 注册
-	$(document).on("click",".sport-regist-first",function(){
+	$(document).on("click",".sport-register-first-back",function(){
+		var dataId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/update.htm?orgId="+dataId;
+	}).on("click",".sport-regist-first",function(){
 		var region = $("#loc_province").val();
 		var regionFlag = Sport.isNull(region);
 		if(regionFlag){
@@ -909,6 +912,7 @@ $(function(){
 					zw:$('#zw').val(),
 					dept:$('#dept').val(),
 					major:$('#major').val(),
+					email:$('#email').val(),
 					telephone:$('#telephone').val(),
 					phone:$('#phone').val(),
 					address:$('#address').val(),
@@ -931,10 +935,110 @@ $(function(){
 				}
 			})
 		}
-	}).on("click",".sport-register-btn",function(){
+	}).on("click",".sport-register-manager-update",function(){
+		// 证书校验
+		var credType = $(".credType-select").val();
+		var credFlag = Sport.isNull(credType);
+		if(credFlag){
+			$(".credType-error").text("请选择证件类型");
+		}else{
+			$(".credType-error").text("");
+		}
+		// 性别校验
+		var gender = $(".gender-select").val();
+		var genderFlag = Sport.isNull(gender);
+		if(genderFlag){
+			$(".gender-error").text("请选择性别");
+		}else{
+			$(".gender-error").text("");
+		}
 		
-	});;
-	
-	
-	
+		// 验证通过
+		if($(".sport-user-form").valid() && !credFlag && !genderFlag){
+			$('.sport-register-manager-update').text("提交中...");
+			$('.sport-register-manager-update').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/org/manager/update.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userId:$("#userId").val(),
+					userName:$('#userName').val(),
+					loginName:$('#loginName').val(),
+					credType:$('#credType').val(),
+					credNo:$('#credNo').val(),
+					gender:$('#gender').val(),
+					role:$('input[name="role"]:checked').val(),
+					organization:$('#organization').val(),
+					birthday:$('#birthday').val(),
+					zc:$('#zc').val(),
+					zw:$('#zw').val(),
+					dept:$('#dept').val(),
+					email:$('#email').val(),
+					major:$('#major').val(),
+					telephone:$('#telephone').val(),
+					phone:$('#phone').val(),
+					address:$('#address').val(),
+					degrees:$("#degrees").val()
+				},
+				error: function () {
+					$('.sport-register-manager-update').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试!");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg("新增单位管理员成功!");
+						window.location.href = Sport.getBasePath()+"/org/success.htm";
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.sport-register-manager-update').removeAttr("disabled");
+					$('.sport-register-manager-update').text("保存");
+				}
+			})
+		}
+	}).on("click",".sport-regist-first-update",function(){
+		var region = $("#loc_province").val();
+		var regionFlag = Sport.isNull(region);
+		if(regionFlag){
+			$(".region-error").text("请选择地区");
+		}else{
+			$(".region-error").text("");
+		}
+		
+		var quality = $("#quality").val();
+		var qualityFlag = Sport.isNull(quality);
+		if(qualityFlag){
+			$(".quality-error").text("请选择单位性质");
+		}else{
+			$(".quality-error").text("");
+		}
+		if($(".register-form").valid() && !regionFlag && !qualityFlag){
+			$('.sport-regist-first-update').text("提交中...");
+			$('.sport-regist-first-update').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/org/update.action",
+				type: "POST",
+				//dataType: "JSON",
+				data: $('.register-form').serialize(),
+				error: function () {
+					$('.sport-regist-first-update').removeAttr("disabled");
+					$('.sport-regist-first-update').text("保存");
+					layer.msg("系统异常，请稍后重试!");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg("修改单位信息成功!");
+						window.location.href = Sport.getBasePath()+"/org/manager/register.htm?orgId="+obj;
+					}else{
+						layer.msg("修改单位信息失败!");
+					}
+					$('.sport-regist-first-update').removeAttr("disabled");
+					$('.sport-regist-first-update').text("保存");
+				}
+			})
+		}
+	});
 })

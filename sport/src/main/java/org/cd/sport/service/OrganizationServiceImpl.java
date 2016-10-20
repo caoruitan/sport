@@ -118,6 +118,22 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 		return this.organizationDao.getEntityById(OrganizationDomain.class, orgId);
 	}
 
+	@Override
+	public OrganizationView getViewById(String orgId) {
+		if (StringUtils.isBlank(orgId)) {
+			return null;
+		}
+		OrganizationDomain org = this.organizationDao.getEntityById(OrganizationDomain.class, orgId);
+		OrganizationView result = this.result(OrganizationView.class, org);
+		String code = org.getCode();
+		if (!StringUtils.isBlank(code)) {
+			String[] split = code.split("-");
+			result.setCodePre(split[0]);
+			result.setCodeSufix(split[1]);
+		}
+		return result;
+	}
+
 	/**
 	 * 通过id删除
 	 */

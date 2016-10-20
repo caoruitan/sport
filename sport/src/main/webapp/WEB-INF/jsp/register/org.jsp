@@ -314,7 +314,7 @@
 	            },
 	            post:{
 	            	required:"邮政编码不能为空",
-	            	checkCode:"请填写正确的邮政编码"
+	            	checkPost:"请填写正确的邮政编码"
 	            },
 	            managerName:{
 	            	required:"姓名不能为空",

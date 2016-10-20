@@ -40,6 +40,14 @@ public class BaseUserAction extends ExceptionWrapper {
 	@Autowired
 	private UserService userService;
 
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
 		request.setAttribute("user_type", "kjsadmin");

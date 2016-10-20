@@ -31,6 +31,8 @@ public interface UserService extends UserDetailsService {
 
 	public UserVo getVoById(String userId);
 
+	public UserVo getMangerByOrgId(String orgId);
+
 	public UserVo getVoByLoginName(String loginName);
 
 	public UserDomain getByLoginName(String loginName);

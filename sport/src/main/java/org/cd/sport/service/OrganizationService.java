@@ -22,6 +22,8 @@ public interface OrganizationService {
 	public boolean unpass(String orgId);
 
 	public OrganizationDomain getById(String orgId);
+	
+	public OrganizationView getViewById(String orgId);
 
 	public OrganizationDomain getByFullName(String name);
 
