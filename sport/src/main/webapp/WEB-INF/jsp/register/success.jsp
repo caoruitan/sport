@@ -33,9 +33,9 @@
 			</div>
 		</div>
 		<div class="editBox">
-			<div class="ok">
+			<div class="ok regist-ok">
 				<li><img src="<%=basePath %>/static/img/ok2.png" /></li>
-				<li class="txt">恭喜你，注册成功~~</li>
+				<li class="txt regist-txt">恭喜你，注册成功~~</li>
 				<li class="font_red">正在提交审核，请耐心等待</li>
 				<p class="save-btn">
 					<a href="<%=basePath %>/login.htm"><button class="btn-red btn-size-big" type="">立即登录</button></a>

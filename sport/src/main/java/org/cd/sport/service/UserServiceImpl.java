@@ -290,7 +290,8 @@ public class UserServiceImpl extends UserSupport implements UserService {
 
 	@Override
 	public List<UserVo> getByWhere(UserQuery query, int start, int limit) {
-		return this.userDao.findVoByWhere(query, start, limit);
+		List<UserVo> vos = this.userDao.findVoByWhere(query, start, limit);
+		return this.processVo(vos);
 	}
 
 	@Override

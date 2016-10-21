@@ -122,4 +122,19 @@ public class UserSupport extends SportSupport {
 		return vos;
 	}
 
+	public List<UserVo> processVo(List<UserVo> datas) {
+		if (datas != null && !datas.isEmpty()) {
+			for (UserVo vo : datas) {
+				UserVo userDomain = AuthenticationUtils.getUser();
+				if (userDomain != null) {
+					boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
+					// 如果用户是管理员、不能修改信息
+					boolean admin = Constants.Role.isAdmin(vo.getRole());
+					vo.setHasOpr(hasRole && !admin);
+				}
+			}
+		}
+		return datas;
+	}
+
 }
