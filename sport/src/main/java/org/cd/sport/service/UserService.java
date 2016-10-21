@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.view.UserView;
+import org.cd.sport.vo.UserQuery;
 import org.cd.sport.vo.UserVo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -43,6 +44,8 @@ public interface UserService extends UserDetailsService {
 
 	public List<UserVo> get(int start, int limit);
 
+	public List<UserVo> getByWhere(UserQuery query, int start, int limit);
+
 	public List<UserVo> getVoByOrgId(String orgId, int start, int limit);
 
 	public long getTotal(String[] role);
@@ -50,6 +53,8 @@ public interface UserService extends UserDetailsService {
 	public long getTotal(String[] role, String name);
 
 	public long getTotalByOrgId(String orgId);
+
+	public long getTotalByWhere(UserQuery query);
 
 	public long getTotal();
 }

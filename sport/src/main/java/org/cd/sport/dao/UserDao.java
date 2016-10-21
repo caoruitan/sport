@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.hibernate.IBaseDao;
+import org.cd.sport.vo.UserQuery;
 import org.cd.sport.vo.UserVo;
 
 /**
@@ -36,12 +37,16 @@ public interface UserDao extends IBaseDao {
 
 	public List<UserDomain> findVoByOrgId(String orgId, int start, int limit);
 
-	public long count(String[] role);
+	public List<UserVo> findVoByWhere(UserQuery query, int start, int limit);
 
-	public long count(String[] role, String name);
+	public long findTotal(String[] role);
+
+	public long findTotal(String[] role, String name);
 
 	public long findTotalByOrgId(String orgId);
 
-	public long count();
+	public long findTotalByWhere(UserQuery query);
+
+	public long findTotal();
 
 }

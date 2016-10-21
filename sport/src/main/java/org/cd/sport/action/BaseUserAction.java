@@ -25,6 +25,7 @@ import org.cd.sport.utils.UUIDUtil;
 import org.cd.sport.utils.VerifCode;
 import org.cd.sport.view.UserView;
 import org.cd.sport.vo.KV;
+import org.cd.sport.vo.UserQuery;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -180,9 +181,12 @@ public class BaseUserAction extends ExceptionWrapper {
 		if (roles == null) {
 			throw new ForbiddenExcetion("");
 		}
-		List<UserVo> datas = this.userService.getByRole(roles, name, (start - 1) * Constants.Common.PAGE_SIZE,
+		UserQuery query = new UserQuery();
+		query.setName(name);
+		query.setRole(roles);
+		List<UserVo> datas = this.userService.getByWhere(query, (start - 1) * Constants.Common.PAGE_SIZE,
 				Constants.Common.PAGE_SIZE);
-		long total = this.userService.getTotal(roles, name);
+		long total = this.userService.getTotalByWhere(query);
 		PageModel<UserVo> page = new PageModel<UserVo>();
 		page.setPage(start);
 		page.setTotal((long) Math.ceil(total * 0.1 / Constants.Common.PAGE_SIZE));

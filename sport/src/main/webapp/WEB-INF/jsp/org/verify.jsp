@@ -78,5 +78,61 @@
 				<button class="btn-wisteria btn-size-big sport-verify-unpass" type="button" data-id="${org.orgId}">不通过</button>
 			</p>
 		</div>
+<script type="text/javascript">
+	$(function(){
+		// 注册单位审核
+		$('.sport-verify-pass').dialog({
+			id: 'sh',
+			title: '审核通过',
+			content: '<div class="dlg-contentbox"><img src="'+Sport.getBasePath()+'/static/img/prompt.gif" />确定审核通过吗？</div>',
+			width: 400,
+			height: 130,
+			ok: function(data){
+				$(".sport-verify-pass").attr("disabled",true);
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    $(document).ajaxSend(function(e, xhr, options) {
+			         xhr.setRequestHeader(header, token);
+			    });
+				$.ajax({
+					url: Sport.getBasePath()+"/org/kjsadmin/pass.action",
+					type: "POST",
+					data: {orgId:$(".sport-verify-pass").attr("data-id")},
+					error: function () {
+						layer.msg("系统异常，请稍后重试!");
+						$(".sport-verify-pass").removeAttr("disabled");
+					},
+					success: function (obj) {
+						if(obj){
+							layer.msg("审核单位成功！");
+							window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+						}else{
+							layer.msg("审核单位失败！");
+						}
+						$(".sport-verify-pass").removeAttr("disabled");
+					}
+				})
+			},
+			cancel: true
+		});
+		
+		// 注册单位审核
+		$('.sport-verify-unpass').dialog({
+			id: 'btg',
+			title: '审核不通过',
+			content: '<div class="dlg-contentbox"><textarea placeholder="请填写退回意见" name="" style="width:530px" rows="4" cols="10"></textarea></div>',
+			width: 600,
+			height: 230,
+			ok: function(data){
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    $(document).ajaxSend(function(e, xhr, options) {
+			         xhr.setRequestHeader(header, token);
+			    });
+			},
+			cancel: true
+		});
+	})
+</script>
 	</body>
 </html>

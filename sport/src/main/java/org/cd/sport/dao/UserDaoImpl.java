@@ -1,10 +1,18 @@
 package org.cd.sport.dao;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.hibernate.BaseDaoImpl;
+import org.cd.sport.vo.UserQuery;
 import org.cd.sport.vo.UserVo;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
@@ -39,14 +47,14 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 	}
 
 	@Override
-	public long count(String[] role) {
+	public long findTotal(String[] role) {
 		String updateHql = "select count(1) from UserDomain where role in (:role)";
 		Long count = (Long) this.getHibernateQuery(updateHql).setParameterList("role", role).uniqueResult();
 		return count == null ? 0 : count.intValue();
 	}
 
 	@Override
-	public long count() {
+	public long findTotal() {
 		String updateHql = "select count(1) from UserDomain";
 		Long count = (Long) this.getHibernateQuery(updateHql).uniqueResult();
 		return count == null ? 0 : count.intValue();
@@ -135,7 +143,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 	}
 
 	@Override
-	public long count(String[] role, String name) {
+	public long findTotal(String[] role, String name) {
 		String updateHql = "select count(1) from UserDomain where role in (:role) and (loginName like :name or userName like :name)";
 		Long count = (Long) this.getHibernateQuery(updateHql).setParameterList("role", role)
 				.setParameter("name", "%" + name + "%").uniqueResult();
@@ -187,6 +195,94 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 		String updateHql = "select count(1) from UserDomain where organization=:organization";
 		Long count = (Long) this.getHibernateQuery(updateHql).setParameter("organization", orgId).uniqueResult();
 		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserVo> findVoByWhere(UserQuery query, int start, int limit) {
+		StringBuffer querySql = new StringBuffer("select U.USER_ID AS \"userId\",U.LOGIN_NAME AS \"loginName\",U.USER_NAME AS \"userName\","
+				+ "U.GENDER AS \"gender\",U.CRED_TYPE AS \"credType\",U.CRED_NO AS \"credNo\",U.ROLE AS \"role\","
+				+ "U.ORGANIZATION AS \"organization\",U.BIRTHDAY AS \"birthday\",U.ZC AS \"zc\",U.ZW AS \"zw\","
+				+ "U.DEPT AS \"dept\",U.DEGREES AS \"degrees\",U.MAJOR AS \"major\",U.TELEPHONE AS \"telephone\","
+				+ "U.PHONE AS \"phone\",U.ADDRESS AS \"address\",O.FULL_NAME as \"orgName\",O.EMAIL AS \"email\", D.NAME AS \"credTypeName\" from SPORT_USER U "
+				+ "LEFT JOIN SPORT_ORGANIZATION O ON U.ORGANIZATION=O.ORG_ID "
+				+ "LEFT JOIN SPORT_DIC D ON D.ID = U.CRED_TYPE WHERE 1=1 ");
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (query != null) {
+			if (StringUtils.isNotBlank(query.getOrgId())) {
+				querySql.append(" and U.ORGANIZATION =:orgId ");
+				params.put("orgId", query.getOrgId());
+			}
+			if (query.getRole() != null && query.getRole().length != 0) {
+				querySql.append(" and U.ROLE in(:role) ");
+				params.put("role", query.getRole());
+			}
+
+			if (StringUtils.isNotBlank(query.getName())) {
+				querySql.append(" and (U.LOGIN_NAME like :name or U.USER_NAME like :name) ");
+				params.put("name", "%" + query.getName() + "%");
+			}
+		}
+		SQLQuery hibernateSqlQuery = this.getHibernateSqlQuery(querySql.toString());
+		hibernateSqlQuery.addScalar("userId");
+		hibernateSqlQuery.addScalar("loginName");
+		hibernateSqlQuery.addScalar("userName");
+		hibernateSqlQuery.addScalar("gender");
+		hibernateSqlQuery.addScalar("credType");
+		hibernateSqlQuery.addScalar("credTypeName");
+		hibernateSqlQuery.addScalar("credNo");
+		hibernateSqlQuery.addScalar("role");
+		hibernateSqlQuery.addScalar("organization");
+		hibernateSqlQuery.addScalar("birthday");
+		hibernateSqlQuery.addScalar("zc");
+		hibernateSqlQuery.addScalar("zw");
+		hibernateSqlQuery.addScalar("dept");
+		hibernateSqlQuery.addScalar("degrees");
+		hibernateSqlQuery.addScalar("major");
+		hibernateSqlQuery.addScalar("telephone");
+		hibernateSqlQuery.addScalar("phone");
+		hibernateSqlQuery.addScalar("address");
+		hibernateSqlQuery.addScalar("orgName");
+		hibernateSqlQuery.addScalar("email");
+		this.processQuery(hibernateSqlQuery, params);
+		hibernateSqlQuery.setResultTransformer(Transformers.aliasToBean(UserVo.class));
+		return hibernateSqlQuery.list();
+	}
+
+	private void processQuery(Query hibernateQuery, Map<String, Object> map) {
+		Set<Entry<String, Object>> entrySet = map.entrySet();
+		for (Entry<String, Object> entry : entrySet) {
+			Object value = entry.getValue();
+			if (value instanceof Object[] || value instanceof Collection) {
+				hibernateQuery.setParameterList(entry.getKey(), (Object[]) value);
+			} else {
+				hibernateQuery.setParameter(entry.getKey(), value);
+			}
+		}
+	}
+
+	@Override
+	public long findTotalByWhere(UserQuery query) {
+		if (query == null) {
+			return this.findTotal();
+		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer queryHql = new StringBuffer("select count(1) from UserDomain where 1=1 ");
+		if (StringUtils.isNotBlank(query.getOrgId())) {
+			queryHql.append(" and organization =:orgId ");
+			params.put("orgId", query.getOrgId());
+		}
+		if (query.getRole() != null && query.getRole().length != 0) {
+			queryHql.append(" and role in(:role) ");
+			params.put("role", query.getRole());
+		}
+
+		if (StringUtils.isNotBlank(query.getName())) {
+			queryHql.append(" and (loginName like :name or userName like :name) ");
+			params.put("name", "%" + query.getName() + "%");
+		}
+		return this.getCountByHQL(queryHql.toString(), params);
 	}
 
 }

@@ -1,13 +1,9 @@
-<%@page import="org.cd.sport.vo.UserVo"%>
-<%@page import="org.cd.sport.utils.AuthenticationUtils"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
-	UserVo user = AuthenticationUtils.getUser();
-	request.setAttribute("loginUser", user);
 	request.setAttribute("user_type", "kjsadmin");
 %>
 <!DOCTYPE html>

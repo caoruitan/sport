@@ -54,7 +54,7 @@
 				{name:'hasOpr',align:"center", width:20,hidden:true},
 				{label:"用户名",name:'loginName',align:"center", width:20, sorttype:"date"},
 				{label:"真实姓名",name:'userName', align:"center", width:15},
-				{label:"证件类型",name:'credType', width:10, align:"center",sorttype:"float"},
+				{label:"证件类型",name:'credTypeName', width:10, align:"center",sorttype:"float"},
 				{label:"证件编号",name:'credNo', width:30, align:"left",sorttype:"float"},		
 				{label:"所属部门",name:'dept', width:10,align:"center",sorttype:"float"},		
 				{label:"操作",name:'操作', width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){

@@ -23,6 +23,7 @@ import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.Md5Util;
 import org.cd.sport.view.UserView;
 import org.cd.sport.vo.UserAuth;
+import org.cd.sport.vo.UserQuery;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -227,12 +228,12 @@ public class UserServiceImpl extends UserSupport implements UserService {
 
 	@Override
 	public long getTotal(String[] role) {
-		return this.userDao.count(role);
+		return this.userDao.findTotal(role);
 	}
 
 	@Override
 	public long getTotal() {
-		return this.userDao.count();
+		return this.userDao.findTotal();
 	}
 
 	@Override
@@ -249,7 +250,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		if (StringUtils.isBlank(name)) {
 			return this.getTotal(role);
 		}
-		return this.userDao.count(role, name);
+		return this.userDao.findTotal(role, name);
 	}
 
 	@Override
@@ -285,5 +286,15 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	@Override
 	public long getTotalByOrgId(String orgId) {
 		return this.userDao.findTotalByOrgId(orgId);
+	}
+
+	@Override
+	public List<UserVo> getByWhere(UserQuery query, int start, int limit) {
+		return this.userDao.findVoByWhere(query, start, limit);
+	}
+
+	@Override
+	public long getTotalByWhere(UserQuery query) {
+		return this.userDao.findTotalByWhere(query);
 	}
 }
