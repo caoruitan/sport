@@ -16,6 +16,7 @@
         <pattern>/dic/*.htm</pattern>
         <pattern>/news/kjsadmin/*.htm</pattern>
         <pattern>/subject/kjsadmin/*.htm</pattern>
+        <pattern>/org/kjsadmin/*.htm</pattern>
     </decorator>
     
     <!-- 申报人 -->

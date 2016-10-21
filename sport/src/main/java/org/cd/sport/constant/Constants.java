@@ -278,6 +278,48 @@ public class Constants {
 		public static final int wait_verify = 0;
 		public static final int pass_verify = 1;
 		public static final int unpass_verify = -1;
+
+		/**
+		 * 解析状态值
+		 */
+		public static Integer[] parseStatus(String status) {
+			if (StringUtils.isBlank(status)) {
+				return new Integer[] { wait_verify, pass_verify, unpass_verify };
+			}
+			try {
+				int parseInt = Integer.parseInt(status);
+				return parseInt == wait_verify ? new Integer[] { wait_verify }
+						: (parseInt == pass_verify ? new Integer[] { pass_verify }
+								: (parseInt == unpass_verify ? new Integer[] { unpass_verify }
+										: new Integer[] { wait_verify, pass_verify, unpass_verify }));
+			} catch (Exception e) {
+				return new Integer[] { wait_verify, pass_verify, unpass_verify };
+			}
+		}
+
+		/**
+		 * 查询所有状态
+		 */
+		public static Map<Integer, String> getStatus() {
+			Map<Integer, String> colums = new LinkedHashMap<Integer, String>();
+			colums.put(wait_verify, "待审核");
+			colums.put(pass_verify, "审核通过");
+			colums.put(unpass_verify, "未审核通过");
+			return colums;
+		}
+
+		/**
+		 * 查询状态名称
+		 */
+		public static String getStatusName(int status) {
+			if (status == wait_verify) {
+				return "待审核";
+			}
+			if (status == pass_verify) {
+				return "审核通过";
+			}
+			return "未审核通过";
+		}
 	}
 
 }

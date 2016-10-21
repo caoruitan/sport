@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("org")
+@RequestMapping("regist")
 public class RegisterAction extends BaseUserAction {
 
 	@Autowired
@@ -48,12 +48,12 @@ public class RegisterAction extends BaseUserAction {
 		PageWrite.writeTOPage(response, result);
 	}
 
-	@RequestMapping("/register.htm")
+	@RequestMapping("/regist.htm")
 	public String register(HttpServletRequest request) {
 		return "register/org";
 	}
 
-	@RequestMapping("/register.action")
+	@RequestMapping("/regist.action")
 	public void register(OrganizationView org, HttpServletRequest request, HttpServletResponse response) {
 		OrganizationDomain domain = this.organizationService.create(org);
 		PageWrite.writeTOPage(response, domain.getOrgId());
@@ -75,7 +75,7 @@ public class RegisterAction extends BaseUserAction {
 		PageWrite.writeTOPage(response, create.getOrgId());
 	}
 
-	@RequestMapping("/manager/register.htm")
+	@RequestMapping("/manager/regist.htm")
 	public String secondRegisterPage(HttpServletRequest request) {
 		String orgId = request.getParameter("orgId");
 		if (StringUtils.isBlank(orgId)) {
@@ -102,7 +102,7 @@ public class RegisterAction extends BaseUserAction {
 		return "register/manager";
 	}
 
-	@RequestMapping("/manager/register.action")
+	@RequestMapping("/manager/regist.action")
 	public void secondRegister(UserView user, HttpServletRequest request, HttpServletResponse response) {
 		user.setRole(Constants.Role.ROLE_ORG_ADMIN);
 		super.createUser(user, request, response);

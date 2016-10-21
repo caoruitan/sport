@@ -34,9 +34,13 @@ public interface UserDao extends IBaseDao {
 
 	public List<UserDomain> find(int start, int limit);
 
+	public List<UserDomain> findVoByOrgId(String orgId, int start, int limit);
+
 	public long count(String[] role);
 
 	public long count(String[] role, String name);
+
+	public long findTotalByOrgId(String orgId);
 
 	public long count();
 

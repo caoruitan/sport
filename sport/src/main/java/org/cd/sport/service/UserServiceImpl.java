@@ -274,4 +274,15 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		}
 		return this.userDao.findMangerByOrgId(orgId);
 	}
+
+	@Override
+	public List<UserVo> getVoByOrgId(String orgId, int start, int limit) {
+		List<UserDomain> users = this.userDao.findVoByOrgId(orgId, start, limit);
+		return this.process(users);
+	}
+
+	@Override
+	public long getTotalByOrgId(String orgId) {
+		return this.userDao.findTotalByOrgId(orgId);
+	}
 }

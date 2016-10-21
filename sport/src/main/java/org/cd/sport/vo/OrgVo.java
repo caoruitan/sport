@@ -1,24 +1,12 @@
-package org.cd.sport.domain;
-
-import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
+package org.cd.sport.vo;
 
 /**
- * 部门对象
+ * 单位查询
  * 
  * @author liuyk
  *
  */
-@Entity
-@Table(name = "SPORT_ORGANIZATION")
-public class OrganizationDomain {
+public class OrgVo {
 	/**
 	 * 单位id
 	 */
@@ -70,7 +58,12 @@ public class OrganizationDomain {
 	/**
 	 * 组织机构代码
 	 */
-	private String code;
+	private String codePre;
+
+	/**
+	 * 组织机构代码
+	 */
+	private String codeSufix;
 	/**
 	 * 邮政编码
 	 */
@@ -97,33 +90,10 @@ public class OrganizationDomain {
 	 */
 	private String managerEmail;
 
-	/**
-	 * 状态
-	 */
 	private int status;
 
-	/**
-	 * 审核不通过原因
-	 */
-	private String reason;
-	/**
-	 * 注册时间
-	 */
-	private Date createTime;
+	private String statusName;
 
-	@Id
-	@Column(name = "ORG_ID")
-	@GenericGenerator(name = "systemUUID", strategy = "uuid")
-	@GeneratedValue(generator = "systemUUID")
-	public String getOrgId() {
-		return orgId;
-	}
-
-	public void setOrgId(String orgId) {
-		this.orgId = orgId;
-	}
-
-	@Column(name = "FULL_NAME")
 	public String getFullName() {
 		return fullName;
 	}
@@ -132,43 +102,6 @@ public class OrganizationDomain {
 		this.fullName = fullName;
 	}
 
-	@Column(name = "ENGLISH_NAME")
-	public String getEnglishName() {
-		return englishName;
-	}
-
-	public void setEnglishName(String englishName) {
-		this.englishName = englishName;
-	}
-
-	@Column(name = "SHORT_NAME")
-	public String getShortName() {
-		return shortName;
-	}
-
-	public void setShortName(String shortName) {
-		this.shortName = shortName;
-	}
-
-	@Column(name = "ADDRESS")
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	@Column(name = "HOMEPAGE")
-	public String getHomepage() {
-		return homepage;
-	}
-
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
-	}
-
-	@Column(name = "LEGAL_LEADER")
 	public String getLegalLeader() {
 		return legalLeader;
 	}
@@ -177,7 +110,46 @@ public class OrganizationDomain {
 		this.legalLeader = legalLeader;
 	}
 
-	@Column(name = "REGION")
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
 	public String getRegion() {
 		return region;
 	}
@@ -186,7 +158,6 @@ public class OrganizationDomain {
 		this.region = region;
 	}
 
-	@Column(name = "TELPHONE")
 	public String getTelphone() {
 		return telphone;
 	}
@@ -195,7 +166,6 @@ public class OrganizationDomain {
 		this.telphone = telphone;
 	}
 
-	@Column(name = "FAX")
 	public String getFax() {
 		return fax;
 	}
@@ -204,7 +174,6 @@ public class OrganizationDomain {
 		this.fax = fax;
 	}
 
-	@Column(name = "QUALITY")
 	public String getQuality() {
 		return quality;
 	}
@@ -213,7 +182,6 @@ public class OrganizationDomain {
 		this.quality = quality;
 	}
 
-	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -222,16 +190,22 @@ public class OrganizationDomain {
 		this.email = email;
 	}
 
-	@Column(name = "CODE")
-	public String getCode() {
-		return code;
+	public String getCodePre() {
+		return codePre;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCodePre(String codePre) {
+		this.codePre = codePre;
 	}
 
-	@Column(name = "POST")
+	public String getCodeSufix() {
+		return codeSufix;
+	}
+
+	public void setCodeSufix(String codeSufix) {
+		this.codeSufix = codeSufix;
+	}
+
 	public String getPost() {
 		return post;
 	}
@@ -240,7 +214,6 @@ public class OrganizationDomain {
 		this.post = post;
 	}
 
-	@Column(name = "MANAGER_NAME")
 	public String getManagerName() {
 		return managerName;
 	}
@@ -249,7 +222,6 @@ public class OrganizationDomain {
 		this.managerName = managerName;
 	}
 
-	@Column(name = "MANAGER_PHONE")
 	public String getManagerPhone() {
 		return managerPhone;
 	}
@@ -258,7 +230,6 @@ public class OrganizationDomain {
 		this.managerPhone = managerPhone;
 	}
 
-	@Column(name = "MANAGER_TEL")
 	public String getManagerTel() {
 		return managerTel;
 	}
@@ -267,7 +238,6 @@ public class OrganizationDomain {
 		this.managerTel = managerTel;
 	}
 
-	@Column(name = "MANAGER_FAX")
 	public String getManagerfax() {
 		return managerfax;
 	}
@@ -276,7 +246,6 @@ public class OrganizationDomain {
 		this.managerfax = managerfax;
 	}
 
-	@Column(name = "MANAGER_EMAIL")
 	public String getManagerEmail() {
 		return managerEmail;
 	}
@@ -285,7 +254,6 @@ public class OrganizationDomain {
 		this.managerEmail = managerEmail;
 	}
 
-	@Column(name = "STATUS")
 	public int getStatus() {
 		return status;
 	}
@@ -294,22 +262,11 @@ public class OrganizationDomain {
 		this.status = status;
 	}
 
-	@Column(name = "CREATE_TIME")
-	public Date getCreateTime() {
-		return createTime;
+	public String getStatusName() {
+		return statusName;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
-	
-	@Column(name = "REASON")
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-
 }

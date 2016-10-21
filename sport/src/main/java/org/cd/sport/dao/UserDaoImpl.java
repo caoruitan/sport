@@ -174,4 +174,19 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 		return (UserVo) hibernateSqlQuery.uniqueResult();
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserDomain> findVoByOrgId(String orgId, int start, int limit) {
+		String queryHql = "from UserDomain where organization=:organization ";
+		return this.getHibernateQuery(queryHql).setParameter("organization", orgId).setFirstResult(start)
+				.setMaxResults(limit).list();
+	}
+
+	@Override
+	public long findTotalByOrgId(String orgId) {
+		String updateHql = "select count(1) from UserDomain where organization=:organization";
+		Long count = (Long) this.getHibernateQuery(updateHql).setParameter("organization", orgId).uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
 }

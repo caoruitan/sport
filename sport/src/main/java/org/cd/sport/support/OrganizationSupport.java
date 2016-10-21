@@ -1,9 +1,14 @@
 package org.cd.sport.support;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.view.OrganizationView;
+import org.cd.sport.vo.OrgVo;
 
 /**
  * 
@@ -74,6 +79,25 @@ public class OrganizationSupport extends SportSupport {
 		this.validate(org);
 		OrganizationDomain result = this.result(OrganizationDomain.class, org);
 		result.setCode(org.getCodePre() + "-" + org.getCodeSufix());
+		return result;
+	}
+
+	public List<OrgVo> process(List<OrganizationDomain> orgs) {
+		if (orgs == null || orgs.isEmpty()) {
+			return null;
+		}
+
+		List<OrgVo> vos = new ArrayList<OrgVo>();
+		for (OrganizationDomain organizationDomain : orgs) {
+			OrgVo process = this.process(organizationDomain);
+			vos.add(process);
+		}
+		return vos;
+	}
+
+	public OrgVo process(OrganizationDomain org) {
+		OrgVo result = this.result(OrgVo.class, org);
+		result.setStatusName(Constants.Org.getStatusName(org.getStatus()));
 		return result;
 	}
 

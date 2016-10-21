@@ -377,15 +377,20 @@ function Location() {
 	};
 }
 
-Location.prototype.find	= function(id) {
+Location.prototype.findItems	= function(id) {
 	if(typeof(this.items[id]) == "undefined")
 		return false;
 	return this.items[id];
 }
 
+Location.prototype.findById	= function(id) {
+	var json = this.items[0];
+	return json[id];
+}
+
 Location.prototype.fillOption	= function(el_id , loc_id , selected_id) {
 	var el	= $('#'+el_id); 
-	var json	= this.find(loc_id); 
+	var json	= this.findItems(loc_id); 
 	if (json) {
 		var index	= 1;
 		var selected_index	= 0;
@@ -396,7 +401,6 @@ Location.prototype.fillOption	= function(el_id , loc_id , selected_id) {
 			if (k == selected_id) {
 				selected_index	= index;
 			}
-			
 			index++;
 		})
 	}

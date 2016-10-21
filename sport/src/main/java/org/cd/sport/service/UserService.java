@@ -43,9 +43,13 @@ public interface UserService extends UserDetailsService {
 
 	public List<UserVo> get(int start, int limit);
 
+	public List<UserVo> getVoByOrgId(String orgId, int start, int limit);
+
 	public long getTotal(String[] role);
 
 	public long getTotal(String[] role, String name);
+
+	public long getTotalByOrgId(String orgId);
 
 	public long getTotal();
 }

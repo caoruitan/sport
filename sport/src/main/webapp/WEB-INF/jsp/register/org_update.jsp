@@ -32,12 +32,12 @@
 				<a href="<%=basePath %>/login.htm">直接登录</a>
 			</div>
 		</div>
-		<div class="editBox">
+		<div class="editBox registBox">
 			<div class="b-title">一、申报单位信息<span class="redfont">请先输入单位全称点击“检索”按钮进行单位检索</span></div>
 			<form class="register-form">
 			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 			  <input type="hidden" name="orgId" value="${org.orgId}" id="orgId"/>
-			  <table class="editTable">
+			  <table class="editTable registTable">
 				<tr>
 					<th class="required">单位全称</th>
 					<td><input name="fullName" type="text" value="${org.fullName}" id="fullName"/></td>
@@ -96,7 +96,7 @@
 				</tr>
 			</table>
 			<div class="b-title">二、业务负责人信息</div>
-			<table class="editTable">
+			<table class="editTable registTable">
 				<tr>
 					<th class="required">姓名</th>
 					<td><input name="managerName" type="text" value="${org.managerName}" /></td>
@@ -204,7 +204,7 @@
 	                maxlength:50,
 	                remote:{     
 	                    type:"POST",
-	                    url:"<%=basePath%>/org/fullname/update/check.action",
+	                    url:"<%=basePath%>/regist/fullname/update/check.action",
 	                    data:{
 	                    	fullName:function(){return $('#fullName').val()},
 	                    	orgId:function(){return $('#orgId').val()},

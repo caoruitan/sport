@@ -1,6 +1,7 @@
 package org.cd.sport.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -12,6 +13,8 @@ import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.OrganizationSupport;
 import org.cd.sport.view.OrganizationView;
+import org.cd.sport.vo.OrgQuery;
+import org.cd.sport.vo.OrgVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,15 +98,20 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 
 	@Override
 	@Transactional
-	public boolean unpass(String orgId) {
+	public boolean unpass(String orgId, String reason) {
 		OrganizationDomain org = this.getById(orgId);
 		if (org == null) {
 			throw new EntityNotFoundException("单位不存在");
+		}
+
+		if (StringUtils.isBlank(reason)) {
+			throw new ParameterIsWrongException("审核不同原因不能为空");
 		}
 		if (org.getStatus() != Constants.Org.wait_verify) {
 			throw new ParameterIsWrongException("单位状态不对");
 		}
 		org.setStatus(Constants.Org.unpass_verify);
+		org.setReason(reason);
 		this.organizationDao.update(org);
 		return true;
 	}
@@ -167,5 +175,22 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 			return null;
 		}
 		return this.organizationDao.findByFullName(fullName);
+	}
+
+	@Override
+	public List<OrgVo> getByWhere(OrgQuery query, int start, int limit) {
+		List<OrganizationDomain> orgs = this.organizationDao.findByWhere(query, start, limit);
+		return this.process(orgs);
+	}
+
+	@Override
+	public List<OrgVo> get(int start, int limit) {
+		List<OrganizationDomain> orgs = this.organizationDao.find(start, limit);
+		return this.process(orgs);
+	}
+
+	@Override
+	public long getTotalByWhere(OrgQuery query) {
+		return this.organizationDao.findTotalByWhere(query);
 	}
 }

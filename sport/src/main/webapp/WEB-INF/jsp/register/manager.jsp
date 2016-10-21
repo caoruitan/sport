@@ -31,14 +31,14 @@
 				<a href="01login.html">直接登录</a>
 			</div>
 		</div>
-		<div class="editBox">
+		<div class="editBox registBox">
 			<form class="sport-user-form sport-form">
 				<input type="hidden" name="pubKey" value="${pubKey}" id="pubKey"/>
 				<input type="hidden" name="uuid" value="${uuid}" id="uuid"/>
 				<input type="hidden" name="organization" value="${organization}" id="organization"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 				<div class="b-title">一、用户登录信息<span class="redfont">（登录名只能是数字字母下划线且大于4位小于20位）</span></div>
-				<table class="editTable">
+				<table class="editTable registTable">
 					<tr>
 						<th class="required">登录名</th>
 						<td colspan="3"><input name="loginName" type="text" id="loginName"/></td>
@@ -51,7 +51,7 @@
 					</tr>
 				</table>
 				<div class="b-title">二、注册用户基本信息<span class="redfont">（计划业务管理人员将用此信息与您联系，请务必填写真实有效信息！）</span></div>
-				<table class="editTable">
+				<table class="editTable registTable">
 					<tr>
 						<th class="required">姓名</th>
 						<td><input name="userName" type="text" id="userName"/></td>

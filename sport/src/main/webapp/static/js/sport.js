@@ -829,7 +829,7 @@ $(function(){
 	// 注册
 	$(document).on("click",".sport-register-first-back",function(){
 		var dataId = $(this).attr("data-id");
-		window.location.href = Sport.getBasePath()+"/org/update.htm?orgId="+dataId;
+		window.location.href = Sport.getBasePath()+"/regist/update.htm?orgId="+dataId;
 	}).on("click",".sport-regist-first",function(){
 		var region = $("#loc_province").val();
 		var regionFlag = Sport.isNull(region);
@@ -850,7 +850,7 @@ $(function(){
 			$('.sport-regist-first').text("提交中...");
 			$('.sport-regist-first').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/org/register.action",
+				url: Sport.getBasePath()+"/regist/regist.action",
 				type: "POST",
 				//dataType: "JSON",
 				data: $('.register-form').serialize(),
@@ -862,7 +862,7 @@ $(function(){
 				success: function (obj) {
 					if(obj){
 						layer.msg("新增单位管理员成功!");
-						window.location.href = Sport.getBasePath()+"/org/manager/register.htm?orgId="+obj;
+						window.location.href = Sport.getBasePath()+"/regist/manager/regist.htm?orgId="+obj;
 					}else{
 						layer.msg("新增单位管理员失败!");
 					}
@@ -894,7 +894,7 @@ $(function(){
 			$('.sport-user-save').text("提交中...");
 			$('.sport-user-save').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/org/manager/register.action",
+				url: Sport.getBasePath()+"/regist/manager/regist.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -926,7 +926,7 @@ $(function(){
 				success: function (obj) {
 					if(obj.success){
 						layer.msg("新增单位管理员成功!");
-						window.location.href = Sport.getBasePath()+"/org/success.htm";
+						window.location.href = Sport.getBasePath()+"/regist/success.htm";
 					}else{
 						layer.msg(obj.msg);
 					}
@@ -958,7 +958,7 @@ $(function(){
 			$('.sport-register-manager-update').text("提交中...");
 			$('.sport-register-manager-update').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/org/manager/update.action",
+				url: Sport.getBasePath()+"/regist/manager/update.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -990,7 +990,7 @@ $(function(){
 				success: function (obj) {
 					if(obj.success){
 						layer.msg("新增单位管理员成功!");
-						window.location.href = Sport.getBasePath()+"/org/success.htm";
+						window.location.href = Sport.getBasePath()+"/regist/success.htm";
 					}else{
 						layer.msg(obj.msg);
 					}
@@ -1019,7 +1019,7 @@ $(function(){
 			$('.sport-regist-first-update').text("提交中...");
 			$('.sport-regist-first-update').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/org/update.action",
+				url: Sport.getBasePath()+"/regist/update.action",
 				type: "POST",
 				//dataType: "JSON",
 				data: $('.register-form').serialize(),
@@ -1031,7 +1031,7 @@ $(function(){
 				success: function (obj) {
 					if(obj){
 						layer.msg("修改单位信息成功!");
-						window.location.href = Sport.getBasePath()+"/org/manager/register.htm?orgId="+obj;
+						window.location.href = Sport.getBasePath()+"/regist/manager/regist.htm?orgId="+obj;
 					}else{
 						layer.msg("修改单位信息失败!");
 					}
@@ -1041,4 +1041,78 @@ $(function(){
 			})
 		}
 	});
+	
+	// 注册单位审核
+	$(document).on("click",".sport-register-verfiy",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".sprot-search-org",function(){
+		var fullName = $("#fullName").val();
+		var legalLeader = $("#legalLeader").val();
+		var orgStatus = $("#orgStatus").val();
+		$("#orgGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{fullName:fullName,legalLeader:legalLeader,status:orgStatus}}).trigger('reloadGrid');
+	}).on("click",".sport-org-manager-query",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/user.htm?orgId="+orgId;
+	}).on("click",".sport-org-query",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/detail.htm?orgId="+orgId;
+	}).on("click",".orgdetail-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".sport-org-verify",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/verify.htm?orgId="+orgId;
+	})
+	// 注册单位审核
+	$('.sport-verify-pass').dialog({
+		id: 'sh',
+		title: '审核通过',
+		content: '<div class="dlg-contentbox"><img src="'+Sport.getBasePath()+'/static/img/prompt.gif" />确定审核通过吗？</div>',
+		width: 400,
+		height: 130,
+		ok: function(data){
+			$(".sport-verify-pass").attr("disabled",true);
+			var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    $(document).ajaxSend(function(e, xhr, options) {
+		         xhr.setRequestHeader(header, token);
+		    });
+			$.ajax({
+				url: Sport.getBasePath()+"/org/kjsadmin/pass.action",
+				type: "POST",
+				data: {orgId:$(".sport-verify-pass").attr("data-id")},
+				error: function () {
+					layer.msg("系统异常，请稍后重试!");
+					$(".sport-verify-pass").removeAttr("disabled");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg("审核单位成功！");
+						window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+					}else{
+						layer.msg("审核单位失败！");
+					}
+					$(".sport-verify-pass").removeAttr("disabled");
+				}
+			})
+		},
+		cancel: true
+	});
+	
+	// 注册单位审核
+	$('.sport-verify-unpass').dialog({
+		id: 'btg',
+		title: '审核不通过',
+		content: '<div class="dlg-contentbox"><textarea placeholder="请填写退回意见" name="" style="width:530px" rows="4" cols="10"></textarea></div>',
+		width: 600,
+		height: 230,
+		ok: function(data){
+			var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    $(document).ajaxSend(function(e, xhr, options) {
+		         xhr.setRequestHeader(header, token);
+		    });
+		},
+		cancel: true
+	});
+	
 })
