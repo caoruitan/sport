@@ -2,7 +2,6 @@ package org.cd.sport.action;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -164,6 +163,86 @@ public class SubjectSbOperAction {
 		String subjectId = request.getParameter("subjectId");
 		String xtyj = request.getParameter("xtyj");
 		this.subjectSbsService.saveXtyj(subjectId, xtyj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveYjmb")
+	public void saveYjmb(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yjmb = request.getParameter("yjmb");
+		this.subjectSbsService.saveYjmb(subjectId, yjmb);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveJsgj")
+	public void saveJsgj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String jsgj = request.getParameter("jsgj");
+		this.subjectSbsService.saveJsgj(subjectId, jsgj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveYjff")
+	public void saveYjff(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yjff = request.getParameter("yjff");
+		this.subjectSbsService.saveYjff(subjectId, yjff);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveSyfa")
+	public void saveSyfa(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String syfa = request.getParameter("syfa");
+		this.subjectSbsService.saveSyfa(subjectId, syfa);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveJdap")
+	public void saveJdap(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String jdap = request.getParameter("jdap");
+		this.subjectSbsService.saveJdap(subjectId, jdap);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveYqjg")
+	public void saveYqjg(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yqjg = request.getParameter("yqjg");
+		this.subjectSbsService.saveYqjg(subjectId, yqjg);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveGztj")
+	public void saveGztj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String gztj = request.getParameter("gztj");
+		this.subjectSbsService.saveGztj(subjectId, gztj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveTjyj")
+	public void saveTjyj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String tjyj = request.getParameter("tjyj");
+		this.subjectSbsService.saveTjyj(subjectId, tjyj);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

@@ -364,7 +364,7 @@
 					<form id="xtyjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea class="ckeditor" name="xtyj"></textarea>
+						<textarea style="width:100%;height:400px;" name="xtyj"></textarea>
 					</form>
 					<p class="save-btn">
 						<button id="xtyjFormSubmit" class="btn-red btn-size-big" onclick="saveXtyj()">保存</button>
@@ -376,10 +376,14 @@
 			<div class="box b-yjmb">
 				<div class="t">02 研究目标和主要研究内容</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-yjmb"></textarea>
+					<form id="yjmbForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="yjmb"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="yjmbFormSubmit" class="btn-red btn-size-big" onclick="saveYjmb()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('yjmbForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -387,10 +391,14 @@
 			<div class="box b-jsgj">
 				<div class="t">03 本项目的技术关键与创新点</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-jsgj"></textarea>
+					<form id="jsgjForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="jsgj"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="jsgjFormSubmit" class="btn-red btn-size-big" onclick="saveJsgj()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('jsgjForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -398,10 +406,14 @@
 			<div class="box b-yjff">
 				<div class="t">04 拟采取的研究方法、主要技术路...</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-yjff"></textarea>
+					<form id="yjffForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="yjff"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="yjffFormSubmit" class="btn-red btn-size-big" onclick="saveYjff()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('yjffForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -409,10 +421,14 @@
 			<div class="box b-syfa">
 				<div class="t">05 研究实验方案、实验地点及联合...</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-syfa"></textarea>
+					<form id="syfaForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="syfa"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="syfaFormSubmit" class="btn-red btn-size-big" onclick="saveSyfa()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('syfaForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -420,10 +436,14 @@
 			<div class="box b-jdap">
 				<div class="t">06 进度安排</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-jdap"></textarea>
+					<form id="jdapForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="jdap"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="jdapFormSubmit" class="btn-red btn-size-big" onclick="saveJdap()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('jdapForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -431,10 +451,14 @@
 			<div class="box b-yqjg">
 				<div class="t">07 预期结果</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-yqjg"></textarea>
+					<form id="yqjgForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="yqjg"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="yqjgFormSubmit" class="btn-red btn-size-big" onclick="saveYqjg()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('yqjgForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -442,10 +466,14 @@
 			<div class="box b-gztj">
 				<div class="t">08 申报单位现有工作条件和基础</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-gztj"></textarea>
+					<form id="gztjForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="gztj"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="gztjFormSubmit" class="btn-red btn-size-big" onclick="saveGztj()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('gztjForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -461,10 +489,14 @@
 			<div class="box b-tjyj">
 				<div class="t">11 申报单位推荐意见及提供相关研...</div>
 				<div class="c">
-					<textarea class="ckeditor" name="editor-tjyj"></textarea>
+					<form id="tjyjForm">
+						<input type="hidden" name="subjectId" value="${subjectId}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+						<textarea style="width:100%;height:400px;" name="tjyj"></textarea>
+					</form>
 					<p class="save-btn">
-						<button class="btn-red btn-size-big" type="">保存</button>
-						<button class="btn-wisteria btn-size-big" type="">重置</button>
+						<button id="tjyjFormSubmit" class="btn-red btn-size-big" onclick="saveTjyj()">保存</button>
+						<button class="btn-wisteria btn-size-big" onclick="reset('tjyjForm')">重置</button>
 					</p>
 				</div>
 			</div>
@@ -521,14 +553,14 @@
 		var saveXtyj = function() {
 			$('#xtyjFormSubmit').attr("disabled",true);
 			$('#xtyjFormSubmit').text('正在提交...');
-			var xtyj = CKEDITOR.instances["xtyj"];
+			// var xtyj = CKEDITOR.instances["xtyj"];
 			$.ajax({
 				url: "<%=basePath%>/subject/sboper/saveXtyj.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
-					xtyj : xtyj.getData(),
-					subjectId : $("#xtyjForm input[name='xtyj']").val(),
+					xtyj : $("#xtyjForm textarea[name='xtyj']").val(),
+					subjectId : $("#xtyjForm input[name='subjectId']").val(),
 					_csrf : "${_csrf.token}"
 				},
 				error: function (obj) {
@@ -539,6 +571,206 @@
 				success: function (obj) {
 					$('#xtyjFormSubmit').removeAttr("disabled");
 					$("#xtyjFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveYjmb = function() {
+			$('#yjmbFormSubmit').attr("disabled",true);
+			$('#yjmbFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveYjmb.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					yjmb : $("#yjmbForm textarea[name='yjmb']").val(),
+					subjectId : $("#yjmbForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#yjmbFormSubmit').removeAttr("disabled");
+					$("#yjmbFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#yjmbFormSubmit').removeAttr("disabled");
+					$("#yjmbFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveJsgj = function() {
+			$('#jsgjFormSubmit').attr("disabled",true);
+			$('#jsgjFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveJsgj.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					jsgj : $("#jsgjForm textarea[name='jsgj']").val(),
+					subjectId : $("#jsgjForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#jsgjFormSubmit').removeAttr("disabled");
+					$("#jsgjFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#jsgjFormSubmit').removeAttr("disabled");
+					$("#jsgjFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveYjff = function() {
+			$('#yjffFormSubmit').attr("disabled",true);
+			$('#yjffFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveYjff.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					yjff : $("#yjffForm textarea[name='yjff']").val(),
+					subjectId : $("#yjffForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#yjffFormSubmit').removeAttr("disabled");
+					$("#yjffFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#yjffFormSubmit').removeAttr("disabled");
+					$("#yjffFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveSyfa = function() {
+			$('#syfaFormSubmit').attr("disabled",true);
+			$('#syfaFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveSyfa.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					syfa : $("#syfaForm textarea[name='syfa']").val(),
+					subjectId : $("#syfaForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#syfaFormSubmit').removeAttr("disabled");
+					$("#syfaFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#syfaFormSubmit').removeAttr("disabled");
+					$("#syfaFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveJdap = function() {
+			$('#jdapFormSubmit').attr("disabled",true);
+			$('#jdapFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveJdap.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					jdap : $("#jdapForm textarea[name='jdap']").val(),
+					subjectId : $("#jdapForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#jdapFormSubmit').removeAttr("disabled");
+					$("#jdapFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#jdapFormSubmit').removeAttr("disabled");
+					$("#jdapFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveYqjg = function() {
+			$('#yqjgFormSubmit').attr("disabled",true);
+			$('#yqjgFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveYqjg.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					yqjg : $("#yqjgForm textarea[name='yqjg']").val(),
+					subjectId : $("#yqjgForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#yqjgFormSubmit').removeAttr("disabled");
+					$("#yqjgFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#yqjgFormSubmit').removeAttr("disabled");
+					$("#yqjgFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveGztj = function() {
+			$('#gztjFormSubmit').attr("disabled",true);
+			$('#gztjFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveGztj.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					gztj : $("#gztjForm textarea[name='gztj']").val(),
+					subjectId : $("#gztjForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#gztjFormSubmit').removeAttr("disabled");
+					$("#gztjFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#gztjFormSubmit').removeAttr("disabled");
+					$("#gztjFormSubmit").text("保存");
+					layer.msg("保存成功！");
+				}
+			});
+		}
+		
+		var saveTjyj = function() {
+			$('#tjyjFormSubmit').attr("disabled",true);
+			$('#tjyjFormSubmit').text('正在提交...');
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/saveTjyj.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					tjyj : $("#tjyjForm textarea[name='tjyj']").val(),
+					subjectId : $("#tjyjForm input[name='subjectId']").val(),
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#tjyjFormSubmit').removeAttr("disabled");
+					$("#tjyjFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#tjyjFormSubmit').removeAttr("disabled");
+					$("#tjyjFormSubmit").text("保存");
 					layer.msg("保存成功！");
 				}
 			});
