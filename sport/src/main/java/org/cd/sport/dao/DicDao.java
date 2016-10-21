@@ -14,13 +14,13 @@ import org.cd.sport.vo.DicQuery;
  */
 public interface DicDao extends IBaseDao {
 
-	public boolean deleteById(String dicId);
+	public boolean deleteByCode(String dicId);
 
-	public boolean deleteById(String[] dicId);
+	public boolean deleteByCode(String[] dicId);
 
 	public Dic findByName(String name);
 
-	public String findMaxCode();
+	public String findMaxCode(String pCode);
 
 	public List<Dic> find(int start, int limit);
 

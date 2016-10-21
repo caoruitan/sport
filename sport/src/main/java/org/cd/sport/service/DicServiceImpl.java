@@ -53,14 +53,14 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	public synchronized void validName(String name, Dic dic) {
 		Dic _dic = this.getByName(name);
 		if (_dic != null) {
-			if (!_dic.getId().equals(dic.getId())) {
+			if (!_dic.getCode().equals(dic.getCode())) {
 				throw new NameIsExistException("数据字典名称已经存在。");
 			}
 		}
 	}
 
 	private synchronized String getCode(String typeCode) {
-		String maxCode = this.dicDao.findMaxCode();
+		String maxCode = this.dicDao.findMaxCode(typeCode);
 		if (StringUtils.isBlank(maxCode)) {
 			return typeCode + "001";
 		}
@@ -80,7 +80,6 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	public boolean create(DicView dic) {
 		Dic process = this.process(dic);
 		this.validName(process.getName());
-		process.setId(null);
 		DicType dicType = dicTypeDao.findByCode(dic.getpCode());
 		if (dicType == null) {
 			throw new EntityNotFoundException("数据对象类型不存在");
@@ -96,7 +95,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	@Transactional
 	public boolean update(DicView dic) {
 		this.validateUpdate(dic);
-		Dic oldDic = this.getById(dic.getId());
+		Dic oldDic = this.getByCode(dic.getCode());
 		if (oldDic == null) {
 			throw new EntityNotFoundExcetion("数据不存在");
 		}
@@ -114,24 +113,24 @@ public class DicServiceImpl extends DicSupport implements DicService {
 
 	@Override
 	@Transactional
-	public boolean deleteById(String dicId) {
+	public boolean deleteByCode(String dicId) {
 		if (StringUtils.isBlank(dicId)) {
 			return false;
 		}
-		return this.dicDao.deleteById(dicId);
+		return this.dicDao.deleteByCode(dicId);
 	}
 
 	@Override
 	@Transactional
-	public boolean deleteById(String[] dicId) {
+	public boolean deleteByCode(String[] dicId) {
 		if (dicId == null || dicId.length == 0) {
 			return false;
 		}
-		return this.dicDao.deleteById(dicId);
+		return this.dicDao.deleteByCode(dicId);
 	}
 
 	@Override
-	public Dic getById(String dicId) {
+	public Dic getByCode(String dicId) {
 		if (StringUtils.isBlank(dicId)) {
 			return null;
 		}

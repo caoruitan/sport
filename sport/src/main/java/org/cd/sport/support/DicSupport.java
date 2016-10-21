@@ -40,8 +40,8 @@ public class DicSupport extends SportSupport {
 
 	public void validateUpdate(DicView dic) {
 		this.validate(dic);
-		if (StringUtils.isBlank(dic.getId())) {
-			throw new ParameterIsWrongException("数据字典id为空");
+		if (StringUtils.isBlank(dic.getCode())) {
+			throw new ParameterIsWrongException("数据字典CODE为空");
 		}
 
 	}

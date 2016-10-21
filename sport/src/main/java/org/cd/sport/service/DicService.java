@@ -19,11 +19,11 @@ public interface DicService {
 
 	public boolean update(DicView dic);
 
-	public boolean deleteById(String dicId);
+	public boolean deleteByCode(String dicId);
 
-	public boolean deleteById(String[] dicId);
+	public boolean deleteByCode(String[] dicId);
 
-	public Dic getById(String dicId);
+	public Dic getByCode(String dicId);
 
 	public Dic getByName(String name);
 

@@ -34,7 +34,7 @@
 						<td>
 							<input name="typeName" type="text" value="${dicType.name }" readonly="readonly"/>
 							<input type="hidden" name="pCode" value="${dic.pCode}" id="pCode"/>
-							<input type="hidden" name="id" value="${dic.id}" id="dicId"/>
+							<input type="hidden" name="code" value="${dic.code}" id="dicCode"/>
 						</td>
 					</tr>
 					<tr>
@@ -91,7 +91,7 @@
 	                    data:{
 	                    	name:function(){return $('#name').val()},
 	                    	_csrf:function(){return $("#csrdId").val()},
-	                    	dicId:function(){return $("#dicId").val()}
+	                    	dicCode:function(){return $("#dicCode").val()}
 	                    }
 	                 }
 	            },

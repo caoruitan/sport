@@ -99,10 +99,10 @@ public class DicAction {
 	 * 创建数据字典
 	 */
 	@RequestMapping(value = "/update/check.action", method = RequestMethod.POST)
-	public void checkUpdateDic(String name, String dicId, HttpServletRequest request, HttpServletResponse response) {
+	public void checkUpdateDic(String name, String dicCode, HttpServletRequest request, HttpServletResponse response) {
 		Dic dic = this.dicService.getByName(name);
 		boolean result = false;
-		if (dic == null || dic.getId().equals(dicId)) {
+		if (dic == null || dic.getCode().equals(dicCode)) {
 			result = true;
 		}
 		PageWrite.writeTOPage(response, result);
@@ -138,7 +138,7 @@ public class DicAction {
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String updatePage(HttpServletRequest request, HttpServletResponse response) {
 		String dicId = request.getParameter("dicId");
-		Dic dic = this.dicService.getById(dicId);
+		Dic dic = this.dicService.getByCode(dicId);
 		if (dic == null) {
 			throw new EntityNotFoundException("数据项没有找到");
 		}
@@ -164,7 +164,7 @@ public class DicAction {
 	public void deleteDic(String dicIds, HttpServletRequest request, HttpServletResponse response) {
 		boolean result = false;
 		if (!StringUtils.isBlank(dicIds)) {
-			result = this.dicService.deleteById(dicIds.split(","));
+			result = this.dicService.deleteByCode(dicIds.split(","));
 		}
 		PageWrite.writeTOPage(response, result);
 	}

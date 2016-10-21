@@ -2,11 +2,8 @@ package org.cd.sport.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 数据字典對象
@@ -17,25 +14,12 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "SPORT_DIC")
 public class Dic {
-	private String id;
 	private String name;
 	private String pCode;
 	private String code;
 	private String value;
 	private String description;
 	private int sort;
-
-	@Id
-	@Column(name = "ID")
-	@GenericGenerator(name = "systemUUID", strategy = "uuid")
-	@GeneratedValue(generator = "systemUUID")
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	@Column(name = "NAME")
 	public String getName() {
@@ -46,10 +30,12 @@ public class Dic {
 		this.name = name;
 	}
 
+	@Id
 	@Column(name = "CODE")
 	public String getCode() {
 		return code;
 	}
+
 	@Column(name = "P_CODE")
 	public String getpCode() {
 		return pCode;

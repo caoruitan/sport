@@ -249,7 +249,7 @@ $(function(){
 		var dicIds = new Array();
 		for (var int = 0; int < selectedIds.length; int++) {
 			var rowData = $("#dicGridDiv").jqGrid("getRowData",selectedIds[int]);
-			dicIds.push(rowData.id);
+			dicIds.push(rowData.code);
 		}
 		layer.confirm('您确定要删除该数据字典吗？', {
 			  btn: ['是的','稍后'] 

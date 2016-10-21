@@ -66,13 +66,13 @@
 	});
 	var setting = {
 		async: {  
-			autoParam:["id=pId"],
+			autoParam:["code=pId"],
 			enable: true,  
 	        url: "<%=basePath%>/dic/dataTypes.action"  
 	    },  
 	    check: {  
 	        enable: false,
-	        idKey: "dicId",  
+	        idKey: "code",  
             pIdKey: "pId",  
             rootPId: -1 
 	    },  
@@ -96,7 +96,7 @@
 			             node = nodes[0]; 
 			         }  
 		    	}else{
-		         	node = zTree.getNodeByParam("id", id, null);
+		         	node = zTree.getNodeByParam("code", id, null);
 		         	if(node ==null){
 		         		var nodes = zTree.getNodes();  
 				         if (nodes.length>0)   {  
@@ -123,7 +123,7 @@
 				{label:"名称",name:'name',align:"center", width:20},
 				{label:"值",name:'value', width:10, align:"center"},
 				{label:"操作",name:'操作', width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
-					return "<a href='javascript:;;' class='sport-dic-edit' data-id='"+rows.id+"'>编辑</a>";
+					return "<a href='javascript:;;' class='sport-dic-edit' data-id='"+rows.code+"'>编辑</a>";
 				}}
               ],
 			viewrecords: true,

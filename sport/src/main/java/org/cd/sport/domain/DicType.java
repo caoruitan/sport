@@ -2,11 +2,8 @@ package org.cd.sport.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 数据字典分类
@@ -17,11 +14,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "SPORT_DIC_TYPE")
 public class DicType {
-	/**
-	 * 数据字典分类id
-	 */
-	private String dicId;
-
 	/**
 	 * 数据字典分类名称
 	 */
@@ -38,21 +30,14 @@ public class DicType {
 	private String code;
 
 	/**
+	 * 排序
+	 */
+	private int sort;
+
+	/**
 	 * 是否有子节点
 	 */
 	private boolean hasChild;
-
-	@Id
-	@Column(name = "DIC_ID")
-	@GenericGenerator(name = "systemUUID", strategy = "uuid")
-	@GeneratedValue(generator = "systemUUID")
-	public String getDicId() {
-		return dicId;
-	}
-
-	public void setDicId(String dicId) {
-		this.dicId = dicId;
-	}
 
 	@Column(name = "NAME")
 	public String getName() {
@@ -72,6 +57,7 @@ public class DicType {
 		this.pId = pId;
 	}
 
+	@Id
 	@Column(name = "CODE")
 	public String getCode() {
 		return code;
@@ -89,4 +75,14 @@ public class DicType {
 	public void setHasChild(boolean hasChild) {
 		this.hasChild = hasChild;
 	}
+
+	@Column(name = "SORT")
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
 }

@@ -20,15 +20,15 @@ import org.springframework.stereotype.Repository;
 public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 
 	@Override
-	public boolean deleteById(String dicId) {
-		String deleteHql = "delete from Dic where id=:dicId";
-		return this.getHibernateQuery(deleteHql).setParameter("dicId", dicId).executeUpdate() != 0;
+	public boolean deleteByCode(String code) {
+		String deleteHql = "delete from Dic where code=:code";
+		return this.getHibernateQuery(deleteHql).setParameter("code", code).executeUpdate() != 0;
 	}
 
 	@Override
-	public boolean deleteById(String[] dicId) {
-		String deleteHql = "delete from Dic where id in (:dicId)";
-		return this.getHibernateQuery(deleteHql).setParameterList("dicId", dicId).executeUpdate() != 0;
+	public boolean deleteByCode(String[] code) {
+		String deleteHql = "delete from Dic where code in (:code)";
+		return this.getHibernateQuery(deleteHql).setParameterList("code", code).executeUpdate() != 0;
 	}
 
 	@Override
@@ -45,17 +45,17 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 	}
 
 	@Override
-	public String findMaxCode() {
-		String queryHql = "select max(code) from Dic";
-		return (String) this.getHibernateQuery(queryHql).uniqueResult();
+	public String findMaxCode(String pCode) {
+		String queryHql = "select max(code) from Dic where pCode=:pCode";
+		return (String) this.getHibernateQuery(queryHql).setParameter("pCode", pCode).uniqueResult();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Dic> findByPcode(String pCode, int start, int limit) {
 		String queryHql = "from Dic where pCode=:pCode order by sort";
-		return this.getHibernateQuery(queryHql).setParameter("pCode", pCode).setMaxResults(limit)
-				.setFirstResult(start).list();
+		return this.getHibernateQuery(queryHql).setParameter("pCode", pCode).setMaxResults(limit).setFirstResult(start)
+				.list();
 	}
 
 	@Override

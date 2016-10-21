@@ -47,7 +47,7 @@ public class DicTypeServiceImpl extends DicTypeSupport implements DicTypeService
 	public synchronized void validName(String name, DicType dic) {
 		DicType _dic = this.getByName(name);
 		if (_dic != null) {
-			if (!_dic.getDicId().equals(dic.getDicId())) {
+			if (!_dic.getCode().equals(dic.getCode())) {
 				throw new NameIsExistException("数据字典名称已经存在。");
 			}
 		}
@@ -125,7 +125,6 @@ public class DicTypeServiceImpl extends DicTypeSupport implements DicTypeService
 		if (datas != null && !datas.isEmpty()) {
 			for (DicType dic : datas) {
 				Node node = new Node();
-				node.setId(dic.getDicId());
 				node.setName(dic.getName());
 				node.setpId(dic.getpId());
 				node.setCode(dic.getCode());

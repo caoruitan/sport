@@ -9,21 +9,12 @@ import java.util.List;
  *
  */
 public class Node {
-	private String id;
 	private String pId;
 	private String name;
 	private String icon;
 	private String code;
 	private boolean isParent;
 	private List<Node> children;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getpId() {
 		return pId;
