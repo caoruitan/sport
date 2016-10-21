@@ -47,7 +47,7 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 		if (oldNews == null) {
 			throw new EntityNotFoundException("新闻实体没有找到");
 		}
-		oldNews.setColumnId(news.getColumnId());
+		oldNews.setColumnId(Integer.parseInt(news.getColumnId()));
 		oldNews.setContent(news.getContent().getBytes());
 		oldNews.setFileId(news.getFileId());
 		oldNews.setFileName(news.getFileName());
@@ -139,8 +139,25 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 	}
 
 	@Override
-	public NewsVo getLatestNotice(String column) {
+	public NewsVo getLatestNotice(int column) {
 		News news = this.newsDao.findLatest(column, Constants.News.news_publish);
 		return this.process(news);
+	}
+
+	@Override
+	public List<NewsVo> getByColumn(Integer[] column, int start, int limit) {
+		if (column == null || column.length == 0) {
+			List<News> news = this.newsDao.find(start, limit);
+			return this.process(news);
+		}
+		return this.newsDao.findByColumn(column, start, limit);
+	}
+
+	@Override
+	public long getTotalByColumn(Integer[] column) {
+		if (column == null || column.length == 0) {
+			return this.newsDao.findTotal();
+		}
+		return this.newsDao.findTotalByColumn(column);
 	}
 }

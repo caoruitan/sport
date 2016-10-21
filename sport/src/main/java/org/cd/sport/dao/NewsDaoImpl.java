@@ -12,6 +12,7 @@ import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.News;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.cd.sport.vo.NewsQuery;
+import org.cd.sport.vo.NewsVo;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -116,9 +117,24 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 	}
 
 	@Override
-	public News findLatest(String column, int status) {
+	public News findLatest(int column, int status) {
 		String queryHql = "from News where columnId=:columnId and status=:status order by publishTime desc ";
-		return (News) this.getHibernateQuery(queryHql).setParameter("columnId", column).setMaxResults(1).setFirstResult(0).setParameter("status", status)
-				.uniqueResult();
+		return (News) this.getHibernateQuery(queryHql).setParameter("columnId", column).setMaxResults(1)
+				.setFirstResult(0).setParameter("status", status).uniqueResult();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<NewsVo> findByColumn(Integer[] column, int start, int limit) {
+		String queryHql = "from News where columnId in (:columnId) order by publishTime,createTime desc";
+		return this.getHibernateQuery(queryHql).setParameterList("columnId", column).setMaxResults(limit)
+				.setFirstResult(start).list();
+	}
+
+	@Override
+	public long findTotalByColumn(Integer[] column) {
+		String updateHql = "select count(1) from News where columnId in (:columnId) ";
+		Long count = (Long) this.getHibernateQuery(updateHql).setParameterList("columnId", column).uniqueResult();
+		return count == null ? 0 : count.intValue();
 	}
 }

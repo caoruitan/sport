@@ -38,7 +38,7 @@ public class NewsAction {
 
 	@RequestMapping(value = "/kjsadmin/list.htm")
 	private String kjsadminIndex(HttpServletRequest request) {
-		Map<Long, String> columns = Constants.News.getColumns();
+		Map<Integer, String> columns = Constants.News.getColumns();
 		request.setAttribute("columns", columns);
 		Map<Integer, String> status = Constants.News.getStatus();
 		request.setAttribute("status", status);
@@ -47,7 +47,7 @@ public class NewsAction {
 
 	@RequestMapping(value = "/kjsadmin/create.htm", method = RequestMethod.GET)
 	private String createPage(HttpServletRequest request) {
-		Map<Long, String> columns = Constants.News.getColumns();
+		Map<Integer, String> columns = Constants.News.getColumns();
 		request.setAttribute("columns", columns);
 		return "news/create";
 	}
@@ -67,7 +67,7 @@ public class NewsAction {
 		if (news == null) {
 			throw new EntityNotFoundException("新闻对象不存在!");
 		}
-		Map<Long, String> columns = Constants.News.getColumns();
+		Map<Integer, String> columns = Constants.News.getColumns();
 		request.setAttribute("columns", columns);
 		request.setAttribute("news", news);
 		return "news/update";

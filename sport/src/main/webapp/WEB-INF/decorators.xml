@@ -40,5 +40,6 @@
     <decorator name="sboper" page="frame/sboper.jsp">
         <pattern>/portal/sboper/*.htm</pattern>
         <pattern>/subject/sboper/*.htm</pattern>
+        <pattern>/password/sboper/*.htm</pattern>
     </decorator>
 </decorators>

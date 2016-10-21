@@ -50,7 +50,7 @@ public class LoginAction {
 	 */
 	@RequestMapping("login")
 	public String Login(HttpServletRequest request) {
-		NewsVo news = newsService.getLatestNotice(String.valueOf(Constants.News.NOTICE_NEWS));
+		NewsVo news = newsService.getLatestNotice(Constants.News.NOTICE_NEWS);
 		String return_url = request.getParameter("return_url");
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();

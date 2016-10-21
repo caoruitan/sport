@@ -222,7 +222,22 @@ public class Constants {
 		/**
 		 * 通知类型新闻
 		 */
-		public static final Long NOTICE_NEWS = 0L;
+		public static final int NOTICE_NEWS = 0;
+
+		/**
+		 * 申报类型新闻
+		 */
+		public static final int SB_NEWS = 1;
+
+		/**
+		 * 政策类型新闻
+		 */
+		public static final int ZC_NEWS = 2;
+
+		/**
+		 * 填报类型新闻
+		 */
+		public static final int TB_NEWS = 3;
 
 		/**
 		 * 解析状态值
@@ -242,14 +257,41 @@ public class Constants {
 		}
 
 		/**
+		 * 解析状态值
+		 */
+		public static Integer[] parseColumn(String column) {
+			if (StringUtils.isBlank(column)) {
+				return new Integer[] { NOTICE_NEWS, SB_NEWS, ZC_NEWS, TB_NEWS };
+			}
+
+			try {
+				int parseInt = (int) Long.parseLong(column);
+				switch (parseInt) {
+				case NOTICE_NEWS:
+					return new Integer[] { NOTICE_NEWS };
+				case SB_NEWS:
+					return new Integer[] { SB_NEWS };
+				case ZC_NEWS:
+					return new Integer[] { ZC_NEWS };
+				case TB_NEWS:
+					return new Integer[] { TB_NEWS };
+				default:
+					return new Integer[] { NOTICE_NEWS, SB_NEWS, ZC_NEWS, TB_NEWS };
+				}
+			} catch (Exception e) {
+				return new Integer[] { NOTICE_NEWS, SB_NEWS, ZC_NEWS, TB_NEWS };
+			}
+		}
+
+		/**
 		 * 查询所有的栏目
 		 */
-		public static Map<Long, String> getColumns() {
-			Map<Long, String> colums = new LinkedHashMap<Long, String>();
-			colums.put(NOTICE_NEWS, "通知公告");
-			colums.put(1L, "申报系统和相关文档");
-			colums.put(2L, "政策法规");
-			colums.put(3L, "填报说明");
+		public static Map<Integer, String> getColumns() {
+			Map<Integer, String> colums = new LinkedHashMap<Integer, String>();
+			colums.put(new Integer(NOTICE_NEWS), "通知公告");
+			colums.put(new Integer(SB_NEWS), "申报系统和相关文档");
+			colums.put(new Integer(ZC_NEWS), "政策法规");
+			colums.put(new Integer(TB_NEWS), "填报说明");
 			return colums;
 		}
 

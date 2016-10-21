@@ -28,7 +28,7 @@ public class News {
 	/**
 	 * 栏目
 	 */
-	private String columnId;
+	private Integer columnId;
 	/**
 	 * 标题
 	 */
@@ -74,18 +74,18 @@ public class News {
 		this.id = id;
 	}
 
-	@Column(name = "COLUMN_ID")
-	public String getColumnId() {
-		return columnId;
-	}
-
-	public void setColumnId(String column) {
-		this.columnId = column;
-	}
-
 	@Column(name = "TITLE")
 	public String getTitle() {
 		return title;
+	}
+
+	@Column(name = "COLUMN_ID")
+	public Integer getColumnId() {
+		return columnId;
+	}
+
+	public void setColumnId(Integer columnId) {
+		this.columnId = columnId;
 	}
 
 	public void setTitle(String title) {

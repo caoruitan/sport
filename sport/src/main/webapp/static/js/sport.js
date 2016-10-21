@@ -1062,4 +1062,9 @@ $(function(){
 		var orgId = $(this).attr("data-id");
 		window.location.href = Sport.getBasePath()+"/org/kjsadmin/verify.htm?orgId="+orgId;
 	})
+	
+	//我的课题
+	$(document).on("click",".sport-my-kt-skip",function(){
+		window.location.href = Sport.getBasePath()+"/subject/"+$(this).attr("data-type")+"/list.htm";
+	})
 })

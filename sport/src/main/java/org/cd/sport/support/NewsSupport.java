@@ -81,7 +81,7 @@ public class NewsSupport extends SportSupport {
 			return null;
 		}
 		NewsVo newsVo = this.result(NewsVo.class, news);
-		String cName = Constants.News.getColumns().get(Long.parseLong(news.getColumnId()));
+		String cName = Constants.News.getColumns().get(news.getColumnId());
 		newsVo.setColumnName(cName);
 		newsVo.setStatusName(Constants.News.getStatusName(news.getStatus()));
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");

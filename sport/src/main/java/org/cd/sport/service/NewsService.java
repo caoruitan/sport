@@ -30,9 +30,13 @@ public interface NewsService {
 
 	public NewsVo getById(String id);
 
-	public NewsVo getLatestNotice(String column);
+	public NewsVo getLatestNotice(int column);
 
 	public List<NewsVo> getByWhere(NewsQuery query, int start, int limit);
 
 	public long getTotalByWhere(NewsQuery query);
+
+	public List<NewsVo> getByColumn(Integer[] column, int start, int limit);
+
+	public long getTotalByColumn(Integer[] column);
 }

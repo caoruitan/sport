@@ -12,7 +12,6 @@
 %>
 <div class="top_logo"></div>
 <div class="mainBtn">
-	<a href="11xxlb.html"><img src="<%=basePath %>/static/img/frame/xx.png" /><div class="count">9</div></a>
 	<a href="<%=basePath %>/<%=url%>"><img src="<%=basePath %>/static/img/frame/sy.png" /></a>
 </div>
 <div class="op">
