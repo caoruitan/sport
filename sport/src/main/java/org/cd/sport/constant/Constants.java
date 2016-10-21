@@ -219,6 +219,10 @@ public class Constants {
 		 * 新闻取消发布状态
 		 */
 		public static final int news_unpublish = -1;
+		/**
+		 * 通知类型新闻
+		 */
+		public static final Long NOTICE_NEWS = 0L;
 
 		/**
 		 * 解析状态值
@@ -242,7 +246,7 @@ public class Constants {
 		 */
 		public static Map<Long, String> getColumns() {
 			Map<Long, String> colums = new LinkedHashMap<Long, String>();
-			colums.put(0L, "通知公告");
+			colums.put(NOTICE_NEWS, "通知公告");
 			colums.put(1L, "申报系统和相关文档");
 			colums.put(2L, "政策法规");
 			colums.put(3L, "填报说明");

@@ -40,9 +40,9 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 		Set<Entry<String, Object>> entrySet = map.entrySet();
 		for (Entry<String, Object> entry : entrySet) {
 			Object value = entry.getValue();
-			if(value instanceof Object[] || value instanceof Collection){
-				hibernateQuery.setParameterList(entry.getKey(), (Object[])value);
-			}else{
+			if (value instanceof Object[] || value instanceof Collection) {
+				hibernateQuery.setParameterList(entry.getKey(), (Object[]) value);
+			} else {
 				hibernateQuery.setParameter(entry.getKey(), value);
 			}
 		}
@@ -104,7 +104,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<News> find(int start, int limit) {
-		String queryHql = "from News where order by publishTime,createTime desc";
+		String queryHql = "from News order by publishTime,createTime desc";
 		return this.getHibernateQuery(queryHql).setMaxResults(limit).setFirstResult(start).list();
 	}
 
@@ -115,4 +115,10 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 		return count == null ? 0 : count.intValue();
 	}
 
+	@Override
+	public News findLatest(String column, int status) {
+		String queryHql = "from News where columnId=:columnId and status=:status order by publishTime desc ";
+		return (News) this.getHibernateQuery(queryHql).setParameter("columnId", column).setMaxResults(1).setFirstResult(0).setParameter("status", status)
+				.uniqueResult();
+	}
 }

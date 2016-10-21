@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="login_H ">
-		<span>公告：<a href="###">系统于2015年12月23日凌晨0点进行升级，请及时备份数据。</a>
+		<span>公告：<a href="<%=basePath %>/news/">${news.title}</a>
 		<img src="<%=basePath %>/static/img/login/ky-new.png"></span>
 	</div>
 	<div class="login_Body ">

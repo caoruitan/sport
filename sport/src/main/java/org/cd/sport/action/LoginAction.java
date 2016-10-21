@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.exception.SportException;
+import org.cd.sport.service.NewsService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
+import org.cd.sport.vo.NewsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +40,9 @@ public class LoginAction {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private NewsService newsService;
+
 	/**
 	 * 跳转登录界面
 	 * 
@@ -45,6 +50,7 @@ public class LoginAction {
 	 */
 	@RequestMapping("login")
 	public String Login(HttpServletRequest request) {
+		NewsVo news = newsService.getLatestNotice(String.valueOf(Constants.News.NOTICE_NEWS));
 		String return_url = request.getParameter("return_url");
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();
@@ -53,6 +59,7 @@ public class LoginAction {
 		request.setAttribute("return_url", return_url);
 		String guid = UUIDUtil.getGuid();
 		request.setAttribute("uuid", guid);
+		request.setAttribute("news", news);
 		// 缓存 rsa对象
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);

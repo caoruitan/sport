@@ -123,8 +123,8 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 
 	@Override
 	public NewsVo getById(String id) {
-		 News news = this.newsDao.getEntityById(News.class, id);
-		 return this.process(news);
+		News news = this.newsDao.getEntityById(News.class, id);
+		return this.process(news);
 	}
 
 	@Override
@@ -136,5 +136,11 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 	@Override
 	public long getTotalByWhere(NewsQuery query) {
 		return this.newsDao.findTotalByWhere(query);
+	}
+
+	@Override
+	public NewsVo getLatestNotice(String column) {
+		News news = this.newsDao.findLatest(column, Constants.News.news_publish);
+		return this.process(news);
 	}
 }

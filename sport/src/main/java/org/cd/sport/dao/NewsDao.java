@@ -18,6 +18,8 @@ public interface NewsDao extends IBaseDao {
 
 	public boolean deleteById(String[] ids);
 
+	public News findLatest(String column, int status);
+
 	public List<News> find(int start, int limit);
 
 	public List<News> findByWhere(NewsQuery query, int start, int limit);
