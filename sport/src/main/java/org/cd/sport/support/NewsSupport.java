@@ -77,6 +77,9 @@ public class NewsSupport extends SportSupport {
 	}
 
 	public NewsVo process(News news) {
+		if (news == null) {
+			return null;
+		}
 		NewsVo newsVo = this.result(NewsVo.class, news);
 		String cName = Constants.News.getColumns().get(Long.parseLong(news.getColumnId()));
 		newsVo.setColumnName(cName);

@@ -19,6 +19,23 @@
         <pattern>/org/kjsadmin/*.htm</pattern>
     </decorator>
     
+    <!-- 领导 -->
+    <decorator name="kjsleader" page="frame/kjsleader.jsp">
+        <pattern>/portal/kjsleader/*.htm</pattern>
+        <pattern>/password/kjsleader/*.htm</pattern>
+    </decorator>
+    
+    <!-- 专家 -->
+    <decorator name="kjsexpert" page="frame/kjsexpert.jsp">
+        <pattern>/portal/kjsexpert/*.htm</pattern>
+        <pattern>/password/kjsexpert/*.htm</pattern>
+    </decorator>
+    <!--申报管理员（注册单位）-->
+    <decorator name="sbadmin" page="frame/sbadmin.jsp">
+        <pattern>/portal/sbadmin/*.htm</pattern>
+        <pattern>/user/sbadmin/*.htm</pattern>
+        <pattern>/password/sbadmin/*.htm</pattern>
+    </decorator>
     <!-- 申报人 -->
     <decorator name="sboper" page="frame/sboper.jsp">
         <pattern>/portal/sboper/*.htm</pattern>

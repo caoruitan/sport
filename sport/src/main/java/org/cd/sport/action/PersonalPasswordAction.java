@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.UserDomain;
+import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
 import org.cd.sport.service.UserService;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -29,12 +30,11 @@ import com.google.gson.JsonObject;
  */
 @Controller
 @RequestMapping("password")
-public class PersonalPasswordAction extends ExceptionWrapper {
+public class PersonalPasswordAction extends BaseUserAction {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
 	public String gotoUpdatePasswordView(HttpServletRequest request) {
 		UserVo user = AuthenticationUtils.getUser();
 		// 初始化公钥
@@ -46,12 +46,47 @@ public class PersonalPasswordAction extends ExceptionWrapper {
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user", user);
-		request.setAttribute("user_type", "kjsadmin");
 		return "password/update";
 	}
 
-	@RequestMapping(value = "/kjsadmin/update.action", method = RequestMethod.POST)
-	public void updatePassword(String oldPassword, String newPassword, HttpServletRequest request,
+	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
+	public String kjsadmin(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/sbadmin/update.htm", method = RequestMethod.GET)
+	public String sbadmin(HttpServletRequest request) {
+		request.setAttribute("user_type", "sbadmin");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/orgadmin/update.htm", method = RequestMethod.GET)
+	public String orgadmin(HttpServletRequest request) {
+		request.setAttribute("user_type", "orgadmin");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/sboper/update.htm", method = RequestMethod.GET)
+	public String sboper(HttpServletRequest request) {
+		request.setAttribute("user_type", "sboper");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/kjsleader/update.htm", method = RequestMethod.GET)
+	public String kjsleader(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsleader");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/kjsexpert/update.htm", method = RequestMethod.GET)
+	public String kjsexpert(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsexpert");
+		return gotoUpdatePasswordView(request);
+	}
+
+	@RequestMapping(value = "/update.action", method = RequestMethod.POST)
+	public void updatePassword(String userId, String oldPassword, String newPassword, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonObject json = new JsonObject();
 		json.addProperty("success", false);
@@ -65,12 +100,17 @@ public class PersonalPasswordAction extends ExceptionWrapper {
 				oldPassword = generator.decryptBase64(oldPassword);
 				newPassword = generator.decryptBase64(newPassword);
 				UserVo user = AuthenticationUtils.getUser();
+				UserDomain userDomain = this.userService.getById(userId);
+				if (userDomain == null || !user.getUserId().equals(userDomain.getUserId())) {
+					throw new ForbiddenExcetion();
+				}
 				boolean updatePassword = this.userService.updatePassword(user.getUserId(), oldPassword, newPassword);
 				// 销毁session
 				if (updatePassword) {
 					session.invalidate();
 				}
 				json.addProperty("success", updatePassword);
+				json.addProperty("url", Constants.User.urlMapping.get(user.getRole()));
 			} catch (SportException e) {
 				json.addProperty("success", false);
 				json.addProperty("msg", "系统异常,请稍后重试");

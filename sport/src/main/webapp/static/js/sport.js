@@ -466,7 +466,7 @@ $(function(){
         }
         $(".sport-yzm").attr("src", url);
 	}).on("click",".user-index-returnBtn",function(){
-		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/index.htm";
+		window.location.href = Sport.getBasePath()+"/portal/"+$(this).attr("data-type")+"/index.htm";
 	}).on("click",".sport-reset-pwd-btn",function(){
 		if($("#reset-pwd-form").valid()){
 			$('.sport-reset-pwd-btn').attr("disabled",true);
@@ -503,7 +503,7 @@ $(function(){
 			$('.sport-password-updae-btn').text("提交中...");
 			$('.sport-password-updae-btn').attr("disabled",true);
 			$.ajax({
-				url: Sport.getBasePath()+"/password/"+$(".sport-password-updae-btn").attr("data-type")+"/update.action",
+				url: Sport.getBasePath()+"/password/update.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -524,7 +524,7 @@ $(function(){
 					if(obj.success){
 						$(".sport-yzm-btn").trigger("click");
 						layer.msg("修改密码成功!");
-						window.location.href = Sport.getBasePath()+"/portal/"+$(".sport-password-updae-btn").attr("data-type")+"/index.htm";
+						window.location.href = Sport.getBasePath()+"/"+obj.url;
 					}else{
 						layer.msg(obj.msg);
 					}

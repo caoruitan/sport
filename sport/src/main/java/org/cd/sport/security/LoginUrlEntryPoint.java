@@ -2,6 +2,9 @@ package org.cd.sport.security;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +28,25 @@ public class LoginUrlEntryPoint implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		String url = request.getRequestURL().toString();
+		Map<String, String[]> parameterMap = request.getParameterMap();
 		if (StringUtils.isBlank(url)) {
-			response.sendRedirect("/");
-			return;
+			url = "/";
+		}
+		if (parameterMap != null && !parameterMap.isEmpty()) {
+			Set<Entry<String, String[]>> entrySet = parameterMap.entrySet();
+			for (Entry<String, String[]> entry : entrySet) {
+				String[] value = entry.getValue();
+				String v = "";
+				if(value!=null){
+					v = StringUtils.join(value, ",");
+				}
+				
+				if (url.indexOf("?") == -1) {
+					url += "?" + entry.getKey() + "=" + v;
+				} else {
+					url += "&" + entry.getKey() + "=" + v;
+				}
+			}
 		}
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;

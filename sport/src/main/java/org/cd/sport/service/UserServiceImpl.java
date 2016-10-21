@@ -15,6 +15,7 @@ import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.UserDao;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.EntityNotFoundExcetion;
+import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.UserSupport;
@@ -171,7 +172,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 			this.userDao.update(user);
 			return true;
 		}
-		return false;
+		throw new ForbiddenExcetion("没有权限重置密码");
 	}
 
 	@Override
@@ -185,7 +186,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		if (Constants.Role.hasOper(userDomain.getRole(), user.getRole()) && !Constants.Role.isAdmin(user.getRole())) {
 			return this.userDao.deleteById(userId);
 		}
-		return false;
+		throw new ForbiddenExcetion("没有权限删除用户");
 	}
 
 	@Override

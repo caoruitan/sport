@@ -110,7 +110,7 @@ public class RegisterAction extends BaseUserAction {
 
 	@RequestMapping("/manager/update.action")
 	public void secondRegisterUpdate(UserView user, HttpServletRequest request, HttpServletResponse response) {
-		user.setRole(Constants.Role.ROLE_ORG_ADMIN);
+		user.setRole(Constants.Role.ROLE_SB_ADMIN);
 		super.updateUser(user, request, response);
 	}
 

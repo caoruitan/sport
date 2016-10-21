@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.SportException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.service.UserService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -25,8 +27,6 @@ import org.cd.sport.view.UserView;
 import org.cd.sport.vo.KV;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.JsonObject;
 
@@ -40,6 +40,9 @@ public class BaseUserAction extends ExceptionWrapper {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private DicService dicService;
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -50,7 +53,6 @@ public class BaseUserAction extends ExceptionWrapper {
 
 	public String gotoResetPasswordView(HttpServletRequest request) {
 		request.setAttribute("default_password", Constants.User.DEFAULT_PASSWORD);
-		request.setAttribute("user_type", "kjsadmin");
 		return "user/resetpassword";
 	}
 
@@ -90,9 +92,10 @@ public class BaseUserAction extends ExceptionWrapper {
 		// 缓存 rsa对象
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
-		request.setAttribute("user_type", "kjsadmin");
-		request.setAttribute("credCode", Constants.Dic.DIC_CRED_CODE);
-		request.setAttribute("degreesCode", Constants.Dic.DIC_DEGREES_CODE);
+		List<Dic> credCodes = dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
+		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
+		request.setAttribute("creds", credCodes);
+		request.setAttribute("degrees", degrees);
 		return "user/create";
 	}
 
@@ -132,7 +135,6 @@ public class BaseUserAction extends ExceptionWrapper {
 		request.setAttribute("uuid", guid);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user", user);
-		request.setAttribute("user_type", "kjsadmin");
 		return "user/update";
 	}
 
@@ -166,7 +168,6 @@ public class BaseUserAction extends ExceptionWrapper {
 		boolean hasRole = Constants.Role.hasOper(userDomain.getRole());
 		// 按钮控制
 		request.setAttribute("hasOper", hasRole);
-		request.setAttribute("user_type", "kjsadmin");
 		return "user/list";
 	}
 
@@ -188,22 +189,5 @@ public class BaseUserAction extends ExceptionWrapper {
 		page.setRecords(total);
 		page.setRows(datas);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
-	}
-
-	@RequestMapping(value = "/create/check.action", method = RequestMethod.POST)
-	public void checkUser(String loginName, HttpServletRequest request, HttpServletResponse response) {
-		UserDomain user = this.userService.getByLoginName(loginName);
-		PageWrite.writeTOPage(response, user == null);
-	}
-
-	@RequestMapping(value = "/update/check.action", method = RequestMethod.POST)
-	public void checUpdatekUser(String loginName, String userId, HttpServletRequest request,
-			HttpServletResponse response) {
-		UserDomain user = this.userService.getByLoginName(loginName);
-		boolean result = false;
-		if (user == null || userId.equals(user.getUserId())) {
-			result = true;
-		}
-		PageWrite.writeTOPage(response, result);
 	}
 }

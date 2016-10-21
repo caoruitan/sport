@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
@@ -19,8 +20,10 @@
 </head>
 <body>
 	<div class="login_H ">
-		<span>公告：<a href="<%=basePath %>/news/">${news.title}</a>
-		<img src="<%=basePath %>/static/img/login/ky-new.png"></span>
+		<c:if test="${news!=null }">
+			<span>公告：<a href="<%=basePath %>/news/">${news.title}</a>
+			<img src="<%=basePath %>/static/img/login/ky-new.png"></span>
+		</c:if>
 	</div>
 	<div class="login_Body ">
 		<div class="login_M">

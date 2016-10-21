@@ -3,6 +3,8 @@ package org.cd.sport.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.cd.sport.domain.UserDomain;
+import org.cd.sport.utils.PageWrite;
 import org.cd.sport.view.UserView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ public class KjsadminUserAction extends BaseUserAction {
 
 	@RequestMapping(value = "/kjsadmin/resetpassword.htm", method = RequestMethod.GET)
 	public String gotoResetPasswordView(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
 		return super.gotoResetPasswordView(request);
 	}
 
@@ -29,16 +32,18 @@ public class KjsadminUserAction extends BaseUserAction {
 
 	@RequestMapping(value = "/kjsadmin/create.htm", method = RequestMethod.GET)
 	public String gotoCreateUserView(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
 		return super.gotoCreateUserView(request);
 	}
 
 	@RequestMapping(value = "/kjsadmin/create.action", method = RequestMethod.POST)
 	public void createUser(UserView user, HttpServletRequest request, HttpServletResponse response) {
-		 super.createUser(user, request, response);
+		super.createUser(user, request, response);
 	}
 
 	@RequestMapping(value = "/kjsadmin/update.htm", method = RequestMethod.GET)
 	public String gotoUpdateUserView(String userId, HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
 		return super.gotoUpdateUserView(userId, request);
 	}
 
@@ -54,11 +59,29 @@ public class KjsadminUserAction extends BaseUserAction {
 
 	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
 	public String gotoUserList(HttpServletRequest request) {
+		request.setAttribute("user_type", "kjsadmin");
 		return super.gotoUserList(request);
 	}
 
 	@RequestMapping(value = "/kjsadmin/datas.action", method = RequestMethod.GET)
 	public void getUserDatas(HttpServletRequest request, HttpServletResponse response) {
 		super.getUserDatas(request, response);
+	}
+
+	@RequestMapping(value = "/create/check.action", method = RequestMethod.POST)
+	public void checkUser(String loginName, HttpServletRequest request, HttpServletResponse response) {
+		UserDomain user = this.getUserService().getByLoginName(loginName);
+		PageWrite.writeTOPage(response, user == null);
+	}
+
+	@RequestMapping(value = "/update/check.action", method = RequestMethod.POST)
+	public void checUpdatekUser(String loginName, String userId, HttpServletRequest request,
+			HttpServletResponse response) {
+		UserDomain user = this.getUserService().getByLoginName(loginName);
+		boolean result = false;
+		if (user == null || userId.equals(user.getUserId())) {
+			result = true;
+		}
+		PageWrite.writeTOPage(response, result);
 	}
 }
