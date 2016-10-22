@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,14 @@ import org.cd.sport.constant.Constants;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.support.SportSupport;
+import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsQuery;
 import org.cd.sport.vo.NewsVo;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -162,6 +165,20 @@ public class NewsAction {
 	public String orgoperNewsView(@PathVariable String newsId, HttpServletRequest request,
 			HttpServletResponse response) {
 		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/detail/{newsId}.htm", method = RequestMethod.GET)
+	public void newsView(@PathVariable String newsId, HttpServletRequest request, HttpServletResponse response) {
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+		UserVo user = AuthenticationUtils.getUser();
+		String role = user.getRole();
+		role = role.replace("ROLE_", "").replace("_", "").toLowerCase();
+		try {
+			response.sendRedirect(basePath+"/news/" + role + "/detail/" + newsId + ".htm");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private String queryDetail(String newsId, HttpServletRequest request, HttpServletResponse response) {
