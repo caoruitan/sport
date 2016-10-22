@@ -91,10 +91,6 @@ var Sport = {
     },
 };
 
-var clickmenu = function(url) {
-	window.location.href=url;
-}
-
 $(function(){
 	// 记住登录名
 	var name = Sport.Cookie.get(Sport.name);
@@ -1063,8 +1059,8 @@ $(function(){
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/verify.htm?orgId="+orgId;
 	})
 	
-	//我的课题
-	$(document).on("click",".sport-my-kt-skip",function(){
+	//课题管理
+	$(document).on("click",".sport-subject-menu",function(){
 		window.location.href = Sport.getBasePath()+"/subject/"+$(this).attr("data-type")+"/list.htm";
 	})
 })

@@ -43,7 +43,7 @@
 					</div>
 					<div class="menu">
 						<ul>
-							<li onclick="menuselect(this,'04ktlb.html')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
+							<li class="sport-subject-menu" data-type="kjsexpert"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
 						</ul>
 					</div>
 				</div>

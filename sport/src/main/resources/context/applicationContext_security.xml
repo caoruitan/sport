@@ -6,6 +6,7 @@
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	
 	<http entry-point-ref="loginUrlEntryPoint" auto-config="true">
+		<!-- 登陆、登出 -->
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
@@ -35,21 +36,6 @@
 		<intercept-url pattern="/portal/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/portal/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
-		<!-- 用户管理权限 -->
-		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
-		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		
-		<!-- 单位管理权限-->
-		<intercept-url pattern="/sborg/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
-		
-		<!-- 数据字典权限 -->
-		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>
-		
-		<!-- 新闻管理权限 -->
-		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/news/**" access="isAuthenticated()"/>
-		
 		<!-- 课题管理权限 -->
 		<intercept-url pattern="/subject/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/subject/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
@@ -58,6 +44,24 @@
 		<intercept-url pattern="/subject/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/subject/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		
+		<!-- 新闻管理权限 -->
+		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/news/**" access="isAuthenticated()"/>
+		
+		<!-- 数据字典权限 -->
+		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>
+		
+		<!-- 注册单位管理权限-->
+		<intercept-url pattern="/sborg/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
+		
+		<!-- 组织单位管理权限-->
+		<intercept-url pattern="/org/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
+		
+		<!-- 用户管理、密码重置权限 -->
+		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		
 		<!-- 403错误页面配置 -->
 		<access-denied-handler error-page="/403.jsp"/>
