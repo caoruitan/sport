@@ -72,8 +72,17 @@ public class BaseUserAction extends ExceptionWrapper {
 		if (user == null) {
 			json.addProperty("msg", "用户不存在!");
 		} else {
-			boolean resetPassword = userService.resetPassword(loginName);
-			json.addProperty("sucess", resetPassword);
+			try {
+				boolean resetPassword = userService.resetPassword(loginName);
+				json.addProperty("sucess", resetPassword);
+				json.addProperty("msg", "重置用户密码成功!");
+			} catch (ForbiddenExcetion e) {
+				json.addProperty("sucess", false);
+				json.addProperty("msg", "您没有权限重置该用户的密码");
+			} catch (EntityNotFoundExcetion e) {
+				json.addProperty("sucess", false);
+				json.addProperty("msg", "用户不存在!");
+			}
 		}
 		PageWrite.writeTOPage(response, json);
 	}

@@ -585,8 +585,8 @@ $(function(){
 					layer.msg("系统异常，请稍后重试");
 				},
 				success: function (obj) {
+					$(".sport-yzm-btn").trigger("click");
 					if(obj.success){
-						$(".sport-yzm-btn").trigger("click");
 						layer.msg("重置密码成功!");
 						window.location.href = Sport.getBasePath()+"/portal/"+$(".sport-password-updae-btn").attr("data-type")+"/index.htm";
 					}else{
