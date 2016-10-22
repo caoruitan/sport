@@ -96,7 +96,10 @@ public class NewsSupport extends SportSupport {
 		newsVo.setColumnName(cName);
 		newsVo.setStatusName(Constants.News.getStatusName(news.getStatus()));
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
-		newsVo.setCreateTime(format.format(news.getCreateTime()));
+		Date createTime = news.getCreateTime();
+		if (createTime != null) {
+			newsVo.setCreateTime(format.format(createTime));
+		}
 		Date publishTime = news.getPublishTime();
 		if (publishTime != null) {
 			newsVo.setPublishTime(format.format(publishTime));

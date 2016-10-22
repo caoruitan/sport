@@ -118,7 +118,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 
 	@Override
 	public News findLatest(int column, int status) {
-		String queryHql = "from News where columnId=:columnId and status=:status order by publishTime desc ";
+		String queryHql = "from News n where n.columnId=:columnId and n.status=:status order by n.publishTime desc ";
 		return (News) this.getHibernateQuery(queryHql).setParameter("columnId", column).setMaxResults(1)
 				.setFirstResult(0).setParameter("status", status).uniqueResult();
 	}

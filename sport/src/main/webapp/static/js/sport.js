@@ -455,9 +455,10 @@ $(function(){
 	}).on("click",".search-user-btn",function(){
 		var value = $(".sport-user-key").val();
 		value = Sport.isNull(value)?"":value;
-        $("#jqGrid").jqGrid('setGridParam',{  
+		//encodeURI(encodeURI(value))
+		$("#jqGrid").jqGrid('setGridParam',{  
             datatype:'json',  
-            postData:{'name':encodeURI(encodeURI(value))},
+            postData:{'name':value},
             page:1  
         }).trigger("reloadGrid"); 
 	}).on("click",".sport-user-edit",function(){
