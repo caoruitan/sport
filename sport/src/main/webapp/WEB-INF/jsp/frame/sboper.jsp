@@ -37,7 +37,7 @@
 					</div>
 					<div class="menu">
 						<ul>
-							<li onclick="clickmenu('<%=basePath %>/subject/sboper/list.htm')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
+							<li class="sport-subject-menu" data-type="sboper"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
 							<div class="clear"></div>
 						</ul>
 					</div>

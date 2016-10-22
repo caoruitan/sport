@@ -43,9 +43,9 @@
 					</div>
 					<div class="menu">
 						<ul>
-							<li onclick="menuselect(this,'04ktlb.html')"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
-							<li data-type="sbadmin" class="sport-user-menu"><img src="<%=basePath %>/static/img/menu/ry.png" /> 用户管理</li>
-							<li data-type="sbadmin" class="sport-password-reset-menu"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置</li>
+							<li class="sport-subject-menu" data-type="sbadmin"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
+							<li class="sport-user-menu" data-type="sbadmin"><img src="<%=basePath %>/static/img/menu/ry.png" /> 用户管理</li>
+							<li class="sport-password-reset-menu" data-type="sbadmin"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置</li>
 							<div class="clear"></div>
 						</ul>
 					</div>

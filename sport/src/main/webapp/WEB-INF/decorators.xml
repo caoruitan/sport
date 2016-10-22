@@ -24,23 +24,43 @@
     <decorator name="kjsleader" page="frame/kjsleader.jsp">
         <pattern>/portal/kjsleader/*.htm</pattern>
         <pattern>/password/kjsleader/*.htm</pattern>
+        <pattern>/subject/kjsleader/*.htm</pattern>
     </decorator>
     
     <!-- 专家 -->
     <decorator name="kjsexpert" page="frame/kjsexpert.jsp">
         <pattern>/portal/kjsexpert/*.htm</pattern>
         <pattern>/password/kjsexpert/*.htm</pattern>
+        <pattern>/subject/kjsexpert/*.htm</pattern>
     </decorator>
+    
     <!--申报管理员（注册单位）-->
     <decorator name="sbadmin" page="frame/sbadmin.jsp">
         <pattern>/portal/sbadmin/*.htm</pattern>
         <pattern>/user/sbadmin/*.htm</pattern>
         <pattern>/password/sbadmin/*.htm</pattern>
+        <pattern>/subject/sbadmin/*.htm</pattern>
     </decorator>
+    
     <!-- 申报人 -->
     <decorator name="sboper" page="frame/sboper.jsp">
         <pattern>/portal/sboper/*.htm</pattern>
         <pattern>/subject/sboper/*.htm</pattern>
         <pattern>/password/sboper/*.htm</pattern>
+    </decorator>
+    
+    <!-- 组织单位管理员 -->
+    <decorator name="orgadmin" page="frame/orgadmin.jsp">
+        <pattern>/portal/orgadmin/*.htm</pattern>
+        <pattern>/user/orgadmin/*.htm</pattern>
+        <pattern>/password/orgadmin/*.htm</pattern>
+        <pattern>/subject/orgadmin/*.htm</pattern>
+    </decorator>
+    
+    <!-- 组织单位成员 -->
+    <decorator name="orgoper" page="frame/orgoper.jsp">
+        <pattern>/portal/orgoper/*.htm</pattern>
+        <pattern>/subject/orgoper/*.htm</pattern>
+        <pattern>/password/orgoper/*.htm</pattern>
     </decorator>
 </decorators>
