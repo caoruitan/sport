@@ -10,6 +10,8 @@ public interface SubjectSbsService {
 	
 	public SubjectSbs getSubjectSbsById(String id);
 	
+	public SubjectSbs getSbsBySubjectId(String subjectId);
+	
 	public SubjectSbs createSubjectSbs(String subjectId);
 	
 	public void saveBaseInfo(String subjectId, String address, String phone, String fax, String email, String years);
