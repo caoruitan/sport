@@ -109,7 +109,6 @@
 					}],
 					autowidth: true,
 					viewrecords: true,
-					height: 200,
 					rowNum: 20,
 					multiselect: true,
 					pager: "#jqGridPager"

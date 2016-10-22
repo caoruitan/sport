@@ -123,6 +123,10 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 			queryHql.append(" and legalLeader like :legalLeader ");
 			params.put("legalLeader", "%" + query.getLegalLeader() + "%");
 		}
+		if (query.getRole() != null) {
+			queryHql.append(" and role  =:role ");
+			params.put("role", query.getRole());
+		}
 		return this.getCountByHQL(queryHql.toString(), params);
 	}
 
@@ -168,6 +172,11 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 		if (StringUtils.isNotBlank(query.getLegalLeader())) {
 			querySql.append(" and LEGAL_LEADER like :legalLeader ");
 			params.put("legalLeader", "%" + query.getLegalLeader() + "%");
+		}
+
+		if (query.getRole() != null) {
+			querySql.append(" and ROLE  =:role ");
+			params.put("role", query.getRole());
 		}
 		querySql.append(" order by CREATE_TIME desc ");
 

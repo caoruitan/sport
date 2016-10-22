@@ -48,9 +48,17 @@ public class KjsadminSbOrgAction {
 	}
 
 	@RequestMapping(value = "/kjsadmin/datas", method = RequestMethod.GET)
-	public void gotoOrgDatas(OrgQuery query, HttpServletRequest request, HttpServletResponse response) {
+	public void gotoOrgDatas(HttpServletRequest request, HttpServletResponse response) {
+		String fullName = request.getParameter("fullName");
+		String legalLeader = request.getParameter("legalLeader");
+		String status = request.getParameter("status");
 		String startStr = request.getParameter("page");
 		int start = SportSupport.processLimit(startStr);
+		OrgQuery query = new OrgQuery();
+		query.setFullName(fullName);
+		query.setLegalLeader(legalLeader);
+		query.setStatus(status);
+		query.setRole(Constants.Org.SB_ROLE);
 		List<OrgVo> datas = this.organizationService.getByWhere(query, (start - 1) * Constants.Common.PAGE_SIZE,
 				Constants.Common.PAGE_SIZE);
 		long total = this.organizationService.getTotalByWhere(query);
