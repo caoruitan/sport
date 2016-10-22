@@ -91,6 +91,11 @@ public class OrganizationView {
 	 */
 	private String managerEmail;
 
+	/**
+	 * 角色
+	 */
+	private int role;
+
 	public String getOrgId() {
 		return orgId;
 	}
@@ -251,4 +256,11 @@ public class OrganizationView {
 		this.managerEmail = managerEmail;
 	}
 
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
 }

@@ -215,17 +215,17 @@ public class Constants {
 			return types;
 		}
 	}
-	
+
 	public static final class SubjectSbs {
-		
+
 		public static final String SUBJECT_SBS_STATUS_SBOPER_TB = "SBOPER_TB";
-		
+
 		public static final String SUBJECT_SBS_STATUS_SBADMIN_SP = "SBADMIN_SP";
-		
+
 		public static final String SUBJECT_SBS_STATUS_ORG_SP = "ORG_SP";
-		
+
 		public static final String SUBJECT_SBS_STATUS_KJS_SP = "KJS_SP";
-		
+
 		public static final String SUBJECT_SBS_STATUS_COMPLETE = "COMPLETE";
 
 		public static Map<String, String> getSubjectSbsStatus() {
@@ -237,7 +237,7 @@ public class Constants {
 			types.put(SUBJECT_SBS_STATUS_COMPLETE, "审批通过");
 			return types;
 		}
-		
+
 	}
 
 	public static class News {
@@ -356,8 +356,32 @@ public class Constants {
 	}
 
 	public static final class Org {
+		/**
+		 * 科教司（国家体育总局）
+		 */
+		public static final int KJS_ROLE = 0;
+
+		/**
+		 * 组织单位（体育中心）
+		 */
+		public static final int ORG_ROLE = 1;
+
+		/**
+		 * 申报单位（注册的单位）
+		 */
+		public static final int SB_ROLE = 2;
+
+		/**
+		 * 等待审核中
+		 */
 		public static final int wait_verify = 0;
+		/**
+		 * 审核通过
+		 */
 		public static final int pass_verify = 1;
+		/**
+		 * 审核未通过
+		 */
 		public static final int unpass_verify = -1;
 
 		/**

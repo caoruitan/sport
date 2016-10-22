@@ -35,7 +35,13 @@ public interface OrganizationService {
 
 	public List<OrgVo> get(int start, int limit);
 
+	public List<OrgVo> getbyRole(int role);
+
+	public List<OrgVo> getbyRole(int role, int start, int limit);
+
 	public long getTotal();
 
 	public long getTotalByWhere(OrgQuery query);
+
+	public long getTotalbyRole(int role);
 }

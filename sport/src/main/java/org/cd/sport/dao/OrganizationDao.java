@@ -22,9 +22,15 @@ public interface OrganizationDao extends IBaseDao {
 
 	public List<OrganizationDomain> find(int start, int limit);
 
+	public List<OrganizationDomain> findbyRole(int role);
+
+	public List<OrganizationDomain> findbyRole(int role, int start, int limit);
+
 	public List<OrganizationDomain> findByWhere(OrgQuery query, int start, int limit);
 
 	public long findTotal();
+
+	public long findTotalbyRole(int role);
 
 	public long findTotalByWhere(OrgQuery query);
 

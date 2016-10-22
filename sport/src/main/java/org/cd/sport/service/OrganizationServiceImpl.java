@@ -193,4 +193,21 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	public long getTotalByWhere(OrgQuery query) {
 		return this.organizationDao.findTotalByWhere(query);
 	}
+
+	@Override
+	public List<OrgVo> getbyRole(int role) {
+		List<OrganizationDomain> orgs = this.organizationDao.findbyRole(role);
+		return this.process(orgs);
+	}
+
+	@Override
+	public List<OrgVo> getbyRole(int role, int start, int limit) {
+		List<OrganizationDomain> orgs = this.organizationDao.findbyRole(role, start, limit);
+		return this.process(orgs);
+	}
+
+	@Override
+	public long getTotalbyRole(int role) {
+		return this.organizationDao.findTotalbyRole(role);
+	}
 }

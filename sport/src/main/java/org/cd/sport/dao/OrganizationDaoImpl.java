@@ -71,7 +71,8 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 			params.put("status", status);
 		}
 		if (StringUtils.isNotBlank(query.getFullName())) {
-			queryHql.append(" and (fullName like :fullName or shortName like :fullName or englishName like :fullName ) ");
+			queryHql.append(
+					" and (fullName like :fullName or shortName like :fullName or englishName like :fullName ) ");
 			params.put("fullName", "%" + query.getFullName() + "%");
 		}
 		if (StringUtils.isNotBlank(query.getLegalLeader())) {
@@ -118,5 +119,27 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 			params.put("legalLeader", "%" + query.getLegalLeader() + "%");
 		}
 		return this.getCountByHQL(queryHql.toString(), params);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<OrganizationDomain> findbyRole(int role) {
+		String queryHql = "from OrganizationDomain where role=:role order by createTime desc";
+		return (List<OrganizationDomain>) this.getHibernateQuery(queryHql).setParameter("role", role).list();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<OrganizationDomain> findbyRole(int role, int start, int limit) {
+		String queryHql = "from OrganizationDomain where role=:role order by createTime desc";
+		return (List<OrganizationDomain>) this.getHibernateQuery(queryHql).setParameter("role", role)
+				.setMaxResults(limit).setFirstResult(start).list();
+	}
+
+	@Override
+	public long findTotalbyRole(int role) {
+		String queryHql = "select count(1) from OrganizationDomain  where role=:role";
+		Long count = (Long) this.getHibernateQuery(queryHql).setParameter("role", role).uniqueResult();
+		return count == null ? 0 : count.intValue();
 	}
 }

@@ -98,6 +98,11 @@ public class OrganizationDomain {
 	private String managerEmail;
 
 	/**
+	 * 权限单位
+	 */
+	private int role;
+
+	/**
 	 * 状态
 	 */
 	private int status;
@@ -302,7 +307,7 @@ public class OrganizationDomain {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
 	@Column(name = "REASON")
 	public String getReason() {
 		return reason;
@@ -310,6 +315,15 @@ public class OrganizationDomain {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	@Column(name = "ROLE")
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 
 }

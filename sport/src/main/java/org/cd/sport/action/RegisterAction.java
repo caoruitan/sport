@@ -55,6 +55,7 @@ public class RegisterAction extends BaseUserAction {
 
 	@RequestMapping("/regist.action")
 	public void register(OrganizationView org, HttpServletRequest request, HttpServletResponse response) {
+		org.setRole(Constants.Org.SB_ROLE);
 		OrganizationDomain domain = this.organizationService.create(org);
 		PageWrite.writeTOPage(response, domain.getOrgId());
 	}
@@ -71,6 +72,7 @@ public class RegisterAction extends BaseUserAction {
 
 	@RequestMapping("/update.action")
 	public void updateRegister(OrganizationView org, HttpServletRequest request, HttpServletResponse response) {
+		org.setRole(Constants.Org.SB_ROLE);
 		OrganizationDomain create = this.organizationService.update(org);
 		PageWrite.writeTOPage(response, create.getOrgId());
 	}
