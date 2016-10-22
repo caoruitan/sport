@@ -60,7 +60,11 @@
 					<td><input name="legalLeader" type="text" value="${org.legalLeader}" /></td>
 					<th class="required">所在地区</th>
 					<td>
-						<select name="region" id="loc_province" class="selectpicker" style="width:300px;" title="请选择" data-live-search="true"></select>
+						<select name="region" id="loc_province" class="selectpicker" style="width:300px;" title="请选择" data-live-search="true">
+							<c:forEach items="${address}" var="dic">
+								<option value="${dic.code}">${dic.name}</option>
+							</c:forEach>
+						</select>
 						<span style="color:rgb(255, 102, 0);" class="region-error"></span>
 					</td>
 				</tr>
@@ -131,8 +135,6 @@
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var loc	= new Location();
-		loc.fillOption('loc_province' , '0');
 		$(window).trigger("load");
 		// 设置select的默认值
 		$('#loc_province').selectpicker('val', "${org.region}");

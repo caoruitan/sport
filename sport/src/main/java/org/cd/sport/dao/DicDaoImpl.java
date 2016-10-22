@@ -40,7 +40,7 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Dic> findByPcode(String pCode) {
-		String queryHql = "from Dic where pCode=:pCode order by sort desc";
+		String queryHql = "from Dic where pCode=:pCode order by sort asc";
 		return this.getHibernateQuery(queryHql).setParameter("pCode", pCode).list();
 	}
 
@@ -53,7 +53,7 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Dic> findByPcode(String pCode, int start, int limit) {
-		String queryHql = "from Dic where pCode=:pCode order by sort";
+		String queryHql = "from Dic where pCode=:pCode order by sort asc";
 		return this.getHibernateQuery(queryHql).setParameter("pCode", pCode).setMaxResults(limit).setFirstResult(start)
 				.list();
 	}
@@ -86,7 +86,7 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 			queryHql.append(" and code like :code ");
 			params.put("code", "%" + query.getCode() + "%");
 		}
-		queryHql.append(" order by sort ");
+		queryHql.append(" order by sort asc ");
 		return this.getDatasByHQL(queryHql.toString(), params);
 	}
 
@@ -117,7 +117,7 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Dic> find(int start, int limit) {
-		String queryHql = "from Dic where order by sort desc";
+		String queryHql = "from Dic where order by sort asc ";
 		return this.getHibernateQuery(queryHql).setMaxResults(limit).setFirstResult(start).list();
 	}
 

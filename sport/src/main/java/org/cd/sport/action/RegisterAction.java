@@ -58,7 +58,9 @@ public class RegisterAction extends BaseUserAction {
 	@RequestMapping("/regist.htm")
 	public String register(HttpServletRequest request) {
 		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
+		List<Dic> address = this.dicService.getByPcode(Constants.Dic.DIC_ADDRESS_CODE);
 		request.setAttribute("dics", dics);
+		request.setAttribute("address", address);
 		return "register/org";
 	}
 

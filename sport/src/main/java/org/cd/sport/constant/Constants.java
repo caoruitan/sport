@@ -51,6 +51,11 @@ public class Constants {
 		public static final String DIC_DEGREES_CODE = "004";
 
 		/**
+		 * 数据字典-所在地区
+		 */
+		public static final String DIC_ADDRESS_CODE = "005";
+
+		/**
 		 * 数据字典-单位性质
 		 */
 		public static final String DIC_QUALITY_CODE = "006";

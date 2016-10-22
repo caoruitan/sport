@@ -65,7 +65,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 
 		if (StringUtils.isNotBlank(query.getColumn())) {
 			queryHql.append(" and columnId =:column ");
-			params.put("column", query.getColumn());
+			params.put("column", Integer.parseInt(query.getColumn()));
 		}
 
 		if (StringUtils.isNotBlank(query.getTitle())) {
@@ -93,7 +93,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 		}
 		if (StringUtils.isNotBlank(query.getColumn())) {
 			queryHql.append(" and columnId =:column ");
-			params.put("column", query.getColumn());
+			params.put("column", Integer.parseInt(query.getColumn()));
 		}
 		if (StringUtils.isNotBlank(query.getTitle())) {
 			queryHql.append(" and title like :name ");
