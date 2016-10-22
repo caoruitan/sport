@@ -95,6 +95,17 @@ public class OrganizationSupport extends SportSupport {
 		return vos;
 	}
 
+	public List<OrgVo> processVo(List<OrgVo> orgs) {
+		if (orgs == null || orgs.isEmpty()) {
+			return null;
+		}
+
+		for (OrgVo vo : orgs) {
+			vo.setStatusName(Constants.Org.getStatusName(vo.getStatus()));
+		}
+		return orgs;
+	}
+
 	public OrgVo process(OrganizationDomain org) {
 		OrgVo result = this.result(OrgVo.class, org);
 		result.setStatusName(Constants.Org.getStatusName(org.getStatus()));

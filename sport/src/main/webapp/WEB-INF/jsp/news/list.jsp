@@ -47,7 +47,7 @@
 		</div>
 		<div class="twoColumn">
 			<div class="t-left">
-				<div class="leftBox sport-lm">
+				<div class="leftBox-news sport-lm">
 					<p class="lm">栏目<a></a></p>
 					<c:forEach items="${columns}" var="column">
 						<li data-id="${column.key }">${column.value}</li>

@@ -280,8 +280,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 
 	@Override
 	public List<UserVo> getVoByOrgId(String orgId, int start, int limit) {
-		List<UserDomain> users = this.userDao.findVoByOrgId(orgId, start, limit);
-		return this.process(users);
+		return this.userDao.findVoByOrgId(orgId, start, limit);
 	}
 
 	@Override

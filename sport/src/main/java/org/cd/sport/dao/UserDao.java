@@ -35,7 +35,7 @@ public interface UserDao extends IBaseDao {
 
 	public List<UserDomain> find(int start, int limit);
 
-	public List<UserDomain> findVoByOrgId(String orgId, int start, int limit);
+	public List<UserVo> findVoByOrgId(String orgId, int start, int limit);
 
 	public List<UserVo> findVoByWhere(UserQuery query, int start, int limit);
 

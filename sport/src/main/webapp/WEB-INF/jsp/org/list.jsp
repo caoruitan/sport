@@ -79,10 +79,7 @@
 						label:"所在地区",
 						name: 'region',
 						width: 20,
-						align: "center",
-						formatter:function(value, grid, rows, state){
-							return new Location().findById(rows.region);
-						}
+						align: "center"
 					}, {
 						label:"单位电话",
 						name: 'telphone',

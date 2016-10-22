@@ -4,15 +4,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.cd.sport.vo.OrgQuery;
+import org.cd.sport.vo.OrgVo;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -87,13 +90,15 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 	}
 
 	private void processQuery(Query hibernateQuery, Map<String, Object> map) {
-		Set<Entry<String, Object>> entrySet = map.entrySet();
-		for (Entry<String, Object> entry : entrySet) {
-			Object value = entry.getValue();
-			if (value instanceof Object[] || value instanceof Collection) {
-				hibernateQuery.setParameterList(entry.getKey(), (Object[]) value);
-			} else {
-				hibernateQuery.setParameter(entry.getKey(), value);
+		if (map != null && !map.isEmpty()) {
+			Set<Entry<String, Object>> entrySet = map.entrySet();
+			for (Entry<String, Object> entry : entrySet) {
+				Object value = entry.getValue();
+				if (value instanceof Object[] || value instanceof Collection) {
+					hibernateQuery.setParameterList(entry.getKey(), (Object[]) value);
+				} else {
+					hibernateQuery.setParameter(entry.getKey(), value);
+				}
 			}
 		}
 	}
@@ -141,5 +146,41 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 		String queryHql = "select count(1) from OrganizationDomain  where role=:role";
 		Long count = (Long) this.getHibernateQuery(queryHql).setParameter("role", role).uniqueResult();
 		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<OrgVo> findVoByWhere(OrgQuery query, int start, int limit) {
+		StringBuffer querySql = new StringBuffer(
+				"SELECT ORG_ID AS \"orgId\",FULL_NAME AS \"fullName\",LEGAL_LEADER AS \"legalLeader\",D.name AS \"region\",TELPHONE AS \"telphone\",STATUS AS \"status\" FROM SPORT_ORGANIZATION O "
+						+ " LEFT JOIN SPORT_DIC D ON D.CODE= O.REGION WHERE 1=1 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (!StringUtils.isBlank(query.getStatus())) {
+			Integer[] status = Constants.Org.parseStatus(query.getStatus());
+			querySql.append(" and O.STATUS in (:status) ");
+			params.put("status", status);
+		}
+		if (StringUtils.isNotBlank(query.getFullName())) {
+			querySql.append(
+					" and (FULL_NAME like :fullName or SHORT_NAME like :fullName or ENGLISH_NAME like :fullName ) ");
+			params.put("fullName", "%" + query.getFullName() + "%");
+		}
+		if (StringUtils.isNotBlank(query.getLegalLeader())) {
+			querySql.append(" and LEGAL_LEADER like :legalLeader ");
+			params.put("legalLeader", "%" + query.getLegalLeader() + "%");
+		}
+		querySql.append(" order by CREATE_TIME desc ");
+
+		SQLQuery hibernateSqlQuery = this.getHibernateSqlQuery(querySql.toString());
+		hibernateSqlQuery.addScalar("orgId");
+		hibernateSqlQuery.addScalar("fullName");
+		hibernateSqlQuery.addScalar("legalLeader");
+		hibernateSqlQuery.addScalar("region");
+		hibernateSqlQuery.addScalar("telphone");
+		this.processQuery(hibernateSqlQuery, params);
+		hibernateSqlQuery.setMaxResults(limit);
+		hibernateSqlQuery.setFirstResult(start);
+		hibernateSqlQuery.setResultTransformer(Transformers.aliasToBean(OrgVo.class));
+		return hibernateSqlQuery.list();
 	}
 }

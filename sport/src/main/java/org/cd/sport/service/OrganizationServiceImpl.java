@@ -179,8 +179,8 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 
 	@Override
 	public List<OrgVo> getByWhere(OrgQuery query, int start, int limit) {
-		List<OrganizationDomain> orgs = this.organizationDao.findByWhere(query, start, limit);
-		return this.process(orgs);
+		List<OrgVo> orgVos = this.organizationDao.findVoByWhere(query, start, limit);
+		return this.processVo(orgVos);
 	}
 
 	@Override
