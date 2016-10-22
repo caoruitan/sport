@@ -66,7 +66,7 @@
 							<button class="btn-wisteria sport-news-delete">删除</button>
 						</div>
 					</div>
-					<table id="newsGridDiv"></table>
+					<table id="newsGridDiv" class="sport-grid"></table>
 					<div id="jqGridPager"></div>
 				</div>
 			</div>
@@ -121,7 +121,6 @@
 					}],
 					autowidth: true,
 					viewrecords: true,
-					height: 200,
 					rowNum: 20,
 					multiselect: true,
 					pager: "#jqGridPager"

@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<th class="required">单位地址</th>
-					<td colspan="3"><input name="address" style="width: 560px;" type="text" value="${org.address}" /></td>
+					<td colspan="3"><input name="address" style="width: 685px;" type="text" value="${org.address}" /></td>
 				</tr>
 				<tr>
 					<th class="required">法人代表</th>
