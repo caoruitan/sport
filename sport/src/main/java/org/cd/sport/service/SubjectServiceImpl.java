@@ -72,6 +72,61 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
+	public int getAllSubjectCount() {
+		return subjectDao.getAllSubjectCount();
+	}
+
+	@Override
+	public int getAllSubjectCountByType(String type) {
+		return subjectDao.getAllSubjectCountByType(type);
+	}
+
+	@Override
+	public int getAllSubjectCountByTypeAndStage(String type, String stage) {
+		return subjectDao.getAllSubjectCountByTypeAndStage(type, stage);
+	}
+
+	@Override
+	public int getSubjectCountByExpert(String expertId) {
+		return subjectDao.getSubjectCountByExpert(expertId);
+	}
+
+	@Override
+	public int getSubjectCountByExpertAndStage(String expertId, String stage) {
+		return subjectDao.getSubjectCountByExpertAndStage(expertId, stage);
+	}
+
+	@Override
+	public int getSubjectCountByOrg(String orgId) {
+		return subjectDao.getSubjectCountByOrg(orgId);
+	}
+
+	@Override
+	public int getSubjectCountByOrgAndStage(String orgId, String stage) {
+		return subjectDao.getSubjectCountByOrgAndStage(orgId, stage);
+	}
+
+	@Override
+	public int getSubjectCountByCreateUnit(String unitId) {
+		return subjectDao.getSubjectCountByCreateUnit(unitId);
+	}
+
+	@Override
+	public int getSubjectCountByCreateUnitAndStage(String unitId, String stage) {
+		return subjectDao.getSubjectCountByCreateUnitAndStage(unitId, stage);
+	}
+
+	@Override
+	public int getSubjectCountByCreator(String creator) {
+		return subjectDao.getSubjectCountByCreator(creator);
+	}
+
+	@Override
+	public int getSubjectCountByCreatorAndStage(String creator, String stage) {
+		return subjectDao.getSubjectCountByCreatorAndStage(creator, stage);
+	}
+
+	@Override
 	public Subject getSubjectById(String id) {
 		return subjectDao.getEntityById(Subject.class, id);
 	}

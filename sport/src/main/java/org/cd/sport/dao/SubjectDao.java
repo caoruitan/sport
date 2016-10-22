@@ -23,4 +23,26 @@ public interface SubjectDao extends IBaseDao {
 	
 	public int getSubjectCountByOrg(String orgId, String year, String type, String stage, int start, int limit);
 	
+	public int getAllSubjectCount();
+	
+	public int getAllSubjectCountByType(String type);
+	
+	public int getAllSubjectCountByTypeAndStage(String type, String stage);
+	
+	public int getSubjectCountByExpert(String expertId);
+	
+	public int getSubjectCountByExpertAndStage(String expertId, String stage);
+	
+	public int getSubjectCountByOrg(String orgId);
+	
+	public int getSubjectCountByOrgAndStage(String orgId, String stage);
+	
+	public int getSubjectCountByCreateUnit(String unitId);
+
+	public int getSubjectCountByCreateUnitAndStage(String unitId, String stage);
+	
+	public int getSubjectCountByCreator(String creator);
+
+	public int getSubjectCountByCreatorAndStage(String creator, String stage);
+	
 }

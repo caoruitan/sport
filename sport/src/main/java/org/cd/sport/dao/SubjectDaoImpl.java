@@ -241,4 +241,100 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		return count == null ? 0 : count.intValue();
 	}
 
+	@Override
+	public int getAllSubjectCount() {
+		String hql = "select count(1) from Subject s";
+		Query query = this.getHibernateQuery(hql.toString());
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getAllSubjectCountByType(String type) {
+		String hql = "select count(1) from Subject s where s.type = :type";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("type", type);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getAllSubjectCountByTypeAndStage(String type, String stage) {
+		String hql = "select count(1) from Subject s where s.type = :type and s.stage = :stage";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("type", type);
+		query.setParameter("stage", stage);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByExpert(String expertId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSubjectCountByExpertAndStage(String expertId, String stage) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSubjectCountByOrg(String orgId) {
+		String hql = "select count(1) from Subject s where s.organizationId = :organizationId";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("organizationId", orgId);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByOrgAndStage(String orgId, String stage) {
+		String hql = "select count(1) from Subject s where s.organizationId = :organizationId and stage = :stage";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("organizationId", orgId);
+		query.setParameter("stage", stage);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByCreateUnit(String unitId) {
+		String hql = "select count(1) from Subject s where s.createUnitId = :createUnitId";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("createUnitId", unitId);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByCreateUnitAndStage(String unitId, String stage) {
+		String hql = "select count(1) from Subject s where s.createUnitId = :createUnitId and s.stage = :stage";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("createUnitId", unitId);
+		query.setParameter("stage", stage);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByCreator(String creator) {
+		String hql = "select count(1) from Subject s where s.creator = :creator";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("creator", creator);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public int getSubjectCountByCreatorAndStage(String creator, String stage) {
+		String hql = "select count(1) from Subject s where s.creator = :creator and s.stage = :stage";
+		Query query = this.getHibernateQuery(hql.toString());
+		query.setParameter("creator", creator);
+		query.setParameter("stage", stage);
+		Long count = (Long) query.uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
 }
