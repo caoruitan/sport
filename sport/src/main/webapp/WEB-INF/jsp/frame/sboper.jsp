@@ -32,8 +32,8 @@
 				<div class="mainMenuBox">
 					<div class="user">
 						<div class="user-head"></div>
-						<div class="user-name">龙五</div>
-						<div class="user-org">国家体育总局</div>
+						<div class="user-name">${loginUser.userName}</div>
+						<div class="user-org">${loginUser.orgName}</div>
 					</div>
 					<div class="menu">
 						<ul>
@@ -48,9 +48,5 @@
 			</div>
 		</div>
 	</div>
-	
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>

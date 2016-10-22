@@ -17,6 +17,7 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 					<input type="hidden" name="pubKey" value="${pubKey}" id="pubKey"/>
 					<input type="hidden" name="uuid" value="${uuid}" id="uuid"/>
+					<input type="hidden" name="userId" value="${user.userId}" id="userId"/>
 				</td>
 			</tr>
 			<tr>

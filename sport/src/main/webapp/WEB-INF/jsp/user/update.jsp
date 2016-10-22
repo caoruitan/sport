@@ -73,7 +73,9 @@
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="organization" type="text" id="organization" value="${user.organization}" readonly="readonly"/>
+				<td>
+					<input name="organization" type="hidden" id="organization" value="${orgId}"/>
+					<input name="orgName" type="text" id="orgName" value="${orgName}" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>

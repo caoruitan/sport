@@ -100,6 +100,7 @@ public class BaseUserAction extends ExceptionWrapper {
 		request.setAttribute("creds", credCodes);
 		request.setAttribute("degrees", degrees);
 		request.setAttribute("orgName", userDomain.getOrgName());
+		request.setAttribute("orgId", userDomain.getOrganization());
 		request.setAttribute("zcDics", zcDics);
 		request.setAttribute("zwDics", zwDics);
 		return "user/create";
@@ -142,6 +143,7 @@ public class BaseUserAction extends ExceptionWrapper {
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user", user);
 		request.setAttribute("orgName", userDomain.getOrgName());
+		request.setAttribute("orgId", userDomain.getOrganization());
 		List<Dic> credCodes = dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
 		List<Dic> zcDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
