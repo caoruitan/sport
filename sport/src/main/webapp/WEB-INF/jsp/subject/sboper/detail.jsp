@@ -157,8 +157,6 @@
 			<div class="viewBox">
 				<table class="viewTable">
 					<tr>
-						<th>课题名称</th>
-						<td><span class="redfont">${subject.name}</span></td>
 						<th>课题类别</th>
 						<td>
 							<c:forEach items="${types}" var="type">
@@ -167,6 +165,8 @@
 								</c:if>
 							</c:forEach>
 						</td>
+						<th>课题名称</th>
+						<td><span class="redfont">${subject.name}</span></td>
 					</tr>
 					<tr>
 						<th>编号</th>
@@ -188,7 +188,7 @@
 					</tr>
 					<tr>
 						<th>密级</th>
-						<td>${subject.security}</td>
+						<td>${subject.securityName}</td>
 						<th>参加单位总数</th>
 						<td>${subject.organizationCount}</td>
 					</tr>
@@ -205,7 +205,7 @@
 							<c:if test="${subject.integration eq false}">否</c:if>
 						</td>
 						<th>预期成果</th>
-						<td>${subject.results}</td>
+						<td>${subject.resultsName}</td>
 					</tr>
 				</table>
 			</div>

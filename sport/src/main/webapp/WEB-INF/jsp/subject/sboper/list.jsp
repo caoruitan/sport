@@ -92,7 +92,7 @@
 							return "";
 						}
 					}},
-					{label:'密级', name:'security', width:10, sortable: false, align:"center"},
+					{label:'密级', name:'securityName', width:10, sortable: false, align:"center"},
 					{label:'申报单位', name:'createUnitName', width:20, sortable: false},
 					{label:'负责人', name:'creatorName', width:10, sortable: false, align:"center"},
 					{label:'阶段状态', name:'stage', width:10, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
