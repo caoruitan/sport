@@ -35,7 +35,7 @@
 		<intercept-url pattern="/portal/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/portal/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/portal/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
-		
+
 		<!-- 课题管理权限 -->
 		<intercept-url pattern="/subject/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/subject/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>

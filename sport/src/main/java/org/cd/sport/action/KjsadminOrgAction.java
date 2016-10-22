@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author liuyk
  */
 @Controller
-@RequestMapping("sborg")
-public class KjsadminSbOrgAction extends BaseOrgAction {
+@RequestMapping("org")
+public class KjsadminOrgAction extends BaseOrgAction {
 
 	@RequestMapping(value = "/kjsadmin/list", method = RequestMethod.GET)
 	public String gotoOrgList(HttpServletRequest request) {
 		Map<Integer, String> status = Constants.Org.getStatus();
 		request.setAttribute("status", status);
-		return "sborg/list";
+		return "org/list";
 	}
 
 	@RequestMapping(value = "/kjsadmin/datas", method = RequestMethod.GET)
 	public void queryOrgDatas(HttpServletRequest request, HttpServletResponse response) {
 		OrgQuery query = new OrgQuery();
-		query.setRole(Constants.Org.SB_ROLE);
+		query.setRole(Constants.Org.ORG_ROLE);
 		super.queryOrgDatas(query, request, response);
 	}
 
@@ -47,20 +47,5 @@ public class KjsadminSbOrgAction extends BaseOrgAction {
 	@RequestMapping(value = "/kjsadmin/detail.htm", method = RequestMethod.GET)
 	public String orgDetail(HttpServletRequest request) {
 		return super.orgDetail(request);
-	}
-
-	@RequestMapping(value = "/kjsadmin/verify.htm", method = RequestMethod.GET)
-	public String verfiyView(HttpServletRequest request, HttpServletResponse response) {
-		return super.verfiyView(request, response);
-	}
-
-	@RequestMapping(value = "/kjsadmin/pass.action", method = RequestMethod.POST)
-	public void verifyPass(HttpServletRequest request, HttpServletResponse response) {
-		super.verifyPass(request, response);
-	}
-
-	@RequestMapping(value = "/kjsadmin/unpass.action", method = RequestMethod.POST)
-	public void verifyUnpass(HttpServletRequest request, HttpServletResponse response) {
-		super.verifyUnpass(request, response);
 	}
 }
