@@ -8,7 +8,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 	UserVo user = AuthenticationUtils.getUser();
 	request.setAttribute("loginUser", user);
-	request.setAttribute("user_type", "kjsadmin");
+	request.setAttribute("user_type", "kjsleader");
 %>
 <!DOCTYPE html>
 <html>
