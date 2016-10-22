@@ -656,6 +656,10 @@ $(function(){
 		window.location.href = Sport.getBasePath()+"/news/kjsadmin/update.htm?newsId="+$(this).attr("data-id");
 	}).on("click",".sport-news-reset",function(){
 		$("#sport-news-form")[0].reset();
+	}).on("click",".sport-download",function(){
+		var dataId = $(this).attr("data-id");
+		var dataName = $(this).attr("data-name");
+		window.open(Sport.getBasePath()+"/download.action?dataId="+dataId+"&dataName="+dataName);
 	}).on("change","#news-column",function(){
 		$(".column-error").text("");
 	}).on("click",".sport-lm li",function(){

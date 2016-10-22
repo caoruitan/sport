@@ -2,6 +2,7 @@ package org.cd.sport.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,13 +23,12 @@ import com.google.gson.JsonObject;
  *
  */
 @Controller
-@RequestMapping("kjsadmin")
 public class UploadAction {
 
 	public static final String DIR = "upload";
 
-	@RequestMapping(value = "/upload.action")
-	public void addUser(@RequestParam MultipartFile file, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/kjsadmin/upload.action")
+	public void upload(@RequestParam MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DIR);
 		// 原来文件名称
@@ -53,6 +53,24 @@ public class UploadAction {
 			json.addProperty("success", false);
 			json.addProperty("msg", "文件上传失败!");
 			PageWrite.writeTOPage(response, json);
+		}
+	}
+
+	@RequestMapping(value = "/download.action")
+	public void download(String dataId, String dataName,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String realPath = request.getSession().getServletContext().getRealPath("/" + DIR);
+		realPath = realPath + "/" + dataId;
+		OutputStream os = response.getOutputStream();
+		try {
+			response.reset();
+			response.setHeader("Content-Disposition", "attachment; filename="+dataName);
+			response.setContentType("application/octet-stream; charset=utf-8");
+			os.write(FileUtils.readFileToByteArray(new File(realPath)));
+			os.flush();
+		} finally {
+			if (os != null) {
+				os.close();
+			}
 		}
 	}
 }

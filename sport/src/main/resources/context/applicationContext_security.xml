@@ -16,6 +16,7 @@
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
+		<intercept-url pattern="/download.action" access="isAuthenticated()"/>
 		
 		<!-- 注册相关-->
 		<intercept-url pattern="/regist/**" access="permitAll()"/>
