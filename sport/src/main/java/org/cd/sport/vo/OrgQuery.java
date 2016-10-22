@@ -20,6 +20,11 @@ public class OrgQuery {
 	 */
 	private String status;
 
+	/**
+	 * 角色
+	 */
+	private Integer role;
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -42,5 +47,13 @@ public class OrgQuery {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
 	}
 }
