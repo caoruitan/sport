@@ -102,6 +102,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		userdetail.setUserId(user.getUserId());
 		userdetail.setUserName(user.getUserName());
 		userdetail.setOrgName(userVo.getOrgName());
+		userdetail.setOrgId(userVo.getOrganization());
 		return userdetail;
 	}
 

@@ -95,8 +95,13 @@ public class BaseUserAction extends ExceptionWrapper {
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		List<Dic> credCodes = dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
+		List<Dic> zcDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
 		request.setAttribute("creds", credCodes);
 		request.setAttribute("degrees", degrees);
+		request.setAttribute("orgName", userDomain.getOrgName());
+		request.setAttribute("zcDics", zcDics);
+		request.setAttribute("zwDics", zwDics);
 		return "user/create";
 	}
 
@@ -136,6 +141,15 @@ public class BaseUserAction extends ExceptionWrapper {
 		request.setAttribute("uuid", guid);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user", user);
+		request.setAttribute("orgName", userDomain.getOrgName());
+		List<Dic> credCodes = dicService.getByPcode(Constants.Dic.DIC_CRED_CODE);
+		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
+		List<Dic> zcDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
+		request.setAttribute("creds", credCodes);
+		request.setAttribute("degrees", degrees);
+		request.setAttribute("zcDics", zcDics);
+		request.setAttribute("zwDics", zwDics);
 		return "user/update";
 	}
 

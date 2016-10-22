@@ -40,7 +40,7 @@
 				<td>
 					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType">
 						<c:forEach items="${creds}" var="cred">
-							<option value="${cred.id}">${cred.name}</option>
+							<option value="${cred.code}">${cred.name}</option>
 						</c:forEach>
 					</select>
 					<span style="color:rgb(255, 102, 0);padding-left:10px;" class="credType-error"></span>
@@ -72,7 +72,7 @@
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="organization" type="text" id="organization"/>
+				<td><input name="organization" type="text" id="organization" value="${orgName}" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>
@@ -83,9 +83,21 @@
 			</tr>
 			<tr>
 				<th>职称</th>
-				<td><input name="zc" type="text" id="zc"/></td>
+				<td>
+					<select class="selectpicker zc-select" name="zc" title="请选择职称" id="zc">
+						<c:forEach items="${zcDics}" var="zc">
+							<option value="${zc.code}">${zc.name}</option>
+						</c:forEach>
+					</select>
+				</td>
 				<th>职务</th>
-				<td><input name="zw" type="text" id="zw"/></td>
+				<td>
+					<select class="selectpicker zw-select" name="zw" title="请选择职务" id="zw">
+						<c:forEach items="${zwDics}" var="zw">
+							<option value="${zw.code}">${zw.name}</option>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th>所属部门</th>
@@ -94,7 +106,7 @@
 				<td>
 					<select class="selectpicker" name="degrees" title="请选择" id="degrees">
 						<c:forEach items="${degrees}" var="de">
-							<option value="${de.id}">${de.name}</option>
+							<option value="${de.code}">${de.name}</option>
 						</c:forEach>
 					</select>
 				</td>

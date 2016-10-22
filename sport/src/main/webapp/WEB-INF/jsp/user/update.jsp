@@ -38,9 +38,9 @@
 				<th class="required">证件类型</th>
 				<td>
 					<select class="selectpicker credType-select" name="credType" title="请选择" id="credType">
-						<option value="1">身份证</option>
-						<option value="2">军官证</option>
-						<option value="3">港澳台胞证</option>
+						<c:forEach items="${creds}" var="cred">
+							<option value="${cred.code}">${cred.name}</option>
+						</c:forEach>
 					</select>
 					<span class="error credType-error"></span>
 				</td>
@@ -73,7 +73,7 @@
 			</tr>
 			<tr>
 				<th class="required">所属单位</th>
-				<td><input name="organization" type="text" id="organization" value="${user.organization}"/>
+				<td><input name="organization" type="text" id="organization" value="${user.organization}" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>
@@ -84,9 +84,21 @@
 			</tr>
 			<tr>
 				<th>职称</th>
-				<td><input name="zc" type="text" id="zc" value="${user.zc}"/></td>
+				<td>
+					<select class="selectpicker zc-select" name="zc" title="请选择职称" id="zc">
+						<c:forEach items="${zcDics}" var="zc">
+							<option value="${zc.code}">${zc.name}</option>
+						</c:forEach>
+					</select>
+				</td>
 				<th>职务</th>
-				<td><input name="zw" type="text" id="zw" value="${user.zw}"/></td>
+				<td>
+					<select class="selectpicker zw-select" name="zw" title="请选择职务" id="zw">
+						<c:forEach items="${zwDics}" var="zw">
+							<option value="${zw.code}">${zw.name}</option>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th>所属部门</th>
@@ -94,9 +106,9 @@
 				<th>学历</th>
 				<td>
 					<select class="selectpicker degrees-select" name="degrees" title="请选择" id="degrees">
-						<option >大专</option>
-						<option >本科</option>
-						<option >硕士</option>
+						<c:forEach items="${degrees}" var="de">
+							<option value="${de.code}">${de.name}</option>
+						</c:forEach>
 					</select>
 				</td>
 			</tr>
@@ -129,6 +141,10 @@
 			$('.credType-select').selectpicker('val', "${user.credType}");
 			// 设置select的默认值
 			$('.degrees-select').selectpicker('val', "${user.degrees}");
+			
+			$('.zc-select').selectpicker('val', "${user.zc}");
+			// 设置select的默认值
+			$('.zw-select').selectpicker('val', "${user.zw}");
 			
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_flat-blue',

@@ -1,13 +1,17 @@
 package org.cd.sport.action;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.service.OrganizationService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
@@ -32,6 +36,9 @@ public class RegisterAction extends BaseUserAction {
 	@Autowired
 	private OrganizationService organizationService;
 
+	@Autowired
+	private DicService dicService;
+
 	@RequestMapping("/fullname/check.action")
 	public void orgCheck(String fullName, HttpServletRequest request, HttpServletResponse response) {
 		OrganizationDomain org = this.organizationService.getByFullName(fullName);
@@ -50,6 +57,8 @@ public class RegisterAction extends BaseUserAction {
 
 	@RequestMapping("/regist.htm")
 	public String register(HttpServletRequest request) {
+		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
+		request.setAttribute("dics", dics);
 		return "register/org";
 	}
 
@@ -66,6 +75,8 @@ public class RegisterAction extends BaseUserAction {
 		if (org == null) {
 			throw new EntityNotFoundException("单位不存在！");
 		}
+		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
+		request.setAttribute("dics", dics);
 		request.setAttribute("org", org);
 		return "register/org_update";
 	}
@@ -106,7 +117,7 @@ public class RegisterAction extends BaseUserAction {
 
 	@RequestMapping("/manager/regist.action")
 	public void secondRegister(UserView user, HttpServletRequest request, HttpServletResponse response) {
-		user.setRole(Constants.Role.ROLE_ORG_ADMIN);
+		user.setRole(Constants.Role.ROLE_SB_ADMIN);
 		super.createUser(user, request, response);
 	}
 

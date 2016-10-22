@@ -37,6 +37,7 @@ public class AuthenticationUtils {
 			user.setUserId(userAuth.getUserId());
 			user.setUserName(userAuth.getUserName());
 			user.setOrgName(userAuth.getOrgName());
+			user.setOrganization(userAuth.getOrgId());
 			return user;
 		}
 		return null;

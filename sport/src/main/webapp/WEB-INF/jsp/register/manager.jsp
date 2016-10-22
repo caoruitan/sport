@@ -138,7 +138,7 @@
 			success:function(datas){
 				 var html;
 				 $.each(datas,function(i,data){
-                       html += "<option value='"+data.id+"'>"+data.name+"</option>";
+                       html += "<option value='"+data.code+"'>"+data.name+"</option>";
                     });
 				 $("#credType").empty();
                     $("#credType").append(html);    
@@ -154,7 +154,7 @@
 			success:function(datas){
 				 var html;
 				 $.each(datas,function(i,data){
-                       html += "<option value='"+data.id+"'>"+data.name+"</option>";
+                       html += "<option value='"+data.code+"'>"+data.name+"</option>";
                     });
 				 $("#degrees").empty();
                     $("#degrees").append(html);    

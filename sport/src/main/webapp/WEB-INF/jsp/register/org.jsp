@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
@@ -71,10 +72,10 @@
 				<tr>
 					<th class="required">单位性质</th>
 					<td>
-						<select id="quality" name="quality" class="selectpicker" data-live-search="true" title="请选择" style="width: 300px;">
-							<option>请选择</option>
-							<option>国家体育总局</option>
-							<option>国家体育局射击队</option>
+						<select id="quality" name="quality" class="selectpicker" title="请选择" style="width: 300px;">
+							<c:forEach items="${dics}" var="dic">
+								<option value="${dic.code}">${dic.name}</option>
+							</c:forEach>
 						</select>
 						<span style="color:rgb(255, 102, 0);" class="quality-error"></span>
 					</td>

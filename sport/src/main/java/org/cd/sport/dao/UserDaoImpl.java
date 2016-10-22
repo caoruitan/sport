@@ -206,7 +206,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 				+ "U.DEPT AS \"dept\",U.DEGREES AS \"degrees\",U.MAJOR AS \"major\",U.TELEPHONE AS \"telephone\","
 				+ "U.PHONE AS \"phone\",U.ADDRESS AS \"address\",O.FULL_NAME as \"orgName\",O.EMAIL AS \"email\", D.NAME AS \"credTypeName\" from SPORT_USER U "
 				+ "LEFT JOIN SPORT_ORGANIZATION O ON U.ORGANIZATION=O.ORG_ID "
-				+ "LEFT JOIN SPORT_DIC D ON D.ID = U.CRED_TYPE WHERE 1=1 ");
+				+ "LEFT JOIN SPORT_DIC D ON D.CODE = U.CRED_TYPE WHERE 1=1 ");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (query != null) {

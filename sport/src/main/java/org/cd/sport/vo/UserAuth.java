@@ -19,6 +19,8 @@ public class UserAuth extends User {
 
 	private String orgName;
 
+	private String orgId;
+
 	private static final long serialVersionUID = 299066218635972319L;
 
 	public UserAuth(String username, String password, boolean enabled, boolean accountNonExpired,
@@ -49,5 +51,13 @@ public class UserAuth extends User {
 
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
 	}
 }
