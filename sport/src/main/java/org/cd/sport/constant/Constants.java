@@ -36,9 +36,39 @@ public class Constants {
 		public static final String DIC_CRED_CODE = "001";
 
 		/**
+		 * 数据字典-职称
+		 */
+		public static final String DIC_ZC_CODE = "002";
+
+		/**
+		 * 数据字典-职务
+		 */
+		public static final String DIC_ZW_CODE = "003";
+
+		/**
 		 * 数据字典-学历
 		 */
-		public static final String DIC_DEGREES_CODE = "002";
+		public static final String DIC_DEGREES_CODE = "004";
+
+		/**
+		 * 数据字典-单位性质
+		 */
+		public static final String DIC_QUALITY_CODE = "006";
+
+		/**
+		 * 数据字典-课题活动
+		 */
+		public static final String DIC_KT_ACTVITY_CODE = "008";
+
+		/**
+		 * 数据字典-应用行业领域
+		 */
+		public static final String DIC_APP_CODE = "009";
+
+		/**
+		 * 数据字典-创新类型
+		 */
+		public static final String DIC_CREATE_CODE = "010";
 
 		/**
 		 * 数据字典-预期成果
