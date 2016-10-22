@@ -43,7 +43,7 @@
 		<intercept-url pattern="/subject/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/subject/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/subject/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
