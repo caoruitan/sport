@@ -218,9 +218,9 @@
 
 	<div class="titleBox1">
 		<div class="tip">申报书填报</div>
-		<div class="title">国民体质测试器材标注的研究<span>已提交至本单位管理员</span></div>
+		<div class="title">${subject.name}<span>${status[sbs.status]}</span></div>
 		<div class="btnBox">
-			<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>提交</button>
+			<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
 		</div>
 	</div>
 
@@ -279,9 +279,6 @@
 					<li class="dot" id="e-spyj" onclick="showLayout('b-spyj')">
 						<a title="国家体育总局审批意见">14 国家体育总局审批意见</a>
 					</li>
-					<li class="dot" id="e-jy" onclick="showLayout('b-jy')">
-						<a title="申报书校验提交">申报书校验提交</a>
-					</li>
 				</div>
 			</div>
 		</div>
@@ -330,23 +327,23 @@
 								</tr>
 								<tr>
 									<th>通信地址</th>
-									<td><input name="address" type="text" value="" /></td>
+									<td><input name="address" type="text" value="${sbs.address}" /></td>
 								</tr>
 								<tr>
 									<th>联系电话</th>
-									<td><input name="phone" type="text" value="" /></td>
+									<td><input name="phone" type="text" value="${sbs.phone}" /></td>
 								</tr>
 								<tr>
 									<th>传真</th>
-									<td><input name="fax" type="text" value="" /></td>
+									<td><input name="fax" type="text" value="${sbs.fax}" /></td>
 								</tr>
 								<tr>
 									<th>电子邮箱</th>
-									<td><input name="email" type="text" value="" /></td>
+									<td><input name="email" type="text" value="${sbs.email}" /></td>
 								</tr>
 								<tr>
 									<th>完成年限</th>
-									<td><input name="years" type="text" value="" /></td>
+									<td><input name="years" type="text" value="${sbs.years}" /></td>
 								</tr>
 							</table>
 						</form>
@@ -364,7 +361,7 @@
 					<form id="xtyjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="xtyj"></textarea>
+						<textarea style="width:100%;height:400px;" name="xtyj">${sbs.xtyj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="xtyjFormSubmit" class="btn-red btn-size-big" onclick="saveXtyj()">保存</button>
@@ -379,7 +376,7 @@
 					<form id="yjmbForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yjmb"></textarea>
+						<textarea style="width:100%;height:400px;" name="yjmb">${sbs.yjmb}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yjmbFormSubmit" class="btn-red btn-size-big" onclick="saveYjmb()">保存</button>
@@ -394,7 +391,7 @@
 					<form id="jsgjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="jsgj"></textarea>
+						<textarea style="width:100%;height:400px;" name="jsgj">${sbs.jsgj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="jsgjFormSubmit" class="btn-red btn-size-big" onclick="saveJsgj()">保存</button>
@@ -409,7 +406,7 @@
 					<form id="yjffForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yjff"></textarea>
+						<textarea style="width:100%;height:400px;" name="yjff">${sbs.yjff}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yjffFormSubmit" class="btn-red btn-size-big" onclick="saveYjff()">保存</button>
@@ -424,7 +421,7 @@
 					<form id="syfaForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="syfa"></textarea>
+						<textarea style="width:100%;height:400px;" name="syfa">${sbs.syfa}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="syfaFormSubmit" class="btn-red btn-size-big" onclick="saveSyfa()">保存</button>
@@ -439,7 +436,7 @@
 					<form id="jdapForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="jdap"></textarea>
+						<textarea style="width:100%;height:400px;" name="jdap">${sbs.jdap}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="jdapFormSubmit" class="btn-red btn-size-big" onclick="saveJdap()">保存</button>
@@ -454,7 +451,7 @@
 					<form id="yqjgForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yqjg"></textarea>
+						<textarea style="width:100%;height:400px;" name="yqjg">${sbs.yqjg}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yqjgFormSubmit" class="btn-red btn-size-big" onclick="saveYqjg()">保存</button>
@@ -469,7 +466,7 @@
 					<form id="gztjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="gztj"></textarea>
+						<textarea style="width:100%;height:400px;" name="gztj">${sbs.gztj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="gztjFormSubmit" class="btn-red btn-size-big" onclick="saveGztj()">保存</button>
@@ -492,7 +489,7 @@
 					<form id="tjyjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="tjyj"></textarea>
+						<textarea style="width:100%;height:400px;" name="tjyj">${sbs.tjyj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="tjyjFormSubmit" class="btn-red btn-size-big" onclick="saveTjyj()">保存</button>
@@ -511,13 +508,6 @@
 			<!--14 国家体育总局审批意见-->
 			<div class="box b-spyj">
 				<div class="t">14 国家体育总局审批意见</div>
-			</div>
-			<!--申报书校验提交-->
-			<div class="box b-jy">
-				<div class="t">申报书校验提交</div>
-				<div class="c">
-					<button class="btn-red btn-size-big" type="">开始校验</button>
-				</div>
 			</div>
 		</div>
 	</div>

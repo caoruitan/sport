@@ -1,5 +1,6 @@
 package org.cd.sport.service;
 
+import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.SubjectSbsDao;
 import org.cd.sport.domain.SubjectSbs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 		return this.subjectSbsDao.getEntityById(SubjectSbs.class, id);
 	}
 	
+	@Override
 	public SubjectSbs getSbsBySubjectId(String subjectId) {
 		return this.subjectSbsDao.getSbsBySubjectId(subjectId);
 	}
@@ -26,6 +28,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	public SubjectSbs createSubjectSbs(String subjectId) {
 		SubjectSbs sbs = new SubjectSbs();
 		sbs.setSubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBOPER_TB);
 		this.subjectSbsDao.save(sbs);
 		return sbs;
 	}

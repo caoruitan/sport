@@ -18,6 +18,7 @@ import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -139,8 +140,11 @@ public class SubjectSbOperAction {
 	public String sbstb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectSbs.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
+		request.setAttribute("sbs", sbs);
 		return "subject/sboper/sbstb";
 	}
 	
