@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.service.NewsService;
+import org.cd.sport.service.SubjectService;
+import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.vo.NewsVo;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +20,14 @@ public class PortalAction {
 
 	@Autowired
 	private NewsService newsService;
+	
+	@Autowired
+	private SubjectService subjectService;
 
 	/**
 	 * 查询新闻
 	 */
 	public void queryNews(HttpServletRequest request) {
-		// 查询课题总数(招标回退)
-		request.setAttribute("zb_return_total", 10);
-		// 查询课题总数(招标结题)
-		request.setAttribute("zb_end_total", 10);
-		// 查询课题总数(科研回退)
-		request.setAttribute("ky_return_total", 10);
-		// 查询课题总数(科研结题)
-		request.setAttribute("ky_end_total", 10);
 		// 查询新闻
 		Integer[] columns = new Integer[] { Constants.News.SB_NEWS };
 		List<NewsVo> news = this.newsService.getByColumn(columns, 0, 10);
@@ -49,6 +47,24 @@ public class PortalAction {
 	@RequestMapping("kjsadmin/index.htm")
 	public String gotoIndex(HttpServletRequest request) {
 		queryNews(request);
+		int kt_zs = subjectService.getAllSubjectCount();
+		int zbkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_ZBKT);
+		int zbkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int zbkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kyggkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_KYGGKT);
+		int kyggkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kyggkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("zbkt_zs", zbkt_zs);
+		request.setAttribute("zbkt_sbs", zbkt_sbs);
+		request.setAttribute("zbkt_rws", zbkt_rws);
+		request.setAttribute("zbkt_jt", zbkt_jt);
+		request.setAttribute("kyggkt_zs", kyggkt_zs);
+		request.setAttribute("kyggkt_sbs", kyggkt_sbs);
+		request.setAttribute("kyggkt_rws", kyggkt_rws);
+		request.setAttribute("kyggkt_jt", kyggkt_jt);
 		request.setAttribute("user_type", "kjsadmin");
 		return "portal/kjsadmin";
 	}
@@ -59,6 +75,24 @@ public class PortalAction {
 	@RequestMapping("kjsleader/index.htm")
 	public String kjsleaderIndex(HttpServletRequest request) {
 		queryNews(request);
+		int kt_zs = subjectService.getAllSubjectCount();
+		int zbkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_ZBKT);
+		int zbkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int zbkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kyggkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_KYGGKT);
+		int kyggkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kyggkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("zbkt_zs", zbkt_zs);
+		request.setAttribute("zbkt_sbs", zbkt_sbs);
+		request.setAttribute("zbkt_rws", zbkt_rws);
+		request.setAttribute("zbkt_jt", zbkt_jt);
+		request.setAttribute("kyggkt_zs", kyggkt_zs);
+		request.setAttribute("kyggkt_sbs", kyggkt_sbs);
+		request.setAttribute("kyggkt_rws", kyggkt_rws);
+		request.setAttribute("kyggkt_jt", kyggkt_jt);
 		request.setAttribute("user_type", "kjsleader");
 		return "portal/kjsleader";
 	}
@@ -69,6 +103,15 @@ public class PortalAction {
 	@RequestMapping("kjsexpert/index.htm")
 	public String kjsexpertIndex(HttpServletRequest request) {
 		queryNews(request);
+		UserVo user = AuthenticationUtils.getUser();
+		int kt_zs = subjectService.getSubjectCountByExpert(user.getOrganization());
+		int kt_sbs = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("kt_sbs", kt_sbs);
+		request.setAttribute("kt_rws", kt_rws);
+		request.setAttribute("kt_jt", kt_jt);
 		request.setAttribute("user_type", "kjsexpert");
 		return "portal/kjsexpert";
 	}
@@ -79,6 +122,16 @@ public class PortalAction {
 	@RequestMapping("sbadmin/index.htm")
 	public String sbadminIndex(HttpServletRequest request) {
 		queryNews(request);
+		UserVo user = AuthenticationUtils.getUser();
+		int kt_zs = subjectService.getSubjectCountByCreateUnit(user.getOrganization());
+		int kt_sbs = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("kt_sbs", kt_sbs);
+		request.setAttribute("kt_rws", kt_rws);
+		request.setAttribute("kt_jt", kt_jt);
+		request.setAttribute("user_type", "sbadmin");
 		return "portal/sbadmin";
 	}
 
@@ -88,6 +141,16 @@ public class PortalAction {
 	@RequestMapping("sboper/index.htm")
 	public String sboperIndex(HttpServletRequest request) {
 		queryNews(request);
+		UserVo user = AuthenticationUtils.getUser();
+		int kt_zs = subjectService.getSubjectCountByCreator(user.getUserId());
+		int kt_sbs = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("kt_sbs", kt_sbs);
+		request.setAttribute("kt_rws", kt_rws);
+		request.setAttribute("kt_jt", kt_jt);
+		request.setAttribute("user_type", "sboper");
 		return "portal/sboper";
 	}
 
@@ -97,6 +160,16 @@ public class PortalAction {
 	@RequestMapping("orgadmin/index.htm")
 	public String orgadminIndex(HttpServletRequest request) {
 		queryNews(request);
+		UserVo user = AuthenticationUtils.getUser();
+		int kt_zs = subjectService.getSubjectCountByOrg(user.getOrganization());
+		int kt_sbs = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("kt_sbs", kt_sbs);
+		request.setAttribute("kt_rws", kt_rws);
+		request.setAttribute("kt_jt", kt_jt);
+		request.setAttribute("user_type", "orgadmin");
 		return "portal/orgadmin";
 	}
 
@@ -106,6 +179,16 @@ public class PortalAction {
 	@RequestMapping("orgoper/index.htm")
 	public String orgoperIndex(HttpServletRequest request) {
 		queryNews(request);
+		UserVo user = AuthenticationUtils.getUser();
+		int kt_zs = subjectService.getSubjectCountByOrg(user.getOrganization());
+		int kt_sbs = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		request.setAttribute("kt_zs", kt_zs);
+		request.setAttribute("kt_sbs", kt_sbs);
+		request.setAttribute("kt_rws", kt_rws);
+		request.setAttribute("kt_jt", kt_jt);
+		request.setAttribute("user_type", "orgoper");
 		return "portal/orgoper";
 	}
 }

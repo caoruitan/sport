@@ -233,20 +233,24 @@ public class Constants {
 		public static final String SUBJECT_STAGE_JDBG = "JDBG";
 
 		public static final String SUBJECT_STAGE_JTBG = "JTBG";
+		
+		public static final String SUBJECT_TYPE_ZBKT = "ZBKT";
+
+		public static final String SUBJECT_TYPE_KYGGKT = "KYGGKT";
 
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put("ZBKT", "招标课题");
-			types.put("KYGGKT", "科技攻关课题");
+			types.put(SUBJECT_TYPE_ZBKT, "招标课题");
+			types.put(SUBJECT_TYPE_KYGGKT, "科技攻关课题");
 			return types;
 		}
 
 		public static Map<String, String> getSubjectStages() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put("SBSTB", "申报书填报");
-			types.put("RWSTB", "任务书填报");
-			types.put("JDBG", "阶段报告");
-			types.put("JTBG", "结题报告");
+			types.put(SUBJECT_STAGE_SBSTB, "申报书填报");
+			types.put(SUBJECT_STAGE_RWSTB, "任务书填报");
+			types.put(SUBJECT_STAGE_JDBG, "阶段报告");
+			types.put(SUBJECT_STAGE_JTBG, "结题报告");
 			return types;
 		}
 	}
