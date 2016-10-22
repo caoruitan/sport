@@ -72,20 +72,12 @@
 		    } 
 			return this.optional(element) || /^[\u0391-\uFFE5\w]{1,200}$/.test(value); 
 		}); 
-		
-		jQuery.validator.addMethod("valueCheck", function(value, element) { 
-		    if(Sport.isNull(value)){
-		    	return true;
-		    } 
-			return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
-		}); 
-		
 		$("#dic-update-form").validate({
 	        rules: {
 	        	name:{
 	                required: true,
-	                maxlength:50,
-	                remote:{     
+	                maxlength:50
+	                /*remote:{     
 	                    type:"POST",
 	                    url:"<%=basePath%>/dic/update/check.action",
 	                    data:{
@@ -93,10 +85,10 @@
 	                    	_csrf:function(){return $("#csrdId").val()},
 	                    	dicCode:function(){return $("#dicCode").val()}
 	                    }
-	                 }
+	                 }*/
 	            },
 	            value:{
-	            	valueCheck:true
+	            	maxlength:20
 	            },
 	            description: {
 	            	descriptionCheck:true
@@ -109,7 +101,7 @@
 	                remote:"名称已经存在"
 	            },
 	            value:{
-	            	valueCheck:'值在1-20个字符之间'
+	            	maxlength:'值在1-20个字符之间'
 	            },
 	            description: {
 	            	descriptionCheck:'描述在200个字符之间'

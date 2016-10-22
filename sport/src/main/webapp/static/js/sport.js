@@ -1044,7 +1044,7 @@ $(function(){
 	
 	// 注册单位审核
 	$(document).on("click",".sport-register-verfiy",function(){
-		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";
 	}).on("click",".sprot-search-org",function(){
 		var fullName = $("#fullName").val();
 		var legalLeader = $("#legalLeader").val();
@@ -1052,15 +1052,15 @@ $(function(){
 		$("#orgGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{fullName:fullName,legalLeader:legalLeader,status:orgStatus}}).trigger('reloadGrid');
 	}).on("click",".sport-org-manager-query",function(){
 		var orgId = $(this).attr("data-id");
-		window.location.href = Sport.getBasePath()+"/org/kjsadmin/user.htm?orgId="+orgId;
+		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/user.htm?orgId="+orgId;
 	}).on("click",".sport-org-query",function(){
 		var orgId = $(this).attr("data-id");
-		window.location.href = Sport.getBasePath()+"/org/kjsadmin/detail.htm?orgId="+orgId;
+		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/detail.htm?orgId="+orgId;
 	}).on("click",".orgdetail-returnBtn",function(){
-		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";
 	}).on("click",".sport-org-verify",function(){
 		var orgId = $(this).attr("data-id");
-		window.location.href = Sport.getBasePath()+"/org/kjsadmin/verify.htm?orgId="+orgId;
+		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/verify.htm?orgId="+orgId;
 	})
 	
 	//我的课题

@@ -38,7 +38,7 @@
 <script type="text/javascript"> 
         $(function () {
             $("#orgDetailDiv").jqGrid({
-            	url: "<%=basePath %>/org/kjsadmin/userDatas.action?orgId=${org.orgId}",
+            	url: "<%=basePath %>/sborg/kjsadmin/userDatas.action?orgId=${org.orgId}",
             	datatype: "json",
             	mtype: "GET",
 				colModel: [

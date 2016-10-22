@@ -16,7 +16,7 @@
         <pattern>/dic/*.htm</pattern>
         <pattern>/news/kjsadmin/*.htm</pattern>
         <pattern>/subject/kjsadmin/*.htm</pattern>
-        <pattern>/org/kjsadmin/*.htm</pattern>
+        <pattern>/sborg/kjsadmin/*.htm</pattern>
     </decorator>
     
     <!-- 领导 -->

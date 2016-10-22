@@ -79,7 +79,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	@Transactional
 	public boolean create(DicView dic) {
 		Dic process = this.process(dic);
-		this.validName(process.getName());
+		//this.validName(process.getName());
 		DicType dicType = dicTypeDao.findByCode(dic.getpCode());
 		if (dicType == null) {
 			throw new EntityNotFoundException("数据对象类型不存在");
@@ -102,7 +102,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 		String code = oldDic.getCode();
 		String pCode = oldDic.getpCode();
 		int sort = oldDic.getSort();
-		this.validName(dic.getName(), oldDic);
+		//this.validName(dic.getName(), oldDic);
 		BeanUtils.copyProperties(dic, oldDic);
 		oldDic.setpCode(pCode);
 		oldDic.setCode(code);

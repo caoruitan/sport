@@ -95,7 +95,7 @@
 			         xhr.setRequestHeader(header, token);
 			    });
 				$.ajax({
-					url: Sport.getBasePath()+"/org/kjsadmin/pass.action",
+					url: Sport.getBasePath()+"/sborg/kjsadmin/pass.action",
 					type: "POST",
 					data: {orgId:$(".sport-verify-pass").attr("data-id")},
 					error: function () {
@@ -105,7 +105,7 @@
 					success: function (obj) {
 						if(obj){
 							layer.msg("审核单位成功！");
-							window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+							window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";
 						}else{
 							layer.msg("审核单位失败！");
 						}
@@ -120,15 +120,41 @@
 		$('.sport-verify-unpass').dialog({
 			id: 'btg',
 			title: '审核不通过',
-			content: '<div class="dlg-contentbox"><textarea placeholder="请填写退回意见" name="" style="width:530px" rows="4" cols="10"></textarea></div>',
+			content: '<div class="dlg-contentbox"><textarea id="verify-msg" placeholder="请填写退回意见" name="" style="width:530px" rows="4" cols="10"></textarea></br><span style="color:rgb(255, 102, 0);padding-left:10px;" class="msg-error"></span></div>',
 			width: 600,
 			height: 230,
-			ok: function(data){
+			ok: function(data ,ddd,dd,rr){
+				var msg = $("#verify-msg").val();
+				if(Sport.isNull(msg)){
+					$(".msg-error").text("请填写退回意见");
+					return false;
+				}else{
+					$(".msg-error").text("");
+				}
 				var token = $("meta[name='_csrf']").attr("content");
 			    var header = $("meta[name='_csrf_header']").attr("content");
 			    $(document).ajaxSend(function(e, xhr, options) {
 			         xhr.setRequestHeader(header, token);
 			    });
+			    $.ajax({
+					url: Sport.getBasePath()+"/sborg/kjsadmin/unpass.action",
+					type: "POST",
+					data: {orgId:$(".sport-verify-unpass").attr("data-id"),msg:msg},
+					error: function () {
+						layer.msg("系统异常，请稍后重试!");
+						$(".sport-verify-unpass").removeAttr("disabled");
+					},
+					success: function (obj) {
+						debugger;
+						if(obj){
+							layer.msg("审核单位成功！");
+							window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";
+						}else{
+							layer.msg("审核单位失败！");
+						}
+						$(".sport-verify-unpass").removeAttr("disabled");
+					}
+				})
 			},
 			cancel: true
 		});

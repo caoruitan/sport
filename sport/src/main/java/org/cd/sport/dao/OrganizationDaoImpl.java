@@ -177,6 +177,7 @@ public class OrganizationDaoImpl extends BaseDaoImpl<OrganizationDomain> impleme
 		hibernateSqlQuery.addScalar("legalLeader");
 		hibernateSqlQuery.addScalar("region");
 		hibernateSqlQuery.addScalar("telphone");
+		hibernateSqlQuery.addScalar("status");
 		this.processQuery(hibernateSqlQuery, params);
 		hibernateSqlQuery.setMaxResults(limit);
 		hibernateSqlQuery.setFirstResult(start);

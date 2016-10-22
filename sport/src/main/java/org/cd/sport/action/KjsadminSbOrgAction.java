@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author liuyk
  */
 @Controller
-@RequestMapping("org")
-public class KjsadminOrgAction {
+@RequestMapping("sborg")
+public class KjsadminSbOrgAction {
 
 	@Autowired
 	private OrganizationService organizationService;
@@ -44,7 +44,7 @@ public class KjsadminOrgAction {
 	public String gotoOrgList(OrgQuery org, HttpServletRequest request) {
 		Map<Integer, String> status = Constants.Org.getStatus();
 		request.setAttribute("status", status);
-		return "org/list";
+		return "sborg/list";
 	}
 
 	@RequestMapping(value = "/kjsadmin/datas", method = RequestMethod.GET)
@@ -67,7 +67,7 @@ public class KjsadminOrgAction {
 		String orgId = request.getParameter("orgId");
 		OrganizationDomain org = this.organizationService.getById(orgId);
 		request.setAttribute("org", org);
-		return "org/user";
+		return "sborg/user";
 	}
 
 	@RequestMapping(value = "/kjsadmin/userDatas.action", method = RequestMethod.GET)
@@ -91,18 +91,18 @@ public class KjsadminOrgAction {
 		String orgId = request.getParameter("orgId");
 		OrganizationDomain org = this.organizationService.getById(orgId);
 		request.setAttribute("org", org);
-		return "org/detail";
+		return "sborg/detail";
 	}
 
 	@RequestMapping(value = "/kjsadmin/verify.htm", method = RequestMethod.GET)
 	public String verfiyView(HttpServletRequest request, HttpServletResponse response) {
 		String orgId = request.getParameter("orgId");
 		OrganizationDomain org = this.organizationService.getById(orgId);
-		if (org == null) {
+		if (org == null || org.getStatus() != Constants.Org.wait_verify) {
 			throw new EntityNotFoundException("单位不存在");
 		}
 		request.setAttribute("org", org);
-		return "org/verify";
+		return "sborg/verify";
 	}
 
 	@RequestMapping(value = "/kjsadmin/pass.action", method = RequestMethod.POST)
@@ -115,7 +115,7 @@ public class KjsadminOrgAction {
 		PageWrite.writeTOPage(response, pass);
 	}
 
-	@RequestMapping(value = "/kjsadmin/uppass.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/kjsadmin/unpass.action", method = RequestMethod.POST)
 	public void verifyUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String orgId = request.getParameter("orgId");
 		String msg = request.getParameter("msg");
@@ -123,6 +123,6 @@ public class KjsadminOrgAction {
 			throw new ParameterIsWrongException("注册单位id为空");
 		}
 		boolean unpass = this.organizationService.unpass(orgId, msg);
-		request.setAttribute("org", unpass);
+		PageWrite.writeTOPage(response, unpass);
 	}
 }

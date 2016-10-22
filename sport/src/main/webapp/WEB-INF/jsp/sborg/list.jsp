@@ -54,7 +54,7 @@
 			$(function() {
 				$("#orgGridDiv").jqGrid({
 					datatype: "json",
-					url: "<%=basePath%>/org/kjsadmin/datas.action",
+					url: "<%=basePath%>/sborg/kjsadmin/datas.action",
 					colModel: [{
 						name: 'orgId',
 						width: 5,
