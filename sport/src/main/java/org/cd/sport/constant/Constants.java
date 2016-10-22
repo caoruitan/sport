@@ -39,6 +39,17 @@ public class Constants {
 		 * 数据字典-学历
 		 */
 		public static final String DIC_DEGREES_CODE = "002";
+
+		/**
+		 * 数据字典-预期成果
+		 */
+		public static final String DIC_EXPECT_CODE = "011";
+
+		/**
+		 * 数据字典-密级
+		 */
+		public static final String DIC_SECRET_CODE = "014";
+
 	}
 
 	public static final class User {
