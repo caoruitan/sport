@@ -28,7 +28,7 @@
 	<body>
 		<div class="titleBox">
 			<div class="title"><img src="<%=basePath %>/static/img/m-dw.png" />单位:${org.fullName}<span></span></div>
-			<div class="returnBtn orgdetail-returnBtn">返回列表</div>
+			<div class="returnBtn sborgdetail-returnBtn">返回列表</div>
 		</div>
 		<div class="viewBox">
 			<table class="viewTable">

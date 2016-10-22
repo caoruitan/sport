@@ -78,8 +78,9 @@ public class RegisterAction extends BaseUserAction {
 			throw new EntityNotFoundException("单位不存在！");
 		}
 		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
+		List<Dic> address = this.dicService.getByPcode(Constants.Dic.DIC_ADDRESS_CODE);
 		request.setAttribute("dics", dics);
-		request.setAttribute("org", org);
+		request.setAttribute("address", address);
 		return "register/org_update";
 	}
 
@@ -107,8 +108,10 @@ public class RegisterAction extends BaseUserAction {
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
 		request.setAttribute("user_type", "kjsadmin");
-		request.setAttribute("credCode", Constants.Dic.DIC_CRED_CODE);
-		request.setAttribute("degreesCode", Constants.Dic.DIC_DEGREES_CODE);
+		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
+		List<Dic> address = this.dicService.getByPcode(Constants.Dic.DIC_ADDRESS_CODE);
+		request.setAttribute("dics", dics);
+		request.setAttribute("address", address);
 		request.setAttribute("organization", orgId);
 		if (user != null) {
 			request.setAttribute("user", user);

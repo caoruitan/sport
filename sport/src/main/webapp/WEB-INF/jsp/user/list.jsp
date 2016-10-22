@@ -37,7 +37,7 @@
 			</div>
 		</c:if>
 	</div>
-	<table id="jqGrid"></table>
+	<table id="jqGrid" class="sport-grid"></table>
     <div id="jqGridPager"></div>
 </div>
 <script type="text/javascript"> 

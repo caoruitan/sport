@@ -9,15 +9,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>国家体育总局科研项目申报系统-单位注册</title>
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/my.select.css">
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />
-		<script type="text/javascript" src="<%=basePath %>/static/js/jquery.min1.10.1.js" charset="utf-8"></script>
-		<script type="text/javascript" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<%=basePath %>/static/js/common.js"></script>
 		<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 		<script type="text/javascript" src="<%=basePath %>/static/js/my97/WdatePicker.js" charset="utf-8"></script>
 		<style type="text/css">
@@ -27,17 +20,15 @@
 		</style>
 	</head>
 	<body>
-		<div class="layout_top">
-			<div class="top_logo_register">单位注册</div>
-			<div class="op">
-				<a href="<%=basePath %>/login.htm">直接登录</a>
-			</div>
+		<div class="titleBox">
+			<div class="title"><img src="<%=basePath %>/static/img/yh.png" />组织新增<span>所有加 * 的区域为必填项。</span></div>
+		    <div class="returnBtn org-returnBtn">返回列表</div>
 		</div>
-		<div class="editBox registBox">
-			<div class="b-title">一、申报单位信息<span class="redfont"></span></div>
-			<form class="register-form">
+		<div class="editBox">
+			<div class="b-title">一、组织单位信息<span class="redfont"></span></div>
+			<form class="org-form">
 			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-			  <table class="editTable registTable">
+			  <table class="editTable">
 				<tr>
 					<th class="required">单位全称</th>
 					<td><input name="fullName" type="text" value="" id="fullName"/></td>
@@ -100,7 +91,7 @@
 				</tr>
 			</table>
 			<div class="b-title">二、业务负责人信息</div>
-			<table class="editTable registTable">
+			<table class="editTable">
 				<tr>
 					<th class="required">姓名</th>
 					<td><input name="managerName" type="text" value="" /></td>
@@ -120,8 +111,8 @@
 				<tr>
 					<td colspan="4">
 						<p class="save-btn">
-							<button class="btn-red btn-size-big sport-regist-first" type="button">下一步</button>
-							<button class="btn-wisteria btn-size-big">重置</button>
+							<button class="btn-red btn-size-big sport-orgcreate-first" type="button">下一步</button>
+							<button class="btn-wisteria btn-size-big org-form-cancel">取消</button>
 						</p>
 					</td>
 				</tr>
@@ -129,13 +120,8 @@
 		</form>
 	</div>
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>/static/js/sport.js"></script>
-<script type="text/javascript" src="<%=basePath %>/static/js/plugin/location.js"></script>
-<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//var loc	= new Location();
-		//loc.fillOption('loc_province' , '0');
 		jQuery.validator.addMethod("englishNameCheck", function(value, element) { 
 		    if(Sport.isNull(value)){
 		    	return true;
@@ -196,7 +182,7 @@
 		}); 
 		
 		// 登录验证
-		$(".register-form").validate({
+		$(".org-form").validate({
 	        rules: {
 	        	fullName:{
 	                required: true,

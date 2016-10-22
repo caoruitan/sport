@@ -17,7 +17,6 @@
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/lhgdialog/lhgdialog.js"></script>
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
-	<script type="text/ecmascript" src="<%=basePath %>/static/js/plugin/location.js"></script>
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
@@ -29,7 +28,7 @@
 	<body>
 		<div class="titleBox">
 			<div class="title"><img src="<%=basePath %>/static/img/yh.png" />${org.fullName}</div>
-			<div class="returnBtn sborgdetail-returnBtn">返回列表</div>
+			<div class="returnBtn orgdetail-returnBtn">返回列表</div>
 		</div>
 		<div class="listBox">
 			<table id="orgDetailDiv" class="sport-grid"></table>
@@ -38,7 +37,7 @@
 <script type="text/javascript"> 
         $(function () {
             $("#orgDetailDiv").jqGrid({
-            	url: "<%=basePath %>/sborg/kjsadmin/userDatas.action?orgId=${org.orgId}",
+            	url: "<%=basePath %>/org/kjsadmin/userDatas.action?orgId=${org.orgId}",
             	datatype: "json",
             	mtype: "GET",
 				colModel: [
@@ -52,12 +51,10 @@
 	              ],
                 autowidth:true,
 				viewrecords: true,
-                height: 200,
                 rowNum: 20,
                 multiselect: true,
                 pager: "#jqGridPager"
             });
-            //$("#orgDetailDiv").addRowData(1,$.parseJSON('${user}'));
 			doResize(); 
         });
    </script>

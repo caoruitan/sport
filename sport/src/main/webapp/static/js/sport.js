@@ -89,6 +89,114 @@ var Sport = {
         }
         return false;
     },
+    createOrg:function(fromCls,btnCls,ajaxUrl,returnUrl,operName){
+    	var region = $("#loc_province").val();
+		var regionFlag = Sport.isNull(region);
+		if(regionFlag){
+			$(".region-error").text("请选择地区");
+		}else{
+			$(".region-error").text("");
+		}
+		
+		var quality = $("#quality").val();
+		var qualityFlag = Sport.isNull(quality);
+		if(qualityFlag){
+			$(".quality-error").text("请选择单位性质");
+		}else{
+			$(".quality-error").text("");
+		}
+		if($("."+fromCls).valid() && !regionFlag && !qualityFlag){
+			$('.'+btnCls).text("提交中...");
+			$('.'+btnCls).attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+ajaxUrl,
+				type: "POST",
+				//dataType: "JSON",
+				data: $("."+fromCls).serialize(),
+				error: function () {
+					$('.'+btnCls).removeAttr("disabled");
+					$('.'+btnCls).text("保存");
+					layer.msg("系统异常，请稍后重试!");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg(operName+"成功!");
+						window.location.href = Sport.getBasePath()+returnUrl+"?orgId="+obj;
+					}else{
+						layer.msg(operName+"失败!");
+					}
+					$('.'+btnCls).removeAttr("disabled");
+					$('.'+btnCls).text("保存");
+				}
+			})
+		}
+    },
+    createManager:function(fromCls,btnCls,ajaxUrl,returnUrl,operName){
+    	// 证书校验
+		var credType = $(".credType-select").val();
+		var credFlag = Sport.isNull(credType);
+		if(credFlag){
+			$(".credType-error").text("请选择证件类型");
+		}else{
+			$(".credType-error").text("");
+		}
+		// 性别校验
+		var gender = $(".gender-select").val();
+		var genderFlag = Sport.isNull(gender);
+		if(genderFlag){
+			$(".gender-error").text("请选择性别");
+		}else{
+			$(".gender-error").text("");
+		}
+		
+		// 验证通过
+		if($("."+fromCls).valid() && !credFlag && !genderFlag){
+			$('.'+btnCls).text("提交中...");
+			$('.'+btnCls).attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+ajaxUrl,
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					uuid:$('#uuid').val(),
+					_csrf:$("#csrdId").val(),
+					userId:$('#userId').val(),
+					userName:$('#userName').val(),
+					loginName:$('#loginName').val(),
+					credType:$('#credType').val(),
+					credNo:$('#credNo').val(),
+					gender:$('#gender').val(),
+					role:$('input[name="role"]:checked').val(),
+					organization:$('#organization').val(),
+					birthday:$('#birthday').val(),
+					zc:$('#zc').val(),
+					zw:$('#zw').val(),
+					dept:$('#dept').val(),
+					major:$('#major').val(),
+					email:$('#email').val(),
+					telephone:$('#telephone').val(),
+					phone:$('#phone').val(),
+					address:$('#address').val(),
+					degrees:$("#degrees").val(),
+					password:Sport.getEntryptPwd($('#pubKey').val(),$('#password').val())
+				},
+				error: function () {
+					$('.'+btnCls).removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试!");
+				},
+				success: function (obj) {
+					if(obj.success){
+						layer.msg(operName+"成功!");
+						window.location.href = Sport.getBasePath()+returnUrl;
+					}else{
+						layer.msg(obj.msg);
+					}
+					$('.'+btnCls).removeAttr("disabled");
+					$('.'+btnCls).text("保存");
+				}
+			})
+		}
+    }
 };
 
 $(function(){
@@ -1046,15 +1154,15 @@ $(function(){
 		var legalLeader = $("#legalLeader").val();
 		var orgStatus = $("#orgStatus").val();
 		$("#orgGridDiv").jqGrid('setGridParam',{datatype:'json',postData:{fullName:fullName,legalLeader:legalLeader,status:orgStatus}}).trigger('reloadGrid');
-	}).on("click",".sport-org-manager-query",function(){
+	}).on("click",".sport-sborg-manager-query",function(){
 		var orgId = $(this).attr("data-id");
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/user.htm?orgId="+orgId;
-	}).on("click",".sport-org-query",function(){
+	}).on("click",".sport-sborg-query",function(){
 		var orgId = $(this).attr("data-id");
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/detail.htm?orgId="+orgId;
-	}).on("click",".orgdetail-returnBtn",function(){
+	}).on("click",".sborgdetail-returnBtn",function(){
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";
-	}).on("click",".sport-org-verify",function(){
+	}).on("click",".sport-sborg-verify",function(){
 		var orgId = $(this).attr("data-id");
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/verify.htm?orgId="+orgId;
 	})
@@ -1062,6 +1170,35 @@ $(function(){
 	//组织单位
 	$(document).on("click",".sport-org-menu",function(){
 		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".sport-org-manager-query",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/user.htm?orgId="+orgId;
+	}).on("click",".sport-org-query",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/detail.htm?orgId="+orgId;
+	}).on("click",".orgdetail-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".sport-org-create-btn",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/create.htm";
+	}).on("click",".org-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".org-form-cancel",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".org-returnBtn",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	}).on("click",".sport-orgcreate-first",function(){
+		Sport.createOrg("org-form", "sport-orgcreate-first", "/org/kjsadmin/create.action", "/org/kjsadmin/manager/update.htm","新增组织单位");
+	}).on("click",".sport-orgcreate-first-back",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/update.htm?orgId="+$(this).attr("data-id");
+	}).on("click",".sport-updateorg-btn",function(){
+		Sport.createOrg("org-form", "sport-updateorg-btn", "/org/kjsadmin/update.action", "/org/kjsadmin/manager/update.htm","修改组织单位");
+	}).on("click",".sport-orgcreate-manager-save",function(){//保存组织单位管理员信息
+		Sport.createManager("sport-user-form", "sport-orgcreate-manager-save", "/org/kjsadmin/manager/create.action", "/org/kjsadmin/list.htm","新增组织单位管理员");
+	}).on("click",".sport-create-manager-back",function(){//返回创建组织机构第一步
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/update.htm?orgId="+$(this).attr("data-id");
+	}).on("click",".sport-create-manager-update",function(){//修改组织单位管理员信息
+		Sport.createManager("sport-user-form", "sport-create-manager-update", "/org/kjsadmin/manager/update.action", "/org/kjsadmin/list.htm","修改组织单位管理员");
 	})
 
 	//课题管理

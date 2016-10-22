@@ -12,7 +12,7 @@ function doResize() {
 	if($(".searchBox").is(':visible')) {
 		height = height - 60;
 	}
-	$("#jqGrid").jqGrid('setGridWidth', $(".listBox").width()).jqGrid('setGridHeight', height);
+	$(".sport-grid").jqGrid('setGridWidth', $(".listBox").width()).jqGrid('setGridHeight', height);
 }
 
 function getPageSize() {

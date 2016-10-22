@@ -47,7 +47,7 @@
 			<button class="search-btn sprot-search-org">查询</button>
 		</div>
 		<div class="listBox">
-			<table id="orgGridDiv"></table>
+			<table id="orgGridDiv" class="sport-grid"></table>
 			<div id="jqGridPager"></div>
 		</div>
 		<script type="text/javascript">
@@ -95,9 +95,9 @@
 						width: 20,
 						align: "center",
 						formatter:function(value, grid, rows, state){
-							var verfiy =  "<a href='javascript:;;' class='sport-org-verify' data-id='"+rows.orgId+"'>审核</a>";
-							var queryUser =  "<a href='javascript:;;' class='sport-org-query' data-id='"+rows.orgId+"'>查看</a>";
-							var queryOrg = "<a href='javascript:;;' class='sport-org-manager-query' data-id='"+rows.orgId+"'>查看用户</a>";
+							var verfiy =  "<a href='javascript:;;' class='sport-sborg-verify' data-id='"+rows.orgId+"'>审核</a>";
+							var queryUser =  "<a href='javascript:;;' class='sport-sborg-query' data-id='"+rows.orgId+"'>查看</a>";
+							var queryOrg = "<a href='javascript:;;' class='sport-sborg-manager-query' data-id='"+rows.orgId+"'>查看用户</a>";
 							if(rows.status == 0){
 								return verfiy+"&nbsp;&nbsp;"+queryOrg;
 							}

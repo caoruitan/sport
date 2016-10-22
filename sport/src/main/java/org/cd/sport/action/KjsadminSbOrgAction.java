@@ -36,7 +36,8 @@ public class KjsadminSbOrgAction extends BaseOrgAction {
 
 	@RequestMapping(value = "/kjsadmin/user.htm", method = RequestMethod.GET)
 	public String orgManagerUser(HttpServletRequest request) {
-		return super.orgManagerUser(request);
+		super.orgManagerUser(request);
+		return "sborg/user";
 	}
 
 	@RequestMapping(value = "/kjsadmin/userDatas.action", method = RequestMethod.GET)
@@ -46,7 +47,8 @@ public class KjsadminSbOrgAction extends BaseOrgAction {
 
 	@RequestMapping(value = "/kjsadmin/detail.htm", method = RequestMethod.GET)
 	public String orgDetail(HttpServletRequest request) {
-		return super.orgDetail(request);
+		super.orgDetail(request);
+		return "sborg/detail";
 	}
 
 	@RequestMapping(value = "/kjsadmin/verify.htm", method = RequestMethod.GET)

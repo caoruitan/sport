@@ -9,15 +9,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>国家体育总局科研项目申报系统-单位注册</title>
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/my.select.css">
-		<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />
-		<script type="text/javascript" src="<%=basePath %>/static/js/jquery.min1.10.1.js" charset="utf-8"></script>
-		<script type="text/javascript" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<%=basePath %>/static/js/common.js"></script>
 		<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 		<script type="text/javascript" src="<%=basePath %>/static/js/my97/WdatePicker.js" charset="utf-8"></script>
 		<style type="text/css">
@@ -27,36 +20,34 @@
 		</style>
 	</head>
 	<body>
-		<div class="layout_top">
-			<div class="top_logo_register">单位注册</div>
-			<div class="op">
-				<a href="<%=basePath %>/login.htm">直接登录</a>
-			</div>
+		<div class="titleBox">
+			<div class="title"><img src="<%=basePath %>/static/img/yh.png" />修改组织单位信息<span>所有加 * 的区域为必填项。</span></div>
 		</div>
-		<div class="editBox registBox">
+		<div class="editBox">
 			<div class="b-title">一、申报单位信息<span class="redfont"></span></div>
-			<form class="register-form">
+			<form class="org-form">
 			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-			  <table class="editTable registTable">
+			  <input type="hidden" name="orgId" value="${org.orgId}" id="orgId"/>
+			  <table class="editTable">
 				<tr>
 					<th class="required">单位全称</th>
-					<td><input name="fullName" type="text" value="" id="fullName"/></td>
+					<td><input name="fullName" type="text" value="${org.fullName}" id="fullName"/></td>
 					<th>英文名称</th>
-					<td><input name="englishName" type="text" value="" id="englishName"/></td>
+					<td><input name="englishName" type="text" value="${org.englishName}" id="englishName"/></td>
 				</tr>
 				<tr>
 					<th>单位简称</th>
-					<td><input name="shortName" type="text" value="" id="shortName"/></td>
+					<td><input name="shortName" type="text" value="${org.shortName}" id="shortName"/></td>
 					<th>单位主页</th>
-					<td><input name="homepage" type="text" value="" id="homepage"/></td>
+					<td><input name="homepage" type="text" value="${org.homepage}" id="homepage"/></td>
 				</tr>
 				<tr>
 					<th class="required">单位地址</th>
-					<td colspan="3"><input name="address" style="width: 560px;" type="text" value="" /></td>
+					<td colspan="3"><input name="address" style="width: 560px;" type="text" value="${org.address}" /></td>
 				</tr>
 				<tr>
 					<th class="required">法人代表</th>
-					<td><input name="legalLeader" type="text" value="" /></td>
+					<td><input name="legalLeader" type="text" value="${org.legalLeader}" /></td>
 					<th class="required">所在地区</th>
 					<td>
 						<select name="region" id="loc_province" class="selectpicker" style="width:300px;" title="请选择" data-live-search="true">
@@ -69,14 +60,14 @@
 				</tr>
 				<tr>
 					<th class="required">单位电话</th>
-					<td><input name="telphone" type="text" value="" /></td>
+					<td><input name="telphone" type="text" value="${org.telphone}" /></td>
 					<th class="required">单位传真</th>
-					<td><input name="fax" type="text" value="" /></td>
+					<td><input name="fax" type="text" value="${org.fax}" /></td>
 				</tr>
 				<tr>
 					<th class="required">单位性质</th>
 					<td>
-						<select id="quality" name="quality" class="selectpicker" title="请选择" style="width: 300px;">
+						<select id="quality" name="quality" class="selectpicker" data-live-search="true" title="请选择" style="width: 300px;">
 							<c:forEach items="${dics}" var="dic">
 								<option value="${dic.code}">${dic.name}</option>
 							</c:forEach>
@@ -84,13 +75,13 @@
 						<span style="color:rgb(255, 102, 0);" class="quality-error"></span>
 					</td>
 					<th class="required">电子邮箱</th>
-					<td><input name="email" type="text" value="" /></td>
+					<td><input name="email" type="text" value="${org.email}" /></td>
 				</tr>
 				<tr>
 					<th class="required">组织机构代码</th>
-					<td><input name="codePre" type="text" value="" style="width: 120px;margin-right: 10px;" /><span style="float: left;margin:6px 14px 0 0 ;">-</span><input name="codeSufix" style="width: 50px" type="text" value="" /></td>
+					<td><input name="codePre" type="text" value="${org.codePre}" style="width: 120px;margin-right: 10px;" /><span style="float: left;margin:6px 14px 0 0 ;">-</span><input name="codeSufix" style="width: 50px" type="text" value="${org.codeSufix}" /></td>
 					<th class="required">邮政编码</th>
-					<td><input name="post" type="text" value="" /></td>
+					<td><input name="post" type="text" value="${org.post}" /></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -100,27 +91,27 @@
 				</tr>
 			</table>
 			<div class="b-title">二、业务负责人信息</div>
-			<table class="editTable registTable">
+			<table class="editTable">
 				<tr>
 					<th class="required">姓名</th>
-					<td><input name="managerName" type="text" value="" /></td>
+					<td><input name="managerName" type="text" value="${org.managerName}" /></td>
 					<th>移动电话</th>
-					<td><input name="managerPhone" type="text" value="" /></td>
+					<td><input name="managerPhone" type="text" value="${org.managerPhone}" /></td>
 				</tr>
 				<tr>
 					<th>电话</th>
-					<td><input name="managerTel" type="text" value="" /></td>
+					<td><input name="managerTel" type="text" value="${org.managerTel}" /></td>
 					<th>传真</th>
-					<td><input name="managerfax" type="text" value="" /></td>
+					<td><input name="managerfax" type="text" value="${org.managerfax}" /></td>
 				</tr>
 				<tr>
 					<th>电子邮件</th>
-					<td colspan="3"><input name="managerEmail" type="text" value="" /></td>
+					<td colspan="3"><input name="managerEmail" type="text" value="${org.managerEmail}" /></td>
 				</tr>
 				<tr>
 					<td colspan="4">
 						<p class="save-btn">
-							<button class="btn-red btn-size-big sport-regist-first" type="button">下一步</button>
+							<button class="btn-red btn-size-big sport-updateorg-btn" type="button">下一步</button>
 							<button class="btn-wisteria btn-size-big">重置</button>
 						</p>
 					</td>
@@ -129,13 +120,13 @@
 		</form>
 	</div>
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>/static/js/sport.js"></script>
-<script type="text/javascript" src="<%=basePath %>/static/js/plugin/location.js"></script>
-<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//var loc	= new Location();
-		//loc.fillOption('loc_province' , '0');
+		$(window).trigger("load");
+		// 设置select的默认值
+		$('#loc_province').selectpicker('val', "${org.region}");
+		// 设置select的默认值
+		$('#quality').selectpicker('val', "${org.quality}");
 		jQuery.validator.addMethod("englishNameCheck", function(value, element) { 
 		    if(Sport.isNull(value)){
 		    	return true;
@@ -203,9 +194,10 @@
 	                maxlength:50,
 	                remote:{     
 	                    type:"POST",
-	                    url:"<%=basePath%>/regist/fullname/check.action",
+	                    url:"<%=basePath%>/regist/fullname/update/check.action",
 	                    data:{
 	                    	fullName:function(){return $('#fullName').val()},
+	                    	orgId:function(){return $('#orgId').val()},
 	                    	_csrf:function(){return $("#csrdId").val()}
 	                    }
 	                 }

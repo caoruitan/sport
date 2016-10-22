@@ -36,18 +36,18 @@
 			<dd><input type="text" id="fullName"/></dd>
 			<dt>法人代表</dt>
 			<dd><input type="text" id="legalLeader"/></dd>
-			<dt>状态</dt>
-			<dd>
-				<select id="orgStatus" class="selectpicker" title="请选择">
-					<c:forEach items="${status}" var="s">
-						<option value="${s.key }">${s.value}</option>
-					</c:forEach>
-				</select>
-			</dd>
 			<button class="search-btn sprot-search-org">查询</button>
 		</div>
 		<div class="listBox">
-			<table id="orgGridDiv"></table>
+			<div class="opBtnBox">
+					<div class="fl-l">
+						<a href="javascript:;;" class="sport-org-create-btn"><button class="btn-red">+ 创建</button></a>
+					</div>
+					<div class="fl-r">
+						<button class="btn-wisteria sport-org-delete">删除</button>
+					</div>
+			</div>
+			<table id="orgGridDiv" class="sport-grid"></table>
 			<div id="jqGridPager"></div>
 		</div>
 		<script type="text/javascript">
@@ -86,25 +86,13 @@
 						width: 15,
 						align: "center"
 					}, {
-						label:"状态",
-						name: 'statusName',
-						width: 10,
-						align: "center"
-					}, {
 						name: '操作',
 						width: 20,
 						align: "center",
 						formatter:function(value, grid, rows, state){
-							var verfiy =  "<a href='javascript:;;' class='sport-org-verify' data-id='"+rows.orgId+"'>审核</a>";
 							var queryUser =  "<a href='javascript:;;' class='sport-org-query' data-id='"+rows.orgId+"'>查看</a>";
 							var queryOrg = "<a href='javascript:;;' class='sport-org-manager-query' data-id='"+rows.orgId+"'>查看用户</a>";
-							if(rows.status == 0){
-								return verfiy+"&nbsp;&nbsp;"+queryOrg;
-							}
-							if(rows.status == 1){
-								return queryUser+"&nbsp;&nbsp;"+queryOrg;
-							}
-							return queryOrg;
+							return queryUser+"&nbsp;&nbsp;"+queryOrg;
 						}
 					}],
 					autowidth: true,
