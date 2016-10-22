@@ -65,7 +65,7 @@
 						</div>
 						<span id="errorMsg" class="login-error"></span>
 						<div class="login_list">
-							<a href="###">忘记密码 </a> <a class="ky_right" href="javascript:void(0)" id="wjmm">注册</a>
+							<a class="ky_right" href="javascript:void(0)" id="wjmm">注册</a>
 						</div>
 						<div class="login_list">
 							<input type="button" value="登录" class="btn_login" id="loginBtn" />

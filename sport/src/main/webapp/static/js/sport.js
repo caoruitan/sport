@@ -1063,6 +1063,11 @@ $(function(){
 		window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/verify.htm?orgId="+orgId;
 	})
 	
+	//组织单位
+	$(document).on("click",".sport-org-menu",function(){
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+	})
+	
 	//我的课题
 	$(document).on("click",".sport-my-kt-skip",function(){
 		window.location.href = Sport.getBasePath()+"/subject/"+$(this).attr("data-type")+"/list.htm";

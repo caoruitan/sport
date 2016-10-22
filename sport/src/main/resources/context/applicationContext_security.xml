@@ -40,9 +40,10 @@
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		
-		<!-- 单位管理权限-->
+		<!-- 注册单位管理权限-->
 		<intercept-url pattern="/sborg/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
-		
+		<!-- 组织单位管理权限-->
+		<intercept-url pattern="/org/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		<!-- 数据字典权限 -->
 		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		
