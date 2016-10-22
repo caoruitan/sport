@@ -3,6 +3,7 @@ package org.cd.sport.action;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,7 +64,7 @@ public class UploadAction {
 		OutputStream os = response.getOutputStream();
 		try {
 			response.reset();
-			response.setHeader("Content-Disposition", "attachment; filename="+dataName);
+			response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(dataName,"UTF-8"));
 			response.setContentType("application/octet-stream; charset=utf-8");
 			os.write(FileUtils.readFileToByteArray(new File(realPath)));
 			os.flush();
