@@ -28,6 +28,8 @@ public class Subject {
 	
 	private String security;
 	
+	private String securityName;
+	
 	private String organizationCount;
 	
 	private Date beginDate;
@@ -35,6 +37,8 @@ public class Subject {
 	private Date endDate;
 	
 	private String results;
+	
+	private String resultsName;
 	
 	private boolean integration;
 	
@@ -122,6 +126,15 @@ public class Subject {
 		this.security = security;
 	}
 
+	@Column(name = "SUBJECT_SECURITY_NAME")
+	public String getSecurityName() {
+		return securityName;
+	}
+
+	public void setSecurityName(String securityName) {
+		this.securityName = securityName;
+	}
+
 	@Column(name = "ORGANIZATION_COUNT")
 	public String getOrganizationCount() {
 		return organizationCount;
@@ -156,6 +169,15 @@ public class Subject {
 
 	public void setResults(String results) {
 		this.results = results;
+	}
+
+	@Column(name = "SUBJECT_RESULTS_NAME")
+	public String getResultsName() {
+		return resultsName;
+	}
+
+	public void setResultsName(String resultsName) {
+		this.resultsName = resultsName;
 	}
 
 	@Column(name = "INTERGRATION")

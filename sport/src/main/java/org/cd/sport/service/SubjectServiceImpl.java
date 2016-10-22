@@ -1,10 +1,14 @@
 package org.cd.sport.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.SubjectDao;
+import org.cd.sport.domain.Dic;
+import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.support.SubjectSupport;
 import org.cd.sport.utils.AuthenticationUtils;
@@ -20,6 +24,12 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 
 	@Autowired
 	private SubjectDao subjectDao;
+	
+	@Autowired
+	private DicService dicService;
+	
+	@Autowired
+	private OrganizationService organizationService;
 
 	@Override
 	public List<Subject> getAllSubjectList(String year, String type, String stage, int start, int limit) {
@@ -76,6 +86,29 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		subject.setCreateUnitName(userDomain.getOrgName());
 		subject.setCreateTime(new Date());
 		subject.setStage(Constants.Subject.SUBJECT_STAGE_SBSTB);
+		
+		Dic security = this.dicService.getByCode(subject.getSecurity());
+		subject.setSecurityName(security.getName());
+		
+		List<Dic> resultList = this.dicService.getByPcode(Constants.Dic.DIC_EXPECT_CODE);
+		Map<String, String> resultMap = new HashMap<String, String>();
+		for(Dic dic : resultList) {
+			resultMap.put(dic.getCode(), dic.getName());
+		}
+		
+		String results = subject.getResults();
+		if(results != null && !results.equals("")) {
+			String resultsName = "";
+			for(String result : results.split(",")) {
+				resultsName += resultMap.get(result) + ",";
+			}
+			resultsName = resultsName.substring(0, resultsName.length() - 1);
+			subject.setResultsName(resultsName);
+		}
+		
+		OrganizationDomain org = this.organizationService.getById(subject.getOrganizationId());
+		subject.setOrganizationName(org.getFullName());
+		
 		subjectDao.save(subject);
 		return subject;
 	}

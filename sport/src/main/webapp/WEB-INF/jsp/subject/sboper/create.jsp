@@ -113,10 +113,10 @@
 					<td colspan="3">
 						<c:forEach items="${types}" var="type" varStatus="status">
 							<c:if test="${status.index eq 0}">
-								<input id="type_${type.key}" type="radio" name="type" checked="checked" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
+								<input id="type_${type.key}" type="radio" name="type" onchange="changeType()" checked="checked" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
 							</c:if>
 							<c:if test="${status.index ne 0}">
-								<input id="type_${type.key}" type="radio" name="type" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
+								<input id="type_${type.key}" type="radio" name="type" onchange="changeType()" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
 							</c:if>
 						</c:forEach>
 					</td>
@@ -124,17 +124,33 @@
 				<tr>
 					<th class="required">组织单位</th>
 					<td colspan="3">
-						<select name="organizationId" class="selectpicker" style="width: 300px;">
-							<option value="gjtyzj">国家体育总局</option>
-							<option value="gjtyjsjd">国家体育局射击队</option>
-						</select>
+						<div id="kjsList" style="display: block">
+							<select name="organizationId" class="selectpicker" style="width: 300px;">
+								<c:forEach items="${kjsList}" var="kjs">
+									<option value="${kjs.orgId}">${kjs.fullName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div id="orgList" style="display: none">
+							<select name="organizationId" class="selectpicker" style="width: 300px;">
+								<c:forEach items="${orgList}" var="org">
+									<option value="${org.orgId}">${org.fullName}</option>
+								</c:forEach>
+							</select>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>密级</th>
 					<td>
-						<input id="security_1" type="radio" name="security" value="1" checked="checked"><label for="security_1">公开</label>
-						<input id="security_2" type="radio" name="security" value="2"><label for="security_2">保密</label>
+						<c:forEach items="${secretList}" var="secret" varStatus="status">
+							<c:if test="${status.index eq 0}">
+								<input id="secret_${secret.code}" type="radio" name="security" value="${secret.code}" checked="checked"><label for="secret_${secret.code}">${secret.name}</label>
+							</c:if>
+							<c:if test="${status.index ne 0}">
+								<input id="secret_${secret.code}" type="radio" name="security" value="${secret.code}"><label for="secret_${secret.code}">${secret.name}</label>
+							</c:if>
+						</c:forEach>
 					</td>
 				</tr>
 				<tr>
@@ -154,15 +170,9 @@
 				<tr>
 					<th>预期成果</th>
 					<td class="yqcg">
-						<p><input id="results_lwhzz" type="checkbox" name="results" value="lwhzz"><label for="results_lwhzz">论文和著作</label></p>
-						<p><input id="results_yjzxbg" type="checkbox" name="results" value="yjzxbg"><label for="results_yjzxbg">研究咨询报告</label></p>
-						<p><input id="results_xgy" type="checkbox" name="results" value="xgy"><label for="results_xgy">新工艺（或新方法、新模式）</label></p>
-						<p><input id="results_xzz" type="checkbox" name="results" value="xzz"><label for="results_xzz">新装置</label></p>
-						<p><input id="results_xcl" type="checkbox" name="results" value="xcl"><label for="results_xcl">新材料</label></p>
-						<p><input id="results_jsjrj" type="checkbox" name="results" value="jsjrj"><label for="results_jsjrj">计算机软件</label></p>
-						<p><input id="results_rcpy" type="checkbox" name="results" value="rcpy"><label for="results_rcpy">人才培养</label></p>
-						<p><input id="results_jsbz" type="checkbox" name="results" value="jsbz"><label for="results_jsbz">技术标准</label></p>
-						<p><input id="results_zl" type="checkbox" name="results" value="zl"><label for="results_zl">专利</label></p>
+						<c:forEach items="${expectList}" var="expect">
+							<p><input id="results_${expect.code}" type="checkbox" name="results" value="${expect.code}"><label for="results_${expect.code}">${expect.name}</label></p>
+						</c:forEach>
 					</td>
 				</tr>
 				<tr>
@@ -186,6 +196,18 @@
 		var reset = function() {
 			$("#subjectCreateForm")[0].reset();
 		}
+		var changeType = function() {
+			debugger;
+			var val = $("input[name='type']:checked").val();
+			if(val == "ZBKT") {
+				$("#kjsList").css("display", "block");
+				$("#orgList").css("display", "none");
+			} else if (val == "KYGGKT") {
+				$("#orgList").css("display", "block");
+				$("#kjsList").css("display", "none");
+			}
+		}
+		
 		$(function() {
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_square-red',

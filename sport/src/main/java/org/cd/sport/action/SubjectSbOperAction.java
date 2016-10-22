@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.service.DicService;
+import org.cd.sport.service.OrganizationService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -26,6 +29,7 @@ import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.vo.OrgVo;
 import org.cd.sport.vo.SubjectVo;
 import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,12 @@ import com.google.gson.JsonObject;
 @RequestMapping("subject/sboper")
 public class SubjectSbOperAction {
 
+	@Autowired
+	private DicService dicService;
+	
+	@Autowired
+	private OrganizationService organizationService;
+	
 	@Autowired
 	private SubjectService subjectService; 
 	
@@ -88,6 +98,14 @@ public class SubjectSbOperAction {
 	
 	@RequestMapping(value = "createSubject", method = RequestMethod.GET)
 	public String toCreateSubject(HttpServletRequest request) {
+		List<Dic> secretList = dicService.getByPcode(Constants.Dic.DIC_SECRET_CODE);
+		List<Dic> expectList = dicService.getByPcode(Constants.Dic.DIC_EXPECT_CODE);
+		List<OrgVo> kjsList = organizationService.getbyRole(Constants.Org.KJS_ROLE);
+		List<OrgVo> orgList = organizationService.getbyRole(Constants.Org.ORG_ROLE);
+		request.setAttribute("kjsList", kjsList);
+		request.setAttribute("orgList", orgList);
+		request.setAttribute("secretList", secretList);
+		request.setAttribute("expectList", expectList);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/create";
 	}
