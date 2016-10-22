@@ -10,7 +10,7 @@
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
 		
-		<!--注册相关-->
+		<!-- 注册相关-->
 		<intercept-url pattern="/regist/**" access="permitAll()"/>
 		<intercept-url pattern="/dic/datas/byPcode.action" access="permitAll()"/>
 		<intercept-url pattern="/user/update/check.action" access="permitAll()"/>
@@ -23,6 +23,7 @@
 		<intercept-url pattern="/password/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/password/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/password/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/password/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		<intercept-url pattern="/password/**" access="isAuthenticated()"/>
 		
 		<!-- 首页面权限 -->
@@ -32,13 +33,14 @@
 		<intercept-url pattern="/portal/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/portal/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/portal/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/portal/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
 		<!-- 用户管理权限 -->
 		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		
-		<!--单位管理权限-->
+		<!-- 单位管理权限-->
 		<intercept-url pattern="/sborg/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
 		
 		<!-- 数据字典权限 -->
@@ -55,19 +57,20 @@
 		<intercept-url pattern="/subject/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/subject/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/subject/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		
-		<!--403错误页面配置 -->
+		<!-- 403错误页面配置 -->
 		<access-denied-handler error-page="/403.jsp"/>
 		
-		<!--退出登录成功页面 logout必须为POST请求-->
+		<!-- 退出登录成功页面 logout必须为POST请求-->
 		<logout invalidate-session="true" logout-url="/logout"  logout-success-url="/login" />
 		
 		<form-login login-page="/login"/>
 			
 	</http>
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="userServiceImpl" >	          
-			<password-encoder hash="md5" ref="passwordEncoder" />	           
+		<authentication-provider user-service-ref="userServiceImpl" >
+			<password-encoder hash="md5" ref="passwordEncoder" />
 		</authentication-provider> 
 	</authentication-manager>
 	<!--密码md5转换-->
