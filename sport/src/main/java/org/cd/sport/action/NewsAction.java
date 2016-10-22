@@ -15,6 +15,7 @@ import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.view.FileView;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsQuery;
 import org.cd.sport.vo.NewsVo;
@@ -166,6 +167,13 @@ public class NewsAction {
 
 	private String queryDetail(String newsId, HttpServletRequest request, HttpServletResponse response) {
 		NewsVo news = this.newsSevice.getById(newsId);
+		if (news == null) {
+			throw new ParameterIsWrongException();
+		}
+		List<FileView> files = news.getFiles();
+		for (FileView fileView : files) {
+			fileView.setPath(UploadAction.DIR + "/" + fileView.getPath());
+		}
 		request.setAttribute("news", news);
 		return "news/detail";
 	}

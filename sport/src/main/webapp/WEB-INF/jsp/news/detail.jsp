@@ -46,9 +46,9 @@
 				<tr>
 					<th>附件 : </th>
 					<td style="width:800px;">
-							<c:forEach items="${news.files}" var="file" varStatus="status">
-				            	<a style="text-align:left;width:100%;display:inline-block;line-height: 25px;">${file.name}</a>
-							</c:forEach>
+						<c:forEach items="${news.files}" var="file" varStatus="status">
+			            	<a href="<%=basePath %>/${file.path}" style="text-align:left;width:100%;display:inline-block;line-height: 25px;">${file.name}</a>
+						</c:forEach>
 					</td>
 				</tr>
 			</table>

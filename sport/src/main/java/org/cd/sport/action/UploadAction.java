@@ -25,10 +25,12 @@ import com.google.gson.JsonObject;
 @RequestMapping("kjsadmin")
 public class UploadAction {
 
+	public static final String DIR = "upload";
+
 	@RequestMapping(value = "/upload.action")
 	public void addUser(@RequestParam MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		String realPath = request.getSession().getServletContext().getRealPath("/upload");
+		String realPath = request.getSession().getServletContext().getRealPath("/" + DIR);
 		// 原来文件名称
 		String originalFilename = file.getOriginalFilename();
 		String suffix = "";
