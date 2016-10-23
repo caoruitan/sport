@@ -21,7 +21,7 @@ public interface SubjectDao extends IBaseDao {
 	
 	public List<Subject> getSubjectListByOrg(String orgId, String year, String type, String stage, int start, int limit);
 	
-	public int getSubjectCountByOrg(String orgId, String year, String type, String stage, int start, int limit);
+	public int getSubjectCountByOrg(String orgId, String year, String type, String stage);
 	
 	public int getAllSubjectCount();
 	

@@ -18,7 +18,7 @@
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border: 1px solid #e4e4e4;
-	background: #f2f2f2 url("images/ui-bg_glass_45_0078ae_1x400.png") 50% 50% repeat-x;
+	background: #f2f2f2;
 	font-weight: bold;
 	color: #1E1E1E;
 	border-radius: 0px;
@@ -75,7 +75,7 @@
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #FFFFCC;
-	background: #FFFFCC url("images/ui-bg_glass_75_79c9ec_1x400.png") 50% 50% repeat-x;
+	background: #FFFFCC ;
 	border-bottom: 1px solid #e4e4e4;
 	font-weight: normal;
 	/*color: #FFFFFF;*/

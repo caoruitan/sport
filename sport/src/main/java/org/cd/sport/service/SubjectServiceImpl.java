@@ -67,8 +67,8 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 	}
 
 	@Override
-	public int getSubjectCountByOrg(String orgId, String year, String type, String stage, int start, int limit) {
-		return subjectDao.getSubjectCountByOrg(orgId, year, type, stage, start, limit);
+	public int getSubjectCountByOrg(String orgId, String year, String type, String stage) {
+		return subjectDao.getSubjectCountByOrg(orgId, year, type, stage);
 	}
 
 	@Override
