@@ -679,7 +679,7 @@ $(function(){
 		}else{
 			$(".news-content-error").text("");
 		}
-		$("#contentContainer").val(content);
+		$("#contentContainer").val(html2ubb(content));
 		//文件
 		var len = $(".news-file-container").find(".sport-news-file").length;
 		var fileIdFlag = false;
@@ -730,7 +730,7 @@ $(function(){
 		}else{
 			$(".news-content-error").text("");
 		}
-		$("#contentContainer").val(content);
+		$("#contentContainer").val(html2ubb(content));
 		//文件
 		var len = $(".news-file-container").find(".sport-news-file").length;
 		var fileIdFlag = false;

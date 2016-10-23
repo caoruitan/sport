@@ -12,6 +12,7 @@ import org.cd.sport.domain.News;
 import org.cd.sport.domain.NewsAttachment;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.utils.NullableUtils;
+import org.cd.sport.utils.UBBDecoder;
 import org.cd.sport.view.FileView;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsVo;
@@ -100,7 +101,7 @@ public class NewsSupport extends SportSupport {
 		if (publishTime != null) {
 			newsVo.setPublishTime(format.format(publishTime));
 		}
-		newsVo.setContent(new String(news.getContent()));
+		newsVo.setContent(UBBDecoder.decode(new String(news.getContent())));
 		return newsVo;
 	}
 

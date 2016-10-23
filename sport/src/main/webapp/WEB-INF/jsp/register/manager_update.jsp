@@ -28,7 +28,7 @@
 		<div class="layout_top">
 			<div class="top_logo_register">单位注册</div>
 			<div class="op">
-				<a href="01login.html">直接登录</a>
+				<a href="<%=basePath %>/login.htm">直接登录</a>
 			</div>
 		</div>
 		<div class="editBox registBox">

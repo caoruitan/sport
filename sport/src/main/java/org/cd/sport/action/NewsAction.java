@@ -20,6 +20,7 @@ import org.cd.sport.vo.NewsQuery;
 import org.cd.sport.vo.NewsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -121,4 +122,51 @@ public class NewsAction {
 		PageWrite.writeTOPage(response, GsonUtils.toJson(model));
 	}
 
+	@RequestMapping(value = "/kjsadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/kjsleader/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsleaderNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/kjsexpert/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsexpertNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/sbadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String sbadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/sboper/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String sboperNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/orgadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String orgadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/orgoper/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String orgoperNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	private String queryDetail(String newsId, HttpServletRequest request, HttpServletResponse response) {
+		NewsVo news = this.newsSevice.getById(newsId);
+		request.setAttribute("news", news);
+		return "news/detail";
+	}
 }
