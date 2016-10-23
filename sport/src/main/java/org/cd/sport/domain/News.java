@@ -37,15 +37,6 @@ public class News {
 	 * 内容
 	 */
 	private byte[] content;
-	/**
-	 * 附件id
-	 */
-	private String fileId;
-
-	/**
-	 * 附件名称
-	 */
-	private String fileName;
 
 	/**
 	 * 创建时间
@@ -92,10 +83,6 @@ public class News {
 		this.title = title;
 	}
 
-	@Column(name = "FILE_ID")
-	public String getFileId() {
-		return fileId;
-	}
 
 	@Column(name = "CONTENT")
 	public byte[] getContent() {
@@ -106,9 +93,6 @@ public class News {
 		this.content = content;
 	}
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
-	}
 
 	@Column(name = "CREATE_TIME")
 	public Date getCreateTime() {
@@ -136,14 +120,4 @@ public class News {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	@Column(name = "FILE_NAME")
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 }

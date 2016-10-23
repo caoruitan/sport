@@ -1,5 +1,9 @@
 package org.cd.sport.vo;
 
+import java.util.List;
+
+import org.cd.sport.view.FileView;
+
 /**
  * 数据字典查询对象
  * 
@@ -30,15 +34,11 @@ public class NewsVo {
 	 * 内容
 	 */
 	private String content;
-	/**
-	 * 附件id
-	 */
-	private String fileId;
 
 	/**
-	 * 附件名称
+	 * 附件
 	 */
-	private String fileName;
+	private List<FileView> files;
 
 	/**
 	 * 创建时间
@@ -100,20 +100,12 @@ public class NewsVo {
 		this.content = content;
 	}
 
-	public String getFileId() {
-		return fileId;
+	public List<FileView> getFiles() {
+		return files;
 	}
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFiles(List<FileView> files) {
+		this.files = files;
 	}
 
 	public String getCreateTime() {

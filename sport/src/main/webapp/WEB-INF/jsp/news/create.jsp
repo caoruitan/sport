@@ -30,7 +30,7 @@
 					<tr>
 						<th class="required">所属栏目</th>
 						<td>
-							<select name="column" class="selectpicker" title="请选择" id="news-column">
+							<select name="columnId" class="selectpicker" title="请选择" id="news-column">
 								<c:forEach items="${columns}" var="column">
 									<option value="${column.key}">${column.value}</option>
 								</c:forEach>
@@ -45,22 +45,23 @@
 					<tr>
 						<th class="required">内容</th>
 						<td>
-							<textarea class="ckeditor" id="content" name="content"></textarea>
+							<textarea class="ckeditor" id="content"></textarea>
+							<input name="content" type="hidden" id="contentContainer">
 							<span style="color:rgb(255, 102, 0);" class="news-content-error"></span>
 						</td>
 					</tr>
 					<tr>
 						<th class="required">附件</th>
 						<td>
-	
-							<div class="upload-file-wrap">
-								<input type="file" class="file-uploader" name="fileName" id="FileUploader" />
-								<input type="hidden" class="file-uploader" name="fileId" id="newsFileId" value="1111"/>
+							<div style="float:right;height:40px;padding-top:15px;color:red;">附件格式:jpg,gif,bmp,png,jpeg,txt,doc,docx,excel,ppt,pdf等,大小不能超过2M.</div>
+							<div class="upload-file-wrap" style="float:left;width:100px;">
+								<input type="file" class="file-uploader" id="FileUploader" />
 								<div class="upload-wrap">
-									<input type="text" id="PathDisplayer" class="upload-text" disabled />
 									<a href="javascript:void(0)" class="upload-btn"></a>
 								</div>
 							</div>
+							<div style="clear:both"></div>
+							<div class="news-file-container"></div>
 							<span style="color:rgb(255, 102, 0);" class="news-file-error"></span>
 						</td>
 					</tr>
@@ -75,6 +76,7 @@
 <script type="text/ecmascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 <script type="text/ecmascript" src="<%=basePath %>/static/js/ckeditor/ckeditor.js"></script>
 <script type="text/ecmascript" src="<%=basePath %>/static/js/plugin/ubb.js"></script>
+<script type="text/ecmascript" src="<%=basePath %>/static/js/plugin/ajaxfileupload.js"></script>
 <script>
 	$(function() {
 		// 新闻验证
@@ -100,28 +102,52 @@
 	            }
 	        }
 	    });
-		//监听上传按钮事件
-		var fileUploader = document.getElementById('FileUploader');
-		var pathDisplayer = document.getElementById('PathDisplayer');
-		if (fileUploader.addEventListener) {
-			fileUploader.addEventListener('change', fileUploaderChangeHandler, false);
-		} else if (fileUploader.attachEvent) {
-			fileUploader.attachEvent('onclick', fileUploaderClickHandler);
-		} else {
-			fileUploader.onchange = fileUploaderChangeHandler;
-		}
-
-		function fileUploaderChangeHandler() {
-			pathDisplayer.value = fileUploader.value;
-		}
-
-		function fileUploaderClickHandler() {
-			setTimeout(function() {
-				fileUploaderChangeHandler();
-			}, 0);
-		}
-		//上传按钮事件结束
 		
+	  $(document).on("click",".delete-file",function(){
+	        $(this).parent().siblings().each(function(){
+	             var index = $(this).attr("data-index");
+	             index= index<=0?1:index;
+	             $(this).find('input[name="files['+index+'].id"]').attr('name','files['+(index-1)+'].id');
+	             $(this).find('input[name="files['+index+'].name"]').attr('name','files['+(index-1)+'].name');
+	             $(this).find('input[name="files['+index+'].path"]').attr('name','files['+(index-1)+'].path');
+	        });
+	        $(this).parent().remove();
+	    });
+		
+		new AjaxUpload('FileUploader', {
+             action: Sport.getBasePath() + '/kjsadmin/upload.action?_csrf='+$("#csrdToken").val(),
+             name : 'file',
+             data : {},
+             autoSubmit: true,
+             onSubmit:function(file,text){
+            	 $(".news-file-error").text("");
+            	 var exp = /.jpg$|.gif$|.bmp$|.png$|.jpeg$|.txt$|.doc$|.docx$|.excel$|.ppt$|.pdf$/;
+                 if (exp.exec(file) == null) {
+                     $(".news-file-error").text("文件格式不正确!");
+                	 return false;
+                 }
+                 return true;
+             },
+             onComplete: function(file, response) {
+            	 var data = $.parseJSON($(response).text());
+            	 if(data.size>2 * 1024 * 1024 ){
+            		 $(".news-file-error").text("文件不能大于2M!");
+            	 }
+            	 
+            	 if(data.success){
+            	 	var len = $(".news-file-container").find(".sport-news-file").length;
+            	 	len = len<=0?0:len;
+            	 	var id = $('<input type="hidden" name="files['+(len)+'].id" value="'+data.id+'"/>');
+            	 	var name = $('<input type="hidden" name="files['+(len)+'].name" value="'+data.name+'"/>');
+            	 	var path = $('<input type="hidden" name="files['+(len)+'].path" value="'+data.path+'"/>');
+            	 	var text = $('<span style="text-align:left;display:inline-block;width:90%;line-height: 25px;color:#1e5494;">'+data.name+'</span>')
+            	 	var span = $('<span style="text-align:right;display:inline-block;width:8%;line-height: 25px;color:#1e5494;cursor:pointer;" class="delete-file">删除</span>')
+            	  	var $a = $('<div href="javascript:void(0)" class="sport-news-file" data-index="'+(len)+'"></div>');
+                    $a.append(id).append(text).append(name).append(path).append(span);
+                    $(".news-file-container").append($a);
+            	 }
+             }
+         });
 	});
 </script>
 	</body>

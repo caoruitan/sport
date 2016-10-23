@@ -6,6 +6,12 @@
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	
 	<http entry-point-ref="loginUrlEntryPoint" auto-config="true">
+		<headers >
+			<frame-options policy="SAMEORIGIN"/>
+			<!--DENY 拒绝任何-->
+			<!--SAMEORIGIN 允许加载本站的-->
+			<!--ALLOW-FROM http:* 允许-->
+		</headers>
 		<!-- 登陆、登出 -->
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
@@ -62,6 +68,9 @@
 		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		
+		<!--文件上传-->
+		<intercept-url pattern="/kjsadmin/upload.action" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		
 		<!-- 403错误页面配置 -->
 		<access-denied-handler error-page="/403.jsp"/>

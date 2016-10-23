@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.NewsDao;
 import org.cd.sport.domain.News;
+import org.cd.sport.domain.NewsAttachment;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.NewsSupport;
 import org.cd.sport.view.NewsView;
@@ -31,11 +32,15 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 	@Autowired
 	private NewsDao newsDao;
 
+	@Autowired
+	private NewsAttachmentService newsAttachmentService;
+
 	@Override
 	@Transactional
 	public boolean create(NewsView news) {
 		News process = this.process(news);
 		this.newsDao.save(process);
+		this.newsAttachmentService.create(process.getId(), news.getFiles());
 		return true;
 	}
 
@@ -49,10 +54,9 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 		}
 		oldNews.setColumnId(Integer.parseInt(news.getColumnId()));
 		oldNews.setContent(news.getContent().getBytes());
-		oldNews.setFileId(news.getFileId());
-		oldNews.setFileName(news.getFileName());
 		oldNews.setTitle(news.getTitle());
 		this.newsDao.update(oldNews);
+		this.newsAttachmentService.create(oldNews.getId(), news.getFiles());
 		return true;
 	}
 
@@ -124,7 +128,10 @@ public class NewsServiceImpl extends NewsSupport implements NewsService {
 	@Override
 	public NewsVo getById(String id) {
 		News news = this.newsDao.getEntityById(News.class, id);
-		return this.process(news);
+		List<NewsAttachment> files = this.newsAttachmentService.getByNewsId(id);
+		NewsVo process = this.process(news);
+		process.setFiles(this.processFile(files));
+		return process;
 	}
 
 	@Override

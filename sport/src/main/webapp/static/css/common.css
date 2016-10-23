@@ -68,14 +68,14 @@ td {
 }
 
 body {
-	font-family: "ËÎÌå", arial;
+	font-family: "ï¿½ï¿½ï¿½ï¿½", arial;
 	font-size: 12px;
 	line-height: 180%;
 	background: #f2f2f2;
 }
 
 
-/* ×ÖÌåÑùÊ½ ¿ªÊ¼ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ ï¿½ï¿½Ê¼ */
 
 a {
 	outline: none;
@@ -89,7 +89,7 @@ a:hover {
 }
 
 
-/* ÔÚ FF ÖÐ */
+/* ï¿½ï¿½ FF ï¿½ï¿½ */
 
 a {
 	blr: expression(this.onFocus=this.blur());
@@ -118,7 +118,7 @@ a.pinkfont {
 }
 
 
-/* ×ÖÌåÑùÊ½ ½áÊø */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ ï¿½ï¿½ï¿½ï¿½ */
 
 img {
 	border: 0px;
@@ -186,10 +186,10 @@ body {
 }
 
 
-/* ¹«¹²ÑùÊ½ end*/
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ end*/
 
 
-/* Ò³Ãæ²¼¾Ö start */
+/* Ò³ï¿½æ²¼ï¿½ï¿½ start */
 
 iframe {
 	width: 100%;
@@ -198,7 +198,7 @@ iframe {
 }
 
 
-/*ÁÐ±íÑùÊ½*/
+/*ï¿½Ð±ï¿½ï¿½ï¿½Ê½*/
 
 .titleBox {
 	box-sizing: border-box;
@@ -218,7 +218,7 @@ iframe {
 	margin-top: 10px;
 	line-height: 30px;
 	font-size: 18px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 }
 
 .titleBox .title img {
@@ -244,7 +244,7 @@ iframe {
 	font-size: 14px;
 	height: 30px;
 	line-height: 30px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	border-radius: 2px;
 }
 
@@ -267,7 +267,7 @@ iframe {
 	font-size: 14px;
 	height: 30px;
 	line-height: 30px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	border-radius: 2px;
 }
 
@@ -307,7 +307,7 @@ iframe {
 	height: 40px;
 	line-height: 40px;
 	font-size: 14px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	padding-right: 10px;
 	margin-left: 12px;
 }
@@ -327,7 +327,7 @@ iframe {
 	text-indent: 0.5em;
 	margin-top: 5px;
 	line-height: 30px\9;
-	/* hack 9 ¼æÈÝËùÓÐIEä¯ÀÀÆ÷*/
+	/* hack 9 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IEï¿½ï¿½ï¿½ï¿½ï¿½*/
 	border-radius: 2px;
 }
 
@@ -338,7 +338,7 @@ iframe {
 	height: 28px;
 	background: #F96A66;
 	border-style: none;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	font-size: 12px;
 	color: #fff;
 	border-radius: 2px;
@@ -370,10 +370,10 @@ iframe {
 }
 
 
-/*ÁÐ±íÑùÊ½ ¡ü*/
+/*ï¿½Ð±ï¿½ï¿½ï¿½Ê½ ï¿½ï¿½*/
 
 
-/*±à¼­²¿·Ö*/
+/*ï¿½à¼­ï¿½ï¿½ï¿½ï¿½*/
 
 .editBox {
 	background: #ffffff;
@@ -398,7 +398,7 @@ iframe {
 	height: 50px;
 	line-height: 50px;
 	font-size: 15px;
-	font-family: "Î¢ÈíÑÅºÚ"
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½"
 }
 
 .editTable th.required {
@@ -412,7 +412,7 @@ iframe {
 
 .editTable td label {
 	font-size: 15px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	margin: 4px 10px 0 4px;
 	cursor: pointer;
 	font-weight: 100;
@@ -457,10 +457,10 @@ iframe {
 }
 
 
-/*±à¼­²¿·Ö*/
+/*ï¿½à¼­ï¿½ï¿½ï¿½ï¿½*/
 
 
-/*ä¯ÀÀ*/
+/*ï¿½ï¿½ï¿½*/
 
 .viewBox {
 	background: #ffffff;
@@ -485,7 +485,7 @@ iframe {
 	height: 50px;
 	line-height: 50px;
 	font-size: 15px;
-	font-family: "Î¢ÈíÑÅºÚ"
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½"
 }
 
 .viewTable td {
@@ -497,7 +497,7 @@ iframe {
 
 .viewTable td label {
 	font-size: 16px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	margin: 4px 10px 0 4px;
 	cursor: pointer;
 }
@@ -508,10 +508,10 @@ iframe {
 }
 
 
-/*ä¯ÀÀ*/
+/*ï¿½ï¿½ï¿½*/
 
 
-/*°´Å¥ÑùÊ½ ¡ý*/
+/*ï¿½ï¿½Å¥ï¿½ï¿½Ê½ ï¿½ï¿½*/
 
 .btn-red {
 	float: left;
@@ -519,7 +519,7 @@ iframe {
 	padding: 0 20px 0 20px;
 	background: #F96A66;
 	border-style: none;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	font-size: 14px;
 	color: #fff;
 	border-radius: 2px;
@@ -540,7 +540,7 @@ iframe {
 	padding: 0 20px 0 20px;
 	border: 1px solid #73819A;
 	background: #73819A;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	font-size: 14px;
 	color: #fff;
 	border-radius: 2px;
@@ -560,7 +560,7 @@ iframe {
 	padding: 0 10px 0 10px;
 	border: 1px solid #5A677E;
 	background: #5A677E;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	font-size: 14px;
 	color: #fff;
 	border-radius: 2px;
@@ -597,7 +597,7 @@ iframe {
 }
 
 
-/*×ÖÌåÑÕÉ«*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«*/
 
 .redfont {
 	color: red
@@ -608,12 +608,10 @@ iframe {
 }
 
 
-/*ÉÏ´«¸½¼þ*/
+/*ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
 .upload-file-wrap {
 	position: relative;
-	width: 405px;
-	height: 27px;
 	margin-top: 20px;
 }
 
@@ -726,7 +724,7 @@ iframe {
 }
 
 
-/*ÓÐ×ó²àµÄ²Ëµ¥*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ä²Ëµï¿½*/
 
 .leftBox .lm {
 	width: 100%;
@@ -757,6 +755,6 @@ iframe {
 	-moz-transform: rotate(45deg);
 	/* Firefox */
 	-webkit-transform: rotate(45deg);
-	/* Safari ºÍ Chrome */
+	/* Safari ï¿½ï¿½ Chrome */
 	-o-transform: rotate(45deg);
 }

@@ -89,6 +89,10 @@ var Sport = {
         }
         return false;
     },
+    updateChange:function($pathDisplayer){
+    	fileName = $("#FileUploader").val();
+    	$pathDisplayer.val(fileName);
+    },
     createOrg:function(fromCls,btnCls,ajaxUrl,returnUrl,operName){
     	var region = $("#loc_province").val();
 		var regionFlag = Sport.isNull(region);
@@ -235,7 +239,6 @@ $(function(){
 				url: Sport.getBasePath()+"/doLogin",
 				type: "POST",
 				dataType: "JSON",
-				//contentType: "application/x-www-form-urlencoded; charset=utf-8",
 				data: {
 					uuid:$('#uuid').val(),
 					return_url:$('#return_url').val(),
@@ -676,30 +679,24 @@ $(function(){
 		}else{
 			$(".news-content-error").text("");
 		}
+		$("#contentContainer").val(content);
 		//文件
-		var fileId = $("#newsFileId").val();
-		var fileIdFlag = Sport.isNull(fileId);
-		if(fileIdFlag){
-			$(".news-file-error").text("请先上传附件！");
+		var len = $(".news-file-container").find(".sport-news-file").length;
+		var fileIdFlag = false;
+		if(len==0){
+			$(".news-file-error").text("请上传附件！");
 		}else{
 			$(".news-file-error").text("");
+			fileIdFlag = true;
 		}
-		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && !fileIdFlag){
+		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && fileIdFlag){
 			$('.sport-news-create-btn').text("提交中...");
 			$('.sport-news-create-btn').attr("disabled",true);
 			$.ajax({
 				url: Sport.getBasePath()+"/news/kjsadmin/create.action",
 				type: "POST",
 				dataType: "JSON",
-				data: {
-					uuid:$('#uuid').val(),
-					_csrf:$("#csrdToken").val(),
-					columnId:columnId,
-					title:$("#title").val(),
-					content:html2ubb(content),
-					fileId:fileId,
-					fileName:$('#FileUploader').val()
-				},
+				data: $("#sport-news-form").serialize(),
 				error: function () {
 					$('.sport-news-create-btn').removeAttr("disabled");
 					$('.sport-news-create-btn').text("保存");
@@ -733,31 +730,24 @@ $(function(){
 		}else{
 			$(".news-content-error").text("");
 		}
+		$("#contentContainer").val(content);
 		//文件
-		var fileId = $("#newsFileId").val();
-		var fileIdFlag = Sport.isNull(fileId);
-		if(fileIdFlag){
-			$(".news-file-error").text("请先上传附件！");
+		var len = $(".news-file-container").find(".sport-news-file").length;
+		var fileIdFlag = false;
+		if(len==0){
+			$(".news-file-error").text("请上传附件！");
 		}else{
 			$(".news-file-error").text("");
+			fileIdFlag = true;
 		}
-		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && !fileIdFlag){
+		if($("#sport-news-form").valid() && !columnFlag && !contentFlag && fileIdFlag){
 			$('.sport-news-update-btn').text("提交中...");
 			$('.sport-news-update-btn').attr("disabled",true);
 			$.ajax({
 				url: Sport.getBasePath()+"/news/kjsadmin/update.action",
 				type: "POST",
 				dataType: "JSON",
-				data: {
-					uuid:$('#uuid').val(),
-					_csrf:$("#csrdToken").val(),
-					id:$("#newsId").val(),
-					columnId:columnId,
-					title:$("#title").val(),
-					content:html2ubb(content),
-					fileId:fileId,
-					fileName:$('#PathDisplayer').val()
-				},
+				data: $("#sport-news-form").serialize(),
 				error: function () {
 					$('.sport-news-update-btn').removeAttr("disabled");
 					$('.sport-news-update-btn').text("保存");

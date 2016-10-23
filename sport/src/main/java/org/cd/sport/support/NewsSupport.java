@@ -1,5 +1,6 @@
 package org.cd.sport.support;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,7 +9,10 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.News;
+import org.cd.sport.domain.NewsAttachment;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.utils.NullableUtils;
+import org.cd.sport.view.FileView;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsVo;
 
@@ -28,6 +32,8 @@ public class NewsSupport extends SportSupport {
 		if (news == null) {
 			throw new ParameterIsWrongException("新闻对象为空");
 		}
+		NullableUtils.clean(news.getFiles());
+
 		if (StringUtils.isBlank(news.getTitle()) || news.getTitle().length() < 4 || news.getTitle().length() > 200) {
 			throw new ParameterIsWrongException("新闻标题或者格式不对");
 		}
@@ -38,11 +44,8 @@ public class NewsSupport extends SportSupport {
 		if (StringUtils.isBlank(news.getContent())) {
 			throw new ParameterIsWrongException("新闻内容不能为空");
 		}
-		if (StringUtils.isBlank(news.getFileId())) {
-			throw new ParameterIsWrongException("新闻附件id不能为空");
-		}
-		if (StringUtils.isBlank(news.getFileName())) {
-			throw new ParameterIsWrongException("新闻附件名称不能为空");
+		if (news.getFiles() == null || news.getFiles().isEmpty()) {
+			throw new ParameterIsWrongException("新闻附件不能为空");
 		}
 	}
 
@@ -59,6 +62,12 @@ public class NewsSupport extends SportSupport {
 	public News process(NewsView user) {
 		this.validate(user);
 		News news = this.result(News.class, user);
+		news.setColumnId(Integer.parseInt(user.getColumnId()));
+		try {
+			news.setContent(user.getContent().getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		news.setCreateTime(new Date(System.currentTimeMillis()));
 		news.setStatus(Constants.News.news_create);
 		return news;
@@ -82,6 +91,7 @@ public class NewsSupport extends SportSupport {
 		}
 		NewsVo newsVo = this.result(NewsVo.class, news);
 		String cName = Constants.News.getColumns().get(news.getColumnId());
+		newsVo.setColumnId(String.valueOf(news.getColumnId()));
 		newsVo.setColumnName(cName);
 		newsVo.setStatusName(Constants.News.getStatusName(news.getStatus()));
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
@@ -94,4 +104,14 @@ public class NewsSupport extends SportSupport {
 		return newsVo;
 	}
 
+	public List<FileView> processFile(List<NewsAttachment> files) {
+		if (files == null || files.isEmpty()) {
+			return null;
+		}
+		List<FileView> vos = new ArrayList<FileView>();
+		for (NewsAttachment file : files) {
+			vos.add(this.result(FileView.class, file));
+		}
+		return vos;
+	}
 }

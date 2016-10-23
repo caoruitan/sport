@@ -68,3 +68,4 @@ body {background: #f2f2f2;}
 .leftBox-news li {width: 100%;height: 30px;line-height: 30px;padding: 0 0 0 10px;}
 .leftBox-news li.sel {background: #73819A;color: #ffffff;}
 .leftBox-news li:hover{background: #73819A;color: #ffffff;cursor: pointer;}
+.sport-news-file {margin:5px;width:100%;background:#cfd1cf;height:25px;padding:0 5px;}

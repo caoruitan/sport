@@ -1,5 +1,7 @@
 package org.cd.sport.view;
 
+import java.util.List;
+
 /**
  * 新闻视图对象
  * 
@@ -24,14 +26,9 @@ public class NewsView {
 	 */
 	private String content;
 	/**
-	 * 附件id
+	 * 附件
 	 */
-	private String fileId;
-
-	/**
-	 * 附件名称
-	 */
-	private String fileName;
+	private List<FileView> files;
 
 	public String getId() {
 		return id;
@@ -65,20 +62,11 @@ public class NewsView {
 		this.content = content;
 	}
 
-	public String getFileId() {
-		return fileId;
+	public List<FileView> getFiles() {
+		return files;
 	}
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
+	public void setFiles(List<FileView> files) {
+		this.files = files;
 	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 }
