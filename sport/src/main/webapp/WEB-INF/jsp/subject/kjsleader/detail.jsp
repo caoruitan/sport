@@ -106,7 +106,7 @@
 
 	<div class="titleBox">
 		<div class="title"><img src="<%=basePath %>/static/img/kt.png" />${subject.name}</div>
-		<a href="<%=basePath %>/subject/sboper/list.htm">
+		<a href="<%=basePath %>/subject/kjsleader/list.htm">
 			<div class="returnBtn">返回列表</div>
 		</a>
 	</div>
@@ -120,7 +120,13 @@
 						<li class="cur">
 							<p><b>申报书填报与评审</b></p>
 							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
-							<p><a href="<%=basePath %>/subject/sboper/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">填报</button></a></p>
+							<p>
+								<c:if test='${not empty sbs}'>
+									<a href="<%=basePath %>/subject/kjsleader/sbstb.shtm?subjectId=${subject.id}" target="_blank">
+										<button class="btn-red btn-size-small">查看</button>
+									</a>
+								</c:if>
+							</p>
 						</li>
 						<li class="dot">
 							<p><b>任务书填报与评审</b></p>
@@ -137,7 +143,7 @@
 						<li class="ok">
 							<p><b>申报书填报与评审</b></p>
 							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
-							<p><a href="<%=basePath %>/subject/sboper/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+							<p><a href="<%=basePath %>/subject/kjsleader/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
 						</li>
 						<li class="cur">
 							<p><b>任务书填报与评审</b></p>

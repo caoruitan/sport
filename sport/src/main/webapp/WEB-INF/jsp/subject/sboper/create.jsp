@@ -113,10 +113,10 @@
 					<td colspan="3">
 						<c:forEach items="${types}" var="type" varStatus="status">
 							<c:if test="${status.index eq 0}">
-								<input id="type_${type.key}" type="radio" name="type" onchange="changeType()" checked="checked" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
+								<input id="type_${type.key}" type="radio" name="type" checked="checked" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
 							</c:if>
 							<c:if test="${status.index ne 0}">
-								<input id="type_${type.key}" type="radio" name="type" onchange="changeType()" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
+								<input id="type_${type.key}" type="radio" name="type" value="${type.key}"><label for="type_${type.key}">${type.value}</label>
 							</c:if>
 						</c:forEach>
 					</td>
@@ -196,17 +196,21 @@
 		var reset = function() {
 			$("#subjectCreateForm")[0].reset();
 		}
-		var changeType = function() {
-			debugger;
+		
+		$("input[name='type']").on("ifChecked", function(event) {
 			var val = $("input[name='type']:checked").val();
 			if(val == "ZBKT") {
 				$("#kjsList").css("display", "block");
+				$("#kjsList").find("select").attr("name", "organizationId");
 				$("#orgList").css("display", "none");
+				$("#orgList").find("select").attr("name", "");
 			} else if (val == "KYGGKT") {
 				$("#orgList").css("display", "block");
+				$("#orgList").find("select").attr("name", "organizationId");
 				$("#kjsList").css("display", "none");
+				$("#kjsList").find("select").attr("name", "");
 			}
-		}
+		});
 		
 		$(function() {
 			$('input').iCheck({

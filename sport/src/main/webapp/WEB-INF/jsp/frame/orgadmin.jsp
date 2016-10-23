@@ -44,8 +44,10 @@
 					<div class="menu">
 						<ul>
 							<li class="sport-subject-menu" data-type="orgadmin"><img src="<%=basePath %>/static/img/menu/kt.png" /> 课题管理</li>
+							<!--
 							<li class="sport-user-menu" data-type="orgadmin"><img src="<%=basePath %>/static/img/menu/ry.png" /> 用户管理</li>
 							<li class="sport-password-reset-menu" data-type="orgadmin"><img src="<%=basePath %>/static/img/menu/mm.png" /> 用户密码重置</li>
+							-->
 							<div class="clear"></div>
 						</ul>
 					</div>
