@@ -43,7 +43,7 @@
 							<option value="${cred.code}">${cred.name}</option>
 						</c:forEach>
 					</select>
-					<span style="color:rgb(255, 102, 0);padding-left:10px;" class="credType-error"></span>
+					&nbsp;&nbsp;&nbsp;<span style="color:rgb(255, 102, 0);" class="credType-error"></span>
 				</td>
 			</tr>
 			<tr>

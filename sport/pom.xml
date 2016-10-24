@@ -328,11 +328,6 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		<dependency>
-			<groupId>com.sysware.cloud</groupId>
-			<artifactId>fileserverApi</artifactId>
-			<version>0.0.1.SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
