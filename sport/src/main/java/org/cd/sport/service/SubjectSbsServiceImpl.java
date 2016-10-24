@@ -1,7 +1,18 @@
 package org.cd.sport.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.SubjectSbsDao;
+import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class SubjectSbsServiceImpl implements SubjectSbsService {
+	
+	@Autowired
+	private SubjectService subjectService;
 
 	@Autowired
 	private SubjectSbsDao subjectSbsDao;
@@ -117,8 +131,50 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	}
 
 	@Override
-	public void submit(String sbsId) {
+	public void checkAndSubmit(String subjectId, String basePath) {
+		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = this.getSbsBySubjectId(subjectId);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		FileInputStream in = null;
+		OutputStream os = null;
+		try {
+			in = new FileInputStream(new File(basePath + Constants.SubjectSbs.SUBJECT_SBS_DOC_TEMPLATE_PATH));
+			HWPFDocument hdt = new HWPFDocument(in);
+			Range range = hdt.getRange();  
+			range.replaceText("${subjectName}", subject.getName());
+			range.replaceText("${createUnitName}", subject.getCreateUnitName());
+			range.replaceText("${creatorName}", subject.getCreatorName());
+			range.replaceText("${address}", sbs.getAddress());
+			range.replaceText("${phone}", sbs.getPhone());
+			range.replaceText("${fax}", sbs.getFax());
+			range.replaceText("${email}", sbs.getEmail());
+			range.replaceText("${createTime}", sdf.format(subject.getCreateTime()));
+			range.replaceText("${years}", sbs.getYears());
+			range.replaceText("${xtyj}", sbs.getXtyj());
+			range.replaceText("${yjmb}", sbs.getYjmb());
+			range.replaceText("${jsgj}", sbs.getJsgj());
+			range.replaceText("${yjff}", sbs.getYjff());
+			range.replaceText("${syfa}", sbs.getSyfa());
+			range.replaceText("${jdap}", sbs.getJdap());
+			range.replaceText("${yqjg}", sbs.getYqjg());
+			range.replaceText("${gztj}", sbs.getGztj());
+			range.replaceText("${tjyj}", sbs.getTjyj());
+			os = new FileOutputStream(basePath + "/WEB-INF/doc/sbs_" + subject.getId() + subject.getCreator() + ".doc");
+			hdt.write(os);
+			
+			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBADMIN_SP);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			in.close();
+			os.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

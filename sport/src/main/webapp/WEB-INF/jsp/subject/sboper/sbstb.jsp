@@ -524,18 +524,12 @@
 				error: function () {
 					$('#baseInfoFormSubmit').removeAttr("disabled");
 					$("#baseInfoFormSubmit").text("保存");
+					layer.msg("保存失败，请稍后重试！");
 				},
 				success: function (obj) {
 					$('#baseInfoFormSubmit').removeAttr("disabled");
 					$("#baseInfoFormSubmit").text("保存");
-					$('#baseInfoFormSubmit').dialog({
-						id: 'baseInfoFormSubmit',
-						title: '保存成功',
-						content: '<div class="dlg-contentbox"><img src="<%=basePath%>/static/img/prompt.gif" />保存成功</div>',
-						width: 400,
-						height: 130,
-						ok: true
-					});
+					layer.msg("保存成功！");
 				}
 			});
 		}
@@ -779,6 +773,26 @@
 			$('.line li').click(function(){
 				$('.line li').removeClass('b-active');
 				$(this).addClass("b-active");
+			});
+			
+			$("#tj").click(function() {
+				$.ajax({
+					url: "<%=basePath%>/subject/sboper/checkAndSubmit.action",
+					type: "POST",
+					dataType: "JSON",
+					data: {
+						subjectId : "${subjectId}",
+						_csrf : "${_csrf.token}"
+					},
+					error: function (obj) {
+						$('#tj').removeAttr("disabled");
+						layer.msg("提交失败，请稍后重试！");
+					},
+					success: function (obj) {
+						$('#tj').removeAttr("disabled");
+						layer.msg("提交成功！");
+					}
+				});
 			});
 		});
 	</script>

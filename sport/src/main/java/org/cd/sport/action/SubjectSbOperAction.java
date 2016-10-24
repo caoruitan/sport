@@ -270,25 +270,14 @@ public class SubjectSbOperAction {
 		PageWrite.writeTOPage(response, json);
 	}
 	
-	@RequestMapping(value = "testWord")
-	public void testWord(HttpServletRequest request) throws IOException {
-		String path = request.getSession().getServletContext().getRealPath("/");
-		FileInputStream in = new FileInputStream(new File(path + "/WEB-INF/doc/aaa.doc"));
-		HWPFDocument hdt = new HWPFDocument(in);
-		Range range = hdt.getRange();  
-		range.replaceText("${address}", "北京市海淀区宝盛南路奥北科技园");
-		range.replaceText("${phone}", "15910949461");
-		range.replaceText("${email}", "caort@sysware.com.cn");
-		range.replaceText("${fax}", "010-82845536");
-		range.replaceText("${content}", "<p>研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容研究目标和主要研究内容</p><p>本项目的技术关键与创新点</p>");
-		OutputStream os = new FileOutputStream(path + "/WEB-INF/doc/write.doc");
-		// 把doc输出到输出流中
-		hdt.write(os);
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	@RequestMapping(value = "checkAndSubmit.action")
+	public void checkAndSubmit(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		this.subjectSbsService.checkAndSubmit(subjectId, basePath);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
 	}
 	
 }

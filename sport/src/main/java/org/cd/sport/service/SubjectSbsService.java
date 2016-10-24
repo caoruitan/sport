@@ -34,6 +34,6 @@ public interface SubjectSbsService {
 	
 	public void saveTjyj(String subjectId, String tjyj);
 	
-	public void submit(String sbsId);
+	public void checkAndSubmit(String subjectId, String basePath);
 	
 }

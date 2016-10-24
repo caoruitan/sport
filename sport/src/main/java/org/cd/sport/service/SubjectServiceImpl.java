@@ -1,5 +1,7 @@
 package org.cd.sport.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -141,6 +143,27 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		subject.setCreateUnitName(userDomain.getOrgName());
 		subject.setCreateTime(new Date());
 		subject.setStage(Constants.Subject.SUBJECT_STAGE_SBSTB);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
+				Dic sbsDic = this.dicService.getByCode(Constants.Subject.SUBJECT_ZBKT_SBS_END_DATE_CODE);
+				subject.setSbsEndDate(sdf.parse(sbsDic.getValue()));
+				Dic rwsDic = this.dicService.getByCode(Constants.Subject.SUBJECT_ZBKT_RWS_END_DATE_CODE);
+				subject.setRwsEndDate(sdf.parse(rwsDic.getValue()));
+				Dic subjectDic = this.dicService.getByCode(Constants.Subject.SUBJECT_ZBKT_END_DATE_CODE);
+				subject.setSubjectEndDate(sdf.parse(subjectDic.getValue()));
+			} else if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
+				Dic sbsDic = this.dicService.getByCode(Constants.Subject.SUBJECT_KYGGKT_SBS_END_DATE_CODE);
+				subject.setSbsEndDate(sdf.parse(sbsDic.getValue()));
+				Dic rwsDic = this.dicService.getByCode(Constants.Subject.SUBJECT_KYGGKT_RWS_END_DATE_CODE);
+				subject.setRwsEndDate(sdf.parse(rwsDic.getValue()));
+				Dic subjectDic = this.dicService.getByCode(Constants.Subject.SUBJECT_KYGGKT_END_DATE_CODE);
+				subject.setSubjectEndDate(sdf.parse(subjectDic.getValue()));
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		Dic security = this.dicService.getByCode(subject.getSecurity());
 		subject.setSecurityName(security.getName());
