@@ -299,7 +299,7 @@
 	            },
 	            fax:{
 	            	required:"单位传真不能为空",
-	            	isTel:"请正确填写单位传真"
+	            	isFax:"请正确填写单位传真"
 	            },
 	            email:{
 	            	required:"单位邮箱不能为空",

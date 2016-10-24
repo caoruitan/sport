@@ -149,6 +149,8 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 		if (StringUtils.isBlank(orgId)) {
 			return false;
 		}
+		// 判断是否有权限删除
+		
 		return this.organizationDao.delete(orgId);
 	}
 
