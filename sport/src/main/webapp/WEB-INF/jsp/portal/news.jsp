@@ -9,7 +9,7 @@
 		申报系统和相关文档（<span class="redfont">${sbTotal}</span>）
 	</div>
 	<c:forEach items="${sbNews}" var="news">
-		<li><a>${news.title}</a><span>${news.publishTime}</span></li>
+		<li><a href="<%=basePath %>/news/${user_type}/detail/${news.id}.htm">${news.title}</a><span>${news.publishTime}</span></li>
 	</c:forEach>
 </div>
 <div class="rBox">
@@ -17,6 +17,6 @@
 		政策法规（<span class="redfont">${sbTotal}</span>）
 	</div>
 	<c:forEach items="${zcNews}" var="news">
-		<li><a>${news.title}</a><span>${news.publishTime}</span></li>
+		<li><a href="<%=basePath %>/news/${user_type}/detail/${news.id}.htm">${news.title}</a><span>${news.publishTime}</span></li>
 	</c:forEach>
 </div>

@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +13,17 @@ import org.cd.sport.constant.Constants;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.support.SportSupport;
+import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsQuery;
 import org.cd.sport.vo.NewsVo;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -121,4 +125,65 @@ public class NewsAction {
 		PageWrite.writeTOPage(response, GsonUtils.toJson(model));
 	}
 
+	@RequestMapping(value = "/kjsadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/kjsleader/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsleaderNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/kjsexpert/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String kjsexpertNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/sbadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String sbadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/sboper/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String sboperNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/orgadmin/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String orgadminNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/orgoper/detail/{newsId}.htm", method = RequestMethod.GET)
+	public String orgoperNewsView(@PathVariable String newsId, HttpServletRequest request,
+			HttpServletResponse response) {
+		return this.queryDetail(newsId, request, response);
+	}
+
+	@RequestMapping(value = "/detail/{newsId}.htm", method = RequestMethod.GET)
+	public void newsView(@PathVariable String newsId, HttpServletRequest request, HttpServletResponse response) {
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+		UserVo user = AuthenticationUtils.getUser();
+		String role = user.getRole();
+		role = role.replace("ROLE_", "").replace("_", "").toLowerCase();
+		try {
+			response.sendRedirect(basePath+"/news/" + role + "/detail/" + newsId + ".htm");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private String queryDetail(String newsId, HttpServletRequest request, HttpServletResponse response) {
+		NewsVo news = this.newsSevice.getById(newsId);
+		request.setAttribute("news", news);
+		return "news/detail";
+	}
 }

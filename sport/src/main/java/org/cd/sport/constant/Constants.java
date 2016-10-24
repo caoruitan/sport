@@ -310,22 +310,22 @@ public class Constants {
 		/**
 		 * 通知类型新闻
 		 */
-		public static final int NOTICE_NEWS = 0;
+		public static final int NOTICE_NEWS = 1;
 
 		/**
 		 * 申报类型新闻
 		 */
-		public static final int SB_NEWS = 1;
+		public static final int SB_NEWS = 2;
 
 		/**
 		 * 政策类型新闻
 		 */
-		public static final int ZC_NEWS = 2;
+		public static final int ZC_NEWS = 3;
 
 		/**
 		 * 填报类型新闻
 		 */
-		public static final int TB_NEWS = 3;
+		public static final int TB_NEWS = 4;
 
 		/**
 		 * 解析状态值

@@ -21,7 +21,7 @@
 <body>
 	<div class="login_H ">
 		<c:if test="${news!=null }">
-			<span>公告：<a href="<%=basePath %>/news/">${news.title}</a>
+			<span>公告：<a href="<%=basePath %>/news/detail/${news.id}.htm">${news.title}</a>
 			<img src="<%=basePath %>/static/img/login/ky-new.png"></span>
 		</c:if>
 	</div>

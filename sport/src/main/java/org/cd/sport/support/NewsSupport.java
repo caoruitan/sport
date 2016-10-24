@@ -12,6 +12,7 @@ import org.cd.sport.domain.News;
 import org.cd.sport.domain.NewsAttachment;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.utils.NullableUtils;
+import org.cd.sport.utils.UBBDecoder;
 import org.cd.sport.view.FileView;
 import org.cd.sport.view.NewsView;
 import org.cd.sport.vo.NewsVo;
@@ -95,12 +96,15 @@ public class NewsSupport extends SportSupport {
 		newsVo.setColumnName(cName);
 		newsVo.setStatusName(Constants.News.getStatusName(news.getStatus()));
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
-		newsVo.setCreateTime(format.format(news.getCreateTime()));
+		Date createTime = news.getCreateTime();
+		if (createTime != null) {
+			newsVo.setCreateTime(format.format(createTime));
+		}
 		Date publishTime = news.getPublishTime();
 		if (publishTime != null) {
 			newsVo.setPublishTime(format.format(publishTime));
 		}
-		newsVo.setContent(new String(news.getContent()));
+		newsVo.setContent(UBBDecoder.decode(new String(news.getContent())));
 		return newsVo;
 	}
 

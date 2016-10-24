@@ -94,8 +94,9 @@ public class KjsadminOrgAction extends BaseOrgAction {
 	}
 
 	@RequestMapping(value = "/kjsadmin/delete.action", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request) {
-
+	public void delete(String orgId, HttpServletRequest request, HttpServletResponse response) {
+		boolean delete = this.organizationService.delete(orgId);
+		PageWrite.writeTOPage(response, delete);
 	}
 
 	@RequestMapping("/kjsadmin/update.htm")

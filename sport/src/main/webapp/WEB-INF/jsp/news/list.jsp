@@ -91,7 +91,10 @@
 						label:"标题",
 						name: 'title',
 						width: 50,
-						align: "center"
+						align: "center",
+						formatter:function(value, grid, rows, state){
+							return "<a href='"+Sport.getBasePath()+"/news/kjsadmin/detail/"+rows.id+".htm'>"+value+"</a>";
+						}
 					}, {
 						label:"所属栏目",
 						name: 'columnName',

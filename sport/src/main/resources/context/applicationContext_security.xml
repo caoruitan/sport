@@ -16,6 +16,7 @@
 		<intercept-url pattern="/login" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
+		<intercept-url pattern="/download.action" access="isAuthenticated()"/>
 		
 		<!-- 注册相关-->
 		<intercept-url pattern="/regist/**" access="permitAll()"/>
@@ -53,6 +54,12 @@
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/news/kjsleader/**" access="hasRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/news/kjsexpert/**" access="hasRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/news/sbadmin/**" access="hasRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/news/sboper/**" access="hasRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/news/orgadmin/**" access="hasRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/news/orgoper/**" access="hasRole('ROLE_ORG_OPER')"/>
 		<intercept-url pattern="/news/**" access="isAuthenticated()"/>
 		
 		<!-- 数据字典权限 -->
