@@ -225,29 +225,45 @@ public class Constants {
 	public static final class Subject {
 
 		public static final String SUBJECT_START_YEAR = "2015";
-
+		/**
+		 * 申报书填写及评审
+		 */
 		public static final String SUBJECT_STAGE_SBSTB = "SBSTB";
-
+		/**
+		 * 任务书填报及审批
+		 */
 		public static final String SUBJECT_STAGE_RWSTB = "RWSTB";
-
+		/**
+		 * 阶段成果及审批
+		 */
 		public static final String SUBJECT_STAGE_JDBG = "JDBG";
-
+		/**
+		 * 结题报告
+		 */
 		public static final String SUBJECT_STAGE_JTBG = "JTBG";
-		
+		/**
+		 * 结题结束
+		 */
+		public static final String SUBJECT_STAGE_JTEND = "JTEND";
+		/**
+		 * 回退状态
+		 */
+		public static final String SUBJECT_STAGE_JTBACK = "JTBACK";
+
 		public static final String SUBJECT_TYPE_ZBKT = "ZBKT";
 
 		public static final String SUBJECT_TYPE_KYGGKT = "KYGGKT";
-		
+
 		public static final String SUBJECT_ZBKT_SBS_END_DATE_CODE = "019002001";
-		
+
 		public static final String SUBJECT_ZBKT_RWS_END_DATE_CODE = "019002002";
-		
+
 		public static final String SUBJECT_ZBKT_END_DATE_CODE = "019002003";
-		
+
 		public static final String SUBJECT_KYGGKT_SBS_END_DATE_CODE = "019001001";
-		
+
 		public static final String SUBJECT_KYGGKT_RWS_END_DATE_CODE = "019001002";
-		
+
 		public static final String SUBJECT_KYGGKT_END_DATE_CODE = "019001003";
 
 		public static Map<String, String> getSubjectTypes() {
@@ -278,7 +294,7 @@ public class Constants {
 		public static final String SUBJECT_SBS_STATUS_KJS_SP = "KJS_SP";
 
 		public static final String SUBJECT_SBS_STATUS_COMPLETE = "COMPLETE";
-		
+
 		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/WEB-INF/doc/sbs_template.doc";
 
 		public static Map<String, String> getSubjectSbsStatus() {

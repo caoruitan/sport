@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -47,9 +48,10 @@ public class LoginAction {
 	 * 跳转登录界面
 	 * 
 	 * @return
+	 * @throws SQLException
 	 */
 	@RequestMapping("login")
-	public String Login(HttpServletRequest request) {
+	public String Login(HttpServletRequest request) throws SQLException {
 		NewsVo news = newsService.getLatestNotice(Constants.News.NOTICE_NEWS);
 		String return_url = request.getParameter("return_url");
 		// 初始化公钥

@@ -25,11 +25,17 @@ public class SubjectSbs {
 	private String email;
 	
 	private String years;
-	
+	/**
+	 * 选题依据
+	 */
 	private String xtyj;
-	
+	/**
+	 * 研究目标
+	 */
 	private String yjmb;
-	
+	/**
+	 * 技术关键
+	 */
 	private String jsgj;
 	
 	private String yjff;

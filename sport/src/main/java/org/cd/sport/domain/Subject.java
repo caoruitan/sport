@@ -10,55 +10,61 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * @author happy
+ *
+ */
 @Entity()
 @Table(name = "SPORT_SUBJECT")
 public class Subject {
-	
+
 	private String id;
-	
+
 	private String num;
-	
+
 	private String name;
-	
+
 	private String type;
-	
+
 	private String organizationId;
-	
+
 	private String organizationName;
-	
+
 	private String security;
-	
+
 	private String securityName;
-	
+
 	private String organizationCount;
-	
+
 	private Date beginDate;
-	
+
 	private Date endDate;
-	
+
 	private String results;
-	
+
 	private String resultsName;
-	
+
 	private boolean integration;
-	
+
 	private String stage;
-	
+
 	private Date sbsEndDate;
-	
+
 	private Date rwsEndDate;
-	
+
 	private Date subjectEndDate;
-	
+
 	private String creator;
-	
+
 	private String creatorName;
-	
+
 	private Date createTime;
-	
+
 	private String createUnitId;
-	
+
 	private String createUnitName;
+
+	private int newState;
 
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -269,5 +275,14 @@ public class Subject {
 	public void setCreateUnitName(String createUnitName) {
 		this.createUnitName = createUnitName;
 	}
-	
+
+	@Column(name = "SUBJECT_NEW_STATE")
+	public int getNewState() {
+		return newState;
+	}
+
+	public void setNewState(int newState) {
+		this.newState = newState;
+	}
+
 }
