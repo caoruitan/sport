@@ -534,13 +534,16 @@ $(function(){
 				return;
 			}
 		}
+		lhgdialog.prompt("简单愉悦的接口，强大的表现力，优雅的内部实现",function(){},function(){});
+		$.dialog('简单愉悦的接口，强大的表现力，优雅的内部实现', function(){alert('yes');});
+		/*
 		layer.confirm('您确定要删除该用户吗？', {
 			  btn: ['是的','稍后'] //按钮
 			}, function(){
 				//删除用户
 				$('.sport-user-delete').attr("disabled",true);
 				$.ajax({
-					url: Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/delete.action",
+					//url: Sport.getBasePath()+"/user/"+$(".sport-user-delete").attr("data-type")+"/delete.action",
 					type: "POST",
 					dataType: "JSON",
 					data: {_csrf:$("#csrdId").val(),userIds:userIds.join(",")},
@@ -559,7 +562,7 @@ $(function(){
 					}
 				});
 			}, function(){
-		});
+		});*/
 	});
 	
 	// 密码重置

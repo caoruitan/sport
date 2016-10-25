@@ -134,8 +134,6 @@
 <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//var loc	= new Location();
-		//loc.fillOption('loc_province' , '0');
 		jQuery.validator.addMethod("englishNameCheck", function(value, element) { 
 		    if(Sport.isNull(value)){
 		    	return true;

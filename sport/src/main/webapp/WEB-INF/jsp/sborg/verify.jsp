@@ -145,7 +145,6 @@
 						$(".sport-verify-unpass").removeAttr("disabled");
 					},
 					success: function (obj) {
-						debugger;
 						if(obj){
 							layer.msg("审核单位成功！");
 							window.location.href = Sport.getBasePath()+"/sborg/kjsadmin/list.htm";

@@ -41,7 +41,7 @@
     <div id="jqGridPager"></div>
 </div>
 <script type="text/javascript"> 
-	$(document).ready(function () {
+	$(function () {
         // 处理select不初始化的问题
 		$(window).trigger("load");
         var user_type="${user_type}";
