@@ -39,6 +39,11 @@ public class PortalAction {
 		total = this.newsService.getTotalByColumn(columns);
 		request.setAttribute("zcNews", news);
 		request.setAttribute("zcTotal", total);
+		columns = new Integer[] { Constants.News.NOTICE_NEWS };
+		news = this.newsService.getByColumn(columns, 0, 10);
+		total = this.newsService.getTotalByColumn(columns);
+		request.setAttribute("noticeNews", news);
+		request.setAttribute("noticeTotal", total);
 	}
 
 	/**
@@ -142,10 +147,10 @@ public class PortalAction {
 	public String sboperIndex(HttpServletRequest request) {
 		queryNews(request);
 		UserVo user = AuthenticationUtils.getUser();
-		int kt_zs = subjectService.getSubjectCountByCreator(user.getUserId());
-		int kt_sbs = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_SBSTB);
-		int kt_rws = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByCreatorAndStage(user.getUserId(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_zs = subjectService.getSubjectCountByCreator(user.getLoginName());
+		int kt_sbs = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_SBSTB);
+		int kt_rws = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_RWSTB);
+		int kt_jt = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_JTBG);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);
