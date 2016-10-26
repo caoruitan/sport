@@ -11,7 +11,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
-
+	
+	@Override
+	public boolean deleteSubjectById(String sId) {
+		String hql = "delete from Subject where id=:id";
+		return this.getHibernateQuery(hql).setParameter("id", sId).executeUpdate()!=0;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Subject> getAllSubjectList(String year, String type, String stage, int start, int limit) {
@@ -293,5 +299,4 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		Long count = (Long) query.uniqueResult();
 		return count == null ? 0 : count.intValue();
 	}
-
 }

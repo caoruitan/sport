@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 public class SubjectSbsDaoImpl extends BaseDaoImpl<SubjectSbs> implements SubjectSbsDao {
 
 	@Override
+	public boolean deleteById(String sbsId) {
+		String hql = "delete from SubjectSbs where sbsId=:sbsId";
+		return this.getHibernateQuery(hql).setParameter("sbsId", sbsId).executeUpdate() != 0;
+	}
+
+	@Override
 	public SubjectSbs getSbsBySubjectId(String subjectId) {
 		String hql = "from SubjectSbs ss where ss.subjectId = :subjectId";
 		Map<String, Object> params = new HashMap<String, Object>();

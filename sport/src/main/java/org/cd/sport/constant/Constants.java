@@ -295,6 +295,8 @@ public class Constants {
 
 		public static final String SUBJECT_SBS_STATUS_COMPLETE = "COMPLETE";
 
+		public static final String SUBJECT_SBS_STATUS_BACK = "BACK";
+
 		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/WEB-INF/doc/sbs_template.doc";
 
 		public static Map<String, String> getSubjectSbsStatus() {
@@ -304,6 +306,7 @@ public class Constants {
 			types.put(SUBJECT_SBS_STATUS_ORG_SP, "已提交至组织单位审批");
 			types.put(SUBJECT_SBS_STATUS_KJS_SP, "已提交至科教司审批");
 			types.put(SUBJECT_SBS_STATUS_COMPLETE, "审批通过");
+			types.put(SUBJECT_SBS_STATUS_BACK, "已回退");
 			return types;
 		}
 
