@@ -500,14 +500,59 @@
 			<!--12 其他联合申报单位意见-->
 			<div class="box b-dwyj">
 				<div class="t">12 其他联合申报单位意见</div>
+				<div class="c">
+					<table style="width:80%;margin-left:10%">
+						<tr>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
+							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<!--13 相关部门意见-->
 			<div class="box b-bmyj">
 				<div class="t">13 相关部门意见</div>
+				<div class="c">
+					<table style="width:80%;margin-left:10%">
+						<tr>
+							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>负责人签字<span style="float: right">单位盖章</span></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<!--14 国家体育总局审批意见-->
 			<div class="box b-spyj">
 				<div class="t">14 国家体育总局审批意见</div>
+				<div class="c">
+					<table style="width:80%;margin-left:10%">
+						<tr>
+							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4"><br/><br/><br/><br/><br/><br/><br/><br/><br/><span style="float: right">单位盖章</span></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
