@@ -312,6 +312,35 @@ public class Constants {
 
 	}
 
+	public static final class SubjectRws {
+
+		public static final String SUBJECT_RWS_STATUS_SBOPER_TB = "SBOPER_TB";
+
+		public static final String SUBJECT_RWS_STATUS_SBADMIN_SP = "SBADMIN_SP";
+
+		public static final String SUBJECT_RWS_STATUS_ORG_SP = "ORG_SP";
+
+		public static final String SUBJECT_RWS_STATUS_KJS_SP = "KJS_SP";
+
+		public static final String SUBJECT_RWS_STATUS_COMPLETE = "COMPLETE";
+
+		public static final String SUBJECT_RWS_STATUS_BACK = "BACK";
+
+		public static final String SUBJECT_RWS_DOC_TEMPLATE_PATH = "/WEB-INF/doc/sbs_template.doc";
+
+		public static Map<String, String> getSubjectRwsStatus() {
+			Map<String, String> types = new LinkedHashMap<String, String>();
+			types.put(SUBJECT_RWS_STATUS_SBOPER_TB, "申报人填报");
+			types.put(SUBJECT_RWS_STATUS_SBADMIN_SP, "已提交至本单位管理员审批");
+			types.put(SUBJECT_RWS_STATUS_ORG_SP, "已提交至组织单位审批");
+			types.put(SUBJECT_RWS_STATUS_KJS_SP, "已提交至科教司审批");
+			types.put(SUBJECT_RWS_STATUS_COMPLETE, "审批通过");
+			types.put(SUBJECT_RWS_STATUS_BACK, "已回退");
+			return types;
+		}
+
+	}
+
 	public static class News {
 		/**
 		 * 新闻创建状态（取消发布状态）
