@@ -76,6 +76,10 @@
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		
+		<!--申报书、任务书下载-->
+		<intercept-url pattern="/sbs/download.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/rws/download.action" access="isAuthenticated()"/>
+		
 		<!--文件上传-->
 		<intercept-url pattern="/kjsadmin/upload.action" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		

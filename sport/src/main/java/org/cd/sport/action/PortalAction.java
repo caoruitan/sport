@@ -56,11 +56,11 @@ public class PortalAction {
 		int zbkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_ZBKT);
 		int zbkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int zbkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTEND);
 		int kyggkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_KYGGKT);
 		int kyggkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kyggkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("zbkt_zs", zbkt_zs);
 		request.setAttribute("zbkt_sbs", zbkt_sbs);
@@ -84,11 +84,11 @@ public class PortalAction {
 		int zbkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_ZBKT);
 		int zbkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int zbkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int zbkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_ZBKT, Constants.Subject.SUBJECT_STAGE_JTEND);
 		int kyggkt_zs = subjectService.getAllSubjectCountByType(Constants.Subject.SUBJECT_TYPE_KYGGKT);
 		int kyggkt_sbs = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kyggkt_rws = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kyggkt_jt = subjectService.getAllSubjectCountByTypeAndStage(Constants.Subject.SUBJECT_TYPE_KYGGKT, Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("zbkt_zs", zbkt_zs);
 		request.setAttribute("zbkt_sbs", zbkt_sbs);
@@ -112,7 +112,7 @@ public class PortalAction {
 		int kt_zs = subjectService.getSubjectCountByExpert(user.getOrganization());
 		int kt_sbs = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kt_rws = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_jt = subjectService.getSubjectCountByExpertAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);
@@ -131,7 +131,7 @@ public class PortalAction {
 		int kt_zs = subjectService.getSubjectCountByCreateUnit(user.getOrganization());
 		int kt_sbs = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kt_rws = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_jt = subjectService.getSubjectCountByCreateUnitAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);
@@ -150,7 +150,7 @@ public class PortalAction {
 		int kt_zs = subjectService.getSubjectCountByCreator(user.getLoginName());
 		int kt_sbs = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kt_rws = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_jt = subjectService.getSubjectCountByCreatorAndStage(user.getLoginName(), Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);
@@ -169,7 +169,7 @@ public class PortalAction {
 		int kt_zs = subjectService.getSubjectCountByOrg(user.getOrganization());
 		int kt_sbs = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kt_rws = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);
@@ -188,7 +188,7 @@ public class PortalAction {
 		int kt_zs = subjectService.getSubjectCountByOrg(user.getOrganization());
 		int kt_sbs = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_SBSTB);
 		int kt_rws = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_RWSTB);
-		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTBG);
+		int kt_jt = subjectService.getSubjectCountByOrgAndStage(user.getOrganization(), Constants.Subject.SUBJECT_STAGE_JTEND);
 		request.setAttribute("kt_zs", kt_zs);
 		request.setAttribute("kt_sbs", kt_sbs);
 		request.setAttribute("kt_rws", kt_rws);

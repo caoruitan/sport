@@ -218,9 +218,17 @@
 
 	<div class="titleBox1">
 		<div class="tip">申报书填报</div>
-		<div class="title">${subject.name}<span>${status[sbs.status]}</span></div>
+		<div class="title">
+			${subject.name}<span>${status[sbs.status]}</span>
+			<c:if test='${sbs.status eq "BACK" }'><a style="font-size:14px;color:0000ff" id="viewComment" href="#">查看审批意见</a></c:if>
+		</div>
 		<div class="btnBox">
-			<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
+			<c:if test='${not empty sbs && (sbs.status eq "SBOPER_TB" || sbs.status eq "BACK")}'>
+				<button class="btn-img" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
+			</c:if>
+			<c:if test='${not empty sbs && sbs.status ne "SBOPER_TB"}'>
+				<button class="btn-img" id="xz"><img src="<%=basePath %>/static/img/d-xz.png"/>下载</button>
+			</c:if>
 		</div>
 	</div>
 
@@ -838,6 +846,19 @@
 						layer.msg("提交成功！");
 					}
 				});
+			});
+			
+			$("#xz").click(function() {
+				window.open("<%=basePath%>/sbs/download.action?subjectId=${subjectId}");
+			});
+			
+			$("#viewComment").dialog({
+				id: 'tj',
+				title: '审批意见',
+				content: '<div class="dlg-contentbox">${sbs.comment}</div>',
+				width: 400,
+				height: 130,
+				ok: true
 			});
 		});
 	</script>
