@@ -662,7 +662,7 @@ $(function(){
 	}).on("click",".sport-download",function(){
 		var dataId = $(this).attr("data-id");
 		var dataName = $(this).attr("data-name");
-		window.open(Sport.getBasePath()+"/download.action?dataId="+dataId+"&dataName="+encodeURI(dataName));
+		window.open(Sport.getBasePath()+"/news/kjsadmin/download.action?dataId="+dataId+"&dataName="+encodeURI(dataName));
 	}).on("change","#news-column",function(){
 		$(".column-error").text("");
 	}).on("click",".sport-lm li",function(){

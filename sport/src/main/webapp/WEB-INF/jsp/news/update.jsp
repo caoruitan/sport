@@ -128,7 +128,7 @@
 	    });
 		
 		new AjaxUpload('FileUploader', {
-             action: Sport.getBasePath() + '/kjsadmin/upload.action?_csrf='+$("#csrdToken").val(),
+             action: Sport.getBasePath() + '/news/kjsadmin/upload.action?_csrf='+$("#csrdToken").val(),
              name : 'file',
              data : {},
              autoSubmit: true,

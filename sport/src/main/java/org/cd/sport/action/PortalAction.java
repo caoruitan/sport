@@ -30,17 +30,17 @@ public class PortalAction {
 	public void queryNews(HttpServletRequest request) {
 		// 查询新闻
 		Integer[] columns = new Integer[] { Constants.News.SB_NEWS };
-		List<NewsVo> news = this.newsService.getByColumn(columns, 0, 10);
+		List<NewsVo> news = this.newsService.getByColumn(columns, 0, 5);
 		long total = this.newsService.getTotalByColumn(columns);
 		request.setAttribute("sbNews", news);
 		request.setAttribute("sbTotal", total);
 		columns = new Integer[] { Constants.News.ZC_NEWS };
-		news = this.newsService.getByColumn(columns, 0, 10);
+		news = this.newsService.getByColumn(columns, 0, 5);
 		total = this.newsService.getTotalByColumn(columns);
 		request.setAttribute("zcNews", news);
 		request.setAttribute("zcTotal", total);
 		columns = new Integer[] { Constants.News.NOTICE_NEWS };
-		news = this.newsService.getByColumn(columns, 0, 10);
+		news = this.newsService.getByColumn(columns, 0, 5);
 		total = this.newsService.getTotalByColumn(columns);
 		request.setAttribute("noticeNews", news);
 		request.setAttribute("noticeTotal", total);
