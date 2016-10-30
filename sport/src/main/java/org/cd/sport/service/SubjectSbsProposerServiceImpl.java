@@ -6,6 +6,7 @@ import org.cd.sport.dao.SubjectSbsProposerDao;
 import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.support.SubjectSbsProposerSupport;
 import org.cd.sport.view.SubjectSbsProposerView;
+import org.cd.sport.vo.SubjectSbsProposerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +61,9 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport imp
 	}
 
 	@Override
-	public List<SubjectSbsProposer> getBySbsId(String sbsId, String primary) {
-		return this.subjectSbsProposerDao.findBySbsId(sbsId, primary);
+	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary) {
+		List<SubjectSbsProposer> ps = this.subjectSbsProposerDao.findBySbsId(sbsId, primary);
+		return this.processVo(ps);
 	}
 
 	@Override

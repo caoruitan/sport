@@ -9,11 +9,13 @@ import java.sql.SQLException;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
+import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.cd.sport.service.DicService;
+import org.cd.sport.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,9 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 
 	@Autowired
 	private SubjectSbsDao subjectSbsDao;
+
+	@Autowired
+	private OrganizationService organizationService;
 
 	public Connection getConn() {
 		Connection conn = null;
@@ -62,6 +67,10 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 				subject.setType(Constants.Subject.SUBJECT_TYPE_ZBKT);
 			}
 			subject.setOrganizationId(rs.getString("SI_OGNI_UNITS_ID"));
+			OrganizationDomain org = organizationService.getById(rs.getString("SI_OGNI_UNITS_ID"));
+			if (org != null) {
+				subject.setOrganizationName(org.getFullName());
+			}
 			subject.setSecurity(rs.getString("SI_SECRET_GRADE"));
 			Dic dic = dicService.getByCode(rs.getString("SI_SECRET_GRADE"));
 			if (dic != null) {
@@ -87,7 +96,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 			subject.setOrganizationCount(rs.getString("SI_UNIT_COUNT"));
 			subject.setCreateTime(rs.getDate("SI_CREAT_TIME"));
 			subject.setSbsEndDate(rs.getDate("SI_TENDER_END_TIME"));
-			subject.setSbsEndDate(rs.getDate("SI_TASK_END_TIME"));
+			subject.setRwsEndDate(rs.getDate("SI_TASK_END_TIME"));
 			subject.setSubjectEndDate(rs.getDate("SI_OVER_END_TIME"));
 			subject.setNewState(rs.getInt("NEW_STATE"));
 			// 状态值处理
@@ -144,7 +153,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 	}
 
 	@Transactional
-	public void importSubjectRws() throws SQLException {  //RWS_ADDRESS
+	public void importSubjectRws() throws SQLException { // RWS_ADDRESS
 		String sql = "select * from subject_task_book";
 		PreparedStatement ps = getConn().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.view.SubjectSbsProposerView;
+import org.cd.sport.vo.SubjectSbsProposerVo;
 
 /**
  * 课题服务类
@@ -24,7 +25,7 @@ public interface SubjectSbsProposerService {
 
 	public List<SubjectSbsProposer> getBySbsId(String sbsId, int start, int limit);
 
-	public List<SubjectSbsProposer> getBySbsId(String sbsId, String primary);
+	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary);
 
 	public List<SubjectSbsProposer> getBySbsId(String sbsId, String primary, int start, int limit);
 

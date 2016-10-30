@@ -1,9 +1,16 @@
 package org.cd.sport.support;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.view.SubjectSbsProposerView;
+import org.cd.sport.vo.SubjectSbsProposerVo;
 
 /**
  * 
@@ -52,6 +59,42 @@ public class SubjectSbsProposerSupport extends SportSupport {
 	public SubjectSbsProposer process(SubjectSbsProposerView view) {
 		this.validate(view);
 		SubjectSbsProposer viewDomain = this.result(SubjectSbsProposer.class, view);
+		return viewDomain;
+	}
+
+	public List<SubjectSbsProposerVo> processVo(List<SubjectSbsProposer> props) {
+		if (props == null || props.isEmpty()) {
+			return null;
+		}
+
+		List<SubjectSbsProposerVo> vos = new ArrayList<SubjectSbsProposerVo>();
+		for (SubjectSbsProposer subjectSbsProposer : props) {
+			vos.add(this.process(subjectSbsProposer));
+		}
+		return vos;
+	}
+
+	public SubjectSbsProposerVo process(SubjectSbsProposer prop) {
+		SubjectSbsProposerVo viewDomain = this.result(SubjectSbsProposerVo.class, prop);
+		// 性别和年龄
+		viewDomain.setGender(Constants.User.getGenderName(prop.getGender()));
+		Date birthday = viewDomain.getBirthday();
+		Calendar c = Calendar.getInstance();
+		c.setTime(birthday);
+		int year1 = c.get(Calendar.YEAR);
+		int month1 = c.get(Calendar.MONTH);
+
+		c.setTime(new Date(System.currentTimeMillis()));
+		int year2 = c.get(Calendar.YEAR);
+		int month2 = c.get(Calendar.MONTH);
+
+		int result;
+		if (year1 == year2) {
+			result = month1 - month2;
+		} else {
+			result = 12 * (year1 - year2) + month1 - month2;
+		}
+		viewDomain.setAge(result / 12);
 		return viewDomain;
 	}
 }

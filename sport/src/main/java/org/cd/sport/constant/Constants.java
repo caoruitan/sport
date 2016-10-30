@@ -128,6 +128,14 @@ public class Constants {
 			}
 
 		}
+
+		public static String getGenderName(int gender) {
+			if (WOMAN == gender) {
+				return "女";
+			}
+			return "男";
+		}
+
 	}
 
 	public static final class Role {
@@ -224,7 +232,7 @@ public class Constants {
 
 	public static final class Subject {
 
-		public static final String SUBJECT_START_YEAR = "2015";
+		public static final String SUBJECT_START_YEAR = "2010";
 		/**
 		 * 申报书填写及评审
 		 */
@@ -297,7 +305,15 @@ public class Constants {
 
 		public static final String SUBJECT_SBS_STATUS_BACK = "BACK";
 
-		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/WEB-INF/doc/sbs_template.doc";
+		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/doc/sbs_template.doc";
+		/**
+		 * 主要申请人
+		 */
+		public static final String SUBJECT_SBS_PROPOSER_PRIMARY = "primary";
+		/**
+		 * 其他申请人
+		 */
+		public static final String SUBJECT_SBS_PROPOSER_OTHER = "other";
 
 		public static Map<String, String> getSubjectSbsStatus() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
@@ -309,7 +325,6 @@ public class Constants {
 			types.put(SUBJECT_SBS_STATUS_BACK, "已回退");
 			return types;
 		}
-
 	}
 
 	public static final class SubjectRws {
