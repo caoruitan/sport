@@ -3,6 +3,7 @@ package org.cd.sport.action;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
@@ -10,6 +11,8 @@ import org.cd.sport.domain.Dic;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.SubjectSbsProposerService;
+import org.cd.sport.utils.PageWrite;
+import org.cd.sport.view.SubjectSbsProposerView;
 import org.cd.sport.vo.SubjectSbsProposerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +25,7 @@ public class SubjectSbsProposerAction {
 
 	@Autowired
 	private DicService dicService;
-	
+
 	@Autowired
 	private SubjectSbsProposerService subjectSbsProposerService;
 
@@ -47,7 +50,9 @@ public class SubjectSbsProposerAction {
 	}
 
 	@RequestMapping(value = "/sboper/create.action", method = RequestMethod.POST)
-	public void create(HttpServletRequest request) {
+	public void create(SubjectSbsProposerView proposer, HttpServletRequest request, HttpServletResponse response) {
+		boolean create = this.subjectSbsProposerService.create(proposer);
+		PageWrite.writeTOPage(response, create);
 	}
 
 }

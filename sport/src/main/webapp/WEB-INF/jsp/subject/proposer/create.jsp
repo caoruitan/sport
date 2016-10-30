@@ -34,7 +34,6 @@
 		body {
 			background: #F2F2F2;
 		}
-		
 		.editBox {
 			min-height: 400px;
 		}
@@ -42,86 +41,77 @@
 	</head>
 	<body>
 		<div class="editBox">
-			<table class="editTable">
-				<tr>
-					<th class="required">姓名</th>
-					<td><input name="name" type="text" value="" /></td>
-
-					<th class="required">性别</th>
-					<td>
-						<input id="男" type="radio" name="性别" checked=""><label for="男">男</label>
-						<input id="女" type="radio" name="性别"><label for="女">女</label>
-					</td>
-				</tr>
-				<tr>
-					<th>出生日期</th>
-					<td><input id="d11" type="text" onClick="WdatePicker()"/></td>
-					<th class="required">职务</th>
-					<td>
-						<select name="zw" class="selectpicker" title="请选择">
-							<c:forEach items="${zwDics}" var="zw">
-    							<option value="${zw.code}">${zw.name}</option>
-    						</c:forEach>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th class="required">学历</th>
-					<td>
-						<select name="degrees" class="selectpicker" title="请选择">
-    						<c:forEach items="${degrees}" var="de">
-    							<option value="${de.code}">${de.name}</option>
-    						</c:forEach>
-						</select>
-					</td>
-					<th class="required">所学专业</th>
-					<td>
-						<select id="lunch" class="selectpicker" title="请选择">
-							<option>请选择</option>
-							<option>计算机</option>
-							<option>体育</option>
-							<option>心理学</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th class="required">确认密码</th>
-					<td><input name="name" type="text" value="" /></td>
-					<th class="required">证件号码</th>
-					<td><input name="name" type="text" value="" /></td>
-				</tr>
-				<tr>
-					<th>所属单位</th>
-					<td><input name="name" type="text" value="" />
-					</td>
-					<th>Email</th>
-					<td><input name="name" type="text" value="" />
-					</td>
-				</tr>
-				<tr>
-					<th>研究分工</th>
-					<td colspan="3"><input name="name" type="text" value="" style="width: 560px;" /></td>
-				</tr>
-				<tr>
-					<th>毕业院校</th>
-					<td><input name="name" type="text" value="" /></td>
-					<th>电话</th>
-					<td><input name="name" type="text" value="" /></td>
-				</tr>
-				<tr>
-					<th>研究背景</th>
-					<td colspan="3"><input name="name" type="text" value="" style="width: 560px;" /></td>
-				</tr>
-			</table>
+			<form id="sport-proposer-from">
+                <table class="editTable">
+                    <tr>
+            			<th class="required">姓名</th>
+            			<td>
+                            <input name="name" type="text" value="" />
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+                        </td>
+            
+            			<th class="required">性别</th>
+            			<td>
+            				<input type="radio" name="gender" value="0" checked="checked"><label for="男">男</label>
+            				<input type="radio" name="gender" value="1" ><label for="女">女</label>
+            			</td>
+            		</tr>
+            		<tr>
+            			<th class="required">出生日期</th>
+            		    <td><input type="text" name="birthday" id="birthday" onClick="WdatePicker()" readonly="readonly"/></td>
+            			<th class="required">职务</th>
+            			<td>
+            				<select name="zw" class="selectpicker" title="请选择">
+            					<c:forEach items="${zwDics}" var="zw">
+            						<option value="${zw.code}">${zw.name}</option>
+            					</c:forEach>
+            				</select>
+            			</td>
+            		</tr>
+            		<tr>
+            			<th class="required">学历</th>
+            			<td>
+            				<select name="degrees" class="selectpicker" title="请选择">
+            					<c:forEach items="${degrees}" var="de">
+            						<option value="${de.code}">${de.name}</option>
+            					</c:forEach>
+            				</select>
+            			</td>
+            			<th class="required">所学专业</th>
+            			<td>
+            				<input name="major" type="text" id="major"/>
+            			</td>
+            		</tr>
+            		<tr>
+            			<th class="required">所属单位</th>
+            			<td><input name="org" type="text" value="" /></td>
+            			<th>电子邮件</th>
+            			<td><input name="email" type="text" value="" /></td>
+            		</tr>
+            		<tr>
+            			<th>毕业院校</th>
+            			<td><input name="university" type="text" value="" /></td>
+            			<th>电话</th>
+            			<td><input name="phone" type="text" value="" /></td>
+            		</tr>
+            		<tr>
+                        <th class="required">研究分工</th>
+                        <td colspan="3"><input name="work" type="text" value="" style="width: 560px;" /></td>
+                    </tr>
+                    <tr>
+            			<th class="required">研究背景</th>
+            			<td colspan="3"><input name="backdrop" type="text" value="" style="width: 560px;" /></td>
+            		</tr>
+            	</table>
+            </form>
 		</div>
 		<script>
 			$(function() {
 				$('input').iCheck({
 					checkboxClass: 'icheckbox_flat-blue',
 					radioClass: 'iradio_flat-blue',
-					increaseArea: '20%' // optional
+					increaseArea: '20%' 
 				});
-				alert(111);
 			});
 		</script>
 	</body>

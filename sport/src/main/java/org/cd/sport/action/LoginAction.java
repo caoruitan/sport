@@ -43,7 +43,7 @@ public class LoginAction {
 
 	@Autowired
 	private NewsService newsService;
-
+	
 	/**
 	 * 跳转登录界面
 	 * 

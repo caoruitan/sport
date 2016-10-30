@@ -123,7 +123,7 @@
 			content: '<div class="dlg-contentbox"><textarea id="verify-msg" placeholder="请填写退回意见" name="" style="width:530px" rows="4" cols="10"></textarea></br><span style="color:rgb(255, 102, 0);padding-left:10px;" class="msg-error"></span></div>',
 			width: 600,
 			height: 230,
-			ok: function(data ,ddd,dd,rr){
+			ok: function(data){
 				var msg = $("#verify-msg").val();
 				if(Sport.isNull(msg)){
 					$(".msg-error").text("请填写退回意见");

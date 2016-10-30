@@ -115,9 +115,6 @@
 	</style>
 	</head>
 	<body>
-		<div class="titleBox">
-			<div class="title"><img src="<%=basePath %>/static/img/yh.png" />申请人情况</div>
-		</div>
 		<div class="titleBox2">
 			<div class="title">主要申请人</div>
 		</div>
@@ -148,7 +145,17 @@
 		</div>
 
 		<script type="text/javascript">
-			$(document).ready(function() {
+			$(function() {
+				jQuery.validator.addMethod("stringCheck", function(value, element) { 
+				     return this.optional(element) || /^[\u0391-\uFFE5\w]{1,100}$/.test(value); 
+				});
+				
+				jQuery.validator.addMethod("nullableCheck", function(value, element) { 
+				    if(Sport.isNull(value)){
+				    	return true;
+				    } 
+					return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
+				}); 
 				$("#jqGrid").jqGrid({
 					datatype: "local",
 					colModel: [{
@@ -245,13 +252,81 @@
 					cancel: true
 				});
 				//申请人新增
-				$('#add').dialog({
-					id: 'sqrxz',
-					title: '申请人',
+				var dddd = $('#add').dialog({
+					id: 'sportproposernew',
+					title: '新增申请人',
 					content: 'url:<%=basePath %>/subject/proposer/sboper/create.htm',
 					width: 800,
 					height: 430,
-					ok: true,
+					ok: function(){
+						var doucment = this.content.document.forms[0];
+						// 参数验证
+						$(doucment).validate({
+					        rules: {
+					        	name:{
+					                required: true,
+					                maxlength:20
+					            },
+					            birthday:{
+					                required: true
+					            },
+					            zw:{
+					            	nullableCheck:true
+					            },
+					            major:{
+					            	nullableCheck:true
+					            },
+					            org:{
+					            	required:false
+					            },
+					            backdrop:{
+					            	required:true
+					            },
+					            work:{
+					            	required:true
+					            }
+					        },
+					        messages: {
+					        	name:{
+					                required: "请填写申请人姓名",
+					                maxlength:'姓名在1-20个字符之间'
+					            },
+					            birthday:{
+					                required: "请填写申请人出生日期"
+					            },
+					            zw:{
+					            	nullableCheck:"职务长度不能超过40个字符"
+					            },
+					            org:{
+					            	required: "请填写所属单位"
+					            },
+					            email:{
+					                 email:"请填写正确的邮箱格式"
+					            },
+					            major:{
+					            	nullableCheck:"专业长度不能超过40个字符"
+					            },
+					            backdrop:{
+					            	required:"请填写研究背景"
+					            },
+					            work:{
+					            	required:"请填写研究分工"
+					            }
+					        }
+					    });
+						var result = $(doucment).valid()
+						if(result){
+							$.ajax({
+								url:"<%=basePath %>/subject/proposer/sboper/create.action",
+								data:$(doucment).serialize(),
+								type:"POST",
+								success:function(data){
+									alert(data);
+								}
+							});
+						}
+						return false;
+					},
 					cancel: true
 				});
 			});

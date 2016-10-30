@@ -148,6 +148,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 			}
 			// 回退意见处理 TODO
 			String advice = rs.getString("SD_RETURN_ADVICE");
+			subject.setComment(advice);
 			this.subjectSbsDao.save(subject);
 		}
 	}
@@ -158,7 +159,6 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 		PreparedStatement ps = getConn().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			this.subjectSbsDao.deleteById(rs.getString("ID"));
 			SubjectRws subject = new SubjectRws();
 			subject.setRwsId(rs.getString("ID"));
 			subject.setSubjectId(rs.getString("STB_SUBJECT_ID"));

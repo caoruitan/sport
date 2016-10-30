@@ -58,7 +58,7 @@ public class SubjectSbsProposer {
 	private String major;
 
 	/**
-	 * 申报人专业
+	 * 申报人单位
 	 */
 	private String org;
 
