@@ -43,7 +43,7 @@ public class SubjectRws {
 	/**
 	 * 项目研究方法
 	 */
-	private String jsff;
+	private String yjff;
 	/**
 	 * 项目研究实验方案
 	 */
@@ -55,23 +55,11 @@ public class SubjectRws {
 	/**
 	 * 承担单位现有工作条件和基础
 	 */
-	private String cddw;
-	/**
-	 * 承担单位现有工作条件和基础
-	 */
 	private String gztj;
 
-	/**
-	 * 预算来源及经费支出情况说明
-	 */
-	private String yssm;
-
-	/**
-	 * 共同条款
-	 */
-	private String gttk;
-
 	private String status;
+	
+	private String comment;
 
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -110,6 +98,33 @@ public class SubjectRws {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Column(name = "RWS_START_DATE")
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Column(name = "RWS_END_DATE")
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@Column(name = "RWS_COOPERATE_ORG")
+	public String getCooperateOrg() {
+		return cooperateOrg;
+	}
+
+	public void setCooperateOrg(String cooperateOrg) {
+		this.cooperateOrg = cooperateOrg;
 	}
 
 	@Column(name = "RWS_YJMB")
@@ -157,6 +172,15 @@ public class SubjectRws {
 		this.gztj = gztj;
 	}
 
+	@Column(name = "RWS_YJFF")
+	public String getYjff() {
+		return yjff;
+	}
+
+	public void setYjff(String yjff) {
+		this.yjff = yjff;
+	}
+
 	@Column(name = "RWS_STATUS")
 	public String getStatus() {
 		return status;
@@ -166,67 +190,13 @@ public class SubjectRws {
 		this.status = status;
 	}
 
-	@Column(name = "RWS_JSFF")
-	public String getJsff() {
-		return jsff;
+	@Column(name = "RWS_COMMENT")
+	public String getComment() {
+		return comment;
 	}
 
-	public void setJsff(String jsff) {
-		this.jsff = jsff;
-	}
-
-	@Column(name = "RWS_CDDW")
-	public String getCddw() {
-		return cddw;
-	}
-
-	public void setCddw(String cddw) {
-		this.cddw = cddw;
-	}
-
-	@Column(name = "RWS_YSSM")
-	public String getYssm() {
-		return yssm;
-	}
-
-	public void setYssm(String yssm) {
-		this.yssm = yssm;
-	}
-
-	@Column(name = "RWS_GTTK")
-	public String getGttk() {
-		return gttk;
-	}
-
-	public void setGttk(String gttk) {
-		this.gttk = gttk;
-	}
-
-	@Column(name = "RWS_START_DATE")
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	@Column(name = "RWS_END_DATE")
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	@Column(name = "RWS_COOPERATE_ORG")
-	public String getCooperateOrg() {
-		return cooperateOrg;
-	}
-
-	public void setCooperateOrg(String cooperateOrg) {
-		this.cooperateOrg = cooperateOrg;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

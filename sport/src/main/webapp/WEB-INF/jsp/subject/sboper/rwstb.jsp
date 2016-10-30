@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <head>
-	<title>申报书填报</title>
+	<title>任务书填报</title>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />
@@ -217,16 +217,16 @@
 <body>
 
 	<div class="titleBox1">
-		<div class="tip">申报书填报</div>
+		<div class="tip">任务书填报</div>
 		<div class="title">
-			${subject.name}<span>${status[sbs.status]}</span>
-			<c:if test='${sbs.status eq "BACK" }'><a style="font-size:14px;color:0000ff" id="viewComment" href="#">查看审批意见</a></c:if>
+			${subject.name}<span>${status[rws.status]}</span>
+			<c:if test='${rws.status eq "BACK" }'><a style="font-size:14px;color:0000ff" id="viewComment" href="#">查看审批意见</a></c:if>
 		</div>
 		<div class="btnBox">
-			<c:if test='${not empty sbs && (sbs.status eq "SBOPER_TB" || sbs.status eq "BACK")}'>
+			<c:if test='${not empty rws && (rws.status eq "SBOPER_TB" || rws.status eq "BACK")}'>
 				<button class="btn-img" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
 			</c:if>
-			<c:if test='${not empty sbs && sbs.status ne "SBOPER_TB"}'>
+			<c:if test='${not empty rws && rws.status ne "SBOPER_TB"}'>
 				<button class="btn-img" id="xz"><img src="<%=basePath %>/static/img/d-xz.png"/>下载</button>
 			</c:if>
 		</div>
@@ -236,55 +236,52 @@
 		<div class="kt-left">
 			<div class="lc">
 				<div class="line">
-					<li class="ok b-active" id="e-zc" onclick="showLayout('b-zc')" >
-						<a title="注册">注册</a>
-					</li>
 					<li class="ok" id="e-txsm" onclick="showLayout('b-txsm')" >
 						<a title="填写说明">填写说明</a>
 					</li>
-					<li class="dot" id="e-sbsfm" onclick="showLayout('b-sbsfm')" >
-						<a title="申报书封面">申报书封面</a>
-					</li>
-					<li class="dot" id="e-xtyj" onclick="showLayout('b-xtyj')" >
-						<a title="选题依据">01 选题依据</a>
+					<li class="dot" id="e-rwsfm" onclick="showLayout('b-rwsfm')" >
+						<a title="任务书基本信息">任务书基本信息</a>
 					</li>
 					<li class="dot" id="e-yjmb" onclick="showLayout('b-yjmb')">
-						<a title="研究目标和主要研究内容">02 研究目标和主要研究内容</a>
+						<a title="研究目标和主要研究内容">01 研究目标和主要研究内容</a>
 					</li>
 					<li class="dot" id="e-jsgj" onclick="showLayout('b-jsgj')" >
-						<a title="本项目的技术关键与创新点">03 本项目的技术关键与创新点</a>
+						<a title="本项目的技术关键与创新点">02 本项目的技术关键与创新点</a>
 					</li>
 					<li class="dot" id="e-yjff" onclick="showLayout('b-yjff')" >
-						<a title="拟采取的研究方法、主要技术路线、主要指标及可行性分析">04 拟采取的研究方法、主要技术路...</a>
+						<a title="采取的研究方法、主要技术路线、主要指标及可行性分析">03 采取的研究方法、主要技术路...</a>
 					</li>
 					<li class="dot" id="e-syfa" onclick="showLayout('b-syfa')">
-						<a title="研究实验方案、实验地点及联合申请单位的分工">05 研究实验方案、实验地点及联合...</a>
-					</li>
-					<li class="dot" id="e-jdap" onclick="showLayout('b-jdap')">
-						<a title="进度安排">06 进度安排</a>
+						<a title="研究实验方案、实验地点及联合申请单位的分工">04 研究实验方案、实验地点及联合...</a>
 					</li>
 					<li class="dot" id="e-yqjg" onclick="showLayout('b-yqjg')">
-						<a title="预期结果">07 预期结果</a>
+						<a title="预期结果">05 预期结果</a>
 					</li>
 					<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
-						<a title="申报单位现有工作条件和基础">08 申报单位现有工作条件和基础</a>
+						<a title="承担单位现有工作条件和基础">06 承担单位现有工作条件和基础</a>
+					</li>
+					<li class="dot" id="e-jdap" onclick="showLayout('b-jdap')">
+						<a title="进度安排">07 进度安排</a>
+					</li>
+					<li class="dot" id="e-xmcddw" onclick="showLayout('b-xmcddw')">
+						<a title="项目承担单位、协作单位和人员情况">08 项目承担单位、协作单位和人员...</a>
 					</li>
 					<li class="dot">
-						<a id="e-sqrqk" onclick="showLayout('b-sqrqk')" title="申请人情况">09 申请人情况</a>
+						<a id="e-jfys" href="0602rws-jfys.html" target="_blank" title="经费预算">09 经费预算</a>
 					</li>
-					<li class="dot">
-						<a id="e-jfys" href="0503sbs-jfys.html" target="_blank" title="经费预算">10 经费预算</a>
+					<li class="dot" id="e-sbgzmx" onclick="showLayout('b-sbgzmx')">
+						<a title="设备购置明细表">10 设备购置明细表</a>
 					</li>
-					<li class="dot" id="e-tjyj" onclick="showLayout('b-tjyj')">
-						<a title="申报单位推荐意见及提供相关研究工作条件的保证">11 申报单位推荐意见及提供相关研...</a>
+					<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
+						<a title="预算来源及经费支出情况说明">11 预算来源及经费支出情况说明</a>
 					</li>
-					<li class="dot" id="e-dwyj" onclick="showLayout('b-dwyj')">
-						<a title="其他联合申报单位意见">12 其他联合申报单位意见</a>
+					<li class="dot" id="e-xbfjf" onclick="showLayout('b-xbfjf')">
+						<a title="需拨付其他单位经费情况">12 需拨付其他单位经费情况</a>
 					</li>
-					<li class="dot" id="e-bmyj" onclick="showLayout('b-bmyj')">
-						<a title="相关部门意见">13 相关部门意见</a>
+					<li class="dot" id="e-gttk" onclick="showLayout('b-gttk')">
+						<a title="共同条款">13 共同条款</a>
 					</li>
-					<li class="dot" id="e-spyj" onclick="showLayout('b-spyj')">
+					<li class="dot" id="e-zjspyj" onclick="showLayout('b-zjspyj')">
 						<a title="国家体育总局审批意见">14 国家体育总局审批意见</a>
 					</li>
 				</div>
@@ -292,16 +289,6 @@
 		</div>
 		<div class="kt-right">
 			<div class="box" style="height:400px;display: block; background: url(<%=basePath %>/static/img/welcome.png) center center no-repeat;">
-			</div>
-			<!--注册-->
-			<div class="box b-zc">
-				<div class="t">注册</div>
-				<div class="c">
-					<div class="centerBox">
-						<img src="<%=basePath %>/static/img/success.png" />
-						<p>已注册成功，请继续下一步</p>
-					</div>
-				</div>
 			</div>
 			<!--填写说明-->
 			<div class="box b-txsm">
@@ -312,9 +299,9 @@
 					初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
 				</div>
 			</div>
-			<!--申报书封面-->
-			<div class="box b-sbsfm wow bounceInDown">
-				<div class="t">申报书封面</div>
+			<!--任务书封面-->
+			<div class="box b-rwsfm wow bounceInDown">
+				<div class="t">任务书封面</div>
 				<div class="c">
 					<div class="editBox">
 						<form id="baseInfoForm">
@@ -326,32 +313,36 @@
 									<td><input name="name" type="text" value="${subject.name}" disabled="disabled" /></td>
 								</tr>
 								<tr>
-									<th>申报单位</th>
+									<th>课题组织单位</th>
+									<td><input name="organizationName" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
+								</tr>
+								<tr>
+									<th>课题承担单位</th>
 									<td><input name="createUnitName" type="text" value="${subject.createUnitName}" disabled="disabled" /></td>
 								</tr>
 								<tr>
-									<th>第一申请人</th>
+									<th>课题负责人</th>
 									<td><input name="creatorName" type="text" value="${subject.creatorName}" disabled="disabled" /></td>
 								</tr>
 								<tr>
+									<th>课题开始日期</th>
+									<td><input name="beginDate" type="text" value="${subject.beginDate}" disabled="disabled" /></td>
+								</tr>
+								<tr>
+									<th>课题结束日期</th>
+									<td><input name="endDate" type="text" value="${subject.endDate}" disabled="disabled" /></td>
+								</tr>
+								<tr>
 									<th>通信地址</th>
-									<td><input name="address" type="text" value="${sbs.address}" /></td>
+									<td><input name="address" type="text" value="${rws.address}" /></td>
 								</tr>
 								<tr>
 									<th>联系电话</th>
-									<td><input name="phone" type="text" value="${sbs.phone}" /></td>
+									<td><input name="phone" type="text" value="${rws.phone}" /></td>
 								</tr>
 								<tr>
-									<th>传真</th>
-									<td><input name="fax" type="text" value="${sbs.fax}" /></td>
-								</tr>
-								<tr>
-									<th>电子邮箱</th>
-									<td><input name="email" type="text" value="${sbs.email}" /></td>
-								</tr>
-								<tr>
-									<th>完成年限</th>
-									<td><input name="years" type="text" value="${sbs.years}" /></td>
+									<th>课题协作单位</th>
+									<td><input name="cooperateOrg" type="text" value="${rws.cooperateOrg}" /></td>
 								</tr>
 							</table>
 						</form>
@@ -362,29 +353,14 @@
 					</div>
 				</div>
 			</div>
-			<!--01 选题依据-->
-			<div class="box b-xtyj">
-				<div class="t">01 选题依据</div>
-				<div class="c">
-					<form id="xtyjForm">
-						<input type="hidden" name="subjectId" value="${subjectId}">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="xtyj">${sbs.xtyj}</textarea>
-					</form>
-					<p class="save-btn">
-						<button id="xtyjFormSubmit" class="btn-red btn-size-big" onclick="saveXtyj()">保存</button>
-						<button class="btn-wisteria btn-size-big" onclick="reset('xtyjForm')">重置</button>
-					</p>
-				</div>
-			</div>
-			<!--02 研究目标和主要研究内容-->
+			<!--01 研究目标和主要研究内容-->
 			<div class="box b-yjmb">
-				<div class="t">02 研究目标和主要研究内容</div>
+				<div class="t">01 研究目标和主要研究内容</div>
 				<div class="c">
 					<form id="yjmbForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yjmb">${sbs.yjmb}</textarea>
+						<textarea style="width:100%;height:400px;" name="yjmb">${rws.yjmb}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yjmbFormSubmit" class="btn-red btn-size-big" onclick="saveYjmb()">保存</button>
@@ -392,14 +368,14 @@
 					</p>
 				</div>
 			</div>
-			<!--03 本项目的技术关键与创新点-->
+			<!--02 本项目的技术关键与创新点-->
 			<div class="box b-jsgj">
-				<div class="t">03 本项目的技术关键与创新点</div>
+				<div class="t">02 本项目的技术关键与创新点</div>
 				<div class="c">
 					<form id="jsgjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="jsgj">${sbs.jsgj}</textarea>
+						<textarea style="width:100%;height:400px;" name="jsgj">${rws.jsgj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="jsgjFormSubmit" class="btn-red btn-size-big" onclick="saveJsgj()">保存</button>
@@ -407,14 +383,14 @@
 					</p>
 				</div>
 			</div>
-			<!--04 拟采取的研究方法、主要技术路...-->
+			<!--03 采取的研究方法、主要技术路...-->
 			<div class="box b-yjff">
-				<div class="t">04 拟采取的研究方法、主要技术路...</div>
+				<div class="t">03 采取的研究方法、主要技术路...</div>
 				<div class="c">
 					<form id="yjffForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yjff">${sbs.yjff}</textarea>
+						<textarea style="width:100%;height:400px;" name="yjff">${rws.yjff}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yjffFormSubmit" class="btn-red btn-size-big" onclick="saveYjff()">保存</button>
@@ -422,14 +398,14 @@
 					</p>
 				</div>
 			</div>
-			<!--05 研究实验方案、实验地点及联合...-->
+			<!--04 研究实验方案、实验地点及联合...-->
 			<div class="box b-syfa">
-				<div class="t">05 研究实验方案、实验地点及联合...</div>
+				<div class="t">04 研究实验方案、实验地点及联合...</div>
 				<div class="c">
 					<form id="syfaForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="syfa">${sbs.syfa}</textarea>
+						<textarea style="width:100%;height:400px;" name="syfa">${rws.syfa}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="syfaFormSubmit" class="btn-red btn-size-big" onclick="saveSyfa()">保存</button>
@@ -437,29 +413,14 @@
 					</p>
 				</div>
 			</div>
-			<!--06 进度安排-->
-			<div class="box b-jdap">
-				<div class="t">06 进度安排</div>
-				<div class="c">
-					<form id="jdapForm">
-						<input type="hidden" name="subjectId" value="${subjectId}">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="jdap">${sbs.jdap}</textarea>
-					</form>
-					<p class="save-btn">
-						<button id="jdapFormSubmit" class="btn-red btn-size-big" onclick="saveJdap()">保存</button>
-						<button class="btn-wisteria btn-size-big" onclick="reset('jdapForm')">重置</button>
-					</p>
-				</div>
-			</div>
-			<!--07 预期结果-->
+			<!--05 预期结果-->
 			<div class="box b-yqjg">
-				<div class="t">07 预期结果</div>
+				<div class="t">05 预期结果</div>
 				<div class="c">
 					<form id="yqjgForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="yqjg">${sbs.yqjg}</textarea>
+						<textarea style="width:100%;height:400px;" name="yqjg">${rws.yqjg}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="yqjgFormSubmit" class="btn-red btn-size-big" onclick="saveYqjg()">保存</button>
@@ -467,14 +428,14 @@
 					</p>
 				</div>
 			</div>
-			<!--08 申报单位现有工作条件和基础-->
+			<!--06 承担单位现有工作条件和基础-->
 			<div class="box b-gztj">
-				<div class="t">08 申报单位现有工作条件和基础</div>
+				<div class="t">06 承担单位现有工作条件和基础</div>
 				<div class="c">
 					<form id="gztjForm">
 						<input type="hidden" name="subjectId" value="${subjectId}">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="gztj">${sbs.gztj}</textarea>
+						<textarea style="width:100%;height:400px;" name="gztj">${rws.gztj}</textarea>
 					</form>
 					<p class="save-btn">
 						<button id="gztjFormSubmit" class="btn-red btn-size-big" onclick="saveGztj()">保存</button>
@@ -482,85 +443,107 @@
 					</p>
 				</div>
 			</div>
-			<!--09 申请人情况-->
-			<div class="box b-sqrqk">
-				<div class="t">09 申请人情况</div>
-                <jsp:include page="/subject/proposer/sboper/list.htm?sbsId=${sbs.sbsId}"></jsp:include>
+			<!--07 进度安排-->
+			<div class="box b-jdap">
+				<div class="t">07 进度安排填报</div>
+				<div class="c">
+					<div class="opBtnBox" >
+						<div class="fl-l">
+							<button class="btn-red" id="jd">+ 新增</button>
+						</div>
+						<div class="fl-r">
+							<button class="btn-wisteria">删除</button>
+						</div>
+					</div>
+					<div class="tb">
+						<table id="jqGrid-jd"></table>
+						<div id="jqGridPager-jd"></div>
+					</div>
+				</div>
+			</div>
+			<!--08 项目承担单位、协作单位和人员情况-->
+			<div class="box b-xmcddw">
+				<div class="t">08 项目承担单位、协作单位和人员情况</div>
+				<div class="c">
+					<div class="opBtnBox" >
+						<div class="fl-l">
+							<button class="btn-red" id="ry">+ 新增</button>
+						</div>
+						<div class="fl-r">
+							<button class="btn-wisteria">删除</button>
+						</div>
+					</div>
+					<div class="tb">
+						<table id="jqGrid-ry"></table>
+						<div id="jqGridPager-ry"></div>
+					</div>
+				</div>
 			</div>
 			<!--10 经费预算-->
 			<div class="box b-jfys">
-				<div class="t">10 经费预算</div>
+				<div class="t">09 经费预算</div>
 			</div>
-			<!--11 申报单位推荐意见及提供相关研...-->
-			<div class="box b-tjyj">
-				<div class="t">11 申报单位推荐意见及提供相关研...</div>
+			<!--10 设备购置明细表-->
+			<div class="box b-sbgzmx">
+				<div class="t">10 设备购置明细表</div>
 				<div class="c">
-					<form id="tjyjForm">
-						<input type="hidden" name="subjectId" value="${subjectId}">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<textarea style="width:100%;height:400px;" name="tjyj">${sbs.tjyj}</textarea>
-					</form>
+					<div class="opBtnBox" >
+						<div class="fl-l">
+							<button class="btn-red" id="sb">+ 新增</button>
+						</div>
+						<div class="fl-r">
+							<button class="btn-wisteria">删除</button>
+						</div>
+					</div>
+					<div class="tb">
+						<table id="jqGrid-sb"></table>
+						<div id="jqGridPager-sb"></div>
+					</div>
+				</div>
+			</div>
+			<!--11 预算来源及经费支出情况说明-->
+			<div class="box b-ysly">
+				<div class="t">11 预算来源及经费支出情况说明</div>
+				<div class="c">
+					<textarea class="ckeditor" name="editor-ysly"></textarea>
 					<p class="save-btn">
-						<button id="tjyjFormSubmit" class="btn-red btn-size-big" onclick="saveTjyj()">保存</button>
-						<button class="btn-wisteria btn-size-big" onclick="reset('tjyjForm')">重置</button>
+						<button class="btn-red btn-size-big" type="">保存</button>
+						<button class="btn-wisteria btn-size-big" type="">重置</button>
 					</p>
 				</div>
 			</div>
-			<!--12 其他联合申报单位意见-->
-			<div class="box b-dwyj">
-				<div class="t">12 其他联合申报单位意见</div>
+			<!--12 需拨付其他单位经费情况-->
+			<div class="box b-xbfjf">
+				<div class="t">12 需拨付其他单位经费情况</div>
 				<div class="c">
-					<table style="width:80%;margin-left:10%">
-						<tr>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-						</tr>
-						<tr>
-							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
-						</tr>
-						<tr>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-						</tr>
-						<tr>
-							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
-						</tr>
-						<tr>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">申报单位</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-							<td style="border:1px solid #000000;width:20%;padding:5px;">联系电话</td>
-							<td style="border:1px solid #000000;width:30%;padding:5px;">&nbsp;</td>
-						</tr>
-						<tr>
-							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">申报意见<br/><br/><br/><br/><br/><br/><br/>法人代表签字<span style="float: right">单位盖章</span></td>
-						</tr>
-					</table>
+					<div class="opBtnBox" >
+						<div class="fl-l">
+							<button class="btn-red" id="bf">+ 新增</button>
+						</div>
+						<div class="fl-r">
+							<button class="btn-wisteria">删除</button>
+						</div>
+					</div>
+					<div class="tb">
+						<table id="jqGrid-bf"></table>
+						<div id="jqGridPager-bf"></div>
+					</div>
 				</div>
 			</div>
-			<!--13 相关部门意见-->
-			<div class="box b-bmyj">
-				<div class="t">13 相关部门意见</div>
+			<!--13 共同条款-->
+			<div class="box b-gttk">
+				<div class="t">13 共同条款</div>
 				<div class="c">
-					<table style="width:80%;margin-left:10%">
-						<tr>
-							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>负责人签字<span style="float: right">单位盖章</span></td>
-						</tr>
-					</table>
+					初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
+					初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
+					初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
 				</div>
 			</div>
 			<!--14 国家体育总局审批意见-->
-			<div class="box b-spyj">
+			<div class="box b-zjspyj">
 				<div class="t">14 国家体育总局审批意见</div>
-				<div class="c">
-					<table style="width:80%;margin-left:10%">
-						<tr>
-							<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4"><br/><br/><br/><br/><br/><br/><br/><br/><br/><span style="float: right">单位盖章</span></td>
-						</tr>
-					</table>
+				<div class="c contentTxt redfont">
+					同意
 				</div>
 			</div>
 		</div>
@@ -571,7 +554,7 @@
 			$('#baseInfoFormSubmit').attr("disabled",true);
 			$('#baseInfoFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveBaseInfo.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsBaseInfo.action",
 				type: "POST",
 				dataType: "JSON",
 				data: $("#baseInfoForm").serialize(),
@@ -588,37 +571,11 @@
 			});
 		}
 		
-		var saveXtyj = function() {
-			$('#xtyjFormSubmit').attr("disabled",true);
-			$('#xtyjFormSubmit').text('正在提交...');
-			// var xtyj = CKEDITOR.instances["xtyj"];
-			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveXtyj.action",
-				type: "POST",
-				dataType: "JSON",
-				data: {
-					xtyj : $("#xtyjForm textarea[name='xtyj']").val(),
-					subjectId : $("#xtyjForm input[name='subjectId']").val(),
-					_csrf : "${_csrf.token}"
-				},
-				error: function (obj) {
-					$('#xtyjFormSubmit').removeAttr("disabled");
-					$("#xtyjFormSubmit").text("保存");
-					layer.msg("保存失败，请稍后重试！");
-				},
-				success: function (obj) {
-					$('#xtyjFormSubmit').removeAttr("disabled");
-					$("#xtyjFormSubmit").text("保存");
-					layer.msg("保存成功！");
-				}
-			});
-		}
-		
 		var saveYjmb = function() {
 			$('#yjmbFormSubmit').attr("disabled",true);
 			$('#yjmbFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveYjmb.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsYjmb.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -643,7 +600,7 @@
 			$('#jsgjFormSubmit').attr("disabled",true);
 			$('#jsgjFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveJsgj.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsJsgj.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -668,7 +625,7 @@
 			$('#yjffFormSubmit').attr("disabled",true);
 			$('#yjffFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveYjff.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsYjff.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -693,7 +650,7 @@
 			$('#syfaFormSubmit').attr("disabled",true);
 			$('#syfaFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveSyfa.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsSyfa.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -714,36 +671,11 @@
 			});
 		}
 		
-		var saveJdap = function() {
-			$('#jdapFormSubmit').attr("disabled",true);
-			$('#jdapFormSubmit').text('正在提交...');
-			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveJdap.action",
-				type: "POST",
-				dataType: "JSON",
-				data: {
-					jdap : $("#jdapForm textarea[name='jdap']").val(),
-					subjectId : $("#jdapForm input[name='subjectId']").val(),
-					_csrf : "${_csrf.token}"
-				},
-				error: function (obj) {
-					$('#jdapFormSubmit').removeAttr("disabled");
-					$("#jdapFormSubmit").text("保存");
-					layer.msg("保存失败，请稍后重试！");
-				},
-				success: function (obj) {
-					$('#jdapFormSubmit').removeAttr("disabled");
-					$("#jdapFormSubmit").text("保存");
-					layer.msg("保存成功！");
-				}
-			});
-		}
-		
 		var saveYqjg = function() {
 			$('#yqjgFormSubmit').attr("disabled",true);
 			$('#yqjgFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveYqjg.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsYqjg.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -768,7 +700,7 @@
 			$('#gztjFormSubmit').attr("disabled",true);
 			$('#gztjFormSubmit').text('正在提交...');
 			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveGztj.action",
+				url: "<%=basePath%>/subject/sboper/saveRwsGztj.action",
 				type: "POST",
 				dataType: "JSON",
 				data: {
@@ -784,31 +716,6 @@
 				success: function (obj) {
 					$('#gztjFormSubmit').removeAttr("disabled");
 					$("#gztjFormSubmit").text("保存");
-					layer.msg("保存成功！");
-				}
-			});
-		}
-		
-		var saveTjyj = function() {
-			$('#tjyjFormSubmit').attr("disabled",true);
-			$('#tjyjFormSubmit').text('正在提交...');
-			$.ajax({
-				url: "<%=basePath%>/subject/sboper/saveTjyj.action",
-				type: "POST",
-				dataType: "JSON",
-				data: {
-					tjyj : $("#tjyjForm textarea[name='tjyj']").val(),
-					subjectId : $("#tjyjForm input[name='subjectId']").val(),
-					_csrf : "${_csrf.token}"
-				},
-				error: function (obj) {
-					$('#tjyjFormSubmit').removeAttr("disabled");
-					$("#tjyjFormSubmit").text("保存");
-					layer.msg("保存失败，请稍后重试！");
-				},
-				success: function (obj) {
-					$('#tjyjFormSubmit').removeAttr("disabled");
-					$("#tjyjFormSubmit").text("保存");
 					layer.msg("保存成功！");
 				}
 			});
@@ -831,7 +738,7 @@
 			
 			$("#tj").click(function() {
 				$.ajax({
-					url: "<%=basePath%>/subject/sboper/checkAndSubmit.action",
+					url: "<%=basePath%>/subject/sboper/checkAndSubmitRws.action",
 					type: "POST",
 					dataType: "JSON",
 					data: {
@@ -850,16 +757,313 @@
 			});
 			
 			$("#xz").click(function() {
-				window.open("<%=basePath%>/sbs/download.action?subjectId=${subjectId}");
+				window.open("<%=basePath%>/rws/download.action?subjectId=${subjectId}");
 			});
 			
 			$("#viewComment").dialog({
 				id: 'tj',
 				title: '审批意见',
-				content: '<div class="dlg-contentbox">${sbs.comment}</div>',
+				content: '<div class="dlg-contentbox">${rws.comment}</div>',
 				width: 400,
 				height: 130,
 				ok: true
+			});
+			//进度安排
+			$("#jqGrid-jd").jqGrid({
+				datatype: "local",
+				colModel: [{
+					name: 'No',
+					index: 'No.',
+					width: 5,
+					sorttype: "int",
+					align: "center"
+				}, {
+					name: '进度安排年',
+					index: '进度安排年',
+					width: 10,
+					sorttype: "date"
+				},  {
+					name: '进度安排月',
+					index: '进度安排月',
+					align: "center",
+					width: 10,
+					sorttype: "date"
+				}, {
+					name: '主要工作内容',
+					index: '主要工作内容',
+					align: "center",
+					width: 25
+				}, {
+					name: '目标',
+					index: '目标',
+					width: 20,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '操作',
+					index: '操作',
+					width: 10,
+					align: "center",
+					sortable: false
+				}],
+//				autowidth: true,
+				viewrecords: true,
+				height: 200,
+				width: 860,
+				rowNum: 20,
+				multiselect: true,
+				pager: "#jqGridPager-jd"
+			});
+
+			var mydata = [{
+					No: "1",
+					进度安排年: "2016",
+					进度安排月:"10",
+					主要工作内容: "1、设备到位 2、资金到位 3、人员到位",
+					目标: "按时完成需求调研与项目启动会",
+					操作: "<a>编辑</a> <a>删除</a>"
+				},
+
+			];
+			for (var i = 0; i <= mydata.length; i++) {
+				jQuery("#jqGrid-jd").jqGrid('addRowData', i + 1, mydata[i]);
+			}
+			
+			//人员情况
+			$("#jqGrid-ry").jqGrid({
+				datatype: "local",
+				colModel: [{
+					name: 'No',
+					index: 'No.',
+					width: 5,
+					sorttype: "int",
+					align: "center"
+				}, {
+					name: '姓名',
+					index: '姓名',
+					width: 10,
+					sorttype: "date"
+				},  {
+					name: '类型',
+					index: '类型',
+					align: "center",
+					width: 10,
+					sorttype: "date"
+				}, {
+					name: '单位',
+					index: '单位',
+					align: "center",
+					width: 25
+				}, {
+					name: '出生年月',
+					index: '出生年月',
+					width: 20,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '职务职称',
+					index: '职务职称',
+					width: 10,
+					align: "left",
+					sorttype: "float"
+				}, {
+					name: '研究分工',
+					index: '研究分工',
+					width: 10,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '操作',
+					index: '操作',
+					width: 10,
+					align: "center",
+					sortable: false
+				}],
+//				autowidth: true,
+				viewrecords: true,
+				height: 200,
+				width: 860,
+				rowNum: 20,
+				multiselect: true,
+				pager: "#jqGridPager-ry"
+			});
+
+			var mydata = [{
+					No: "1",
+					姓名: "龙一飞",
+					类型:"负责人",
+					单位: "中国羽毛球协会",
+					出生年月: "1982-04-03",
+					职务职称: "研究员",
+					研究分工: "人体力学",
+					操作: "编辑"
+				},
+
+			];
+			for (var i = 0; i <= mydata.length; i++) {
+				jQuery("#jqGrid-ry").jqGrid('addRowData', i + 1, mydata[i]);
+			}
+			
+			//设备购置
+			$("#jqGrid-sb").jqGrid({
+				datatype: "local",
+				colModel: [{
+					name: 'No',
+					index: 'No.',
+					width: 5,
+					sorttype: "int",
+					align: "center"
+				}, {
+					name: '设备名称',
+					index: '设备名称',
+					width: 10,
+					sorttype: "date"
+				},  {
+					name: '购置或试制的理由用途',
+					index: '购置或试制的理由用途',
+					align: "center",
+					width: 15,
+					sorttype: "date"
+				}, {
+					name: '设备型号及指标',
+					index: '设备型号及指标',
+					align: "center",
+					width: 10
+				}, {
+					name: '单价',
+					index: '单价',
+					width: 5,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '数量',
+					index: '数量',
+					width: 5,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '总价',
+					index: '总价',
+					width: 5,
+					align: "center",
+					sorttype: "float"
+				}, {
+					name: '申请从专项经费中列支数',
+					index: '申请从专项经费中列支数',
+					width: 15,
+					align: "center",
+					sortable: false
+				}],
+//				autowidth: true,
+				viewrecords: true,
+				height: 200,
+				width: 860,
+				rowNum: 20,
+				multiselect: true,
+				pager: "#jqGridPager-sb"
+			});
+
+			var mydata = [{
+					No: "1",
+					设备名称: "龙一飞",
+					购置或试制的理由用途:"负责人",
+					设备型号及指标: "中国羽毛球协会",
+					单价: "2300",
+					数量: "3",
+					总价: "6900",
+					申请从专项经费中列支数: "1"
+				},
+
+			];
+			for (var i = 0; i <= mydata.length; i++) {
+				jQuery("#jqGrid-sb").jqGrid('addRowData', i + 1, mydata[i]);
+			}
+			
+			//拨付
+			$("#jqGrid-bf").jqGrid({
+				datatype: "local",
+				colModel: [{
+					name: 'No',
+					index: 'No.',
+					width: 5,
+					sorttype: "int",
+					align: "center"
+				}, {
+					name: '拨往单位',
+					index: '拨往单位',
+					width: 20,
+					sorttype: "date"
+				},  {
+					name: '拨付数额万元',
+					index: '拨付数额万元',
+					align: "center",
+					width: 15,
+					sorttype: "date"
+				}, {
+					name: '用途说明',
+					index: '用途说明',
+					align: "center",
+					width: 60
+				}],
+//				autowidth: true,
+				viewrecords: true,
+				height: 200,
+				width: 860,
+				rowNum: 20,
+				multiselect: true,
+				pager: "#jqGridPager-bf"
+			});
+
+			var mydata = [{
+					No: "1",
+					拨往单位: "拨往单位",
+					拨付数额万元: "34443",
+					用途说明: "用途说明"
+				},
+			];
+			for (var i = 0; i <= mydata.length; i++) {
+				jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, mydata[i]);
+			}
+			
+			//进度
+			$('#jd').dialog({
+				id: 'jd',
+				title: '进度安排',
+				content: 'url:0604rws-jd-xz.html',
+				width: 700,
+				height: 400,
+				ok: true,
+				cancel: true
+			});
+			//项目承担
+			$('#ry').dialog({
+				id: 'ry',
+				title: '项目人员情况填报',
+				content: 'url:0603rws-xm-xz.html',
+				width: 800,
+				height: 430,
+				ok: true,
+				cancel: true
+			});
+			//设备
+			$('#sb').dialog({
+				id: 'sb',
+				title: '设备',
+				content: 'url:0605rws-sb-xz.html',
+				width: 760,
+				height: 480,
+				ok: true,
+				cancel: true
+			});
+			//拨付
+			$('#bf').dialog({
+				id: 'bf',
+				title: '拨往其他单位的经费',
+				content: 'url:0606rws-bf-xz.html',
+				width: 840,
+				height: 260,
+				ok: true,
+				cancel: true
 			});
 		});
 	</script>

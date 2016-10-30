@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -34,6 +36,9 @@ public class SubjectSbAdminAction {
 	
 	@Autowired
 	private SubjectSbsService subjectSbsService;
+	
+	@Autowired
+	private SubjectRwsService subjectRwsService;
 
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response) {
@@ -81,8 +86,10 @@ public class SubjectSbAdminAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
+		request.setAttribute("rws", rws);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sbadmin/detail";
 	}
@@ -113,6 +120,37 @@ public class SubjectSbAdminAction {
 		String subjectId = request.getParameter("subjectId");
 		String comment = request.getParameter("comment");
 		this.subjectSbsService.sbadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "rwstb")
+	public String rwstb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("rws", rws);
+		return "subject/sbadmin/rwstb";
+	}
+	
+	@RequestMapping(value = "rwsPass.action")
+	public void rwsPass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectRwsService.sbadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "rwsUnpass.action")
+	public void rwsUnpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectRwsService.sbadminUnpass(subjectId, comment);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

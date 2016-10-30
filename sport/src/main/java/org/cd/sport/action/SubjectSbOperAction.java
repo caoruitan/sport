@@ -1,10 +1,5 @@
 package org.cd.sport.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,14 +9,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.OrganizationService;
+import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -54,6 +49,9 @@ public class SubjectSbOperAction {
 	
 	@Autowired
 	private SubjectSbsService subjectSbsService;
+	
+	@Autowired
+	private SubjectRwsService subjectRwsService;
 
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response) {
@@ -149,7 +147,11 @@ public class SubjectSbOperAction {
 	public String detail(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
+		request.setAttribute("sbs", sbs);
+		request.setAttribute("rws", rws);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/detail";
 	}
@@ -275,6 +277,100 @@ public class SubjectSbOperAction {
 		String subjectId = request.getParameter("subjectId");
 		String basePath = request.getSession().getServletContext().getRealPath("/");
 		this.subjectSbsService.checkAndSubmit(subjectId, basePath);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "rwstb")
+	public String rwstb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("rws", rws);
+		return "subject/sboper/rwstb";
+	}
+	
+	@RequestMapping(value = "saveRwsBaseInfo")
+	public void saveRwsBaseInfo(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String cooperateOrg = request.getParameter("cooperateOrg");
+		this.subjectRwsService.saveBaseInfo(subjectId, address, phone, cooperateOrg);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsYjmb")
+	public void saveRwsYjmb(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yjmb = request.getParameter("yjmb");
+		this.subjectRwsService.saveYjmb(subjectId, yjmb);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsJsgj")
+	public void saveRwsJsgj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String jsgj = request.getParameter("jsgj");
+		this.subjectRwsService.saveJsgj(subjectId, jsgj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsYjff")
+	public void saveRwsYjff(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yjff = request.getParameter("yjff");
+		this.subjectRwsService.saveYjff(subjectId, yjff);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsSyfa")
+	public void saveRwsSyfa(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String syfa = request.getParameter("syfa");
+		this.subjectRwsService.saveSyfa(subjectId, syfa);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsYqjg")
+	public void saveRwsYqjg(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String yqjg = request.getParameter("yqjg");
+		this.subjectRwsService.saveYqjg(subjectId, yqjg);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "saveRwsGztj")
+	public void saveRwsGztj(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String gztj = request.getParameter("gztj");
+		this.subjectRwsService.saveGztj(subjectId, gztj);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "checkAndSubmitRws.action")
+	public void checkAndSubmitRws(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		this.subjectRwsService.checkAndSubmit(subjectId, basePath);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

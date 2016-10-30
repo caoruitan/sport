@@ -299,7 +299,7 @@
 								</tr>
 								<tr>
 									<th>申报单位</th>
-									<td><input name="organizationName" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
+									<td><input name="createUnitName" type="text" value="${subject.createUnitName}" disabled="disabled" /></td>
 								</tr>
 								<tr>
 									<th>第一申请人</th>
