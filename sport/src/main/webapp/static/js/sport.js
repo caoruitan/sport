@@ -397,6 +397,10 @@ $(function(){
 		window.location.href = Sport.getBasePath()+"/user/"+$(this).attr("data-type")+"/create.htm";
 	}).on("change",".credType-select",function(){
 		$(".credType-error").text("");
+	}).on("change",".zw-select",function(){
+		$(".zw-error").text("");
+	}).on("change",".degrees-select",function(){
+		$(".degrees-error").text("");
 	}).on("click",".sport-user-save",function(){
 		// 证书校验
 		var credType = $(".credType-select").val();

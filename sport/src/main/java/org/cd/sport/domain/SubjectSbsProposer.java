@@ -225,7 +225,7 @@ public class SubjectSbsProposer {
 		this.backdrop = backdrop;
 	}
 
-	@Column(name = "PRIMARY")
+	@Column(name = "IS_PRIMARY")
 	public String getPrimary() {
 		return primary;
 	}

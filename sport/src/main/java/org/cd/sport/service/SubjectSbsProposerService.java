@@ -16,10 +16,12 @@ public interface SubjectSbsProposerService {
 	public boolean create(SubjectSbsProposerView view);
 
 	public boolean update(SubjectSbsProposerView view);
-	
+
 	public boolean deleteById(String id);
 
 	public boolean deleteById(String[] id);
+
+	public SubjectSbsProposer getById(String id);
 
 	public List<SubjectSbsProposer> getBySbsId(String sbsId);
 
@@ -27,7 +29,7 @@ public interface SubjectSbsProposerService {
 
 	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary);
 
-	public List<SubjectSbsProposer> getBySbsId(String sbsId, String primary, int start, int limit);
+	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary, int start, int limit);
 
 	public long getTotalBySbsId(String sbsId);
 

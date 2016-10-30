@@ -1,7 +1,5 @@
 package org.cd.sport.vo;
 
-import java.sql.Date;
-
 /**
  * 申请人vo对象
  * 
@@ -34,7 +32,7 @@ public class SubjectSbsProposerVo {
 	/**
 	 * 申报人生日
 	 */
-	private Date birthday;
+	private String birthday;
 
 	/**
 	 * 申报年龄
@@ -125,11 +123,11 @@ public class SubjectSbsProposerVo {
 		this.gender = gender;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

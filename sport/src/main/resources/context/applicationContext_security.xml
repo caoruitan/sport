@@ -51,7 +51,15 @@
 		<intercept-url pattern="/subject/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
 		<intercept-url pattern="/subject/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		<intercept-url pattern="/subject/proposer/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/proposer/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/subject/proposer/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/subject/proposer/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/subject/proposer/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/proposer/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/proposer/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/proposer/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		<intercept-url pattern="/subject/proposer/other/datas.action" access="isAuthenticated()"/>
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>

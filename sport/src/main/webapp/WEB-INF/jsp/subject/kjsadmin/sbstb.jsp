@@ -262,7 +262,7 @@
 						<a title="申报单位现有工作条件和基础">08 申报单位现有工作条件和基础</a>
 					</li>
 					<li class="dot">
-						<a id="e-sqrqk" href="0504sbs-sqrqk.html" target="_blank" title="申请人情况">09 申请人情况</a>
+						<a id="e-sqrqk" title="申请人情况">09 申请人情况</a>
 					</li>
 					<li class="dot">
 						<a id="e-jfys" href="0503sbs-jfys.html" target="_blank" title="经费预算">10 经费预算</a>
@@ -439,6 +439,7 @@
 			<!--09 申请人情况-->
 			<div class="box b-sqrqk">
 				<div class="t">09 申请人情况</div>
+                <div class="sqrqk-container"></div>
 			</div>
 			<!--10 经费预算-->
 			<div class="box b-jfys">
@@ -543,6 +544,11 @@
 			
 			$("#xz").click(function() {
 				window.open("<%=basePath%>/sbs/download.action?subjectId=${subjectId}");
+			});
+			
+			$("#e-sqrqk").click(function(){
+				showLayout('b-sqrqk');
+				$(".sqrqk-container").load("<%=basePath%>/subject/proposer/kjsadmin/list.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
 			});
 		});
 	</script>

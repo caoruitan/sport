@@ -25,6 +25,7 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport imp
 	private SubjectSbsProposerDao subjectSbsProposerDao;
 
 	@Override
+	@Transactional
 	public boolean create(SubjectSbsProposerView view) {
 		SubjectSbsProposer process = this.process(view);
 		process.setId(null);
@@ -33,19 +34,22 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport imp
 	}
 
 	@Override
+	@Transactional
 	public boolean update(SubjectSbsProposerView view) {
-		SubjectSbsProposer process = this.process(view);
-		process.setId(view.getId());
-		this.subjectSbsProposerDao.update(process);
+		SubjectSbsProposer proposer = this.getById(view.getId());
+		this.process(proposer, view);
+		this.subjectSbsProposerDao.update(proposer);
 		return true;
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteById(String id) {
 		return this.subjectSbsProposerDao.deleteById(id);
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteById(String[] id) {
 		return this.subjectSbsProposerDao.deleteById(id);
 	}
@@ -67,8 +71,9 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport imp
 	}
 
 	@Override
-	public List<SubjectSbsProposer> getBySbsId(String sbsId, String primary, int start, int limit) {
-		return this.subjectSbsProposerDao.findBySbsId(sbsId, primary, start, limit);
+	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary, int start, int limit) {
+		List<SubjectSbsProposer> ps = this.subjectSbsProposerDao.findBySbsId(sbsId, primary, start, limit);
+		return this.processVo(ps);
 	}
 
 	@Override
@@ -79,5 +84,10 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport imp
 	@Override
 	public long getTotalBySbsId(String sbsId, String primary) {
 		return this.subjectSbsProposerDao.findTotalBySbsId(sbsId, primary);
+	}
+
+	@Override
+	public SubjectSbsProposer getById(String id) {
+		return this.subjectSbsProposerDao.getEntityById(SubjectSbsProposer.class, id);
 	}
 }

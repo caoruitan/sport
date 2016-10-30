@@ -29,6 +29,7 @@
 	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/icheck/icheck.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/my97/WdatePicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
@@ -118,12 +119,13 @@
 		<div class="titleBox2">
 			<div class="title">主要申请人</div>
 		</div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
         <c:forEach var="p" items="${primaryProposers}">
-            <div class="sqrBox" id="sqr1">
+            <div class="sqrBox proposerBox">
                 <p class="t">第一申请人</p>
                 <li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender} ${p.age}岁</li>
                 <li>${p.zw}</li>
-                <p class="op" id="op1"><img src="<%=basePath %>/static/img/del.png" /><img src="<%=basePath %>/static/img/edit.png" id="op1-edit" /></p>
+                <p class="op"><img src="<%=basePath %>/static/img/del.png" data-id="${p.id}" class="proposer-delete"/><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
             </div>
         </c:forEach>
 		<div class="sqrBox" id="add">
@@ -131,17 +133,17 @@
 		<div class="titleBox2">
 			<div class="title">其他申请人</div>
 		</div>
-		<div class="listBox">
+		<div class="listBox" id="ddfdfd">
 			<div class="opBtnBox">
 				<div class="fl-l">
 					<button class="btn-red" id="sqrxz">+ 新增</button>
 				</div>
 				<div class="fl-r">
-					<button class="btn-wisteria">删除</button>
+					<button class="btn-wisteria proposer-other-delete">删除</button>
 				</div>
 			</div>
-			<table id="jqGrid"></table>
-			<div id="jqGridPager"></div>
+			<table id="proposerGrid" class="sport-grid"></table>
+			<div id="proposerGridPager"></div>
 		</div>
 
 		<script type="text/javascript">
@@ -156,180 +158,221 @@
 				    } 
 					return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
 				}); 
-				$("#jqGrid").jqGrid({
-					datatype: "local",
-					colModel: [{
-						name: 'No',
-						index: 'No.',
-						width: 5,
-						sorttype: "int",
-						align: "center"
-					}, {
-						name: '姓名',
-						index: '姓名',
-						width: 20,
-						sorttype: "date"
-					}, {
-						name: '单位',
-						index: '单位',
-						align: "center",
-						width: 15
-					}, {
-						name: '出生年月',
-						index: '出生年月',
-						width: 10,
-						align: "center",
-						sorttype: "float"
-					}, {
-						name: '职务职称',
-						index: '职务职称',
-						width: 30,
-						align: "left",
-						sorttype: "float"
-					}, {
-						name: '研究分工',
-						index: '研究分工',
-						width: 10,
-						align: "center",
-						sorttype: "float"
-					}, {
-						name: '操作',
-						index: '操作',
-						width: 10,
-						align: "center",
-						sortable: false
-					}],
-					autowidth: true,
+				$("#proposerGrid").jqGrid({
+					datatype: "json",
+					url: "<%=basePath%>/subject/proposer/other/datas.action?sbsId=${sbsId}",
+					colModel: [
+						{name:'id',align:"center", width:20,hidden:true},
+						{label:"姓名",name:'name',align:"center", width:20},
+						{label:"所属单位",name:'org', align:"center", width:15},
+						{label:"出生日期",name:'birthday', width:20, align:"center",sorttype:"date"},
+						{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
+						{label:"研究分工",name:'work', width:30,align:"center",sorttype:"float"},		
+						{label:"操作",width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
+							return "<a href='javascript:;;' class='proposer-other-edit' data-id='"+rows.id+"'>编辑</a>";
+						}}
+		              ],
 					viewrecords: true,
-					height: 200,
 					rowNum: 20,
 					multiselect: true,
-					pager: "#jqGridPager"
+					pager: "#proposerGridPager"
 				});
+				doResize();
+				$("#proposerGrid").setGridWidth($("div.listBox").width());
 
-				var mydata = [{
-						No: "1",
-						姓名: "龙一飞",
-						单位: "中国羽毛球协会",
-						出生年月: "1982-04-03",
-						职务职称: "研究员",
-						研究分工: "人体力学",
-						操作: "编辑"
-					},
-
-				];
-				for (var i = 0; i <= mydata.length; i++) {
-					jQuery("#jqGrid").jqGrid('addRowData', i + 1, mydata[i]);
-				}
-
-				//选择专家弹出框
-				$('#sqrxz').dialog({
-					id: 'sqrxz',
-					title: '申请人',
-					content: 'url:0505sbs-sqrqk-xz.html',
-					width: 800,
-					height: 430,
-					ok: true,
-					cancel: true
-				});
-
-				$("#sqr1").hover(
-					function() {
-						$("#op1").show();}, 
+				$(".proposerBox").hover(
+					  function() {
+						$(this).find(".op").show();
+					}, 
 					  function () {
-					    $("#op1").hide();
+						$(this).find(".op").hide();
 					}
 				);
 				
-				//申请人编辑
-				$('#op1-edit').dialog({
-					id: 'sqrxz',
-					title: '申请人',
-					content: 'url:0505sbs-sqrqk-xz.html',
-					width: 800,
-					height: 430,
-					ok: true,
-					cancel: true
+				$(".proposer-delete").click(function(){
+					var dataId = $(this).attr("data-id");
+					lhgdialog.confirm("您确定要删除申请人吗？",function(){
+    					$.ajax({
+    						url: Sport.getBasePath()+"/subject/proposer/sboper/delete.action",
+    						data:{pId:dataId,_csrf:$("#csrdId").val()},
+    						type:"POST",
+    						success:function(data){
+    							$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbsId}&subjectId=${subjectId}");
+    						},
+    						error:function(){
+    							
+    						}
+    					});
+					});
 				});
+				
+				//申请人编辑
+				$(document).on('click','.proposer-edit,.proposer-other-edit',function(){
+					proposerId = $(this).attr("data-id");
+					var dg = new $.dialog({
+						id: 'sportproposerupdate',
+						title: '修改申请人',
+						content: 'url:<%=basePath %>/subject/proposer/sboper/update.htm?sbsId=${sbsId}&subjectId=${subjectId}&proposerId='+proposerId,
+						width: 800,
+						height: 430,
+						ok: function(){
+							return operProposer(this,"subject/proposer/sboper/update.action");
+						},
+						cancel: true
+					});
+				});
+				
 				//申请人新增
-				var dddd = $('#add').dialog({
+				$('#add').dialog({
 					id: 'sportproposernew',
 					title: '新增申请人',
-					content: 'url:<%=basePath %>/subject/proposer/sboper/create.htm',
-					width: 800,
+					content: 'url:<%=basePath %>/subject/proposer/sboper/primary/create.htm?sbsId=${sbsId}&subjectId=${subjectId}',
+					width: 1000,
 					height: 430,
 					ok: function(){
-						var doucment = this.content.document.forms[0];
-						// 参数验证
-						$(doucment).validate({
-					        rules: {
-					        	name:{
-					                required: true,
-					                maxlength:20
-					            },
-					            birthday:{
-					                required: true
-					            },
-					            zw:{
-					            	nullableCheck:true
-					            },
-					            major:{
-					            	nullableCheck:true
-					            },
-					            org:{
-					            	required:false
-					            },
-					            backdrop:{
-					            	required:true
-					            },
-					            work:{
-					            	required:true
-					            }
-					        },
-					        messages: {
-					        	name:{
-					                required: "请填写申请人姓名",
-					                maxlength:'姓名在1-20个字符之间'
-					            },
-					            birthday:{
-					                required: "请填写申请人出生日期"
-					            },
-					            zw:{
-					            	nullableCheck:"职务长度不能超过40个字符"
-					            },
-					            org:{
-					            	required: "请填写所属单位"
-					            },
-					            email:{
-					                 email:"请填写正确的邮箱格式"
-					            },
-					            major:{
-					            	nullableCheck:"专业长度不能超过40个字符"
-					            },
-					            backdrop:{
-					            	required:"请填写研究背景"
-					            },
-					            work:{
-					            	required:"请填写研究分工"
-					            }
-					        }
-					    });
-						var result = $(doucment).valid()
-						if(result){
-							$.ajax({
-								url:"<%=basePath %>/subject/proposer/sboper/create.action",
-								data:$(doucment).serialize(),
-								type:"POST",
-								success:function(data){
-									alert(data);
-								}
-							});
-						}
-						return false;
+						return operProposer(this,"subject/proposer/sboper/primary/create.action");
 					},
 					cancel: true
 				});
+				
+				//申请人新增
+				$('#sqrxz').dialog({
+					id: 'sportproposernew',
+					title: '新增申请人',
+					content: 'url:<%=basePath %>/subject/proposer/sboper/other/create.htm?sbsId=${sbsId}&subjectId=${subjectId}',
+					width: 1000,
+					height: 430,
+					ok: function(){
+						return operProposer(this,"subject/proposer/sboper/other/create.action");
+					},
+					cancel: true
+				});
+				
+				$(".proposer-other-delete").click(function(){
+					var selectedIds = $("#proposerGrid").jqGrid("getGridParam", "selarrrow");
+					if(selectedIds.length<1){
+						layer.msg("请最少选择一行数据");
+						return;
+					}
+					var dicIds = new Array();
+					for (var int = 0; int < selectedIds.length; int++) {
+						var rowData = $("#proposerGrid").jqGrid("getRowData",selectedIds[int]);
+						dicIds.push(rowData.id);
+					}
+					lhgdialog.confirm("您确定要删除申请人吗？",function(){
+						$('.proposer-other-delete').attr("disabled",true);
+						$.ajax({
+							url: Sport.getBasePath()+"/subject/proposer/sboper/delete.action",
+							type: "POST",
+							dataType: "JSON",
+							data: {_csrf:$("#csrdId").val(),pId:dicIds.join(",")},
+							error: function () {
+								$('.proposer-other-delete').removeAttr("disabled");
+								layer.msg("系统异常，请稍后重试");
+							},
+							success: function (obj) {
+								if(obj){
+									layer.msg("删除用户成功!");
+									$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbsId}&subjectId=${subjectId}");
+								}else{
+									layer.msg("删除用户失败,请稍后重试。");
+								}
+								$('.proposer-other-delete').removeAttr("disabled");
+							}
+						});
+					});
+				});
 			});
+			
+			function operProposer(obj,url){
+				var doucment = obj.content.document.forms[0];
+				// 参数验证
+				$(doucment).validate({
+			        rules: {
+			        	name:{
+			                required: true,
+			                maxlength:20
+			            },
+			            birthday:{
+			                required: true
+			            },
+			            zw:{
+			            	nullableCheck:true
+			            },
+			            major:{
+			            	nullableCheck:true
+			            },
+			            org:{
+			            	required:false
+			            },
+			            backdrop:{
+			            	required:true
+			            },
+			            work:{
+			            	required:true
+			            }
+			        },
+			        messages: {
+			        	name:{
+			                required: "请填写申请人姓名",
+			                maxlength:'姓名在1-20个字符之间'
+			            },
+			            birthday:{
+			                required: "请填写申请人出生日期"
+			            },
+			            zw:{
+			            	nullableCheck:"职务长度不能超过40个字符"
+			            },
+			            org:{
+			            	required: "请填写所属单位"
+			            },
+			            email:{
+			                 email:"请填写正确的邮箱格式"
+			            },
+			            major:{
+			            	nullableCheck:"专业长度不能超过40个字符"
+			            },
+			            backdrop:{
+			            	required:"请填写研究背景"
+			            },
+			            work:{
+			            	required:"请填写研究分工"
+			            }
+			        }
+			    });
+				var result = $(doucment).valid()
+				// 证书校验
+				var zw = $(doucment).find(".zw-select").val();
+				var zwFlag = Sport.isNull(zw);
+				if(zwFlag){
+					$(doucment).find(".zw-error").text("请选择职务");
+				}else{
+					$(doucment).find(".zw-error").text("");
+				}
+				// 证书校验
+				var degrees = $(doucment).find(".degrees-select").val();
+				var degreesFlag = Sport.isNull(degrees);
+				if(degreesFlag){
+					$(doucment).find(".degrees-error").text("请选择学历");
+				}else{
+					$(doucment).find(".degrees-error").text("");
+				}
+				if(result && zwFlag && degreesFlag){
+					$.ajax({
+						url:"<%=basePath %>/"+url,
+						data:$(doucment).serialize(),
+						type:"POST",
+						success:function(data){
+							$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbsId}&subjectId=${subjectId}");
+						},
+						error:function(){
+							
+						}
+					});
+					return true;
+				}
+				return false;
+			}
 		</script>
 	</body>
 </html>

@@ -46,21 +46,28 @@
                     <tr>
             			<th class="required">姓名</th>
             			<td>
-                            <input name="name" type="text" value="" />
+                            <input name="name" type="text" value="${proposer.name}" />
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-                            <input type="hidden" name="subjectId" value="${subjectId}" />
-                            <input type="hidden" name="sbsId" value="${sbsId}" />
+                            <input type="hidden" name="subjectId" value="${proposer.subjectId}" />
+                            <input type="hidden" name="sbsId" value="${proposer.sbsId}" />
+                             <input type="hidden" name="id" value="${proposer.id}" />
                         </td>
             
             			<th class="required">性别</th>
             			<td>
-            				<input type="radio" name="gender" value="0" checked="checked"><label for="男">男</label>
-            				<input type="radio" name="gender" value="1" ><label for="女">女</label>
+            				<c:if test="${proposer.gender==0}">
+        						<input type="radio" name="gender" value="0" checked="checked"><label for="男">男</label>
+        						<input type="radio" name="gender" value="1" ><label for="女">女</label>
+        					</c:if>
+        					<c:if test="${proposer.gender==1}">
+        						<input type="radio" name="gender" value="0" ><label for="男">男</label>
+        						<input type="radio" name="gender" value="1" checked="checked"><label for="女">女</label>
+        					</c:if>
             			</td>
             		</tr>
             		<tr>
             			<th class="required">出生日期</th>
-            		    <td><input type="text" name="birthday" id="birthday" onClick="WdatePicker()" readonly="readonly"/></td>
+            		    <td><input type="text" name="birthday" id="birthday" value="${proposer.birthday}" onClick="WdatePicker()" readonly="readonly"/></td>
             			<th class="required">职务</th>
             			<td>
             				<select name="zw" class="selectpicker zw-select" title="请选择">
@@ -68,7 +75,6 @@
             						<option value="${zw.code}">${zw.name}</option>
             					</c:forEach>
             				</select>
-                            &nbsp;&nbsp;&nbsp;<span style="color:rgb(255, 102, 0);" class="zw-error"></span>
             			</td>
             		</tr>
             		<tr>
@@ -79,38 +85,41 @@
             						<option value="${de.code}">${de.name}</option>
             					</c:forEach>
             				</select>
-                             &nbsp;&nbsp;&nbsp;<span style="color:rgb(255, 102, 0);" class="degrees-error"></span>
             			</td>
             			<th class="required">所学专业</th>
             			<td>
-            				<input name="major" type="text" id="major"/>
+            				<input name="major" type="text" value="${proposer.major}"/>
             			</td>
             		</tr>
             		<tr>
             			<th class="required">所属单位</th>
-            			<td><input name="org" type="text" value="" /></td>
+            			<td><input name="org" type="text" value="${proposer.org}" /></td>
             			<th>电子邮件</th>
-            			<td><input name="email" type="text" value="" /></td>
+            			<td><input name="email" type="text" value="${proposer.email}"/></td>
             		</tr>
             		<tr>
             			<th>毕业院校</th>
-            			<td><input name="university" type="text" value="" /></td>
+            			<td><input name="university" type="text" value="${proposer.university}" /></td>
             			<th>电话</th>
-            			<td><input name="phone" type="text" value="" /></td>
+            			<td><input name="phone" type="text" value="${proposer.phone}"/></td>
             		</tr>
             		<tr>
                         <th class="required">研究分工</th>
-                        <td colspan="3"><input name="work" type="text" value="" style="width: 560px;" /></td>
+                        <td colspan="3"><input name="work" type="text"  style="width: 560px;" value="${proposer.work}"/></td>
                     </tr>
                     <tr>
             			<th class="required">研究背景</th>
-            			<td colspan="3"><input name="backdrop" type="text" value="" style="width: 560px;" /></td>
+            			<td colspan="3"><input name="backdrop" type="text" style="width: 560px;" value="${proposer.backdrop}"/></td>
             		</tr>
             	</table>
             </form>
 		</div>
 		<script>
 			$(function() {
+				$(window).trigger("load");
+				$('.degrees-select').selectpicker('val', "${proposer.degrees}");
+				// 设置select的默认值
+				$('.zw-select').selectpicker('val', "${proposer.zw}");
 				$('input').iCheck({
 					checkboxClass: 'icheckbox_flat-blue',
 					radioClass: 'iradio_flat-blue',

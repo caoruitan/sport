@@ -3,6 +3,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+    request.setAttribute("_time", System.currentTimeMillis());
 %>
 <head>
 	<title>申报书填报</title>
@@ -270,7 +271,7 @@
 						<a title="申报单位现有工作条件和基础">08 申报单位现有工作条件和基础</a>
 					</li>
 					<li class="dot">
-						<a id="e-sqrqk" onclick="showLayout('b-sqrqk')" title="申请人情况">09 申请人情况</a>
+						<a id="e-sqrqk" title="申请人情况">09 申请人情况</a>
 					</li>
 					<li class="dot">
 						<a id="e-jfys" href="0503sbs-jfys.html" target="_blank" title="经费预算">10 经费预算</a>
@@ -485,7 +486,7 @@
 			<!--09 申请人情况-->
 			<div class="box b-sqrqk">
 				<div class="t">09 申请人情况</div>
-                <jsp:include page="/subject/proposer/sboper/list.htm?sbsId=${sbs.sbsId}"></jsp:include>
+                <div class="sqrqk-container"></div>
 			</div>
 			<!--10 经费预算-->
 			<div class="box b-jfys">
@@ -861,6 +862,12 @@
 				height: 130,
 				ok: true
 			});
+			
+			$("#e-sqrqk").click(function(){
+				showLayout('b-sqrqk');
+				$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
+			});
+			
 		});
 	</script>
 </body>
