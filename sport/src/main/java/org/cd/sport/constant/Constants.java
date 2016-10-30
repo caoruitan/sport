@@ -341,13 +341,12 @@ public class Constants {
 
 		public static final String SUBJECT_RWS_STATUS_BACK = "BACK";
 
-		public static final String SUBJECT_RWS_DOC_TEMPLATE_PATH = "/WEB-INF/doc/sbs_template.doc";
+		public static final String SUBJECT_RWS_DOC_TEMPLATE_PATH = "/doc/rws_template.doc";
 
 		public static Map<String, String> getSubjectRwsStatus() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
 			types.put(SUBJECT_RWS_STATUS_SBOPER_TB, "申报人填报");
 			types.put(SUBJECT_RWS_STATUS_SBADMIN_SP, "已提交至本单位管理员审批");
-			types.put(SUBJECT_RWS_STATUS_ORG_SP, "已提交至组织单位审批");
 			types.put(SUBJECT_RWS_STATUS_KJS_SP, "已提交至科教司审批");
 			types.put(SUBJECT_RWS_STATUS_COMPLETE, "审批通过");
 			types.put(SUBJECT_RWS_STATUS_BACK, "已回退");

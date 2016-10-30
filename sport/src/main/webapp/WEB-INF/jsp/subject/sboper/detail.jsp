@@ -122,10 +122,10 @@
 							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
 							<p>
 								<a href="<%=basePath %>/subject/sboper/sbstb.shtm?subjectId=${subject.id}" target="_blank">
-									<c:if = '${empty sbs || sbs.status eq "SBOPER_TB" || sbs.status eq "BACK"}'>
+									<c:if test = '${empty sbs || sbs.status eq "SBOPER_TB" || sbs.status eq "BACK"}'>
 										<button class="btn-red btn-size-small">填报</button>
 									</c:if>
-									<c:if = '${not empty sbs && sbs.status ne "SBOPER_TB" && sbs.status ne "BACK"}'>
+									<c:if test = '${not empty sbs && sbs.status ne "SBOPER_TB" && sbs.status ne "BACK"}'>
 										<button class="btn-red btn-size-small">查看</button>
 									</c:if>
 								</a>
@@ -151,7 +151,16 @@
 						<li class="cur">
 							<p><b>任务书填报与评审</b></p>
 							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
-							<p><a href="0601rws-tb.html" target="_blank"><button class="btn-red btn-size-small">填报</button></a></p>
+							<p>
+								<a href="<%=basePath %>/subject/sboper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<c:if test = '${empty rws || rws.status eq "SBOPER_TB" || rws.status eq "BACK"}'>
+										<button class="btn-red btn-size-small">填报</button>
+									</c:if>
+									<c:if test = '${not empty rws && rws.status ne "SBOPER_TB" && rws.status ne "BACK"}'>
+										<button class="btn-red btn-size-small">查看</button>
+									</c:if>
+								</a>
+							</p>
 						</li>
 						<li class="dot">
 							<p><b>结题报告</b></p>

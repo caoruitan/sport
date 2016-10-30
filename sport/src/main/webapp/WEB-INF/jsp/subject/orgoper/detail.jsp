@@ -153,7 +153,18 @@
 						<li class="cur">
 							<p><b>任务书填报与评审</b></p>
 							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
-							<p><a href="0601rws-tb.html" target="_blank"><button class="btn-red btn-size-small">填报</button></a></p>
+							<p>
+								<c:if test='${not empty rws}'>
+									<a href="<%=basePath %>/subject/orgoper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+										<c:if test='${rws.status ne "ORGADMIN_SP"}'>
+											<button class="btn-red btn-size-small">查看</button>
+										</c:if>
+										<c:if test='${rws.status eq "ORGADMIN_SP"}'>
+											<button class="btn-red btn-size-small">审批</button>
+										</c:if>
+									</a>
+								</c:if>
+							</p>
 						</li>
 						<li class="dot">
 							<p><b>结题报告</b></p>

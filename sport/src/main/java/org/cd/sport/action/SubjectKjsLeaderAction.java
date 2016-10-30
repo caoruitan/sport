@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -30,6 +32,9 @@ public class SubjectKjsLeaderAction {
 	
 	@Autowired
 	private SubjectSbsService subjectSbsService;
+	
+	@Autowired
+	private SubjectRwsService subjectRwsService;
 
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response) {
@@ -76,8 +81,10 @@ public class SubjectKjsLeaderAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
+		request.setAttribute("rws", rws);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/kjsleader/detail";
 	}
@@ -92,6 +99,18 @@ public class SubjectKjsLeaderAction {
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		return "subject/kjsleader/sbstb";
+	}
+	
+	@RequestMapping(value = "rwstb")
+	public String rwstb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("rws", rws);
+		return "subject/kjsleader/rwstb";
 	}
 	
 }
