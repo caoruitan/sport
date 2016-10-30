@@ -149,7 +149,9 @@ public class SubjectSbOperAction {
 	public String detail(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
+		request.setAttribute("sbs", sbs);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/detail";
 	}
