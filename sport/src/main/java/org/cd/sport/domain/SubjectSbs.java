@@ -51,6 +51,8 @@ public class SubjectSbs {
 	private String tjyj;
 	
 	private String status;
+	
+	private String comment;
 
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -206,6 +208,15 @@ public class SubjectSbs {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Column(name = "SBS_COMMENT")
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	
 }

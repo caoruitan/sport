@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.JsonObject;
+
 @Controller
 @RequestMapping("subject/sbadmin")
 public class SubjectSbAdminAction {
@@ -95,6 +97,25 @@ public class SubjectSbAdminAction {
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		return "subject/sbadmin/sbstb";
+	}
+	
+	@RequestMapping(value = "pass.action")
+	public void pass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectSbsService.sbadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "unpass.action")
+	public void unpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectSbsService.sbadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
 	}
 	
 }

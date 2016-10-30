@@ -220,7 +220,9 @@
 		<div class="tip">申报书填报</div>
 		<div class="title">${subject.name}<span>${status[sbs.status]}</span></div>
 		<div class="btnBox">
-			<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
+			<c:if test='${not empty sbs && sbs.status ne "SBOPER_TB"}'>
+				<button class="btn-img" id="xz"><img src="<%=basePath %>/static/img/d-xz.png"/>下载</button>
+			</c:if>
 		</div>
 	</div>
 
@@ -476,6 +478,10 @@
 			$('.line li').click(function(){
 				$('.line li').removeClass('b-active');
 				$(this).addClass("b-active");
+			});
+			
+			$("#xz").click(function() {
+				window.open("<%=basePath%>/sbs/download.action?subjectId=${subjectId}");
 			});
 		});
 	</script>

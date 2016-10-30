@@ -143,6 +143,7 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		subject.setCreateUnitName(userDomain.getOrgName());
 		subject.setCreateTime(new Date());
 		subject.setStage(Constants.Subject.SUBJECT_STAGE_SBSTB);
+		subject.setNewState(1);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {

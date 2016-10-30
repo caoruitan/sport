@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.JsonObject;
+
 @Controller
 @RequestMapping("subject/kjsadmin")
 public class SubjectKjsAdminAction {
@@ -92,6 +94,25 @@ public class SubjectKjsAdminAction {
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		return "subject/kjsadmin/sbstb";
+	}
+	
+	@RequestMapping(value = "pass.action")
+	public void pass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectSbsService.kjsadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "unpass.action")
+	public void unpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectSbsService.kjsadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
 	}
 	
 }

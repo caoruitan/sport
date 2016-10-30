@@ -89,24 +89,22 @@ public class UploadAction {
 	}
 
 	public void downloadSbsById(String subjectId, HttpServletRequest request, HttpServletResponse response) {
-		UserVo userDomain = AuthenticationUtils.getUser();
-		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
-		realPath = realPath + "/" + subjectId + userDomain.getLoginName() + ".doc";
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		if (subject == null) {
 			throw new EntityNotFoundException("申报书不存在");
 		}
+		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
+		realPath = realPath + "/sbs_" + subjectId + subject.getCreator() + ".doc";
 		this.downloadFile(realPath, "申报书_" + subject.getName() + ".doc", request, response);
 	}
 
 	public void downloadRwsById(String subjectId, HttpServletRequest request, HttpServletResponse response) {
-		UserVo userDomain = AuthenticationUtils.getUser();
-		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
-		realPath = realPath + "/" + subjectId + userDomain.getLoginName() + ".doc";
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		if (subject == null) {
 			throw new EntityNotFoundException("申报书不存在");
 		}
+		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
+		realPath = realPath + "/rws_" + subjectId + subject.getCreator() + ".doc";
 		this.downloadFile(realPath, "任务书_" + subject.getName() + ".doc", request, response);
 	}
 

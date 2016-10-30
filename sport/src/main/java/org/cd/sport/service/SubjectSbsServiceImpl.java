@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.dao.SubjectDao;
 import org.cd.sport.dao.SubjectSbsDao;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
@@ -27,6 +28,9 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 
 	@Autowired
 	private SubjectSbsDao subjectSbsDao;
+
+	@Autowired
+	private SubjectDao subjectDao;
 
 	@Override
 	public SubjectSbs getSubjectSbsById(String id) {
@@ -160,7 +164,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 			range.replaceText("${yqjg}", sbs.getYqjg());
 			range.replaceText("${gztj}", sbs.getGztj());
 			range.replaceText("${tjyj}", sbs.getTjyj());
-			os = new FileOutputStream(basePath + "/WEB-INF/doc/sbs_" + subject.getId() + subject.getCreator() + ".doc");
+			os = new FileOutputStream(basePath + "/doc/sbs_" + subject.getId() + subject.getCreator() + ".doc");
 			hdt.write(os);
 			
 			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBADMIN_SP);
@@ -175,6 +179,60 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void sbadminPass(String subjectId) {
+		Subject subject = this.subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
+			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_KJS_SP);
+			this.subjectSbsDao.update(sbs);
+		} else if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
+			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_ORG_SP);
+			this.subjectSbsDao.update(sbs);
+		}
+	}
+
+	@Override
+	public void sbadminUnpass(String subjectId, String comment) {
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_BACK);
+		sbs.setComment(comment);
+		this.subjectSbsDao.update(sbs);
+	}
+
+	@Override
+	public void orgadminPass(String subjectId) {
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_KJS_SP);
+		this.subjectSbsDao.update(sbs);
+	}
+
+	@Override
+	public void orgadminUnpass(String subjectId, String comment) {
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_BACK);
+		sbs.setComment(comment);
+		this.subjectSbsDao.update(sbs);
+	}
+
+	@Override
+	public void kjsadminPass(String subjectId) {
+		Subject subject = this.subjectService.getSubjectById(subjectId);
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_COMPLETE);
+		this.subjectSbsDao.update(sbs);
+		subject.setStage(Constants.Subject.SUBJECT_STAGE_RWSTB);
+		this.subjectDao.save(subject);
+	}
+
+	@Override
+	public void kjsadminUnpass(String subjectId, String comment) {
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_BACK);
+		sbs.setComment(comment);
+		this.subjectSbsDao.update(sbs);
 	}
 
 }

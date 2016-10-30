@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.JsonObject;
+
 @Controller
 @RequestMapping("subject/orgoper")
 public class SubjectOrgOperAction {
@@ -95,6 +97,25 @@ public class SubjectOrgOperAction {
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		return "subject/orgoper/sbstb";
+	}
+	
+	@RequestMapping(value = "pass.action")
+	public void pass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectSbsService.orgadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+	
+	@RequestMapping(value = "unpass.action")
+	public void unpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectSbsService.orgadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
 	}
 	
 }

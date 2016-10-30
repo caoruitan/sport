@@ -36,4 +36,16 @@ public interface SubjectSbsService {
 	
 	public void checkAndSubmit(String subjectId, String basePath);
 	
+	public void sbadminPass(String subjectId);
+	
+	public void sbadminUnpass(String subjectId, String comment);
+	
+	public void orgadminPass(String subjectId);
+	
+	public void orgadminUnpass(String subjectId, String comment);
+	
+	public void kjsadminPass(String subjectId);
+	
+	public void kjsadminUnpass(String subjectId, String comment);
+	
 }
