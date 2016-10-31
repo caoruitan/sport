@@ -85,6 +85,21 @@ public class Constants {
 		 */
 		public static final String DIC_SECRET_CODE = "014";
 
+		/**
+		 * 数据字典-经费来源
+		 */
+		public static final String DIC_SBS_INCOME_CODE = "015001";
+
+		/**
+		 * 数据字典-经费支出
+		 */
+		public static final String DIC_SBS_COST_CODE = "015002";
+
+		/**
+		 * 数据字典-科研总和
+		 */
+		public static final String DIC_SBS_KYCOST_TOTAL_CODE = "015002001";
+
 	}
 
 	public static final class User {

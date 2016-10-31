@@ -60,6 +60,8 @@
 		<intercept-url pattern="/subject/proposer/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/proposer/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		<intercept-url pattern="/subject/proposer/other/datas.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/subject/budget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>

@@ -32,8 +32,6 @@
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
-			width: 1200px;
-			margin: 0 auto;
 		}
 		
 		.titleBox2 {
