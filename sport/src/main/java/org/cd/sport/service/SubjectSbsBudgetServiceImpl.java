@@ -1,5 +1,6 @@
 package org.cd.sport.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,6 @@ import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 
 import org.cd.sport.dao.SubjectSbsBudgetDao;
-import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
 import org.cd.sport.utils.NullableUtils;
@@ -33,9 +33,6 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 	@Autowired
 	private SubjectSbsService subjectSbsService;
 
-	@Autowired
-	private DicService dicService;
-
 	@Override
 	public List<SubjectSbsBudget> getBySbsId(String sbsId) {
 		return this.subjectSbsBudgetDao.findBySbsId(sbsId);
@@ -53,7 +50,7 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		NullableUtils.clean(incomes);
 		if (incomes != null && !incomes.isEmpty()) {
 			for (Budget in : incomes) {
-				this.create(sbsId, in.getCode(), in.getCost(), in.getReason());
+				this.create(sbsId, in.getCode(), in.getCost(), in.getName(), in.getReason());
 			}
 		}
 		// 处理支出
@@ -61,7 +58,7 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		NullableUtils.clean(costs);
 		if (costs != null && !costs.isEmpty()) {
 			for (Budget co : costs) {
-				this.create(sbsId, co.getCode(), co.getCost(), co.getReason());
+				this.create(sbsId, co.getCode(), co.getCost(), co.getName(), co.getReason());
 			}
 		}
 		return true;
@@ -69,19 +66,17 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean create(String sbsId, String code, String cost, String reason) {
+	public boolean create(String sbsId, String code, String cost, String name, String reason) {
 		SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
 		if (subject == null) {
 			throw new EntityNotFoundException("申报书对象不存在");
 		}
-		Dic dic = dicService.getByCode(code);
-		if (dic == null) {
-			throw new EntityNotFoundException("申报书预算类型不存在");
-		}
+		this.subjectSbsBudgetDao.deleteById(sbsId, code);
 		SubjectSbsBudget ssb = new SubjectSbsBudget();
 		ssb.setCode(code);
+		ssb.setCost(new BigDecimal(cost));
 		ssb.setSbsId(sbsId);
-		ssb.setName(dic.getName());
+		ssb.setName(name);
 		ssb.setReason(reason);
 		this.subjectSbsBudgetDao.save(ssb);
 		return true;
@@ -89,17 +84,13 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean update(String sbsId, String code, String cost, String reason) {
+	public boolean update(String sbsId, String code, String cost, String name, String reason) {
 		SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
 		if (subject == null) {
 			throw new EntityNotFoundException("申报书对象不存在");
 		}
-		Dic dic = dicService.getByCode(code);
-		if (dic == null) {
-			throw new EntityNotFoundException("申报书预算类型不存在");
-		}
 		this.subjectSbsBudgetDao.deleteById(sbsId, code);
-		return this.create(sbsId, code, cost, reason);
+		return this.create(sbsId, code, cost, name, reason);
 	}
 
 	@Override

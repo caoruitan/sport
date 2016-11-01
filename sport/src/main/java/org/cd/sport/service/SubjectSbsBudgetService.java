@@ -15,9 +15,9 @@ public interface SubjectSbsBudgetService {
 
 	public boolean create(SbsBudgetView view);
 
-	public boolean create(String sbsId, String code, String cost, String reason);
+	public boolean create(String sbsId, String code, String cost, String name, String reason);
 
-	public boolean update(String sbsId, String code, String cost, String reason);
+	public boolean update(String sbsId, String code, String cost, String name, String reason);
 
 	public List<SubjectSbsBudget> getBySbsId(String sbsId);
 

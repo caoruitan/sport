@@ -27,7 +27,7 @@
 		<div>
 			<p>
 				<button class="btn-wisteria " style="float:right;" type="button">重置</button>
-				<button class="btn-red " style="float:right;" type="button">保存</button>
+				<button class="btn-red budget-save" style="float:right;" type="button">保存</button>
 			</p>
 		</div>
 		<div class="notice-box">
@@ -53,14 +53,19 @@
                             <c:if test="${status.index < fn:length(incomeDics)-1}">
                                 <th class="level2">${dic.name }</th>
                                 <td>
-                                    <input name="income.cost[${status.index}]" class="price" type="number" placeholder="0.00" value="${ssbMap[dic.code].income}" />
-                                    <input name="income.code[${status.index}]" type="hidden" value="${dic.code}" />
-                                    <input name="income.name[${status.index}]" type="hidden" value="${dic.name}" />
+                                    <input name="income[${status.index}].cost" data-index="income${status.index}" class="price income" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
+                                    <input name="income[${status.index}].code" type="hidden" value="${dic.code}" />
+                                    <input name="income[${status.index}].name" type="hidden" value="${dic.name}" />
                                 </td>
                             </c:if>
                             <c:if test="${status.index == fn:length(incomeDics)-1}">
                                 <th class="level2"><span class="brownfont">${dic.name }</span></th>
-    					        <td class="price-ly">${ssbMap[dic.code].income == null ?'0.00': ssbMap[dic.code].income}</td>
+    					        <td class="price-ly">
+                                    <input name="income[${status.index}].name" type="hidden" value="${dic.name}" />
+                                    <input name="income[${status.index}].code" type="hidden" value="${dic.code}" />
+                                    <input name="income[${status.index}].cost" id="income-total-td" type="hidden" value="${ssbMap[dic.code].cost}" />
+                                    <span class="income-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
+                                </td>
                             </c:if>
                             <td>/</td>
         				</tr>
@@ -72,32 +77,49 @@
     					<td></td>
     				</tr>
                     <c:forEach var="dic" items="${costDics}" varStatus="status">
-                        <tr>
-                            <c:if test="${status.index < fn:length(costDics)-1}">
-                                <th class="level2">${dic.name }</th>
-                                <td>
-                                    <input name="cost.cost[${status.index}]" class="price" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
-                                    <input name="cost.code[${status.index}]" type="hidden" value="${dic.code}" />
-                                    <input name="cost.name[${status.index}]" type="hidden" value="${dic.name}" />
-                                </td>
-                                <td><input name="cost.reason[${status.index}]" type="text" value="${ssbMap[dic.code].reason}"></td>
-                            </c:if>
-                            <c:if test="${status.index == fn:length(costDics)-1}">
-                                <th class="level2"><span class="brownfont">${dic.name }</span></th>
-                                <td class="sub-total-error">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</td>
-                                <td>/</td>
-                            </c:if>
-                        </tr>
+                        <c:if test="${costTotalCode !=dic.code}">
+                            <tr>
+                                <c:if test="${status.index < fn:length(costDics)-1}">
+                                    <th class="level2">${dic.name }</th>
+                                    <td>
+                                        <input name="cost[${status.index}].cost" class="price cost" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
+                                        <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
+                                        <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
+                                    </td>
+                                    <td><input name="cost.reason[${status.index}]" type="text" value="${ssbMap[dic.code].reason}"></td>
+                                </c:if>
+                                <c:if test="${status.index == fn:length(costDics)-1}">
+                                    <th class="level2"><span class="brownfont">${dic.name }</span></th>
+                                    <td class="sub-total-error">
+                                        <input name="cost[${status.index}].cost" type="hidden" id="cost-total-td" value="${ssbMap[dic.code].cost}" />
+                                        <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
+                                        <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
+                                        <span class="cost-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
+                                    </td>
+                                    <td>/</td>
+                                </c:if>
+                            </tr>
+                        </c:if>
                         <c:if test="${costTotalCode ==dic.code}">
+                             <tr>
+                                <th class="level2">${dic.name }</th>
+                                <td class="sub-total-error">
+                                    <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
+                                    <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
+                                    <input name="cost[${status.index}].cost" type="hidden" class="cost" id="cost-temp-total-td" value="${ssbMap[dic.code].cost}" />
+                                    <span class="cost-temp-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
+                                </td>
+                                <td>/</td>
+                            </tr>
                             <c:forEach var="costTotal" items="${costTotalDics}" varStatus="cstatus">
                                 <tr>
                                     <th class="level3">${costTotal.name}</th>
                                     <td>
-                                        <input name="cost.cost[${fn:length(costDics)-1 + status.index}]" class="price" type="number" placeholder="0.00" value="${ssbMap[costTotal.code].cost}" />
-                                        <input name="cost.code[${fn:length(costDics)-1 + status.index}]" type="hidden" value="${costTotal.code}" />
-                                        <input name="cost.name[${fn:length(costDics)-1 + status.index}]" type="hidden" value="${costTotal.name}" />
+                                        <input name="cost[${fn:length(costDics) + cstatus.index}].cost" class="price temp" type="number" placeholder="0.00" value="${ssbMap[costTotal.code].cost}" />
+                                        <input name="cost[${fn:length(costDics) + cstatus.index}].code" type="hidden" value="${costTotal.code}" />
+                                        <input name="cost[${fn:length(costDics) + cstatus.index}].name" type="hidden" value="${costTotal.name}" />
                                     </td>
-                                    <td><input name="cost.reason[${fn:length(costDics)-1 + status.index}]" type="text" value="${ssbMap[costTotal.code].reason}"></td>
+                                    <td><input name="cost.reason[${fn:length(costDics) + cstatus.index}]" type="text" value="${ssbMap[costTotal.code].reason}"></td>
                                 </tr>
                             </c:forEach>
                         </c:if>
@@ -106,7 +128,63 @@
             </form>
 		</div>
 		<script type="text/javascript">
-			$(document).ready(function() {});
+			$(function(){
+				$(".price").on("blur",function(){
+					if($(this).hasClass("cost")){
+						var total = 0;
+						$("#sbs-budget-form").find("input.cost").each(function(){
+							var v = $(this).val();
+							v = Sport.isNull(v)?"0":v;
+							v = parseFloat(v);
+							total +=v;
+						});
+						$(".cost-total-td").text(total.toFixed(2));
+						$("#cost-total-td").val(total.toFixed(2));
+					}else if($(this).hasClass("income")){
+						var total = 0;
+						$("#sbs-budget-form").find("input.income").each(function(){
+							var v = $(this).val();
+							v = Sport.isNull(v)?"0":v;
+							v = parseFloat(v);
+							total +=v;
+						});
+						$(".income-total-td").text(total.toFixed(2));
+						$("#income-total-td").val(total.toFixed(2));
+					}else if($(this).hasClass("temp")){
+						debugger;
+						var tempTotal = 0;
+						$("#sbs-budget-form").find("input.temp").each(function(){
+							var v = $(this).val();
+							v = Sport.isNull(v)?"0":v;
+							v = parseFloat(v);
+							tempTotal +=v;
+						});
+						$(".cost-temp-total-td").text(tempTotal.toFixed(2));
+						$("#cost-temp-total-td").val(tempTotal.toFixed(2));
+						
+						var total = 0;
+						$("#sbs-budget-form").find("input.cost").each(function(){
+							var v = $(this).val();
+							v = Sport.isNull(v)?"0":v;
+							v = parseFloat(v);
+							total +=v;
+						});
+						total = Sport.isNull(total)?0:total;
+						$(".cost-total-td").text(total.toFixed(2));
+						$("#cost-total-td").val(total.toFixed(2));
+					};
+				})
+				
+				$(".budget-save").click(function(){
+					$.ajax({
+						url:Sport.getBasePath()+"/subject/budget/sboper/create.action",
+						data:$("#sbs-budget-form").serialize(),
+						type:"POST",
+						success:function(data){
+						}
+					});
+				});
+			})
 		</script>
 	</body>
 </html>
