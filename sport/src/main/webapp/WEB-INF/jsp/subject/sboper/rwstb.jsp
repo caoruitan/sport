@@ -6,6 +6,7 @@
 %>
 <head>
 	<title>任务书填报</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />

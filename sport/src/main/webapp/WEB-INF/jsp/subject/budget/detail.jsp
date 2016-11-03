@@ -90,7 +90,7 @@
                                 </c:if>
                                 <c:if test="${status.index == fn:length(costDics)-1}">
                                     <th class="level2"><span class="brownfont">${dic.name }</span></th>
-                                    <td class="sub-total-error">
+                                    <td class="price-ly">
                                         <input name="cost[${status.index}].cost" type="hidden" id="cost-total-td" value="${ssbMap[dic.code].cost}" />
                                         <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
                                         <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
@@ -103,7 +103,7 @@
                         <c:if test="${costTotalCode ==dic.code}">
                              <tr>
                                 <th class="level2">${dic.name }</th>
-                                <td class="sub-total-error">
+                                <td class="price-ly">
                                     <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
                                     <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
                                     <input name="cost[${status.index}].cost" type="hidden" class="cost" id="cost-temp-total-td" value="${ssbMap[dic.code].cost}" />
@@ -175,11 +175,19 @@
 				})
 				
 				$(".budget-save").click(function(){
+					var iTotal = $(".income-total-td").text();
+					var cTotal = $(".cost-total-td").text();
+					if(iTotal!=cTotal){
+						layer.msg("经费来源和经费支出总额不相等!,请重新填写");
+						$(".cost-total-td").parent().addClass("sub-total-error");
+						return;
+					}
 					$.ajax({
 						url:Sport.getBasePath()+"/subject/sbsbudget/sboper/create.action",
 						data:$("#sbs-budget-form").serialize(),
 						type:"POST",
 						success:function(data){
+							layer.msg("经费预算保存成功!");
 						}
 					});
 				});
