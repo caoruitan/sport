@@ -10,6 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import org.cd.sport.dao.SubjectSbsBudgetDao;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
+import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.utils.NullableUtils;
 import org.cd.sport.view.Budget;
 import org.cd.sport.view.SbsBudgetView;
@@ -67,18 +68,24 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 	@Override
 	@Transactional
 	public boolean create(String sbsId, String code, String cost, String name, String reason) {
-		SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
-		if (subject == null) {
-			throw new EntityNotFoundException("申报书对象不存在");
+		try {
+			BigDecimal money = new BigDecimal(cost);
+			SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
+			if (subject == null) {
+				throw new EntityNotFoundException("申报书对象不存在");
+			}
+			this.subjectSbsBudgetDao.deleteById(sbsId, code);
+			SubjectSbsBudget ssb = new SubjectSbsBudget();
+			ssb.setCode(code);
+			ssb.setCost(money);
+			ssb.setSbsId(sbsId);
+			ssb.setName(name);
+			ssb.setReason(reason);
+			this.subjectSbsBudgetDao.save(ssb);
+		} catch (Exception e) {
+			throw new ParameterIsWrongException("经费格式不正确");
 		}
-		this.subjectSbsBudgetDao.deleteById(sbsId, code);
-		SubjectSbsBudget ssb = new SubjectSbsBudget();
-		ssb.setCode(code);
-		ssb.setCost(new BigDecimal(cost));
-		ssb.setSbsId(sbsId);
-		ssb.setName(name);
-		ssb.setReason(reason);
-		this.subjectSbsBudgetDao.save(ssb);
+
 		return true;
 	}
 

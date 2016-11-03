@@ -24,17 +24,10 @@
     </style>
 	</head>
 	<body>
-		<div>
-			<p>
-				<button class="btn-wisteria " style="float:right;" type="button">重置</button>
-				<button class="btn-red budget-save" style="float:right;" type="button">保存</button>
-			</p>
-		</div>
 		<div class="notice-box">
 			<li>注意：经费来源总额必须与经费支出总额相等。单位：万元</li>
 		</div>
 		<div class="TBox">
-			<form id="sbs-budget-form">
                 <table class="TTable">
     				<thead>
     					<tr>
@@ -125,65 +118,6 @@
                         </c:if>
                     </c:forEach>
     			</table>
-            </form>
 		</div>
-		<script type="text/javascript">
-			$(function(){
-				$(".price").on("blur",function(){
-					if($(this).hasClass("cost")){
-						var total = 0;
-						$("#sbs-budget-form").find("input.cost").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							total +=v;
-						});
-						$(".cost-total-td").text(total.toFixed(2));
-						$("#cost-total-td").val(total.toFixed(2));
-					}else if($(this).hasClass("income")){
-						var total = 0;
-						$("#sbs-budget-form").find("input.income").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							total +=v;
-						});
-						$(".income-total-td").text(total.toFixed(2));
-						$("#income-total-td").val(total.toFixed(2));
-					}else if($(this).hasClass("temp")){
-						var tempTotal = 0;
-						$("#sbs-budget-form").find("input.temp").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							tempTotal +=v;
-						});
-						$(".cost-temp-total-td").text(tempTotal.toFixed(2));
-						$("#cost-temp-total-td").val(tempTotal.toFixed(2));
-						
-						var total = 0;
-						$("#sbs-budget-form").find("input.cost").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							total +=v;
-						});
-						total = Sport.isNull(total)?0:total;
-						$(".cost-total-td").text(total.toFixed(2));
-						$("#cost-total-td").val(total.toFixed(2));
-					};
-				})
-				
-				$(".budget-save").click(function(){
-					$.ajax({
-						url:Sport.getBasePath()+"/subject/sbsbudget/sboper/create.action",
-						data:$("#sbs-budget-form").serialize(),
-						type:"POST",
-						success:function(data){
-						}
-					});
-				});
-			})
-		</script>
 	</body>
 </html>

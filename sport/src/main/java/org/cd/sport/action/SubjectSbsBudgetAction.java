@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  */
 @Controller
-@RequestMapping("/subject/budget")
+@RequestMapping("/subject/sbsbudget")
 public class SubjectSbsBudgetAction {
 
 	@Autowired
@@ -41,8 +41,7 @@ public class SubjectSbsBudgetAction {
 	@Autowired
 	private SubjectSbsBudgetService subjectSbsBudgetService;
 
-	@RequestMapping(value = "/sboper/cost.htm", method = RequestMethod.GET)
-	public String sboperListView(String sbsId, HttpServletRequest request) {
+	private void sbsCost(String sbsId, HttpServletRequest request) {
 		if (StringUtils.isBlank(sbsId)) {
 			throw new ParameterIsWrongException();
 		}
@@ -64,7 +63,48 @@ public class SubjectSbsBudgetAction {
 		request.setAttribute("costDics", costDics);
 		request.setAttribute("costTotalDics", costTotalDics);
 		request.setAttribute("ssbMap", ssbMap);
+	}
+
+	@RequestMapping(value = "/sboper/cost.htm", method = RequestMethod.GET)
+	public String sboperListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
 		return "subject/budget/detail";
+	}
+
+	@RequestMapping(value = "/sbadmin/cost.htm", method = RequestMethod.GET)
+	public String ssbadminListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
+	}
+
+	@RequestMapping(value = "/kjsadmin/cost.htm", method = RequestMethod.GET)
+	public String kjsadminListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
+	}
+
+	@RequestMapping(value = "/kjsleader/cost.htm", method = RequestMethod.GET)
+	public String kjsleaderListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
+	}
+
+	@RequestMapping(value = "/kjsexpert/cost.htm", method = RequestMethod.GET)
+	public String kjsexpertListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
+	}
+
+	@RequestMapping(value = "/orgadmin/cost.htm", method = RequestMethod.GET)
+	public String orgadminListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
+	}
+
+	@RequestMapping(value = "/orgoper/cost.htm", method = RequestMethod.GET)
+	public String orgoperListView(String sbsId, HttpServletRequest request) {
+		this.sbsCost(sbsId, request);
+		return "subject/budget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/sboper/create.action", method = RequestMethod.POST)

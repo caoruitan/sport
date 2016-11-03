@@ -261,7 +261,7 @@
 						<a id="e-sqrqk" title="申请人情况">09 申请人情况</a>
 					</li>
 					<li class="dot">
-						<a id="e-jfys" href="0503sbs-jfys.html" target="_blank" title="经费预算">10 经费预算</a>
+						<a id="e-jfys" title="经费预算">10 经费预算</a>
 					</li>
 					<li class="dot" id="e-tjyj" onclick="showLayout('b-tjyj')">
 						<a title="申报单位推荐意见及提供相关研究工作条件的保证">11 申报单位推荐意见及提供相关研...</a>
@@ -440,6 +440,7 @@
 			<!--10 经费预算-->
 			<div class="box b-jfys">
 				<div class="t">10 经费预算</div>
+				<div class="jfys-container"></div>
 			</div>
 			<!--11 申报单位推荐意见及提供相关研...-->
 			<div class="box b-tjyj">
@@ -488,6 +489,11 @@
 			$("#e-sqrqk").click(function(){
 				showLayout('b-sqrqk');
 				$(".sqrqk-container").load("<%=basePath%>/subject/proposer/kjsleader/list.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
+			});
+			
+			$("#e-jfys").click(function(){
+				showLayout('b-jfys');
+				$(".jfys-container").load("<%=basePath%>/subject/sbsbudget/kjsleader/cost.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
 			});
 		});
 	</script>

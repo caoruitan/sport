@@ -871,7 +871,7 @@
 			
 			$("#e-jfys").click(function(){
 				showLayout('b-jfys');
-				$(".jfys-container").load("<%=basePath%>/subject/budget/sboper/cost.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
+				$(".jfys-container").load("<%=basePath%>/subject/sbsbudget/sboper/cost.htm?sbsId=${sbs.sbsId}&subjectId=${subjectId}");
 			});
 			
 		});
