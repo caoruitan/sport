@@ -8,9 +8,11 @@ import java.util.Calendar;
 import javax.persistence.EntityNotFoundException;
 
 import org.apache.commons.lang.StringUtils;
+import org.cd.sport.domain.SubjectRwsAppropriation;
 import org.cd.sport.domain.SubjectRwsDevice;
 import org.cd.sport.domain.SubjectRwsSchedule;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.view.SubjectRwsAppropriationView;
 import org.cd.sport.view.SubjectRwsDeviceView;
 import org.cd.sport.view.SubjectRwsScheduleView;
 
@@ -173,6 +175,73 @@ public class SubjectRwsSupport extends SportSupport {
 		proposer.setSlzs(view.getSlzs());
 		proposer.setPrice(new BigDecimal(view.getPrice()));
 		proposer.setNum(Integer.parseInt(view.getNum()));
+		return proposer;
+	}
+	
+	
+	
+	
+	/**
+	 * 任务书进度安排
+	 */
+	public void validate(SubjectRwsAppropriationView view) {
+		if (view == null) {
+			throw new ParameterIsWrongException("任务书进度安排为空");
+		}
+
+		if (StringUtils.isBlank(view.getRwsId())) {
+			throw new ParameterIsWrongException("任务书进度rwsid不能为空");
+		}
+
+		if (StringUtils.isBlank(view.getSubjectId())) {
+			throw new ParameterIsWrongException("任务书进度SubjectId不能为空");
+		}
+
+		if (StringUtils.isBlank(view.getGainOrg())) {
+			throw new ParameterIsWrongException("拨往单位不能为空");
+		}
+		
+		String approAmount = view.getApproAmount();
+		if (!StringUtils.isBlank(approAmount)) {
+			try {
+				BigDecimal money = new BigDecimal(approAmount);
+				if (BigDecimal.ZERO.compareTo(money) == 1) {
+					throw new ParameterIsWrongException("拨款金额不能为负数");
+				}
+			} catch (Exception e) {
+				throw new ParameterIsWrongException("拨款金额格式不正确");
+			}
+			
+		}
+	}
+
+	/**
+	 * 任务书进度安排
+	 */
+	public void validateUpdate(SubjectRwsAppropriationView view) {
+		this.validate(view);
+		if (StringUtils.isBlank(view.getApproId())) {
+			throw new ParameterIsWrongException("拨往id不能为空");
+		}
+	}
+
+	public SubjectRwsAppropriation process(SubjectRwsAppropriationView view) {
+		this.validate(view);
+		SubjectRwsAppropriation viewDomain = this.result(SubjectRwsAppropriation.class, view);
+		BigDecimal money = new BigDecimal(view.getApproAmount());
+		viewDomain.setApproAmount(money);
+		return viewDomain;
+	}
+
+	public SubjectRwsAppropriation process(SubjectRwsAppropriation proposer, SubjectRwsAppropriationView view) {
+		this.validateUpdate(view);
+		if (proposer == null) {
+			throw new EntityNotFoundException();
+		}
+		proposer.setDescribe(view.getDescribe());
+		proposer.setGainOrg(view.getGainOrg());
+		BigDecimal money = new BigDecimal(view.getApproAmount());
+		proposer.setApproAmount(money);
 		return proposer;
 	}
 }
