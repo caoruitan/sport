@@ -267,7 +267,7 @@
 					<li class="dot">
 						<a id="e-jfys" href="0602rws-jfys.html" target="_blank" title="经费预算">09 经费预算</a>
 					</li>
-					<li class="dot" id="e-sbgzmx" onclick="showLayout('b-sbgzmx')">
+					<li class="dot" id="e-sbgzmx">
 						<a title="设备购置明细表">10 设备购置明细表</a>
 					</li>
 					<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
@@ -458,15 +458,7 @@
 				<div class="t">09 经费预算</div>
 			</div>
 			<!--10 设备购置明细表-->
-			<div class="box b-sbgzmx">
-				<div class="t">10 设备购置明细表</div>
-				<div class="c">
-					<div class="tb">
-						<table id="jqGrid-sb"></table>
-						<div id="jqGridPager-sb"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-sbgzmx"></div>
 			<!--11 预算来源及经费支出情况说明-->
 			<div class="box b-ysly">
 				<div class="t">11 预算来源及经费支出情况说明</div>
@@ -656,81 +648,6 @@
 				jQuery("#jqGrid-ry").jqGrid('addRowData', i + 1, mydata[i]);
 			}
 			
-			//设备购置
-			$("#jqGrid-sb").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '设备名称',
-					index: '设备名称',
-					width: 10,
-					sorttype: "date"
-				},  {
-					name: '购置或试制的理由用途',
-					index: '购置或试制的理由用途',
-					align: "center",
-					width: 15,
-					sorttype: "date"
-				}, {
-					name: '设备型号及指标',
-					index: '设备型号及指标',
-					align: "center",
-					width: 10
-				}, {
-					name: '单价',
-					index: '单价',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '数量',
-					index: '数量',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '总价',
-					index: '总价',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '申请从专项经费中列支数',
-					index: '申请从专项经费中列支数',
-					width: 15,
-					align: "center",
-					sortable: false
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-sb"
-			});
-
-			var mydata = [{
-					No: "1",
-					设备名称: "龙一飞",
-					购置或试制的理由用途:"负责人",
-					设备型号及指标: "中国羽毛球协会",
-					单价: "2300",
-					数量: "3",
-					总价: "6900",
-					申请从专项经费中列支数: "1"
-				},
-
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-sb").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-			
 			//拨付
 			$("#jqGrid-bf").jqGrid({
 				datatype: "local",
@@ -781,6 +698,11 @@
 		$("#e-jdap").click(function(){
 			showLayout('b-jdap');
 			$(".b-jdap").load("<%=basePath%>/subject/schedule/orgoper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+		});
+		
+		$("#e-sbgzmx").click(function(){
+			showLayout('b-sbgzmx');
+			$(".b-sbgzmx").load("<%=basePath%>/subject/device/sbadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 	</script>
 </body>

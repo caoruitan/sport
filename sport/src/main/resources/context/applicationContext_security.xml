@@ -83,7 +83,15 @@
 		<intercept-url pattern="/subject/schedule/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/schedule/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
-		
+		<!--设备-->
+		<intercept-url pattern="/subject/device/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/device/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/subject/device/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/subject/device/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/subject/device/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/device/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/device/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/device/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>

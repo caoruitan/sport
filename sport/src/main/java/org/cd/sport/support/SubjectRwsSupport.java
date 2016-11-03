@@ -165,6 +165,12 @@ public class SubjectRwsSupport extends SportSupport {
 		if (proposer == null) {
 			throw new EntityNotFoundException();
 		}
+		proposer.setName(view.getName());
+		proposer.setBuy(view.getBuy());
+		proposer.setNorm(view.getNorm());
+		proposer.setOrgin(view.getOrgin());
+		proposer.setPurpose(view.getPurpose());
+		proposer.setSlzs(view.getSlzs());
 		proposer.setPrice(new BigDecimal(view.getPrice()));
 		proposer.setNum(Integer.parseInt(view.getNum()));
 		return proposer;

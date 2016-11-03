@@ -270,7 +270,7 @@
 					<li class="dot">
 						<a id="e-jfys" href="0602rws-jfys.html" target="_blank" title="经费预算">09 经费预算</a>
 					</li>
-					<li class="dot" id="e-sbgzmx" onclick="showLayout('b-sbgzmx')">
+					<li class="dot" id="e-sbgzmx">
 						<a title="设备购置明细表">10 设备购置明细表</a>
 					</li>
 					<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
@@ -469,23 +469,7 @@
 				<div class="t">09 经费预算</div>
 			</div>
 			<!--10 设备购置明细表-->
-			<div class="box b-sbgzmx">
-				<div class="t">10 设备购置明细表</div>
-				<div class="c">
-					<div class="opBtnBox" >
-						<div class="fl-l">
-							<button class="btn-red" id="sb">+ 新增</button>
-						</div>
-						<div class="fl-r">
-							<button class="btn-wisteria">删除</button>
-						</div>
-					</div>
-					<div class="tb">
-						<table id="jqGrid-sb"></table>
-						<div id="jqGridPager-sb"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-sbgzmx"></div>
 			<!--11 预算来源及经费支出情况说明-->
 			<div class="box b-ysly">
 				<div class="t">11 预算来源及经费支出情况说明</div>
@@ -984,6 +968,10 @@
 				$(".b-jdap").load("<%=basePath%>/subject/schedule/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 			});
 			
+			$("#e-sbgzmx").click(function(){
+				showLayout('b-sbgzmx');
+				$(".b-sbgzmx").load("<%=basePath%>/subject/device/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			});
 		});
 	</script>
 </body>
