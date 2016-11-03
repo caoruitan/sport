@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.cd.sport.dao.SubjectSbsProposerDao;
 import org.cd.sport.domain.SubjectSbsProposer;
-import org.cd.sport.support.SubjectSbsProposerSupport;
+import org.cd.sport.support.SubjectSbsSupport;
 import org.cd.sport.view.SubjectSbsProposerView;
 import org.cd.sport.vo.SubjectSbsProposerVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(readOnly = true)
-public class SubjectSbsProposerServiceImpl extends SubjectSbsProposerSupport implements SubjectSbsProposerService {
+public class SubjectSbsProposerServiceImpl extends SubjectSbsSupport implements SubjectSbsProposerService {
 
 	@Autowired
 	private SubjectSbsProposerDao subjectSbsProposerDao;

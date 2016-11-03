@@ -261,7 +261,7 @@
 					<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
 						<a title="承担单位现有工作条件和基础">06 承担单位现有工作条件和基础</a>
 					</li>
-					<li class="dot" id="e-jdap" onclick="showLayout('b-jdap')">
+					<li class="dot" id="e-jdap">
 						<a title="进度安排">07 进度安排</a>
 					</li>
 					<li class="dot" id="e-xmcddw" onclick="showLayout('b-xmcddw')">
@@ -445,23 +445,7 @@
 				</div>
 			</div>
 			<!--07 进度安排-->
-			<div class="box b-jdap">
-				<div class="t">07 进度安排填报</div>
-				<div class="c">
-					<div class="opBtnBox" >
-						<div class="fl-l">
-							<button class="btn-red" id="jd">+ 新增</button>
-						</div>
-						<div class="fl-r">
-							<button class="btn-wisteria">删除</button>
-						</div>
-					</div>
-					<div class="tb">
-						<table id="jqGrid-jd"></table>
-						<div id="jqGridPager-jd"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-jdap"></div>
 			<!--08 项目承担单位、协作单位和人员情况-->
 			<div class="box b-xmcddw">
 				<div class="t">08 项目承担单位、协作单位和人员情况</div>
@@ -769,67 +753,6 @@
 				height: 130,
 				ok: true
 			});
-			//进度安排
-			$("#jqGrid-jd").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '进度安排年',
-					index: '进度安排年',
-					width: 10,
-					sorttype: "date"
-				},  {
-					name: '进度安排月',
-					index: '进度安排月',
-					align: "center",
-					width: 10,
-					sorttype: "date"
-				}, {
-					name: '主要工作内容',
-					index: '主要工作内容',
-					align: "center",
-					width: 25
-				}, {
-					name: '目标',
-					index: '目标',
-					width: 20,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '操作',
-					index: '操作',
-					width: 10,
-					align: "center",
-					sortable: false
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-jd"
-			});
-
-			var mydata = [{
-					No: "1",
-					进度安排年: "2016",
-					进度安排月:"10",
-					主要工作内容: "1、设备到位 2、资金到位 3、人员到位",
-					目标: "按时完成需求调研与项目启动会",
-					操作: "<a>编辑</a> <a>删除</a>"
-				},
-
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-jd").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-			
 			//人员情况
 			$("#jqGrid-ry").jqGrid({
 				datatype: "local",
@@ -1025,17 +948,6 @@
 			for (var i = 0; i <= mydata.length; i++) {
 				jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, mydata[i]);
 			}
-			
-			//进度
-			$('#jd').dialog({
-				id: 'jd',
-				title: '进度安排',
-				content: 'url:0604rws-jd-xz.html',
-				width: 700,
-				height: 400,
-				ok: true,
-				cancel: true
-			});
 			//项目承担
 			$('#ry').dialog({
 				id: 'ry',
@@ -1066,6 +978,12 @@
 				ok: true,
 				cancel: true
 			});
+			
+			$("#e-jdap").click(function(){
+				showLayout('b-jdap');
+				$(".b-jdap").load("<%=basePath%>/subject/schedule/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			});
+			
 		});
 	</script>
 </body>

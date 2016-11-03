@@ -131,7 +131,7 @@
 		<div class="titleBox2">
 			<div class="title">其他申请人</div>
 		</div>
-		<div class="listBox" id="ddfdfd">
+		<div class="listBox">
 			<div class="opBtnBox">
 				<div class="fl-l">
 					<button class="btn-red" id="sqrxz">+ 新增</button>

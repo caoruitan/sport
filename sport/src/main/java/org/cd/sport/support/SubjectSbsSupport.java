@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author liuyk
  *
  */
-public class SubjectSbsProposerSupport extends SportSupport {
+public class SubjectSbsSupport extends SportSupport {
 
 	@Autowired
 	private DicService dicService;

@@ -258,7 +258,7 @@
 					<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
 						<a title="承担单位现有工作条件和基础">06 承担单位现有工作条件和基础</a>
 					</li>
-					<li class="dot" id="e-jdap" onclick="showLayout('b-jdap')">
+					<li class="dot" id="e-jdap">
 						<a title="进度安排">07 进度安排</a>
 					</li>
 					<li class="dot" id="e-xmcddw" onclick="showLayout('b-xmcddw')">
@@ -442,15 +442,7 @@
 				</div>
 			</div>
 			<!--07 进度安排-->
-			<div class="box b-jdap">
-				<div class="t">07 进度安排填报</div>
-				<div class="c">
-					<div class="tb">
-						<table id="jqGrid-jd"></table>
-						<div id="jqGridPager-jd"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-jdap"></div>
 			<!--08 项目承担单位、协作单位和人员情况-->
 			<div class="box b-xmcddw">
 				<div class="t">08 项目承担单位、协作单位和人员情况</div>
@@ -845,6 +837,11 @@
 			for (var i = 0; i <= mydata.length; i++) {
 				jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, mydata[i]);
 			}
+		});
+		
+		$("#e-jdap").click(function(){
+			showLayout('b-jdap');
+			$(".b-jdap").load("<%=basePath%>/subject/schedule/orgadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 	</script>
 </body>
