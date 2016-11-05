@@ -43,9 +43,9 @@
                 <table class="TTable">
     				<thead>
     					<tr>
-    						<th width="40%">预算科目名称</th>
+    						<th width="48%">预算科目名称</th>
     						<th width="15%">金额</th>
-    						<th width="45%">计算依据和理由</th>
+    						<th width="33%">计算依据和理由</th>
     					</tr>
     				</thead>
     				<tr>
@@ -81,53 +81,96 @@
     					<td></td>
     					<td></td>
     				</tr>
-                    <c:forEach var="dic" items="${costDics}" varStatus="status">
-                        <c:if test="${costTotalCode !=dic.code}">
-                            <tr>
-                                <c:if test="${status.index < fn:length(costDics)-1}">
-                                    <th class="level2">${dic.name }</th>
-                                    <td>
-                                        <input name="cost[${status.index}].cost" class="price cost" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
-                                        <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
-                                        <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
-                                    </td>
-                                    <td><input name="cost[${status.index}].reason" type="text" value="${ssbMap[dic.code].reason}"></td>
-                                </c:if>
-                                <c:if test="${status.index == fn:length(costDics)-1}">
-                                    <th class="level2"><span class="brownfont">${dic.name }</span></th>
-                                    <td class="price-ly">
-                                        <input name="cost[${status.index}].cost" type="hidden" id="cost-total-td" value="${ssbMap[dic.code].cost}" />
-                                        <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
-                                        <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
-                                        <span class="cost-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
-                                    </td>
-                                    <td>/</td>
-                                </c:if>
-                            </tr>
-                        </c:if>
-                        <c:if test="${costTotalCode ==dic.code}">
-                             <tr>
-                                <th class="level2">${dic.name }</th>
-                                <td class="price-ly">
-                                    <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
-                                    <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
-                                    <input name="cost[${status.index}].cost" type="hidden" class="cost" id="cost-temp-total-td" value="${ssbMap[dic.code].cost}" />
-                                    <span class="cost-temp-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
-                                </td>
-                                <td>/</td>
-                            </tr>
-                            <c:forEach var="costTotal" items="${costTotalDics}" varStatus="cstatus">
-                                <tr>
-                                    <th class="level3">${costTotal.name}</th>
-                                    <td>
-                                        <input name="cost[${fn:length(costDics) + cstatus.index}].cost" class="price temp" type="number" placeholder="0.00" value="${ssbMap[costTotal.code].cost}" />
-                                        <input name="cost[${fn:length(costDics) + cstatus.index}].code" type="hidden" value="${costTotal.code}" />
-                                        <input name="cost[${fn:length(costDics) + cstatus.index}].name" type="hidden" value="${costTotal.name}" />
-                                    </td>
-                                    <td><input name="cost[${fn:length(costDics) + cstatus.index}].reason" type="text" value="${ssbMap[costTotal.code].reason}"></td>
-                                </tr>
-                            </c:forEach>
-                        </c:if>
+                    <c:forEach var="dic" items="${cost.children}" varStatus="status">
+                        <tr>
+                            <th class="level2">${dic.name }</th>
+                            <c:if test="${dic.hasChild == true}">
+	                            <td class="price-ly">
+	                                <input name="cost[${status.index}].cost" class="price_${cost.code}" id="total_${dic.code}"  type="hidden" value="${ssbMap[dic.code].cost}" />
+	                                <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
+	                                <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
+	                                <span class="total_${dic.code} cost-total-td">${ssbMap[dic.code].cost == null ?'0.00': ssbMap[dic.code].cost}</span>
+	                            </td>
+	                            <td>/</td>
+                            </c:if>
+                            <c:if test="${dic.hasChild == false}">
+	                            <td>
+	                                <input name="cost[${status.index}].cost" class="price cost price_${cost.code}" data-pcodes="${cost.code}" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
+	                                <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
+	                                <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
+	                            </td>
+	                            <td><input name="cost[${status.index}].reason" type="text" value="${ssbMap[dic.code].reason}"></td>
+                            </c:if>
+                        </tr>
+                        <c:forEach var="dic1" items="${dic.children}" varStatus="status1">
+	                        <tr>
+	                             <c:set var="len3" value="${fn:length(cost.children) * (status.index+1)}"></c:set>
+	                             <th class="level3">${dic1.name }</th>
+	                             <c:if test="${dic1.hasChild == true}">
+		                            <td class="price-ly">
+		                                <input name="cost[${len3+status1.index}].cost" class="price_${dic.code}" id="total_${dic1.code}"  type="hidden" value="${ssbMap[dic1.code].cost}" />
+		                                <input name="cost[${len3+status1.index}].code" type="hidden" value="${dic1.code}" />
+		                                <input name="cost[${len3+status1.index}].name" type="hidden" value="${dic1.name}" />
+		                                <span class="total_${dic1.code}">${ssbMap[dic1.code].cost == null ?'0.00': ssbMap[dic1.code].cost}</span>
+		                            </td>
+		                            <td>/</td>
+	                            </c:if>
+	                            <c:if test="${dic1.hasChild == false}">
+		                            <td>
+		                                <input name="cost[${len3+status1.index}].cost" class="price cost price_${dic.code}" data-pcodes="${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic1.code].cost}" />
+		                                <input name="cost[${len3+status1.index}].code" type="hidden" value="${dic1.code}" />
+		                                <input name="cost[${len3+status1.index}].name" type="hidden" value="${dic1.name}" />
+		                            </td>
+		                            <td><input name="cost[${len3+status1.index}].reason" type="text" value="${ssbMap[dic1.code].reason}"></td>
+	                            </c:if>
+	                        </tr>
+	                        <c:forEach var="dic2" items="${dic1.children}" varStatus="status2">
+		                        <tr>
+		                            <c:set var="len4" value="${fn:length(dic.children) * (status1.index+1) }"></c:set>
+		                            <th class="level4">${dic2.name }</th>
+		                            <c:if test="${dic2.hasChild == true}">
+			                            <td class="price-ly">
+			                                <input name="cost[${len3+len4+status2.index}].cost" class="price_${dic1.code}" id="total_${dic2.code}" type="hidden" value="${ssbMap[dic2.code].cost}" />
+			                                <input name="cost[${len3+len4+status2.index}].code" type="hidden" value="${dic2.code}" />
+			                                <input name="cost[${len3+len4+status2.index}].name" type="hidden" value="${dic2.name}" />
+			                                <span class="total_${dic2.code}">${ssbMap[dic2.code].cost == null ?'0.00': ssbMap[dic2.code].cost}</span>
+			                            </td>
+			                            <td>/</td>
+		                            </c:if>
+		                            <c:if test="${dic2.hasChild == false}">
+			                            <td>
+			                                <input name="cost[${len3+len4+status2.index}].cost" class="price cost price_${dic1.code}" data-pcodes="${dic1.code},${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic2.code].cost}" />
+			                                <input name="cost[${len3+len4+status2.index}].code" type="hidden" value="${dic2.code}" />
+			                                <input name="cost[${len3+len4+status2.index}].name" type="hidden" value="${dic2.name}" />
+			                            </td>
+			                            <td><input name="cost[${len3+len4+status2.index}].reason" type="text" value="${ssbMap[dic2.code].reason}"></td>
+		                            </c:if>
+		                        </tr>
+		                        <c:forEach var="dic3" items="${dic2.children}" varStatus="status3">
+			                        <tr>
+			                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
+			                            <th class="level5">${dic3.name }</th>
+			                            <c:if test="${dic3.hasChild == true}">
+				                            <td class="price-ly">
+				                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price_${dic2.code}" id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
+				                                <span class="total_${dic3.code}">${ssbMap[dic3.code].cost == null ?'0.00': ssbMap[dic3.code].cost}</span>
+				                            </td>
+				                            <td>/</td>
+			                            </c:if>
+			                            <c:if test="${dic3.hasChild == false}">
+				                            <td>
+				                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price cost price_${dic2.code}" type="number" data-pcodes="${dic2.code},${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
+				                            </td>
+				                            <td><input name="cost[${len3+len4+len5+status3.index}].reason" type="text" value="${ssbMap[dic3.code].reason}"></td>
+			                            </c:if>
+			                        </tr>
+	                        	</c:forEach>
+                        	</c:forEach>
+                        </c:forEach>
                     </c:forEach>
     			</table>
             </form>
@@ -136,15 +179,19 @@
 			$(function(){
 				$(".price").on("blur",function(){
 					if($(this).hasClass("cost")){
-						var total = 0;
-						$("#sbs-budget-form").find("input.cost").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							total +=v;
-						});
-						$(".cost-total-td").text(total.toFixed(2));
-						$("#cost-total-td").val(total.toFixed(2));
+						var pCodes = $(this).attr("data-pcodes");
+						var codes = pCodes.split(",");
+						for (var i = 0; i < codes.length; i++) {
+							var total = 0;
+							$("#sbs-budget-form").find("input.price_"+codes[i]).each(function(){
+								var v = $(this).val();
+								v = Sport.isNull(v)?"0":v;
+								v = parseFloat(v);
+								total +=v;
+							});
+							$(".total_"+codes[i]).text(total.toFixed(2));
+							$("#total_"+codes[i]).val(total.toFixed(2));
+						}
 					}else if($(this).hasClass("income")){
 						var total = 0;
 						$("#sbs-budget-form").find("input.income").each(function(){
@@ -155,28 +202,7 @@
 						});
 						$(".income-total-td").text(total.toFixed(2));
 						$("#income-total-td").val(total.toFixed(2));
-					}else if($(this).hasClass("temp")){
-						var tempTotal = 0;
-						$("#sbs-budget-form").find("input.temp").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							tempTotal +=v;
-						});
-						$(".cost-temp-total-td").text(tempTotal.toFixed(2));
-						$("#cost-temp-total-td").val(tempTotal.toFixed(2));
-						
-						var total = 0;
-						$("#sbs-budget-form").find("input.cost").each(function(){
-							var v = $(this).val();
-							v = Sport.isNull(v)?"0":v;
-							v = parseFloat(v);
-							total +=v;
-						});
-						total = Sport.isNull(total)?0:total;
-						$(".cost-total-td").text(total.toFixed(2));
-						$("#cost-total-td").val(total.toFixed(2));
-					};
+					}
 				})
 				
 				$(".budget-save").click(function(){

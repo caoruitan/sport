@@ -17,6 +17,7 @@ import org.cd.sport.service.DicTypeService;
 import org.cd.sport.service.SubjectSbsBudgetService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.view.SbsBudgetView;
+import org.cd.sport.vo.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,22 +47,17 @@ public class SubjectSbsBudgetAction {
 			throw new ParameterIsWrongException();
 		}
 		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
-		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_COST_CODE);
 		// 经费来源
 		List<Dic> incomeDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		// 经费支出
-		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_SBS_COST_CODE);
-		// 经费总和
-		List<Dic> costTotalDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
+		Node costs = this.dicService.getNodeByPcode(Constants.Dic.DIC_RWS_COST_CODE);
 		// 查询预算
 		Map<String, SubjectSbsBudget> ssbMap = this.subjectSbsBudgetService.getMapBySbsId(sbsId);
 		request.setAttribute("sbsId", sbsId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
-		request.setAttribute("cost", cost);
+		request.setAttribute("cost", costs);
 		request.setAttribute("incomeDics", incomeDics);
-		request.setAttribute("costDics", costDics);
-		request.setAttribute("costTotalDics", costTotalDics);
 		request.setAttribute("ssbMap", ssbMap);
 	}
 

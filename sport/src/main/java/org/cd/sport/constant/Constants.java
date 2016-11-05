@@ -101,10 +101,10 @@ public class Constants {
 		public static final String DIC_SBS_KYCOST_TOTAL_CODE = "015002001";
 		
 		/**
-		 * 数据字典-任务书-直接费用
+		 * 数据字典-任务书-费用总额
 		 */
-		public static final String DIC_RWS_COST_CODE = "017001";
 		
+		public static final String DIC_RWS_COST_CODE = "017";
 		/**
 		 * 数据字典-任务书-直接费用
 		 */

@@ -94,6 +94,11 @@
 	padding-left: 124px;
 }
 
+.TTable th.level5 {
+	text-align: left;
+	padding-left: 164px;
+}
+
 .TTable td {
 	text-align: left;
 	height: 30px;

@@ -17,6 +17,7 @@ import org.cd.sport.service.DicTypeService;
 import org.cd.sport.service.SubjectRwsBudgetService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.view.RwsBudgetView;
+import org.cd.sport.vo.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,19 +50,14 @@ public class SubjectRwsBudgetAction {
 		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		List<Dic> incomeDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		// 经费支出
-		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_COST_CODE);
-		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_RWS_COST_CODE);
-		// 经费总和
-		List<Dic> costTotalDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
+		Node costs = this.dicService.getNodeByPcode(Constants.Dic.DIC_RWS_COST_CODE);
 		// 查询预算
 		Map<String, SubjectRwsBudget> ssbMap = this.subjectRwsBudgetService.getMapByRwsId(rwsId);
 		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
-		request.setAttribute("cost", cost);
+		request.setAttribute("cost", costs);
 		request.setAttribute("incomeDics", incomeDics);
-		request.setAttribute("costDics", costDics);
-		request.setAttribute("costTotalDics", costTotalDics);
 		request.setAttribute("ssbMap", ssbMap);
 	}
 

@@ -13,7 +13,7 @@ public class Node {
 	private String name;
 	private String icon;
 	private String code;
-	private boolean isParent;
+	private boolean hasChild = true;
 	private List<Node> children;
 
 	public String getpId() {
@@ -40,12 +40,12 @@ public class Node {
 		this.icon = icon;
 	}
 
-	public boolean isParent() {
-		return isParent;
+	public boolean isHasChild() {
+		return hasChild;
 	}
 
-	public void setParent(boolean isParent) {
-		this.isParent = isParent;
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
 	}
 
 	public List<Node> getChildren() {

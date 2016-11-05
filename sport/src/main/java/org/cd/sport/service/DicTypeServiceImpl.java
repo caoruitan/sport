@@ -128,7 +128,7 @@ public class DicTypeServiceImpl extends DicTypeSupport implements DicTypeService
 				node.setName(dic.getName());
 				node.setpId(dic.getpId());
 				node.setCode(dic.getCode());
-				node.setParent(dic.isHasChild());
+				node.setHasChild(dic.isHasChild());
 				nodes.add(node);
 			}
 		}

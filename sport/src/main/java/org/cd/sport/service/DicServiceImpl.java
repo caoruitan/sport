@@ -2,7 +2,6 @@ package org.cd.sport.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -212,7 +211,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 		}
 		node.setChildren(clids);
 		List<Dic> dics = this.dicDao.find();
-		this.findClidType(clids, types, dics, node);
+		this.findClidType(clids, types, dics, null);
 	}
 
 	public void findClidType(List<Node> nodes, List<DicType> types, List<Dic> dics, Node Node) {
@@ -221,7 +220,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 			for (Node node : nodes) {
 				List<Node> clids = new ArrayList<Node>();
 				for (DicType dicType : types) {
-					if (dicType.getpId().equals(Node.getCode())) {
+					if (dicType.getpId().equals(node.getCode())) {
 						Node process = this.process(dicType);
 						clids.add(process);
 					}
@@ -236,11 +235,14 @@ public class DicServiceImpl extends DicSupport implements DicService {
 					if (dic.getpCode().equals(Node.getCode())) {
 						Node process = this.process(dic);
 						clids.add(process);
-
+						this.findClid(process, dics);
 					}
 				}
 			}
 			Node.setChildren(clids);
+			if (clids == null || clids.isEmpty()) {
+				Node.setHasChild(false);
+			}
 		}
 	}
 
@@ -255,6 +257,9 @@ public class DicServiceImpl extends DicSupport implements DicService {
 			}
 		}
 		node.setChildren(clids);
+		if (clids == null || clids.isEmpty()) {
+			node.setHasChild(false);
+		}
 		this.findClid(clids, dics);
 	}
 
@@ -269,6 +274,9 @@ public class DicServiceImpl extends DicSupport implements DicService {
 					}
 				}
 				node.setChildren(clids);
+				if (clids == null || clids.isEmpty()) {
+					node.setHasChild(false);
+				}
 				this.findClid(clids, dics);
 			}
 		}

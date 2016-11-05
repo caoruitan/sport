@@ -207,10 +207,7 @@
 			<div class="sqrqk-container"></div>
 		</div>
 		<!--10 经费预算-->
-		<div class="box b-jfys">
-			<div class="t">10 经费预算</div>
-			<div class="jfys-container"></div>
-		</div>
+		<div class="box b-jfys jfys-container"></div>
 		<!--11 申报单位推荐意见及提供相关研...-->
 		<div class="box b-tjyj">
 			<div class="t">11 申报单位推荐意见及提供相关研...</div>

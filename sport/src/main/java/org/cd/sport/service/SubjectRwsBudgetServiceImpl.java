@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectRwsBudgetDao;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsBudget;
@@ -69,7 +70,7 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 	@Transactional
 	public boolean create(String rwsId, String code, String cost, String name, String reason) {
 		try {
-			BigDecimal money = new BigDecimal(cost);
+			BigDecimal money = new BigDecimal(StringUtils.isBlank(cost)?"0":cost);
 			SubjectRws subject = subjectRwsService.getSubjectRwsById(rwsId);
 			if (subject == null) {
 				throw new EntityNotFoundException("任务书对象不存在");

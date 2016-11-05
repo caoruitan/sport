@@ -131,7 +131,7 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Dic> find() {
-		String queryHql = "from Dic where order ";
+		String queryHql = "from Dic ";
 		return this.getHibernateQuery(queryHql).list();
 	}
 
