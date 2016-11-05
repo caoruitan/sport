@@ -724,7 +724,6 @@
 				$(".b-xmcddw").load("<%=basePath%>/subject/undertaker/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 			});
 			
-			
 			$("#e-jfys").click(function(){
 				showLayout('b-jfys');
 				$(".b-jfys").load("<%=basePath%>/subject/rwsbudget/sboper/cost.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");

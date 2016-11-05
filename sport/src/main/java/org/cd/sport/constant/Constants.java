@@ -99,11 +99,16 @@ public class Constants {
 		 * 数据字典-科研总和
 		 */
 		public static final String DIC_SBS_KYCOST_TOTAL_CODE = "015002001";
-		
+
 		/**
-		 * 数据字典-任务书-科研业务总额
+		 * 数据字典-任务书-直接费用
 		 */
-		public static final String DIC_RWS_INCOME_CODE = "017001";
+		public static final String DIC_RWS_DIRECT_CODE = "017001";
+
+		/**
+		 * 数据字典-任务书-间接费用
+		 */
+		public static final String DIC_RWS_INDIRECT_CODE = "017002";
 
 	}
 

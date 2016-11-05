@@ -46,7 +46,8 @@ public class SubjectRwsBudgetAction {
 			throw new ParameterIsWrongException();
 		}
 		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
-		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_COST_CODE);
+		DicType directCost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_DIRECT_CODE);
+		DicType indirectCost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_INDIRECT_CODE);
 		// 经费来源
 		List<Dic> incomeDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		// 经费支出
@@ -58,7 +59,8 @@ public class SubjectRwsBudgetAction {
 		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
-		request.setAttribute("cost", cost);
+		request.setAttribute("directCost", directCost);
+		request.setAttribute("indirectCost", indirectCost);
 		request.setAttribute("incomeDics", incomeDics);
 		request.setAttribute("costDics", costDics);
 		request.setAttribute("costTotalDics", costTotalDics);

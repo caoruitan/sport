@@ -24,6 +24,7 @@
     </style>
 	</head>
 	<body>
+		<div class="t">09 经费预算</div>
 		<div>
 			<p>
 				<button class="btn-wisteria " style="float:right;" type="button">重置</button>
@@ -31,7 +32,11 @@
 			</p>
 		</div>
 		<div class="notice-box">
-			<li>注意：经费来源总额必须与经费支出总额相等。单位：万元</li>
+			<li>注意：</li>
+			<li>1、经费来源只需填写【申请国家体育总局拨款】项，经费来源总额必须与经费支出总额相等，单位：万元。</li>
+			<li>2、【公杂补贴费】上限为经费来源的2%，【管理费】和【人员费】上限为经费来源的10%。</li>
+			<li>3、如果填写了【协作费】，请将合作协议打印并置于本任务书附件中。</li>
+			<li>4、经费来源及经费支出的详细情况请在第十一项中说明。</li>
 		</div>
 		<div class="TBox">
 			<form id="sbs-budget-form">
