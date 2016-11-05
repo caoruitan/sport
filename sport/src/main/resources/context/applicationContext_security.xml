@@ -52,26 +52,18 @@
 		<intercept-url pattern="/subject/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
-		<!--申报人-->
-		<intercept-url pattern="/subject/proposer/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/proposer/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
-		<intercept-url pattern="/subject/proposer/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
-		<intercept-url pattern="/subject/proposer/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
-		<intercept-url pattern="/subject/proposer/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
-		<intercept-url pattern="/subject/proposer/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/proposer/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		<intercept-url pattern="/subject/proposer/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
-		<intercept-url pattern="/subject/proposer/other/datas.action" access="isAuthenticated()"/>
+		<!--申报书、任务书下载-->
+		<intercept-url pattern="/sbs/download.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/rws/download.action" access="isAuthenticated()"/>
 		
-		<!--申请书预算-->
-		<intercept-url pattern="/subject/sbsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/sbsbudget/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
-		<intercept-url pattern="/subject/sbsbudget/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
-		<intercept-url pattern="/subject/sbsbudget/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
-		<intercept-url pattern="/subject/sbsbudget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
-		<intercept-url pattern="/subject/sbsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/sbsbudget/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		<intercept-url pattern="/subject/sbsbudget/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		<!--申报人-->
+		<intercept-url pattern="/subject/proposer/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/proposer/listReadOnly.htm" access="isAuthenticated()"/>
+		<intercept-url pattern="/subject/proposer/datas.action" access="isAuthenticated()"/>
+		
+		<!--预算-->
+		<intercept-url pattern="/subject/budget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/budget/costReadOnly.htm" access="isAuthenticated()"/>
 		
 		<!--任务书预算-->
 		<intercept-url pattern="/subject/rwsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
@@ -146,10 +138,6 @@
 		<intercept-url pattern="/user/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/user/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
 		<intercept-url pattern="/user/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		
-		<!--申报书、任务书下载-->
-		<intercept-url pattern="/sbs/download.action" access="isAuthenticated()"/>
-		<intercept-url pattern="/rws/download.action" access="isAuthenticated()"/>
 		
 		<!--文件上传-->
 		<intercept-url pattern="/kjsadmin/upload.action" access="hasAnyRole('ROLE_KJS_ADMIN')"/>

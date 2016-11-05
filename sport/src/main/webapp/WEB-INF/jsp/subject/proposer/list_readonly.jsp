@@ -1,8 +1,8 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <html>
 <head>
@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-    <link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/square/red.css">
@@ -73,9 +73,9 @@
 		
 		.sqrBox .t {
 			position: absolute;
-			left: 60px;
+			left: 50px;
 			top: 0px;
-			width: 80px;
+			width: 100px;
 			height: 22px;
 			line-height: 22px;
 			background: #5A677E;
@@ -116,16 +116,14 @@
 		<div class="titleBox2">
 			<div class="title">主要申请人</div>
 		</div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-        <c:forEach var="p" items="${primaryProposers}">
-            <div class="sqrBox proposerBox">
-                <p class="t">第一申请人</p>
-                <li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender} ${p.age}岁</li>
-                <li>${p.zw}</li>
-            </div>
-        </c:forEach>
-		<div class="sqrBox" id="add">
-		</div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+		<c:forEach var="p" items="${primaryProposers}">
+			<div class="sqrBox proposerBox">
+				<p class="t">第一申请人</p>
+				<li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender}</li>
+				<li>${p.zw}</li>
+			</div>
+		</c:forEach>
 		<div class="titleBox2">
 			<div class="title">其他申请人</div>
 		</div>
@@ -138,7 +136,7 @@
 			$(function() {
 				$("#proposerGrid").jqGrid({
 					datatype: "json",
-					url: "<%=basePath%>/subject/proposer/other/datas.action?sbsId=${sbsId}",
+					url: "<%=basePath%>/subject/proposer/datas.action?sbsId=${sbsId}",
 					colModel: [
 						{name:'id',align:"center", width:20,hidden:true},
 						{label:"姓名",name:'name',align:"center", width:20},
@@ -146,7 +144,7 @@
 						{label:"出生日期",name:'birthday', width:20, align:"center",sorttype:"date"},
 						{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
 						{label:"研究分工",name:'work', width:30,align:"center",sorttype:"float"}
-		              ],
+					],
 					viewrecords: true,
 					rowNum: 20,
 					multiselect: true,

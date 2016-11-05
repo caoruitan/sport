@@ -71,38 +71,8 @@ public class SubjectSbsBudgetAction {
 		return "subject/sbsbudget/detail";
 	}
 
-	@RequestMapping(value = "/sbadmin/cost.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/costReadOnly.htm", method = RequestMethod.GET)
 	public String ssbadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
-	}
-
-	@RequestMapping(value = "/kjsadmin/cost.htm", method = RequestMethod.GET)
-	public String kjsadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
-	}
-
-	@RequestMapping(value = "/kjsleader/cost.htm", method = RequestMethod.GET)
-	public String kjsleaderListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
-	}
-
-	@RequestMapping(value = "/kjsexpert/cost.htm", method = RequestMethod.GET)
-	public String kjsexpertListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
-	}
-
-	@RequestMapping(value = "/orgadmin/cost.htm", method = RequestMethod.GET)
-	public String orgadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
-	}
-
-	@RequestMapping(value = "/orgoper/cost.htm", method = RequestMethod.GET)
-	public String orgoperListView(String sbsId, HttpServletRequest request) {
 		this.sbsCost(sbsId, request);
 		return "subject/sbsbudget/detail_readonly";
 	}

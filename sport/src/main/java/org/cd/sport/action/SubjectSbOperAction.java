@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
+import org.cd.sport.domain.News;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.service.DicService;
+import org.cd.sport.service.NewsService;
 import org.cd.sport.service.OrganizationService;
 import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
@@ -24,6 +26,7 @@ import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.vo.NewsVo;
 import org.cd.sport.vo.OrgVo;
 import org.cd.sport.vo.SubjectVo;
 import org.cd.sport.vo.UserVo;
@@ -40,6 +43,9 @@ public class SubjectSbOperAction {
 
 	@Autowired
 	private DicService dicService;
+
+	@Autowired
+	private NewsService newsService;
 	
 	@Autowired
 	private OrganizationService organizationService;
@@ -161,10 +167,12 @@ public class SubjectSbOperAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
+		NewsVo news = newsService.getById(Constants.SubjectSbs.SUBJECT_SBS_DESCRIPTION_NEWS_ID);
 		request.setAttribute("status", Constants.SubjectSbs.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
+		request.setAttribute("sbs", news);
 		return "subject/sboper/sbstb";
 	}
 	

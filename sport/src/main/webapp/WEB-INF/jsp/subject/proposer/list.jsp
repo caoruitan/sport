@@ -1,8 +1,8 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 <html>
 <head>
@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-    <link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/square/red.css">
@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/icheck/icheck.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/my97/WdatePicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
+	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
@@ -74,9 +74,9 @@
 		
 		.sqrBox .t {
 			position: absolute;
-			left: 60px;
+			left: 50px;
 			top: 0px;
-			width: 80px;
+			width: 100px;
 			height: 22px;
 			line-height: 22px;
 			background: #5A677E;
@@ -117,15 +117,15 @@
 		<div class="titleBox2">
 			<div class="title">主要申请人</div>
 		</div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-        <c:forEach var="p" items="${primaryProposers}">
-            <div class="sqrBox proposerBox">
-                <p class="t">第一申请人</p>
-                <li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender} ${p.age}岁</li>
-                <li>${p.zw}</li>
-                <p class="op"><img src="<%=basePath %>/static/img/del.png" data-id="${p.id}" class="proposer-delete"/><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
-            </div>
-        </c:forEach>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
+		<c:forEach var="p" items="${primaryProposers}">
+			<div class="sqrBox proposerBox">
+				<p class="t">第一申请人</p>
+				<li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender}</li>
+				<li>${p.zw}</li>
+				<p class="op"><img src="<%=basePath %>/static/img/del.png" data-id="${p.id}" class="proposer-delete"/><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
+			</div>
+		</c:forEach>
 		<div class="sqrBox" id="add">
 		</div>
 		<div class="titleBox2">
@@ -147,29 +147,29 @@
 		<script type="text/javascript">
 			$(function() {
 				jQuery.validator.addMethod("stringCheck", function(value, element) { 
-				     return this.optional(element) || /^[\u0391-\uFFE5\w]{1,100}$/.test(value); 
+					return this.optional(element) || /^[\u0391-\uFFE5\w]{1,100}$/.test(value); 
 				});
 				
 				jQuery.validator.addMethod("nullableCheck", function(value, element) { 
-				    if(Sport.isNull(value)){
-				    	return true;
-				    } 
+					if(Sport.isNull(value)) {
+						return true;
+					} 
 					return this.optional(element) || /^[\u0391-\uFFE5\w]{1,40}$/.test(value); 
 				}); 
 				$("#proposerGrid").jqGrid({
 					datatype: "json",
-					url: "<%=basePath%>/subject/proposer/other/datas.action?sbsId=${sbsId}",
+					url: "<%=basePath%>/subject/proposer/datas.action?sbsId=${sbsId}",
 					colModel: [
 						{name:'id',align:"center", width:20,hidden:true},
 						{label:"姓名",name:'name',align:"center", width:20},
 						{label:"所属单位",name:'org', align:"center", width:15},
 						{label:"出生日期",name:'birthday', width:20, align:"center",sorttype:"date"},
-						{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
-						{label:"研究分工",name:'work', width:30,align:"center",sorttype:"float"},		
+						{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},
+						{label:"研究分工",name:'work', width:30,align:"center",sorttype:"float"},
 						{label:"操作",width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
 							return "<a href='javascript:;;' class='proposer-other-edit' data-id='"+rows.id+"'>编辑</a>";
 						}}
-		              ],
+					],
 					viewrecords: true,
 					rowNum: 20,
 					multiselect: true,
@@ -179,10 +179,10 @@
 				$("#proposerGrid").setGridWidth($("div.listBox").width());
 
 				$(".proposerBox").hover(
-					  function() {
+					function() {
 						$(this).find(".op").show();
 					}, 
-					  function () {
+					function () {
 						$(this).find(".op").hide();
 					}
 				);
@@ -190,17 +190,17 @@
 				$(".proposer-delete").click(function(){
 					var dataId = $(this).attr("data-id");
 					lhgdialog.confirm("您确定要删除申请人吗？",function(){
-    					$.ajax({
-    						url: Sport.getBasePath()+"/subject/proposer/sboper/delete.action",
-    						data:{pId:dataId,_csrf:$("#csrdId").val()},
-    						type:"POST",
-    						success:function(data){
-    							$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbsId}&subjectId=${subjectId}");
-    						},
-    						error:function(){
-    							
-    						}
-    					});
+						$.ajax({
+							url: Sport.getBasePath()+"/subject/proposer/sboper/delete.action",
+							data:{pId:dataId,_csrf:$("#csrdId").val()},
+							type:"POST",
+							success:function(data){
+								$(".sqrqk-container").load("<%=basePath%>/subject/proposer/sboper/list.htm?sbsId=${sbsId}&subjectId=${subjectId}");
+							},
+							error:function(){
+								
+							}
+						});
 					});
 				});
 				
@@ -283,61 +283,62 @@
 			});
 			
 			function operProposer(obj,url){
+				debugger;
 				var doucment = obj.content.document.forms[0];
 				// 参数验证
 				$(doucment).validate({
-			        rules: {
-			        	name:{
-			                required: true,
-			                maxlength:20
-			            },
-			            birthday:{
-			                required: true
-			            },
-			            zw:{
-			            	nullableCheck:true
-			            },
-			            major:{
-			            	nullableCheck:true
-			            },
-			            org:{
-			            	required:false
-			            },
-			            backdrop:{
-			            	required:true
-			            },
-			            work:{
-			            	required:true
-			            }
-			        },
-			        messages: {
-			        	name:{
-			                required: "请填写申请人姓名",
-			                maxlength:'姓名在1-20个字符之间'
-			            },
-			            birthday:{
-			                required: "请填写申请人出生日期"
-			            },
-			            zw:{
-			            	nullableCheck:"职务长度不能超过40个字符"
-			            },
-			            org:{
-			            	required: "请填写所属单位"
-			            },
-			            email:{
-			                 email:"请填写正确的邮箱格式"
-			            },
-			            major:{
-			            	nullableCheck:"专业长度不能超过40个字符"
-			            },
-			            backdrop:{
-			            	required:"请填写研究背景"
-			            },
-			            work:{
-			            	required:"请填写研究分工"
-			            }
-			        }
-			    });
+					rules: {
+						name:{
+							required: true,
+							maxlength:20
+						},
+						birthday:{
+							required: true
+						},
+						zw:{
+							nullableCheck:true
+						},
+						major:{
+							nullableCheck:true
+						},
+						org:{
+							required:false
+						},
+						backdrop:{
+							required:true
+						},
+						work:{
+							required:true
+						}
+					},
+					messages: {
+						name:{
+							required: "请填写申请人姓名",
+							maxlength:'姓名在1-20个字符之间'
+						},
+						birthday:{
+							required: "请填写申请人出生日期"
+						},
+						zw:{
+							nullableCheck:"职务长度不能超过40个字符"
+						},
+						org:{
+							required: "请填写所属单位"
+						},
+						email:{
+							 email:"请填写正确的邮箱格式"
+						},
+						major:{
+							nullableCheck:"专业长度不能超过40个字符"
+						},
+						backdrop:{
+							required:"请填写研究背景"
+						},
+						work:{
+							required:"请填写研究分工"
+						}
+					}
+				});
 				var result = $(doucment).valid()
 				// 证书校验
 				var zw = $(doucment).find(".zw-select").val();
@@ -355,7 +356,7 @@
 				}else{
 					$(doucment).find(".degrees-error").text("");
 				}
-				if(result && zwFlag && degreesFlag){
+				if(result && !zwFlag && !degreesFlag){
 					$.ajax({
 						url:"<%=basePath %>/"+url,
 						data:$(doucment).serialize(),
