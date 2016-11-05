@@ -265,7 +265,7 @@
 						<a title="项目承担单位、协作单位和人员情况">08 项目承担单位、协作单位和人员...</a>
 					</li>
 					<li class="dot">
-						<a id="e-jfys" href="0602rws-jfys.html" target="_blank" title="经费预算">09 经费预算</a>
+						<a id="e-jfys" title="经费预算">09 经费预算</a>
 					</li>
 					<li class="dot" id="e-sbgzmx">
 						<a title="设备购置明细表">10 设备购置明细表</a>
@@ -454,9 +454,7 @@
 				</div>
 			</div>
 			<!--10 经费预算-->
-			<div class="box b-jfys">
-				<div class="t">09 经费预算</div>
-			</div>
+			<div class="box b-jfys"></div>
 			<!--10 设备购置明细表-->
 			<div class="box b-sbgzmx"></div>
 			<!--11 预算来源及经费支出情况说明-->
@@ -564,82 +562,6 @@
 			$("#xz").click(function() {
 				window.open("<%=basePath%>/rws/download.action?subjectId=${subjectId}");
 			});
-			
-			//人员情况
-			$("#jqGrid-ry").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '姓名',
-					index: '姓名',
-					width: 10,
-					sorttype: "date"
-				},  {
-					name: '类型',
-					index: '类型',
-					align: "center",
-					width: 10,
-					sorttype: "date"
-				}, {
-					name: '单位',
-					index: '单位',
-					align: "center",
-					width: 25
-				}, {
-					name: '出生年月',
-					index: '出生年月',
-					width: 20,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '职务职称',
-					index: '职务职称',
-					width: 10,
-					align: "left",
-					sorttype: "float"
-				}, {
-					name: '研究分工',
-					index: '研究分工',
-					width: 10,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '操作',
-					index: '操作',
-					width: 10,
-					align: "center",
-					sortable: false
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-ry"
-			});
-
-			var mydata = [{
-					No: "1",
-					姓名: "龙一飞",
-					类型:"负责人",
-					单位: "中国羽毛球协会",
-					出生年月: "1982-04-03",
-					职务职称: "研究员",
-					研究分工: "人体力学",
-					操作: "编辑"
-				},
-
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-ry").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-		
 		});
 		
 		$("#e-jdap").click(function(){
@@ -655,6 +577,11 @@
 		$("#e-xbfjf").click(function(){
 			showLayout('b-xbfjf');
 			$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/sbadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+		});
+		
+		$("#e-jfys").click(function(){
+			showLayout('b-jfys');
+			$(".b-jfys").load("<%=basePath%>/subject/rwsbudget/sbadmin/cost.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 	</script>
 </body>

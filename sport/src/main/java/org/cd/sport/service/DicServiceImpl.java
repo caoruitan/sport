@@ -1,6 +1,8 @@
 package org.cd.sport.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -15,6 +17,7 @@ import org.cd.sport.support.DicSupport;
 import org.cd.sport.utils.NumUtils;
 import org.cd.sport.view.DicView;
 import org.cd.sport.vo.DicQuery;
+import org.cd.sport.vo.Node;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +82,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	@Transactional
 	public boolean create(DicView dic) {
 		Dic process = this.process(dic);
-		//this.validName(process.getName());
+		// this.validName(process.getName());
 		DicType dicType = dicTypeDao.findByCode(dic.getpCode());
 		if (dicType == null) {
 			throw new EntityNotFoundException("数据对象类型不存在");
@@ -102,7 +105,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 		String code = oldDic.getCode();
 		String pCode = oldDic.getpCode();
 		int sort = oldDic.getSort();
-		//this.validName(dic.getName(), oldDic);
+		// this.validName(dic.getName(), oldDic);
 		BeanUtils.copyProperties(dic, oldDic);
 		oldDic.setpCode(pCode);
 		oldDic.setCode(code);
@@ -177,5 +180,111 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	@Override
 	public long getTotalByWhere(DicQuery query) {
 		return this.dicDao.findTotalByWhere(query);
+	}
+
+	@Override
+	public Node getNodeByPcode(String pcode) {
+		if (StringUtils.isBlank(pcode)) {
+			return null;
+		}
+		List<DicType> dicTypes = this.dicTypeDao.find();
+		if (dicTypes != null && !dicTypes.isEmpty()) {
+			for (DicType dicType : dicTypes) {
+				if (pcode.equals(dicType.getCode())) {
+					Node process = this.process(dicType);
+					this.findClidType(process, dicTypes);
+					return process;
+				}
+			}
+		}
+		return null;
+	}
+
+	public void findClidType(Node node, List<DicType> types) {
+		List<Node> clids = new ArrayList<Node>();
+		if (types != null && !types.isEmpty()) {
+			for (DicType dicType : types) {
+				if (dicType.getpId().equals(node.getCode())) {
+					Node process = this.process(dicType);
+					clids.add(process);
+				}
+			}
+		}
+		node.setChildren(clids);
+		List<Dic> dics = this.dicDao.find();
+		this.findClidType(clids, types, dics, node);
+	}
+
+	public void findClidType(List<Node> nodes, List<DicType> types, List<Dic> dics, Node Node) {
+		// type为空查询node
+		if (nodes != null && !nodes.isEmpty()) {
+			for (Node node : nodes) {
+				List<Node> clids = new ArrayList<Node>();
+				for (DicType dicType : types) {
+					if (dicType.getpId().equals(Node.getCode())) {
+						Node process = this.process(dicType);
+						clids.add(process);
+					}
+				}
+				node.setChildren(clids);
+				this.findClidType(clids, types, dics, node);
+			}
+		} else {
+			List<Node> clids = new ArrayList<Node>();
+			if (dics != null && !dics.isEmpty()) {
+				for (Dic dic : dics) {
+					if (dic.getpCode().equals(Node.getCode())) {
+						Node process = this.process(dic);
+						clids.add(process);
+
+					}
+				}
+			}
+			Node.setChildren(clids);
+		}
+	}
+
+	public void findClid(Node node, List<Dic> dics) {
+		List<Node> clids = new ArrayList<Node>();
+		if (dics != null && !dics.isEmpty()) {
+			for (Dic dic : dics) {
+				if (dic.getpCode().equals(node.getCode())) {
+					Node process = this.process(dic);
+					clids.add(process);
+				}
+			}
+		}
+		node.setChildren(clids);
+		this.findClid(clids, dics);
+	}
+
+	public void findClid(List<Node> nodes, List<Dic> dics) {
+		if (nodes != null && !nodes.isEmpty()) {
+			for (Node node : nodes) {
+				List<Node> clids = new ArrayList<Node>();
+				for (Dic dic : dics) {
+					if (dic.getpCode().equals(node.getCode())) {
+						Node process = this.process(dic);
+						clids.add(process);
+					}
+				}
+				node.setChildren(clids);
+				this.findClid(clids, dics);
+			}
+		}
+	}
+
+	public Node process(DicType dicType) {
+		Node node = new Node();
+		node.setCode(dicType.getCode());
+		node.setName(dicType.getName());
+		return node;
+	}
+
+	public Node process(Dic dicType) {
+		Node node = new Node();
+		node.setCode(dicType.getCode());
+		node.setName(dicType.getName());
+		return node;
 	}
 }

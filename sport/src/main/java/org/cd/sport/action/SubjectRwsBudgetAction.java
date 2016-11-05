@@ -45,12 +45,12 @@ public class SubjectRwsBudgetAction {
 		if (StringUtils.isBlank(rwsId)) {
 			throw new ParameterIsWrongException();
 		}
-		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
-		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_COST_CODE);
 		// 经费来源
+		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		List<Dic> incomeDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		// 经费支出
-		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_SBS_COST_CODE);
+		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_COST_CODE);
+		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_RWS_COST_CODE);
 		// 经费总和
 		List<Dic> costTotalDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		// 查询预算

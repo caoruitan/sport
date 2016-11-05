@@ -128,4 +128,11 @@ public class DicDaoImpl extends BaseDaoImpl<Dic> implements DicDao {
 		return count == null ? 0 : count.intValue();
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Dic> find() {
+		String queryHql = "from Dic where order ";
+		return this.getHibernateQuery(queryHql).list();
+	}
+
 }

@@ -23,6 +23,8 @@ public interface DicDao extends IBaseDao {
 	public String findMaxCode(String pCode);
 
 	public List<Dic> find(int start, int limit);
+	
+	public List<Dic> find();
 
 	public List<Dic> findByPcode(String pCode);
 
