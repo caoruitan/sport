@@ -21,7 +21,9 @@
 		<body>
 		<div class="titleBox">
 			<div class="title"><img src="<%=basePath %>/static/img/m-news.png" />新闻详情</div>
-			<div class="returnBtn news-returnBtn">返回列表</div>
+			<c:if test="${notLogin !=true}">
+				<div class="returnBtn news-returnBtn">返回列表</div>
+			</c:if>
 		</div>
 		<div class="editBox">
 			<table class="editTable">

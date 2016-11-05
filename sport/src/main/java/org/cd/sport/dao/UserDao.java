@@ -19,11 +19,13 @@ public interface UserDao extends IBaseDao {
 
 	public boolean deleteById(String[] id);
 
+	public boolean deleteByOrgId(String org);
+
 	public UserDomain findById(String id);
 
 	public UserVo findVoById(String id);
 
-	public UserVo findMangerByOrgId(String orgId);
+	public UserVo findMangerByOrgId(String orgId, String role);
 
 	public UserVo findVoByLoginName(String loginName);
 

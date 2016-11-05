@@ -32,7 +32,7 @@ public interface UserService extends UserDetailsService {
 
 	public UserVo getVoById(String userId);
 
-	public UserVo getMangerByOrgId(String orgId);
+	public UserVo getMangerByOrgId(String orgId, String role);
 
 	public UserVo getVoByLoginName(String loginName);
 

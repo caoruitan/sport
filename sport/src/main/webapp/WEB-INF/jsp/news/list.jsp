@@ -129,6 +129,7 @@
 					pager: "#jqGridPager"
 				});
 				$(".sport-lm").find("li").first().trigger("click");
+				doResize(20); 
 			});
 		</script>
 	</body>

@@ -1,6 +1,6 @@
 package org.cd.sport.service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -8,13 +8,17 @@ import javax.persistence.EntityNotFoundException;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.OrganizationDao;
+import org.cd.sport.dao.UserDao;
 import org.cd.sport.domain.OrganizationDomain;
+import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.support.OrganizationSupport;
+import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.view.OrganizationView;
 import org.cd.sport.vo.OrgQuery;
 import org.cd.sport.vo.OrgVo;
+import org.cd.sport.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,9 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 
 	@Autowired
 	private OrganizationDao organizationDao;
+
+	@Autowired
+	private UserDao userDao;
 
 	/**
 	 * 校验登录名是否重复
@@ -63,7 +70,7 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 		OrganizationDomain process = this.process(organization);
 		this.validName(process.getFullName());
 		process.setStatus(Constants.Org.wait_verify);
-		process.setCreateTime(new Date(System.currentTimeMillis()));
+		process.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		this.organizationDao.save(process);
 		return process;
 	}
@@ -145,23 +152,59 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 	/**
 	 * 通过id删除
 	 */
+	@Transactional
 	public boolean delete(String orgId) {
 		if (StringUtils.isBlank(orgId)) {
 			return false;
 		}
+		OrganizationDomain entity = this.organizationDao.getEntityById(OrganizationDomain.class, orgId);
+		if (entity == null) {
+			return false;
+		}
 		// 判断是否有权限删除
-		
-		return this.organizationDao.delete(orgId);
+		UserVo user = AuthenticationUtils.getUser();
+		if (user == null) {
+			throw new ForbiddenExcetion("您没有权限删除组织");
+		}
+
+		if (entity.getRole() == Constants.Org.KJS_ROLE) {
+			throw new ForbiddenExcetion("您没有权限删除组织");
+		}
+
+		if (Constants.Role.ROLE_KJS_ADMIN.equals(user.getRole())) {
+			this.organizationDao.delete(orgId);
+			this.userDao.deleteByOrgId(orgId);
+			return true;
+		} else if (Constants.Role.ROLE_ORG_ADMIN.equals(user.getRole())) {
+			if (entity.getRole() == Constants.Org.ORG_ROLE) {
+				this.organizationDao.delete(orgId);
+				this.userDao.deleteByOrgId(orgId);
+				return true;
+			}
+		} else if (Constants.Role.ROLE_SB_ADMIN.equals(user.getRole())) {
+			if (entity.getRole() == Constants.Org.SB_ROLE) {
+				this.organizationDao.delete(orgId);
+				this.userDao.deleteByOrgId(orgId);
+				return true;
+			}
+		}
+		throw new ForbiddenExcetion("您没有权限删除组织");
 	}
 
 	/**
 	 * 通过多个id删除多个单位
 	 */
 	public boolean delete(String[] orgId) {
-		if (orgId == null) {
+		if (orgId == null || orgId.length == 0) {
 			return false;
 		}
-		return this.organizationDao.delete(orgId);
+		boolean result = true;
+		for (int i = 0; i < orgId.length; i++) {
+			for (String id : orgId) {
+				result &= this.delete(id);
+			}
+		}
+		return result;
 	}
 
 	/**

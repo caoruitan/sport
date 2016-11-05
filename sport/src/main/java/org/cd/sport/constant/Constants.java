@@ -14,7 +14,7 @@ public class Constants {
 
 	public static final class Common {
 
-		public static final int PAGE_SIZE = 15;
+		public static final int PAGE_SIZE = 10;
 
 		public static final int ACTIVE = 1;
 

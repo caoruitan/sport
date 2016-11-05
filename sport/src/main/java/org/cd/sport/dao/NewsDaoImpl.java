@@ -72,9 +72,10 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 			queryHql.append(" and title like :name ");
 			params.put("name", "%" + query.getTitle() + "%");
 		}
-		queryHql.append(" order by publishTime,createTime desc ");
+		queryHql.append(" order by publishTime desc,createTime desc ");
 
 		Query hibernateQuery = this.getHibernateQuery(queryHql.toString());
+		hibernateQuery.setMaxResults(limit).setFirstResult(start);
 		this.processQuery(hibernateQuery, params);
 		return hibernateQuery.list();
 	}

@@ -6,9 +6,12 @@ $(function() {
 	});
 });
 
-function doResize() {
+function doResize(h) {
+	if(h==null || h==''){
+		h = 0;
+	}
 	var ss = getPageSize();
-	var height = ss.WinH - 280;
+	var height = ss.WinH - 280-h;
 	if($(".searchBox").is(':visible')) {
 		height = height - 60;
 	}

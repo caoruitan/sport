@@ -54,7 +54,7 @@
 					<button class="btn-wisteria sport-dic-delete">删除</button>
 				</div>
 			</div>
-			<table id="dicGridDiv"></table>
+			<table id="dicGridDiv" class="sport-grid"></table>
 			<div id="jqGridPager"></div>
 		</div>
 	</div>
@@ -127,7 +127,6 @@
 				}}
               ],
 			viewrecords: true,
-			height: 200,
 			rowNum: 20,
 			multiselect: true,
 			pager: "#jqGridPager",
@@ -137,8 +136,7 @@
             onSelectAll: function (aRowids, status) {
             }
 	    });
-		doResize(); 
-		$("#dicGridDiv").setGridWidth($(".listBox").width());
+		doResize(20); 
 	})
 </script>
 </div>

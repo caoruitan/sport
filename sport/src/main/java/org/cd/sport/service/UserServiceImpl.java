@@ -271,11 +271,11 @@ public class UserServiceImpl extends UserSupport implements UserService {
 	}
 
 	@Override
-	public UserVo getMangerByOrgId(String orgId) {
+	public UserVo getMangerByOrgId(String orgId, String role) {
 		if (StringUtils.isBlank(orgId)) {
 			return null;
 		}
-		return this.userDao.findMangerByOrgId(orgId);
+		return this.userDao.findMangerByOrgId(orgId, role);
 	}
 
 	@Override

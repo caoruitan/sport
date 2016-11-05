@@ -1171,6 +1171,9 @@ $(function(){
 	}).on("click",".sport-org-query",function(){
 		var orgId = $(this).attr("data-id");
 		window.location.href = Sport.getBasePath()+"/org/kjsadmin/detail.htm?orgId="+orgId;
+	}).on("click",".sport-org-edit",function(){
+		var orgId = $(this).attr("data-id");
+		window.location.href = Sport.getBasePath()+"/org/kjsadmin/update.htm?orgId="+orgId;
 	}).on("click",".orgdetail-returnBtn",function(){
 		window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
 	}).on("click",".sport-org-create-btn",function(){
@@ -1194,6 +1197,39 @@ $(function(){
 		window.location.href = Sport.getBasePath()+"/org/kjsadmin/update.htm?orgId="+$(this).attr("data-id");
 	}).on("click",".sport-create-manager-update",function(){//修改组织单位管理员信息
 		Sport.createManager("sport-user-form", "sport-create-manager-update", "/org/kjsadmin/manager/update.action", "/org/kjsadmin/list.htm","修改组织单位管理员");
+	}).on("click",".sport-org-delete",function(){
+		var selectedIds = $("#orgGridDiv").jqGrid("getGridParam", "selarrrow");
+		if(selectedIds.length<1){
+			layer.msg("请最少选择一行数据");
+			return;
+		}
+		var dicIds = new Array();
+		for (var int = 0; int < selectedIds.length; int++) {
+			var rowData = $("#orgGridDiv").jqGrid("getRowData",selectedIds[int]);
+			dicIds.push(rowData.orgId);
+		}
+		lhgdialog.confirm("您确定要删除该单位吗？",function(){
+			$('.sport-org-delete').attr("disabled",true);
+			$.ajax({
+				url: Sport.getBasePath()+"/org/kjsadmin/delete.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {_csrf:$("#csrdId").val(),orgId:dicIds.join(",")},
+				error: function () {
+					$('.sport-org-delete').removeAttr("disabled");
+					layer.msg("系统异常，请稍后重试");
+				},
+				success: function (obj) {
+					if(obj){
+						layer.msg("删除单位成功!");
+						window.location.href = Sport.getBasePath()+"/org/kjsadmin/list.htm";
+					}else{
+						layer.msg("删除单位失败,请稍后重试。");
+					}
+					$('.sport-org-delete').removeAttr("disabled");
+				}
+			});
+		});
 	})
 
 	//课题管理

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
-import org.cd.sport.domain.News;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
