@@ -172,7 +172,7 @@ public class SubjectSbOperAction {
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
-		request.setAttribute("sbs", news);
+		request.setAttribute("news", news);
 		return "subject/sboper/sbstb";
 	}
 	
