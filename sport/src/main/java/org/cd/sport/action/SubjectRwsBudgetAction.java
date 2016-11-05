@@ -45,13 +45,12 @@ public class SubjectRwsBudgetAction {
 		if (StringUtils.isBlank(rwsId)) {
 			throw new ParameterIsWrongException();
 		}
-		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
-		DicType directCost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_DIRECT_CODE);
-		DicType indirectCost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_INDIRECT_CODE);
 		// 经费来源
+		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		List<Dic> incomeDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_INCOME_CODE);
 		// 经费支出
-		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_SBS_COST_CODE);
+		DicType cost = this.dicTypeService.getByCode(Constants.Dic.DIC_RWS_COST_CODE);
+		List<DicType> costDics = this.dicTypeService.getByPid(Constants.Dic.DIC_RWS_COST_CODE);
 		// 经费总和
 		List<Dic> costTotalDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		// 查询预算
@@ -59,8 +58,7 @@ public class SubjectRwsBudgetAction {
 		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
-		request.setAttribute("directCost", directCost);
-		request.setAttribute("indirectCost", indirectCost);
+		request.setAttribute("cost", cost);
 		request.setAttribute("incomeDics", incomeDics);
 		request.setAttribute("costDics", costDics);
 		request.setAttribute("costTotalDics", costTotalDics);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.view.DicView;
 import org.cd.sport.vo.DicQuery;
+import org.cd.sport.vo.Node;
 
 /**
  * 
@@ -30,6 +31,8 @@ public interface DicService {
 	public List<Dic> getByPcode(String pcode);
 
 	public List<Dic> getByPcode(String pcode, int start, int limit);
+
+	public Node getNodeByPcode(String pcode);
 
 	public List<Dic> getByWhere(DicQuery query, int start, int limit);
 
