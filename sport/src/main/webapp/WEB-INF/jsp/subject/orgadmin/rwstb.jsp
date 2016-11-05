@@ -273,7 +273,7 @@
 					<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
 						<a title="预算来源及经费支出情况说明">11 预算来源及经费支出情况说明</a>
 					</li>
-					<li class="dot" id="e-xbfjf" onclick="showLayout('b-xbfjf')">
+					<li class="dot" id="e-xbfjf">
 						<a title="需拨付其他单位经费情况">12 需拨付其他单位经费情况</a>
 					</li>
 					<li class="dot" id="e-gttk" onclick="showLayout('b-gttk')">
@@ -471,15 +471,7 @@
 				</div>
 			</div>
 			<!--12 需拨付其他单位经费情况-->
-			<div class="box b-xbfjf">
-				<div class="t">12 需拨付其他单位经费情况</div>
-				<div class="c">
-					<div class="tb">
-						<table id="jqGrid-bf"></table>
-						<div id="jqGridPager-bf"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-xbfjf"></div>
 			<!--13 共同条款-->
 			<div class="box b-gttk">
 				<div class="t">13 共同条款</div>
@@ -647,52 +639,6 @@
 			for (var i = 0; i <= mydata.length; i++) {
 				jQuery("#jqGrid-ry").jqGrid('addRowData', i + 1, mydata[i]);
 			}
-			
-			//拨付
-			$("#jqGrid-bf").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '拨往单位',
-					index: '拨往单位',
-					width: 20,
-					sorttype: "date"
-				},  {
-					name: '拨付数额万元',
-					index: '拨付数额万元',
-					align: "center",
-					width: 15,
-					sorttype: "date"
-				}, {
-					name: '用途说明',
-					index: '用途说明',
-					align: "center",
-					width: 60
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-bf"
-			});
-
-			var mydata = [{
-					No: "1",
-					拨往单位: "拨往单位",
-					拨付数额万元: "34443",
-					用途说明: "用途说明"
-				},
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, mydata[i]);
-			}
 		});
 		
 		$("#e-jdap").click(function(){
@@ -703,6 +649,11 @@
 		$("#e-sbgzmx").click(function(){
 			showLayout('b-sbgzmx');
 			$(".b-sbgzmx").load("<%=basePath%>/subject/device/orgadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+		});
+		
+		$("#e-xbfjf").click(function(){
+			showLayout('b-xbfjf');
+			$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/orgadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 	</script>
 </body>

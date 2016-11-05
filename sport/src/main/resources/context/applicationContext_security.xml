@@ -63,15 +63,25 @@
 		<intercept-url pattern="/subject/proposer/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		<intercept-url pattern="/subject/proposer/other/datas.action" access="isAuthenticated()"/>
 		
-		<!--预算-->
-		<intercept-url pattern="/subject/budget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/budget/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
-		<intercept-url pattern="/subject/budget/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
-		<intercept-url pattern="/subject/budget/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
-		<intercept-url pattern="/subject/budget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
-		<intercept-url pattern="/subject/budget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
-		<intercept-url pattern="/subject/budget/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
-		<intercept-url pattern="/subject/budget/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		<!--申请书预算-->
+		<intercept-url pattern="/subject/sbsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/sbsbudget/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/subject/sbsbudget/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/subject/sbsbudget/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/subject/sbsbudget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/sbsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/sbsbudget/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/sbsbudget/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		
+		<!--任务书预算-->
+		<intercept-url pattern="/subject/rwsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/rwsbudget/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/subject/rwsbudget/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/subject/rwsbudget/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/subject/rwsbudget/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/rwsbudget/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/rwsbudget/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/rwsbudget/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
 		<!--进度安排-->
 		<intercept-url pattern="/subject/schedule/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
@@ -93,7 +103,6 @@
 		<intercept-url pattern="/subject/device/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/device/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
-		
 		<!--拨款-->
 		<intercept-url pattern="/subject/appropriation/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/subject/appropriation/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
@@ -103,6 +112,16 @@
 		<intercept-url pattern="/subject/appropriation/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
 		<intercept-url pattern="/subject/appropriation/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/subject/appropriation/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		
+		<!--任务书 项目承担人-->
+		<intercept-url pattern="/subject/undertaker/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/undertaker/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/subject/undertaker/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/subject/undertaker/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/subject/undertaker/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/subject/undertaker/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/subject/undertaker/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/subject/undertaker/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
 		
 		<!-- 新闻管理权限 -->
 		<intercept-url pattern="/news/kjsadmin/**" access="hasRole('ROLE_KJS_ADMIN')"/>

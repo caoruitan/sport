@@ -5,60 +5,61 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
 
-<div class="t">07 进度安排填报</div>
+<div class="t">12 需拨付其他单位经费情况</div>
 <div class="listBox">
 <div class="c">
 	<div class="opBtnBox" >
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="approprToken"/>
 		<div class="fl-l">
-			<button class="btn-red" id='jd'>+ 新增</button>
+			<button class="btn-red" id="bf">+ 新增</button>
 		</div>
 		<div class="fl-r">
-			<button class="btn-wisteria schedule-delete">删除</button>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="scheduleToken"/>
+			<button class="btn-wisteria appropr-delete">删除</button>
 		</div>
 	</div>
 	<div class="tb">
-	<table id="jqGrid-jd"  class="sport-grid"></table>
-	<div id="jqGridPager-jd"></div>
+	<table id="jqGrid-bf"></table>
+	<div id="jqGridPager-bf"></div>
 	</div>
+</div>
 <script type="text/javascript">
 	//进度
-	$('#jd').dialog({
-		id: 'jd',
-		title: '进度安排',
-		content: 'url:'+Sport.getBasePath()+"/subject/schedule/sboper/create.htm?rwsId=${rwsId}&subjectId=${subjectId}",
-		width: 700,
-		height: 400,
+	$('#bf').dialog({
+		id: 'bf',
+		title: '需拨付其他单位经费情况新增',
+		content: 'url:'+Sport.getBasePath()+"/subject/appropriation/sboper/create.htm?rwsId=${rwsId}&subjectId=${subjectId}",
+		width: 800,
+		height: 234,
 		ok: function(){
-			return scheduling(this,"/subject/schedule/sboper/create.action");
+			return scheduling(this,"subject/appropriation/sboper/create.action");
 		},
 		cancel: true
 	});
+	
+	jQuery.validator.addMethod("decimal", function(value, element) {
+		var decimal = /^-?\d+(\.\d{1,3})?$/;
+		return this.optional(element) || (decimal.test(value));
+	}, $.validator.format("小数位数不能超过三位!"));
+	
 	
 	function scheduling(obj,url){
 		var doucment = obj.content.document.forms[0];
 		$(doucment).validate({
 	        rules: {
-	        	schTime:{
+	        	gainOrg:{
 	                required: true
 	            },
-	            work:{
-	                required: true
-	            },
-	            goal:{
-	            	required:false,
-	            	maxlength:3000
+	            approAmount:{
+	                required: true,
+	                decimal:true
 	            }
 	        },
 	        messages: {
-	        	schTime:{
-	                required: "请填写进度安排年月"
+	        	gainOrg:{
+	                required: "请填写拨往单位"
 	            },
-	            work:{
-	                required: "请填写主要工作内容",
-	            },
-	            goal: {
-	            	maxlength:'目标不能超过3000',
+	            approAmount:{
+	                required: "请填写拨款数额"
 	            }
 	        }
 	    });
@@ -68,7 +69,7 @@
 				data:$(doucment).serialize(),
 				type:"POST",
 				success:function(data){
-					$(".b-jdap").load("<%=basePath%>/subject/schedule/sboper/list.htm?rwsId=${rwsId}&subjectId=${subjectId}");
+					$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/sboper/list.htm?rwsId=${rwsId}&subjectId=${subjectId}");
 				},
 				error:function(){
 					
@@ -80,92 +81,88 @@
 	}
 	
 	//进度安排
-	$("#jqGrid-jd").jqGrid({
+	$("#jqGrid-bf").jqGrid({
 		datatype: "local",
 		colModel: [{
-			name: 'sId',
+			name: 'approId',
 			width: 10,
 			hidden:true
 		},{
-			name: 'year',
-			label:"进度安排年",
+			name: 'gainOrg',
+			label:"拨往单位",
+			align: "center",
 			width: 10
 		},  {
-			name: 'month',
-			label:"进度安排月",
+			name: 'approAmount',
+			label:"拨付数额（万元）",
 			align: "center",
 			width: 10
 		}, {
-			label: '主要工作内容',
-			name: 'work',
+			label: '用途说明',
+			name: 'describe',
 			align: "center",
 			width: 25
-		}, {
-			label: '目标',
-			name: 'goal',
-			width: 20,
-			align: "center"
 		}, {
 			name: '操作',
 			width: 10,
 			align: "center",
 			sortable: false,
 			formatter:function(value, grid, rows, state){
-				return "<a href='javascript:;;' class='sport-schedule-edit'  data-id='"+rows.sId+"'>编辑</a>";
+				return "<a href='javascript:;;' class='sport-appropr-edit'  data-id='"+rows.approId+"'>编辑</a>";
 			}
 		}],
 		viewrecords: true,
 		width: 860,
 		rowNum: 20,
 		multiselect: true,
-		pager: "#jqGridPager-jd"
+		pager: "#jqGridPager-bf"
 	});
 	
 	var datas = $.parseJSON('${ssDatas}');
 	$.each(datas,function(i,v){
-		jQuery("#jqGrid-jd").jqGrid('addRowData', i + 1, datas[i]);
+		jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, datas[i]);
 	});
 	
 	$(function(){
-		$(".sport-schedule-edit").click(function(){
+		$(".sport-appropr-edit").click(function(){
 			var dataId = $(this).attr("data-id");
 			new $.dialog({
 				id: 'jd_update',
-				title: '进度安排',
-				content: 'url:'+Sport.getBasePath()+"/subject/schedule/sboper/update.htm?sId="+dataId,
-				width: 700,
-				height: 400,
+				title: '需拨付其他单位经费情况修改',
+				content: 'url:'+Sport.getBasePath()+"/subject/appropriation/sboper/update.htm?sId="+dataId,
+				width: 800,
+				height: 234,
 				ok: function(){
-					return scheduling(this,"/subject/schedule/sboper/update.action");
+					return scheduling(this,"subject/appropriation/sboper/update.action");
 				},
 				cancel: true
 			});
 		});
 		
-		$(".schedule-delete").click(function(){
-			var selectedIds = $("#jqGrid-jd").jqGrid("getGridParam", "selarrrow");
+		$(".appropr-delete").click(function(){
+			var selectedIds = $("#jqGrid-bf").jqGrid("getGridParam", "selarrrow");
 			if(selectedIds.length<1){
 				layer.msg("请最少选择一行数据");
 				return;
 			}
 			var sIds = new Array();
 			for (var int = 0; int < selectedIds.length; int++) {
-				var rowData = $("#jqGrid-jd").jqGrid("getRowData",selectedIds[int]);
-				sIds.push(rowData.sId);
+				var rowData = $("#jqGrid-bf").jqGrid("getRowData",selectedIds[int]);
+				sIds.push(rowData.approId);
 			}
 			new $.dialog({
-				id: 'jd_delete',
-				title: '进度安排',
-				content: "您确定要删除该进度安排吗？",
+				id: 'bf_delete',
+				title: '需拨付其他单位经费情况删除确认',
+				content: "您确定要删除该需拨付其他单位经费情况吗？",
 				width: 250,
 				height: 80,
 				ok: function(){
 					$.ajax({
-						url:Sport.getBasePath()+"/subject/schedule/sboper/delete.action",
-						data:{sIds:sIds.join(","),_csrf:$("#scheduleToken").val()},
+						url:Sport.getBasePath()+"/subject/appropriation/sboper/delete.action",
+						data:{sIds:sIds.join(","),_csrf:$("#approprToken").val()},
 						type:"POST",
 						success:function(data){
-							$(".b-jdap").load("<%=basePath%>/subject/schedule/sboper/list.htm?rwsId=${rwsId}&subjectId=${subjectId}");
+							$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/sboper/list.htm?rwsId=${rwsId}&subjectId=${subjectId}");
 						},
 						error:function(){
 							
@@ -178,8 +175,5 @@
 			
 		});
 	});
-	
-	
 </script>
-</div>
 </div>

@@ -86,7 +86,7 @@ public class Constants {
 		public static final String DIC_SECRET_CODE = "014";
 
 		/**
-		 * 数据字典-经费来源
+		 * 数据字典-申报书-经费来源
 		 */
 		public static final String DIC_SBS_INCOME_CODE = "015001";
 
@@ -99,6 +99,11 @@ public class Constants {
 		 * 数据字典-科研总和
 		 */
 		public static final String DIC_SBS_KYCOST_TOTAL_CODE = "015002001";
+		
+		/**
+		 * 数据字典-任务书-科研业务总额
+		 */
+		public static final String DIC_RWS_INCOME_CODE = "017001";
 
 	}
 

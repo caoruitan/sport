@@ -10,13 +10,13 @@ import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.DicType;
-import org.cd.sport.domain.SubjectSbsBudget;
+import org.cd.sport.domain.SubjectRwsBudget;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.DicTypeService;
-import org.cd.sport.service.SubjectSbsBudgetService;
+import org.cd.sport.service.SubjectRwsBudgetService;
 import org.cd.sport.utils.PageWrite;
-import org.cd.sport.view.SbsBudgetView;
+import org.cd.sport.view.RwsBudgetView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  */
 @Controller
-@RequestMapping("/subject/sbsbudget")
-public class SubjectSbsBudgetAction {
+@RequestMapping("/subject/rwsbudget")
+public class SubjectRwsBudgetAction {
 
 	@Autowired
 	private DicService dicService;
@@ -39,10 +39,10 @@ public class SubjectSbsBudgetAction {
 	private DicTypeService dicTypeService;
 
 	@Autowired
-	private SubjectSbsBudgetService subjectSbsBudgetService;
+	private SubjectRwsBudgetService subjectRwsBudgetService;
 
-	private void sbsCost(String sbsId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId)) {
+	private void sbsCost(String rwsId, HttpServletRequest request) {
+		if (StringUtils.isBlank(rwsId)) {
 			throw new ParameterIsWrongException();
 		}
 		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
@@ -54,8 +54,8 @@ public class SubjectSbsBudgetAction {
 		// 经费总和
 		List<Dic> costTotalDics = this.dicService.getByPcode(Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		// 查询预算
-		Map<String, SubjectSbsBudget> ssbMap = this.subjectSbsBudgetService.getMapBySbsId(sbsId);
-		request.setAttribute("sbsId", sbsId);
+		Map<String, SubjectRwsBudget> ssbMap = this.subjectRwsBudgetService.getMapByRwsId(rwsId);
+		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
 		request.setAttribute("cost", cost);
@@ -66,50 +66,50 @@ public class SubjectSbsBudgetAction {
 	}
 
 	@RequestMapping(value = "/sboper/cost.htm", method = RequestMethod.GET)
-	public String sboperListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail";
+	public String sboperListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail";
 	}
 
 	@RequestMapping(value = "/sbadmin/cost.htm", method = RequestMethod.GET)
-	public String ssbadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String ssbadminListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/kjsadmin/cost.htm", method = RequestMethod.GET)
-	public String kjsadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String kjsadminListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/kjsleader/cost.htm", method = RequestMethod.GET)
-	public String kjsleaderListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String kjsleaderListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/kjsexpert/cost.htm", method = RequestMethod.GET)
-	public String kjsexpertListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String kjsexpertListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/orgadmin/cost.htm", method = RequestMethod.GET)
-	public String orgadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String orgadminListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/orgoper/cost.htm", method = RequestMethod.GET)
-	public String orgoperListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
-		return "subject/sbsbudget/detail_readonly";
+	public String orgoperListView(String rwsId, HttpServletRequest request) {
+		this.sbsCost(rwsId, request);
+		return "subject/rwsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/sboper/create.action", method = RequestMethod.POST)
-	public void sboperCreate(SbsBudgetView budget, HttpServletRequest request, HttpServletResponse response) {
-		boolean create = this.subjectSbsBudgetService.create(budget);
+	public void sboperCreate(RwsBudgetView budget, HttpServletRequest request, HttpServletResponse response) {
+		boolean create = this.subjectRwsBudgetService.create(budget);
 		PageWrite.writeTOPage(response, create);
 	}
 }

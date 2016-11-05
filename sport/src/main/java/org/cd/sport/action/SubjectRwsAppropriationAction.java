@@ -26,9 +26,9 @@ public class SubjectRwsAppropriationAction {
 	private SubjectRwsAppropriationService subjectRwsAppropriationService;
 
 	@RequestMapping(value = "/sboper/list.htm", method = RequestMethod.GET)
-	public String sboperListView(String approId, String subjectId, HttpServletRequest request) {
-		List<SubjectRwsAppropriation> ssDatas = this.subjectRwsAppropriationService.getByRwsId(approId);
-		request.setAttribute("approId", approId);
+	public String sboperListView(String rwsId, String subjectId, HttpServletRequest request) {
+		List<SubjectRwsAppropriation> ssDatas = this.subjectRwsAppropriationService.getByRwsId(rwsId);
+		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("ssDatas", GsonUtils.toJson(ssDatas));
 		request.setAttribute("subjectId", subjectId);
 		return "subject/appropriation/list";
@@ -65,9 +65,9 @@ public class SubjectRwsAppropriationAction {
 	}
 
 	@RequestMapping(value = "/sboper/create.htm", method = RequestMethod.GET)
-	public String sboperCreateView(String approId, String subjectId, HttpServletRequest request,
+	public String sboperCreateView(String rwsId, String subjectId, HttpServletRequest request,
 			HttpServletResponse response) {
-		request.setAttribute("approId", approId);
+		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("subjectId", subjectId);
 		return "subject/appropriation/create";
 	}

@@ -3,18 +3,26 @@ package org.cd.sport.support;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.apache.commons.lang.StringUtils;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.SubjectRwsAppropriation;
 import org.cd.sport.domain.SubjectRwsDevice;
 import org.cd.sport.domain.SubjectRwsSchedule;
+import org.cd.sport.domain.SubjectRwsUndertaker;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.view.SubjectRwsAppropriationView;
 import org.cd.sport.view.SubjectRwsDeviceView;
 import org.cd.sport.view.SubjectRwsScheduleView;
+import org.cd.sport.view.SubjectRwsUndertakerView;
+import org.cd.sport.vo.SubjectRwsUndertakerVo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -24,6 +32,13 @@ import org.cd.sport.view.SubjectRwsScheduleView;
  *
  */
 public class SubjectRwsSupport extends SportSupport {
+
+	@Autowired
+	private DicService dicService;
+
+	public DicService getDicService() {
+		return dicService;
+	}
 
 	/**
 	 * 任务书进度安排
@@ -177,10 +192,7 @@ public class SubjectRwsSupport extends SportSupport {
 		proposer.setNum(Integer.parseInt(view.getNum()));
 		return proposer;
 	}
-	
-	
-	
-	
+
 	/**
 	 * 任务书进度安排
 	 */
@@ -200,7 +212,7 @@ public class SubjectRwsSupport extends SportSupport {
 		if (StringUtils.isBlank(view.getGainOrg())) {
 			throw new ParameterIsWrongException("拨往单位不能为空");
 		}
-		
+
 		String approAmount = view.getApproAmount();
 		if (!StringUtils.isBlank(approAmount)) {
 			try {
@@ -211,7 +223,7 @@ public class SubjectRwsSupport extends SportSupport {
 			} catch (Exception e) {
 				throw new ParameterIsWrongException("拨款金额格式不正确");
 			}
-			
+
 		}
 	}
 
@@ -243,5 +255,82 @@ public class SubjectRwsSupport extends SportSupport {
 		BigDecimal money = new BigDecimal(view.getApproAmount());
 		proposer.setApproAmount(money);
 		return proposer;
+	}
+
+	/**
+	 * 项目承担人员
+	 */
+	public void validate(SubjectRwsUndertakerView view) {
+		if (view == null) {
+			throw new ParameterIsWrongException("任务书项目承担人员为空");
+		}
+
+		if (StringUtils.isBlank(view.getRwsId())) {
+			throw new ParameterIsWrongException("任务书rwsid不能为空");
+		}
+
+		if (StringUtils.isBlank(view.getSubjectId())) {
+			throw new ParameterIsWrongException("任务书SubjectId不能为空");
+		}
+
+		if (StringUtils.isBlank(view.getOrg())) {
+			throw new ParameterIsWrongException("项目承担人员单位不能为空");
+		}
+
+	}
+
+	/**
+	 * 任务书进度安排
+	 */
+	public void validateUpdate(SubjectRwsUndertakerView view) {
+		this.validate(view);
+		if (StringUtils.isBlank(view.getId())) {
+			throw new ParameterIsWrongException("项目承担人员id不能为空");
+		}
+	}
+
+	public SubjectRwsUndertaker process(SubjectRwsUndertakerView view) {
+		this.validate(view);
+		SubjectRwsUndertaker viewDomain = this.result(SubjectRwsUndertaker.class, view);
+		viewDomain.setAge(Integer.parseInt(view.getAge()));
+		return viewDomain;
+	}
+
+	public SubjectRwsUndertaker process(SubjectRwsUndertaker viewDomain, SubjectRwsUndertakerView view) {
+		this.validateUpdate(view);
+		if (viewDomain == null) {
+			throw new EntityNotFoundException();
+		}
+		viewDomain.setName(view.getName());
+		viewDomain.setDegrees(view.getDegrees());
+		viewDomain.setZw(view.getZw());
+		viewDomain.setMajor(view.getMajor());
+		viewDomain.setWork(view.getWork());
+		viewDomain.setType(view.getType());
+		viewDomain.setOrg(view.getOrg());
+		viewDomain.setAge(Integer.parseInt(view.getAge()));
+		return viewDomain;
+	}
+
+	public List<SubjectRwsUndertakerVo> processVo(List<SubjectRwsUndertaker> srs) {
+		if (srs == null || srs.isEmpty()) {
+			return null;
+		}
+
+		List<SubjectRwsUndertakerVo> vos = new ArrayList<SubjectRwsUndertakerVo>();
+		for (SubjectRwsUndertaker subjectRwsUndertaker : srs) {
+			vos.add(this.process(subjectRwsUndertaker));
+		}
+		return vos;
+	}
+
+	public SubjectRwsUndertakerVo process(SubjectRwsUndertaker sr) {
+		SubjectRwsUndertakerVo viewDomain = this.result(SubjectRwsUndertakerVo.class, sr);
+		viewDomain.setAge(String.valueOf(sr.getAge()));
+		Dic dic = dicService.getByCode(sr.getZw());
+		if (dic != null) {
+			viewDomain.setZw(dic.getName());
+		}
+		return viewDomain;
 	}
 }

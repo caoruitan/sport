@@ -264,11 +264,11 @@
 					<li class="dot" id="e-jdap">
 						<a title="进度安排">07 进度安排</a>
 					</li>
-					<li class="dot" id="e-xmcddw" onclick="showLayout('b-xmcddw')">
+					<li class="dot" id="e-xmcddw">
 						<a title="项目承担单位、协作单位和人员情况">08 项目承担单位、协作单位和人员...</a>
 					</li>
 					<li class="dot">
-						<a id="e-jfys" href="0602rws-jfys.html" target="_blank" title="经费预算">09 经费预算</a>
+						<a id="e-jfys" title="经费预算">09 经费预算</a>
 					</li>
 					<li class="dot" id="e-sbgzmx">
 						<a title="设备购置明细表">10 设备购置明细表</a>
@@ -276,7 +276,7 @@
 					<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
 						<a title="预算来源及经费支出情况说明">11 预算来源及经费支出情况说明</a>
 					</li>
-					<li class="dot" id="e-xbfjf" onclick="showLayout('b-xbfjf')">
+					<li class="dot" id="e-xbfjf">
 						<a title="需拨付其他单位经费情况">12 需拨付其他单位经费情况</a>
 					</li>
 					<li class="dot" id="e-gttk" onclick="showLayout('b-gttk')">
@@ -447,27 +447,9 @@
 			<!--07 进度安排-->
 			<div class="box b-jdap"></div>
 			<!--08 项目承担单位、协作单位和人员情况-->
-			<div class="box b-xmcddw">
-				<div class="t">08 项目承担单位、协作单位和人员情况</div>
-				<div class="c">
-					<div class="opBtnBox" >
-						<div class="fl-l">
-							<button class="btn-red" id="ry">+ 新增</button>
-						</div>
-						<div class="fl-r">
-							<button class="btn-wisteria">删除</button>
-						</div>
-					</div>
-					<div class="tb">
-						<table id="jqGrid-ry"></table>
-						<div id="jqGridPager-ry"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-xmcddw"></div>
 			<!--10 经费预算-->
-			<div class="box b-jfys">
-				<div class="t">09 经费预算</div>
-			</div>
+			<div class="box b-jfys"></div>
 			<!--10 设备购置明细表-->
 			<div class="box b-sbgzmx"></div>
 			<!--11 预算来源及经费支出情况说明-->
@@ -482,23 +464,7 @@
 				</div>
 			</div>
 			<!--12 需拨付其他单位经费情况-->
-			<div class="box b-xbfjf">
-				<div class="t">12 需拨付其他单位经费情况</div>
-				<div class="c">
-					<div class="opBtnBox" >
-						<div class="fl-l">
-							<button class="btn-red" id="bf">+ 新增</button>
-						</div>
-						<div class="fl-r">
-							<button class="btn-wisteria">删除</button>
-						</div>
-					</div>
-					<div class="tb">
-						<table id="jqGrid-bf"></table>
-						<div id="jqGridPager-bf"></div>
-					</div>
-				</div>
-			</div>
+			<div class="box b-xbfjf"></div>
 			<!--13 共同条款-->
 			<div class="box b-gttk">
 				<div class="t">13 共同条款</div>
@@ -737,231 +703,6 @@
 				height: 130,
 				ok: true
 			});
-			//人员情况
-			$("#jqGrid-ry").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '姓名',
-					index: '姓名',
-					width: 10,
-					sorttype: "date"
-				},  {
-					name: '类型',
-					index: '类型',
-					align: "center",
-					width: 10,
-					sorttype: "date"
-				}, {
-					name: '单位',
-					index: '单位',
-					align: "center",
-					width: 25
-				}, {
-					name: '出生年月',
-					index: '出生年月',
-					width: 20,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '职务职称',
-					index: '职务职称',
-					width: 10,
-					align: "left",
-					sorttype: "float"
-				}, {
-					name: '研究分工',
-					index: '研究分工',
-					width: 10,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '操作',
-					index: '操作',
-					width: 10,
-					align: "center",
-					sortable: false
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-ry"
-			});
-
-			var mydata = [{
-					No: "1",
-					姓名: "龙一飞",
-					类型:"负责人",
-					单位: "中国羽毛球协会",
-					出生年月: "1982-04-03",
-					职务职称: "研究员",
-					研究分工: "人体力学",
-					操作: "编辑"
-				},
-
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-ry").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-			
-			//设备购置
-			$("#jqGrid-sb").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '设备名称',
-					index: '设备名称',
-					width: 10,
-					sorttype: "date"
-				},  {
-					name: '购置或试制的理由用途',
-					index: '购置或试制的理由用途',
-					align: "center",
-					width: 15,
-					sorttype: "date"
-				}, {
-					name: '设备型号及指标',
-					index: '设备型号及指标',
-					align: "center",
-					width: 10
-				}, {
-					name: '单价',
-					index: '单价',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '数量',
-					index: '数量',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '总价',
-					index: '总价',
-					width: 5,
-					align: "center",
-					sorttype: "float"
-				}, {
-					name: '申请从专项经费中列支数',
-					index: '申请从专项经费中列支数',
-					width: 15,
-					align: "center",
-					sortable: false
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-sb"
-			});
-
-			var mydata = [{
-					No: "1",
-					设备名称: "龙一飞",
-					购置或试制的理由用途:"负责人",
-					设备型号及指标: "中国羽毛球协会",
-					单价: "2300",
-					数量: "3",
-					总价: "6900",
-					申请从专项经费中列支数: "1"
-				},
-
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-sb").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-			
-			//拨付
-			$("#jqGrid-bf").jqGrid({
-				datatype: "local",
-				colModel: [{
-					name: 'No',
-					index: 'No.',
-					width: 5,
-					sorttype: "int",
-					align: "center"
-				}, {
-					name: '拨往单位',
-					index: '拨往单位',
-					width: 20,
-					sorttype: "date"
-				},  {
-					name: '拨付数额万元',
-					index: '拨付数额万元',
-					align: "center",
-					width: 15,
-					sorttype: "date"
-				}, {
-					name: '用途说明',
-					index: '用途说明',
-					align: "center",
-					width: 60
-				}],
-//				autowidth: true,
-				viewrecords: true,
-				height: 200,
-				width: 860,
-				rowNum: 20,
-				multiselect: true,
-				pager: "#jqGridPager-bf"
-			});
-
-			var mydata = [{
-					No: "1",
-					拨往单位: "拨往单位",
-					拨付数额万元: "34443",
-					用途说明: "用途说明"
-				},
-			];
-			for (var i = 0; i <= mydata.length; i++) {
-				jQuery("#jqGrid-bf").jqGrid('addRowData', i + 1, mydata[i]);
-			}
-			//项目承担
-			$('#ry').dialog({
-				id: 'ry',
-				title: '项目人员情况填报',
-				content: 'url:0603rws-xm-xz.html',
-				width: 800,
-				height: 430,
-				ok: true,
-				cancel: true
-			});
-			//设备
-			$('#sb').dialog({
-				id: 'sb',
-				title: '设备',
-				content: 'url:0605rws-sb-xz.html',
-				width: 760,
-				height: 480,
-				ok: true,
-				cancel: true
-			});
-			//拨付
-			$('#bf').dialog({
-				id: 'bf',
-				title: '拨往其他单位的经费',
-				content: 'url:0606rws-bf-xz.html',
-				width: 840,
-				height: 260,
-				ok: true,
-				cancel: true
-			});
 			
 			$("#e-jdap").click(function(){
 				showLayout('b-jdap');
@@ -971,6 +712,22 @@
 			$("#e-sbgzmx").click(function(){
 				showLayout('b-sbgzmx');
 				$(".b-sbgzmx").load("<%=basePath%>/subject/device/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			});
+			
+			$("#e-xbfjf").click(function(){
+				showLayout('b-xbfjf');
+				$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			});
+			
+			$("#e-xmcddw").click(function(){
+				showLayout('b-xmcddw');
+				$(".b-xmcddw").load("<%=basePath%>/subject/undertaker/sboper/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			});
+			
+			
+			$("#e-jfys").click(function(){
+				showLayout('b-jfys');
+				$(".b-jfys").load("<%=basePath%>/subject/rwsbudget/sboper/cost.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 			});
 		});
 	</script>
