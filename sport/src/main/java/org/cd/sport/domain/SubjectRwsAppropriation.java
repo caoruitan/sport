@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 拨往其他单位经费情况填报
@@ -14,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "SPORT_SUBJECT_APPRO")
+@Table(name = "SPORT_SUBJECT_RWS_APPRO")
 public class SubjectRwsAppropriation {
 	
 	/**
@@ -43,7 +46,9 @@ public class SubjectRwsAppropriation {
 	private String describe;
 
 	@Id
-	@Column(name = "APPRO_Id")
+	@GeneratedValue(generator = "paymentableGenerator")
+	@GenericGenerator(name = "paymentableGenerator", strategy = "guid")
+	@Column(name = "APPRO_ID")
 	public String getApproId() {
 		return approId;
 	}
@@ -70,7 +75,7 @@ public class SubjectRwsAppropriation {
 		this.approAmount = approAmount;
 	}
 
-	@Column(name = "DESCRIBE")
+	@Column(name = "APPRO_DESCRIBE")
 	public String getDescribe() {
 		return describe;
 	}

@@ -68,13 +68,13 @@ public class SubjectSbsBudgetAction {
 	@RequestMapping(value = "/sboper/cost.htm", method = RequestMethod.GET)
 	public String sboperListView(String sbsId, HttpServletRequest request) {
 		this.sbsCost(sbsId, request);
-		return "subject/budget/detail";
+		return "subject/sbsbudget/detail";
 	}
 
 	@RequestMapping(value = "/costReadOnly.htm", method = RequestMethod.GET)
 	public String ssbadminListView(String sbsId, HttpServletRequest request) {
 		this.sbsCost(sbsId, request);
-		return "subject/budget/detail_readonly";
+		return "subject/sbsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/sboper/create.action", method = RequestMethod.POST)

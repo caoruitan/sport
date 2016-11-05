@@ -38,15 +38,13 @@
     				</thead>
     				<tr>
     					<th class="level1">${income.name}</th>
-    					<td><input name="sbsId" type="hidden" value="${sbsId}" /></td>
-    					<td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
     				</tr>
     				<c:forEach var="dic" items="${incomeDics}" varStatus="status">
                         <tr>
                             <c:if test="${status.index < fn:length(incomeDics)-1}">
                                 <th class="level2">${dic.name }</th>
                                 <td>
-                                    <input name="income[${status.index}].cost" data-index="income${status.index}" disabled="disabled" class="price income" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
+                                    <input name="income[${status.index}].cost" data-index="income${status.index}" class="price income" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
                                     <input name="income[${status.index}].code" type="hidden" value="${dic.code}" />
                                     <input name="income[${status.index}].name" type="hidden" value="${dic.name}" />
                                 </td>
@@ -75,11 +73,11 @@
                                 <c:if test="${status.index < fn:length(costDics)-1}">
                                     <th class="level2">${dic.name }</th>
                                     <td>
-                                        <input name="cost[${status.index}].cost" class="price cost" type="number" disabled="disabled" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
+                                        <input name="cost[${status.index}].cost" class="price cost" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}" />
                                         <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
                                         <input name="cost[${status.index}].name" type="hidden" value="${dic.name}" />
                                     </td>
-                                    <td><input name="cost[${status.index}].reason" type="text" disabled="disabled" value="${ssbMap[dic.code].reason}"></td>
+                                    <td><input name="cost[${status.index}].reason" type="text" value="${ssbMap[dic.code].reason}"></td>
                                 </c:if>
                                 <c:if test="${status.index == fn:length(costDics)-1}">
                                     <th class="level2"><span class="brownfont">${dic.name }</span></th>
@@ -108,11 +106,11 @@
                                 <tr>
                                     <th class="level3">${costTotal.name}</th>
                                     <td>
-                                        <input name="cost[${fn:length(costDics) + cstatus.index}].cost" disabled="disabled" class="price temp" type="number" placeholder="0.00" value="${ssbMap[costTotal.code].cost}" />
+                                        <input name="cost[${fn:length(costDics) + cstatus.index}].cost" class="price temp" type="number" placeholder="0.00" value="${ssbMap[costTotal.code].cost}" />
                                         <input name="cost[${fn:length(costDics) + cstatus.index}].code" type="hidden" value="${costTotal.code}" />
                                         <input name="cost[${fn:length(costDics) + cstatus.index}].name" type="hidden" value="${costTotal.name}" />
                                     </td>
-                                    <td><input name="cost[${fn:length(costDics) + cstatus.index}].reason" disabled="disabled" type="text" value="${ssbMap[costTotal.code].reason}"></td>
+                                    <td><input name="cost[${fn:length(costDics) + cstatus.index}].reason" type="text" value="${ssbMap[costTotal.code].reason}"></td>
                                 </tr>
                             </c:forEach>
                         </c:if>

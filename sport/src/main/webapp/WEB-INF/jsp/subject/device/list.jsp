@@ -103,6 +103,7 @@
 		},{
 			name: 'name',
 			label:"设备名称",
+			align: "center",
 			width: 10
 		},  {
 			name: 'purpose',
@@ -180,7 +181,7 @@
 			new $.dialog({
 				id: 'jd_delete',
 				title: '进度安排',
-				content: "您确定要删除该进度安排吗？",
+				content: "您确定要删除该设备吗？",
 				width: 250,
 				height: 80,
 				ok: function(){
