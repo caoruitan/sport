@@ -34,7 +34,7 @@ public class SubjectSbsProposerAction {
 	@Autowired
 	private SubjectSbsProposerService subjectSbsProposerService;
 
-	@RequestMapping(value = "/sbadmin/list.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/listReadOnly.htm", method = RequestMethod.GET)
 	public String sbadminListView(String sbsId, String subjectId, HttpServletRequest request) {
 		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
 			throw new ParameterIsWrongException();
@@ -60,72 +60,7 @@ public class SubjectSbsProposerAction {
 		return "subject/proposer/list";
 	}
 
-	@RequestMapping(value = "/kjsadmin/list.htm", method = RequestMethod.GET)
-	public String kjsadminListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
-				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		request.setAttribute("primaryProposers", primaryProposers);
-		request.setAttribute("sbsId", sbsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/proposer/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsleader/list.htm", method = RequestMethod.GET)
-	public String kjsleaderListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
-				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		request.setAttribute("primaryProposers", primaryProposers);
-		request.setAttribute("sbsId", sbsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/proposer/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsexpert/list.htm", method = RequestMethod.GET)
-	public String kjsexpertListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
-				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		request.setAttribute("primaryProposers", primaryProposers);
-		request.setAttribute("sbsId", sbsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/proposer/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgadmin/list.htm", method = RequestMethod.GET)
-	public String orgadminListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
-				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		request.setAttribute("primaryProposers", primaryProposers);
-		request.setAttribute("sbsId", sbsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/proposer/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgoper/list.htm", method = RequestMethod.GET)
-	public String orgoperListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
-				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		request.setAttribute("primaryProposers", primaryProposers);
-		request.setAttribute("sbsId", sbsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/proposer/list_readonly";
-	}
-
-	@RequestMapping(value = "/other/datas.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/datas.action", method = RequestMethod.GET)
 	public void otherDatas(String sbsId, HttpServletRequest request, HttpServletResponse response) {
 		if (StringUtils.isBlank(sbsId)) {
 			throw new ParameterIsWrongException();
