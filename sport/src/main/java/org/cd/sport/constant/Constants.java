@@ -99,11 +99,11 @@ public class Constants {
 		 * 数据字典-科研总和
 		 */
 		public static final String DIC_SBS_KYCOST_TOTAL_CODE = "015002001";
-		
+
 		/**
 		 * 数据字典-任务书-费用总额
 		 */
-		
+
 		public static final String DIC_RWS_COST_CODE = "017";
 		/**
 		 * 数据字典-任务书-直接费用
@@ -114,6 +114,12 @@ public class Constants {
 		 * 数据字典-任务书-间接费用
 		 */
 		public static final String DIC_RWS_INDIRECT_CODE = "017001002";
+
+		/**
+		 * 数据字典-科教司联系方式
+		 */
+
+		public static final String DIC_CONCAT_CODE = "020";
 
 	}
 
@@ -336,7 +342,7 @@ public class Constants {
 		public static final String SUBJECT_SBS_STATUS_BACK = "BACK";
 
 		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/doc/sbs_template.doc";
-		
+
 		public static final String SUBJECT_SBS_DESCRIPTION_NEWS_ID = "402881e42cc658b4012cc66387a70002";
 		/**
 		 * 主要申请人
@@ -374,7 +380,7 @@ public class Constants {
 		public static final String SUBJECT_RWS_STATUS_BACK = "BACK";
 
 		public static final String SUBJECT_RWS_DOC_TEMPLATE_PATH = "/doc/rws_template.doc";
-		
+
 		public static final String SUBJECT_RWS_DESCRIPTION_NEWS_ID = "402881e42cc658b4012cc663c22f0003";
 
 		public static Map<String, String> getSubjectRwsStatus() {
