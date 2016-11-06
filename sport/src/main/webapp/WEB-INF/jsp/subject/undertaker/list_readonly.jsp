@@ -4,157 +4,41 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
 %>
-<html>
-<head>
-	<title>新增申请人</title>
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css" />
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/common.js"></script>
-	<script type="text/ecmascript" charset="utf-8" src="<%=basePath %>/static/js/lhgdialog/lhgdialog.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/sport.js"></script>
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-    <link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/js/jqselect/my.select.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/square/red.css">
-	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
-	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/icheck/icheck.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/my97/WdatePicker.js"></script>
-	<style type="text/css">
-		body {
-			background: #F2F2F2;
-		}
-		
-		.titleBox2 {
-			font-size: 16px;
-			float: left;
-			width: 100%;
-			margin-bottom: 10px;
-		}
-		
-		.sqrBox {
-			width: 200px;
-			height: 100px;
-			padding-top: 32px;
-			margin-bottom: 30px;
-			position: relative;
-			border: 1px solid #E4E4E4;
-			background: #fafafa;
-			float: left;
-			margin-right: 10px;
-		}
-		.sqrBox:hover{
-			border:1px solid #aaaaaa;
-		}
-		
-		.sqrBox img {
-			width: 16px;
-			height: 16px;
-			margin: 0 6px 2px 0;
-			cursor: pointer;
-		}
-		
-		.sqrBox li {
-			width: 100%;
-			height: 26px;
-			line-height: 26px;
-			padding-left: 20px;
-			color: #999999;
-		}
-		
-		.sqrBox .t {
-			position: absolute;
-			left: 60px;
-			top: 0px;
-			width: 80px;
-			height: 22px;
-			line-height: 22px;
-			background: #5A677E;
-			color: #FFFFFF;
-			text-align: center;
-		}
-		
-		.sqrBox .op {
-			position: absolute;
-			right: -1px;
-			bottom: -32px;
-			width: 60px;
-			height: 22px;
-			line-height: 22px;
-			background: #fafafa;
-			color: #FFFFFF;
-			text-align: center;
-			border: 1px solid #aaaaaa;
-			border-top: none;
-			display: none;
-		}
-		
-		#add {
-			border:1px dashed #aaaaaa;
-			background: #ffffff url(<%=basePath %>/static/img/jia.png) center center no-repeat;
-			cursor: pointer;
-			border-radius: 4px;
-		}
-		
-		#add:hover {
-			border:1px dashed #ff3300;
-			background: #ffffff url(<%=basePath %>/static/img/jia-hover.png) center center no-repeat;
-			cursor: pointer;
-		}
-	</style>
-	</head>
-	<body>
-		<div class="titleBox2">
-			<div class="title">主要申请人</div>
-		</div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-        <c:forEach var="p" items="${primaryProposers}">
-            <div class="sqrBox proposerBox">
-                <p class="t">第一申请人</p>
-                <li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender} ${p.age}岁</li>
-                <li>${p.zw}</li>
-            </div>
-        </c:forEach>
-		<div class="sqrBox" id="add">
-		</div>
-		<div class="titleBox2">
-			<div class="title">其他申请人</div>
-		</div>
-		<div class="listBox" id="ddfdfd">
-			<table id="proposerGrid" class="sport-grid"></table>
-			<div id="proposerGridPager"></div>
-		</div>
 
-		<script type="text/javascript">
-			$(function() {
-				$("#proposerGrid").jqGrid({
-					datatype: "json",
-					url: "<%=basePath%>/subject/proposer/other/datas.action?sbsId=${sbsId}",
-					colModel: [
-						{name:'id',align:"center", width:20,hidden:true},
-						{label:"姓名",name:'name',align:"center", width:20},
-						{label:"所属单位",name:'org', align:"center", width:15},
-						{label:"出生日期",name:'birthday', width:20, align:"center",sorttype:"date"},
-						{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
-						{label:"研究分工",name:'work', width:30,align:"center",sorttype:"float"}
-		              ],
-					viewrecords: true,
-					rowNum: 20,
-					multiselect: true,
-					pager: "#proposerGridPager"
-				});
-				doResize();
-				$("#proposerGrid").setGridWidth($("div.listBox").width());
-			});
-		</script>
-	</body>
-</html>
+<div class="t">08 项目承担单位、协作单位和人员情况</div>
+<div class="listBox">
+<div class="c">
+	<div class="tb">
+	<table id="jqGrid-undertaker"></table>
+	<div id="jqGridPager-undertaker"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	//进度安排
+	$("#jqGrid-undertaker").jqGrid({
+		datatype: "local",
+		colModel: [
+			{name:'id',align:"center", width:20,hidden:true},
+			{label:"姓名",name:'name',align:"center", width:20},
+			{label:"类型",name:'type', align:"center", width:15},
+			{label:"单位",name:'org', align:"center", width:15},
+			{label:"年龄",name:'age', width:20, align:"center"},
+			{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
+			{label:"分工",name:'work', width:30,align:"center",sorttype:"float"},		
+			{label:"操作",width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
+				return "<a href='javascript:;;' class='sport-undertaker-edit' data-id='"+rows.id+"'>编辑</a>";
+			}}
+        ],
+		viewrecords: true,
+		width: 860,
+		rowNum: 20,
+		multiselect: true,
+		pager: "#jqGridPager-undertaker"
+	});
+	
+	var datas = $.parseJSON('${undertakers}');
+	$.each(datas,function(i,v){
+		jQuery("#jqGrid-undertaker").jqGrid('addRowData', i + 1, datas[i]);
+	});
+</script>
+</div>

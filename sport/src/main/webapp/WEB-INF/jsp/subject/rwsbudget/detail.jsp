@@ -8,15 +8,7 @@
 <html>
 <head>
 	<title>申报书经费预算</title>
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/kt.css" />
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/common.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
     <style type="text/css">
             body {
                 background: #ffffff;
@@ -155,7 +147,7 @@
 				                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
 				                            <th class="level5">${dic3.name }</th>
 				                            <td>
-				                                <input name="cost[${len3+len4+len5+status3.index}].cost" id="${dic3.code }" class="price cost price_${dic1.code}" type="number" data-pcodes="${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].cost" id="${dic3.code }" class="price" type="number"  placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
 				                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
 				                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
 				                            </td>
@@ -168,7 +160,7 @@
 				                            <th class="level5">${dic3.name }</th>
 				                            <c:if test="${dic3.parent == true}">
 					                            <td class="price-ly">
-					                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price_${dic2.code}" id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].cost"  id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
 					                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
 					                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
 					                                <span class="total_${dic3.code}">${ssbMap[dic3.code].cost == null ?'0.00': ssbMap[dic3.code].cost}</span>
@@ -177,7 +169,7 @@
 				                            </c:if>
 				                            <c:if test="${dic3.parent == false}">
 					                            <td>
-					                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price cost price_${dic2.code}" type="number" data-pcodes="${dic2.code},${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price" type="number" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
 					                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
 					                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
 					                            </td>
@@ -248,9 +240,30 @@
 					var v2 = $("#017001001001002").val();
 					var v3 = $("#017001001001003").val();
 					var v4 = $("#017001001001").val();
-					if(v4<(v1+v2+v3)){
+					if(v4<(parseFloat(v1)+parseFloat(v2)+parseFloat(v3))){
 						layer.msg("购置设备费+试制设备费+设备改造与租赁费不能高于设备费总费用！");
 						return;
+					}
+					
+					var msg = "";
+					$("#sbs-budget-form").find("input.price").each(function(){
+						var v = $(this).val();
+						if(v>0){
+							// 需要填写原因
+							var name = $(this).attr("name");
+							var rName = name.split(".")[0]+".reason"
+							var cName = name.split(".")[0]+".name"
+							var reason = $("input[name='"+rName+"']").val();
+							var _name = $("input[name='"+cName+"']").val();
+							if(Sport.isNull(reason)){
+								msg +=_name+"，";
+							}
+						}
+					});
+					
+					if(msg != ""){
+						layer.msg(msg+"计算依据和理由不能为空！");
+						return ;
 					}
 					
 					$.ajax({

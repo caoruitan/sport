@@ -8,15 +8,7 @@
 <html>
 <head>
 	<title>申报书经费预算</title>
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/kt.css" />
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/common.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
     <style type="text/css">
             body {
                 background: #ffffff;

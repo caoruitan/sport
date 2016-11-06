@@ -131,7 +131,7 @@ public class SubjectSbsProposerAction {
 		boolean create = this.subjectSbsProposerService.create(proposer);
 		PageWrite.writeTOPage(response, create);
 	}
-
+	
 	@RequestMapping(value = "/sboper/update.htm", method = RequestMethod.GET)
 	public String updateView(String proposerId, HttpServletRequest request) {
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);

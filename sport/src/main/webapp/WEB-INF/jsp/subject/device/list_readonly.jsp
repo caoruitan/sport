@@ -8,12 +8,12 @@
 <div class="listBox">
 <div class="c">
 	<div class="tb">
-	<table id="jqGrid-jd"  class="sport-grid"></table>
-	<div id="jqGridPager-jd"></div>
+	<table id="jqGrid-sbgz"  class="sport-grid"></table>
+	<div id="jqGridPager-sbgz"></div>
 	</div>
 <script type="text/javascript">
 	
-	$("#jqGrid-jd").jqGrid({
+	$("#jqGrid-sbgz").jqGrid({
 		datatype: "local",
 		colModel: [{
 			name: 'dId',
@@ -53,12 +53,12 @@
 		width: 860,
 		rowNum: 20,
 		multiselect: true,
-		pager: "#jqGridPager-jd"
+		pager: "#jqGridPager-sbgz"
 	});
 	
 	var datas = $.parseJSON('${ssDatas}');
 	$.each(datas,function(i,v){
-		jQuery("#jqGrid-jd").jqGrid('addRowData', i + 1, datas[i]);
+		jQuery("#jqGrid-sbgz").jqGrid('addRowData', i + 1, datas[i]);
 	});
 </script>
 </div>

@@ -333,6 +333,20 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 			range.replaceText("${user_address}", user.getAddress());
 			range.replaceText("${createTime}", sf.format(org.getCreateTime()));
 
+			List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CONCAT_CODE);
+			for (Dic dic : dics) {
+				switch (dic.getCode()) {
+				case "020001":
+					range.replaceText("${kjs_address}", dic.getValue());
+					break;
+				case "020002":
+					range.replaceText("${kjs_phone}", dic.getValue());
+					break;
+				case "020003":
+					range.replaceText("${kjs_fax}", dic.getValue());
+					break;
+				}
+			}
 			os = new FileOutputStream(basePath + "/doc/" + user.getLoginName() + "register.doc");
 			hdt.write(os);
 		} catch (Exception e) {

@@ -17,8 +17,8 @@
 		</div>
 	</div>
 	<div class="tb">
-	<table id="jqGrid-jd"  class="sport-grid"></table>
-	<div id="jqGridPager-jd"></div>
+	<table id="jqGrid-sbgz"  class="sport-grid"></table>
+	<div id="jqGridPager-sbgz"></div>
 	</div>
 <script type="text/javascript">
 	//进度
@@ -94,7 +94,7 @@
 	}
 	
 	//进度安排
-	$("#jqGrid-jd").jqGrid({
+	$("#jqGrid-sbgz").jqGrid({
 		datatype: "local",
 		colModel: [{
 			name: 'dId',
@@ -143,12 +143,12 @@
 		width: 860,
 		rowNum: 20,
 		multiselect: true,
-		pager: "#jqGridPager-jd"
+		pager: "#jqGridPager-sbgz"
 	});
 	
 	var datas = $.parseJSON('${ssDatas}');
 	$.each(datas,function(i,v){
-		jQuery("#jqGrid-jd").jqGrid('addRowData', i + 1, datas[i]);
+		jQuery("#jqGrid-sbgz").jqGrid('addRowData', i + 1, datas[i]);
 	});
 	
 	$(function(){
@@ -168,14 +168,14 @@
 		});
 		
 		$(".device-delete").click(function(){
-			var selectedIds = $("#jqGrid-jd").jqGrid("getGridParam", "selarrrow");
+			var selectedIds = $("#jqGrid-sbgz").jqGrid("getGridParam", "selarrrow");
 			if(selectedIds.length<1){
 				layer.msg("请最少选择一行数据");
 				return;
 			}
 			var sIds = new Array();
 			for (var int = 0; int < selectedIds.length; int++) {
-				var rowData = $("#jqGrid-jd").jqGrid("getRowData",selectedIds[int]);
+				var rowData = $("#jqGrid-sbgz").jqGrid("getRowData",selectedIds[int]);
 				sIds.push(rowData.dId);
 			}
 			new $.dialog({
