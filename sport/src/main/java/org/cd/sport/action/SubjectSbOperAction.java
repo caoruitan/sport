@@ -307,10 +307,12 @@ public class SubjectSbOperAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		NewsVo news = newsService.getById(Constants.SubjectRws.SUBJECT_RWS_DESCRIPTION_NEWS_ID);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("rws", rws);
+		request.setAttribute("news", news);
 		return "subject/sboper/rwstb";
 	}
 	
