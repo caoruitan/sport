@@ -2,9 +2,12 @@ package org.cd.sport.service;
 
 import java.util.List;
 
+import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.SubjectSbsProposerDao;
+import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsProposer;
+import org.cd.sport.domain.UserDomain;
 import org.cd.sport.support.SubjectSbsSupport;
 import org.cd.sport.view.SubjectSbsProposerView;
 import org.cd.sport.vo.SubjectSbsProposerVo;
@@ -28,11 +31,19 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsSupport implements 
 	@Autowired
 	private SubjectSbsService subjectSbsService;
 
+	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
+	private UserService userService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectSbsProposerView view) {
 		SubjectSbsProposer process = this.process(view);
 		process.setId(null);
+		int sort = this.subjectSbsProposerDao.findMaxSort(view.getPrimary());
+		process.setSort(sort + 1);
 		SubjectSbs subject = this.subjectSbsService.getSbsBySubjectId(view.getSubjectId());
 		if (subject == null) {
 			this.subjectSbsService.createSubjectSbs(view.getSubjectId());
@@ -97,5 +108,28 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsSupport implements 
 	@Override
 	public SubjectSbsProposer getById(String id) {
 		return this.subjectSbsProposerDao.getEntityById(SubjectSbsProposer.class, id);
+	}
+
+	@Override
+	@Transactional
+	public boolean createBySubjectId(String subjectId) {
+		SubjectSbs sbs = this.subjectSbsService.getSbsBySubjectId(subjectId);
+		Subject subject = this.subjectService.getSubjectById(subjectId);
+		UserDomain user = this.userService.getByLoginName(subject.getCreator());
+		SubjectSbsProposer sp = new SubjectSbsProposer();
+		sp.setSubjectId(subjectId);
+		sp.setSbsId(sbs.getSbsId());
+		sp.setName(user.getUserName());
+		sp.setGender(user.getGender());
+		sp.setBirthday(user.getBirthday());
+		sp.setDegrees(user.getDegrees());
+		sp.setEmail(user.getEmail());
+		sp.setPrimary(Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
+		sp.setZw(user.getZw());
+		sp.setMajor(user.getMajor());
+		sp.setPhone(user.getPhone());
+		sp.setSort(0);
+		this.subjectSbsProposerDao.save(sp);
+		return true;
 	}
 }

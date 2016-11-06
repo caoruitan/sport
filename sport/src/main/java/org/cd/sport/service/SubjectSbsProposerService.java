@@ -13,6 +13,8 @@ import org.cd.sport.vo.SubjectSbsProposerVo;
  */
 public interface SubjectSbsProposerService {
 
+	public boolean createBySubjectId(String subjectId);
+
 	public boolean create(SubjectSbsProposerView view);
 
 	public boolean update(SubjectSbsProposerView view);

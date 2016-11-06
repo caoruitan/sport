@@ -49,6 +49,7 @@
     						<th width="33%">计算依据和理由</th>
     					</tr>
     				</thead>
+    				<!--  
     				<tr>
     					<th class="level1">${income.name}</th>
     					<td><input name="rwsId" type="hidden" value="${rwsId}" /></td>
@@ -76,6 +77,7 @@
                             <td>/</td>
         				</tr>
                     </c:forEach>
+                    -->
     				<!--支出-->
     				<tr>
     					<th class="level1">${cost.name}</th>
@@ -140,7 +142,7 @@
 		                            </c:if>
 		                            <c:if test="${dic2.parent == false}">
 			                            <td>
-			                                <input name="cost[${len3+len4+status2.index}].cost" class="price cost price_${dic1.code}" data-pcodes="${dic1.code},${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic2.code].cost}" />
+			                                <input name="cost[${len3+len4+status2.index}].cost" id="${dic2.code }"  id="${dic2.code}" class="price cost price_${dic1.code}" data-pcodes="${dic1.code},${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic2.code].cost}" />
 			                                <input name="cost[${len3+len4+status2.index}].code" type="hidden" value="${dic2.code}" />
 			                                <input name="cost[${len3+len4+status2.index}].name" type="hidden" value="${dic2.name}" />
 			                            </td>
@@ -148,27 +150,41 @@
 		                            </c:if>
 		                        </tr>
 		                        <c:forEach var="dic3" items="${dic2.children}" varStatus="status3">
-			                        <tr>
-			                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
-			                            <th class="level5">${dic3.name }</th>
-			                            <c:if test="${dic3.parent == true}">
-				                            <td class="price-ly">
-				                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price_${dic2.code}" id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
-				                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
-				                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
-				                                <span class="total_${dic3.code}">${ssbMap[dic3.code].cost == null ?'0.00': ssbMap[dic3.code].cost}</span>
-				                            </td>
-				                            <td>/</td>
-			                            </c:if>
-			                            <c:if test="${dic3.parent == false}">
+			                       <c:if test="${dic2.code =='017001001004' || dic2.code =='017001001001'}">
+			                       		 <tr>
+				                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
+				                            <th class="level5">${dic3.name }</th>
 				                            <td>
-				                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price cost price_${dic2.code}" type="number" data-pcodes="${dic2.code},${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
+				                                <input name="cost[${len3+len4+len5+status3.index}].cost" id="${dic3.code }" class="price cost price_${dic1.code}" type="number" data-pcodes="${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
 				                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
 				                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
 				                            </td>
 				                            <td><input name="cost[${len3+len4+len5+status3.index}].reason" type="text" value="${ssbMap[dic3.code].reason}"></td>
-			                            </c:if>
-			                        </tr>
+				                        </tr>
+			                       </c:if>
+			                       <c:if test="${dic2.code !='017001001004' && dic2.code !='017001001001'}">
+				                        <tr>
+				                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
+				                            <th class="level5">${dic3.name }</th>
+				                            <c:if test="${dic3.parent == true}">
+					                            <td class="price-ly">
+					                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price_${dic2.code}" id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
+					                                <span class="total_${dic3.code}">${ssbMap[dic3.code].cost == null ?'0.00': ssbMap[dic3.code].cost}</span>
+					                            </td>
+					                            <td>/</td>
+				                            </c:if>
+				                            <c:if test="${dic3.parent == false}">
+					                            <td>
+					                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price cost price_${dic2.code}" type="number" data-pcodes="${dic2.code},${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
+					                                <input name="cost[${len3+len4+len5+status3.index}].name" type="hidden" value="${dic3.name}" />
+					                            </td>
+					                            <td><input name="cost[${len3+len4+len5+status3.index}].reason" type="text" value="${ssbMap[dic3.code].reason}"></td>
+				                            </c:if>
+				                        </tr>
+			                        </c:if>
 	                        	</c:forEach>
                         	</c:forEach>
                         </c:forEach>
@@ -207,13 +223,36 @@
 				})
 				
 				$(".budget-save").click(function(){
-					var iTotal = $(".income-total-td").text();
+					/*var iTotal = $(".income-total-td").text();
 					var cTotal = $(".cost-total-td").text();
 					if(iTotal!=cTotal){
 						layer.msg("经费来源和经费支出总额不相等!,请重新填写");
 						$(".cost-total-td").parent().addClass("sub-total-error");
 						return;
+					}*/
+					
+					var cTotal = $(".cost-total-td").text();
+					var flag = Sport.isNull(cTotal);
+					if(flag || cTotal==0){
+						layer.msg("经费支出最少填写一项！");
+						return;
 					}
+					var v1 = $("#017001001004").val();
+					var v2 = $("#017001001004001").val();
+					if(v2>v1){
+						layer.msg("市内交通费不能高于差旅费！");
+						return;
+					}
+					
+					var v1 = $("#017001001001001").val();
+					var v2 = $("#017001001001002").val();
+					var v3 = $("#017001001001003").val();
+					var v4 = $("#017001001001").val();
+					if(v4<(v1+v2+v3)){
+						layer.msg("购置设备费+试制设备费+设备改造与租赁费不能高于设备费总费用！");
+						return;
+					}
+					
 					$.ajax({
 						url:Sport.getBasePath()+"/subject/rwsbudget/sboper/create.action",
 						data:$("#sbs-budget-form").serialize(),

@@ -26,13 +26,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class SubjectSbsServiceImpl implements SubjectSbsService {
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private SubjectSbsProposerService subjectSbsProposerService;
-	
+
 	@Autowired
 	private SubjectSbsBudgetService subjectSbsBudgetService;
 
@@ -46,30 +46,31 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	public SubjectSbs getSubjectSbsById(String id) {
 		return this.subjectSbsDao.getEntityById(SubjectSbs.class, id);
 	}
-	
+
 	@Override
 	public SubjectSbs getSbsBySubjectId(String subjectId) {
 		return this.subjectSbsDao.getSbsBySubjectId(subjectId);
 	}
 
 	@Override
-	public synchronized SubjectSbs createSubjectSbs(String subjectId) {
+	public SubjectSbs createSubjectSbs(String subjectId) {
 		SubjectSbs sbs = new SubjectSbs();
 		sbs.setSubjectId(subjectId);
 		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBOPER_TB);
 		this.subjectSbsDao.save(sbs);
+		this.subjectSbsProposerService.createBySubjectId(subjectId);
 		return sbs;
 	}
-	
+
 	private SubjectSbs getOrCreateSubjectSbs(String subjectId) {
 		SubjectSbs sbs = this.getSbsBySubjectId(subjectId);
-		if(sbs == null) {
+		if (sbs == null) {
 			return this.createSubjectSbs(subjectId);
 		} else {
 			return sbs;
 		}
 	}
-	
+
 	@Override
 	public void saveBaseInfo(String subjectId, String address, String phone, String fax, String email, String years) {
 		SubjectSbs sbs = getOrCreateSubjectSbs(subjectId);
@@ -149,81 +150,82 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = this.getSbsBySubjectId(subjectId);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		if(sbs == null) {
+
+		if (sbs == null) {
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("success", "false");
 			result.put("msg", "申报书尚未填报");
 			return result;
 		}
-		
+
 		boolean complete = true;
 		StringBuilder msg = new StringBuilder("");
 		// 验证基本信息是否完整
-		if(sbs.getPhone() == null || sbs.getPhone().equals("")) {
+		if (sbs.getPhone() == null || sbs.getPhone().equals("")) {
 			msg.append("联系方式未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getXtyj() == null || sbs.getXtyj().equals("")) {
+		if (sbs.getXtyj() == null || sbs.getXtyj().equals("")) {
 			msg.append("选题依据未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getYjmb() == null || sbs.getYjmb().equals("")) {
+		if (sbs.getYjmb() == null || sbs.getYjmb().equals("")) {
 			msg.append("研究目标和主要研究内容未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getJsgj() == null || sbs.getJsgj().equals("")) {
+		if (sbs.getJsgj() == null || sbs.getJsgj().equals("")) {
 			msg.append("技术关键和创新点未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getYjff() == null || sbs.getYjff().equals("")) {
+		if (sbs.getYjff() == null || sbs.getYjff().equals("")) {
 			msg.append("拟采取的研究方法、主要技术路线、主要指标及可行性分析未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getSyfa() == null || sbs.getSyfa().equals("")) {
+		if (sbs.getSyfa() == null || sbs.getSyfa().equals("")) {
 			msg.append("研究实验方案、实验地点及联合申请单位的分工未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getJdap() == null || sbs.getJdap().equals("")) {
+		if (sbs.getJdap() == null || sbs.getJdap().equals("")) {
 			msg.append("进度安排未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getYqjg() == null || sbs.getYqjg().equals("")) {
+		if (sbs.getYqjg() == null || sbs.getYqjg().equals("")) {
 			msg.append("预期结果未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getGztj() == null || sbs.getGztj().equals("")) {
+		if (sbs.getGztj() == null || sbs.getGztj().equals("")) {
 			msg.append("申报单位现有工作条件和基础未填写<br/>");
 			complete = false;
 		}
-		List<SubjectSbsProposerVo> primaryProposers = subjectSbsProposerService.getBySbsId(sbs.getSbsId(), Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
-		if(primaryProposers == null || primaryProposers.isEmpty()) {
+		List<SubjectSbsProposerVo> primaryProposers = subjectSbsProposerService.getBySbsId(sbs.getSbsId(),
+				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
+		if (primaryProposers == null || primaryProposers.isEmpty()) {
 			msg.append("申请人员情况未填写<br/>");
 			complete = false;
 		}
 		List<SubjectSbsBudget> budgets = subjectSbsBudgetService.getBySbsId(sbs.getSbsId());
-		if(budgets == null || budgets.isEmpty()) {
+		if (budgets == null || budgets.isEmpty()) {
 			msg.append("经费预算未填写<br/>");
 			complete = false;
 		}
-		if(sbs.getTjyj() == null || sbs.getTjyj().equals("")) {
+		if (sbs.getTjyj() == null || sbs.getTjyj().equals("")) {
 			msg.append("申报单位推荐意见及提供相关研究工作条件的保证未填写<br/>");
 			complete = false;
 		}
-		
-		if(complete == false) {
+
+		if (complete == false) {
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("success", "false");
 			result.put("msg", msg.toString());
 			return result;
 		}
-		
+
 		FileInputStream in = null;
 		OutputStream os = null;
 		try {
 			in = new FileInputStream(new File(basePath + Constants.SubjectSbs.SUBJECT_SBS_DOC_TEMPLATE_PATH));
 			HWPFDocument hdt = new HWPFDocument(in);
-			Range range = hdt.getRange();  
+			Range range = hdt.getRange();
 			range.replaceText("${subjectName}", subject.getName());
 			range.replaceText("${createUnitName}", subject.getCreateUnitName());
 			range.replaceText("${creatorName}", subject.getCreatorName());
@@ -242,10 +244,10 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 			range.replaceText("${yqjg}", sbs.getYqjg());
 			range.replaceText("${gztj}", sbs.getGztj());
 			range.replaceText("${tjyj}", sbs.getTjyj());
-			
+
 			// 填充主要申请人信息
-			for(int i = 0; i < 3; i ++) {
-				if(i < primaryProposers.size()) {
+			for (int i = 0; i < 3; i++) {
+				if (i < primaryProposers.size()) {
 					SubjectSbsProposerVo proposer = primaryProposers.get(i);
 					range.replaceText("${name" + (i + 1) + "}", proposer.getName());
 					range.replaceText("${xb" + (i + 1) + "}", proposer.getGender());
@@ -276,15 +278,16 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 					range.replaceText("${content" + (i + 1) + "}", "");
 				}
 			}
-			
+
 			// 填充其它申请人信息
-			List<SubjectSbsProposerVo> otherProposers = subjectSbsProposerService.getBySbsId(sbs.getSbsId(), Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_OTHER);
-			for(int i = 0; i < 10; i ++) {
+			List<SubjectSbsProposerVo> otherProposers = subjectSbsProposerService.getBySbsId(sbs.getSbsId(),
+					Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_OTHER);
+			for (int i = 0; i < 10; i++) {
 				int size = 0;
-				if(otherProposers != null) {
+				if (otherProposers != null) {
 					size = otherProposers.size();
 				}
-				if(i < size) {
+				if (i < size) {
 					SubjectSbsProposerVo proposer = otherProposers.get(i);
 					range.replaceText("${oname" + i + "}", proposer.getName());
 					range.replaceText("${oage" + i + "}", String.valueOf(proposer.getAge()));
@@ -305,16 +308,17 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 					range.replaceText("${owork" + i + "}", "");
 				}
 			}
-			
+
 			// 填充预算信息
-			for(SubjectSbsBudget budget : budgets) {
+			for (SubjectSbsBudget budget : budgets) {
 				range.replaceText("${A_" + budget.getCode().substring(3) + "}", String.valueOf(budget.getCost()));
-				range.replaceText("${D_" + budget.getCode().substring(3) + "}", budget.getReason() == null ? "" : budget.getReason());
+				range.replaceText("${D_" + budget.getCode().substring(3) + "}",
+						budget.getReason() == null ? "" : budget.getReason());
 			}
-			
+
 			os = new FileOutputStream(basePath + "/doc/sbs_" + subject.getId() + subject.getCreator() + ".doc");
 			hdt.write(os);
-			
+
 			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBADMIN_SP);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -335,10 +339,10 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	public void sbadminPass(String subjectId) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
-		if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
+		if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
 			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_KJS_SP);
 			this.subjectSbsDao.update(sbs);
-		} else if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
+		} else if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
 			sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_ORG_SP);
 			this.subjectSbsDao.update(sbs);
 		}

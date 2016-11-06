@@ -3,6 +3,7 @@ package org.cd.sport.service;
 import java.util.List;
 
 import org.cd.sport.dao.SubjectRwsUndertakerDao;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsUndertaker;
 import org.cd.sport.support.SubjectRwsSupport;
 import org.cd.sport.view.SubjectRwsUndertakerView;
@@ -24,11 +25,18 @@ public class SubjectRwsUndertakerServiceImpl extends SubjectRwsSupport implement
 	@Autowired
 	private SubjectRwsUndertakerDao subjectRwsUndertakerDao;
 
+	@Autowired
+	private SubjectRwsService subjectRwsService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectRwsUndertakerView view) {
 		SubjectRwsUndertaker process = this.process(view);
 		process.setId(null);
+		SubjectRws rws = this.subjectRwsService.getRwsBySubjectId(view.getSubjectId());
+		if (rws == null) {
+			this.subjectRwsService.createSubjectRws(view.getSubjectId());
+		}
 		this.subjectRwsUndertakerDao.save(process);
 		return true;
 	}

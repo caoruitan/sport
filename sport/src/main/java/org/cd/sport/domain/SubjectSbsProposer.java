@@ -47,6 +47,12 @@ public class SubjectSbsProposer {
 	 * 申报人学历
 	 */
 	private String degrees;
+
+	/**
+	 * 申请人学位
+	 */
+	private String xuewei;
+
 	/**
 	 * 申报人毕业院校
 	 */
@@ -86,6 +92,11 @@ public class SubjectSbsProposer {
 	 * 是否为主要申请人
 	 */
 	private String primary;
+
+	/**
+	 * 排序
+	 */
+	private int sort;
 
 	@Column(name = "SBS_ID")
 	public String getSbsId() {
@@ -232,5 +243,23 @@ public class SubjectSbsProposer {
 
 	public void setPrimary(String primary) {
 		this.primary = primary;
+	}
+
+	@Column(name = "SORT")
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
+	@Column(name = "XUE_WEI")
+	public String getXuewei() {
+		return xuewei;
+	}
+
+	public void setXuewei(String xuewei) {
+		this.xuewei = xuewei;
 	}
 }

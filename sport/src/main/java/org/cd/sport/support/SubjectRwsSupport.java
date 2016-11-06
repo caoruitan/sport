@@ -48,9 +48,9 @@ public class SubjectRwsSupport extends SportSupport {
 			throw new ParameterIsWrongException("任务书进度安排为空");
 		}
 
-		if (StringUtils.isBlank(view.getRwsId())) {
-			throw new ParameterIsWrongException("任务书进度rwsid不能为空");
-		}
+//		if (StringUtils.isBlank(view.getRwsId())) {
+//			throw new ParameterIsWrongException("任务书进度rwsid不能为空");
+//		}
 
 		if (StringUtils.isBlank(view.getSubjectId())) {
 			throw new ParameterIsWrongException("任务书进度SubjectId不能为空");
@@ -118,9 +118,9 @@ public class SubjectRwsSupport extends SportSupport {
 			throw new ParameterIsWrongException("任务书设备为空");
 		}
 
-		if (StringUtils.isBlank(view.getRwsId())) {
-			throw new ParameterIsWrongException("任务书设备rwsid不能为空");
-		}
+//		if (StringUtils.isBlank(view.getRwsId())) {
+//			throw new ParameterIsWrongException("任务书设备rwsid不能为空");
+//		}
 
 		if (StringUtils.isBlank(view.getSubjectId())) {
 			throw new ParameterIsWrongException("任务书设备SubjectId不能为空");
@@ -201,9 +201,9 @@ public class SubjectRwsSupport extends SportSupport {
 			throw new ParameterIsWrongException("任务书进度安排为空");
 		}
 
-		if (StringUtils.isBlank(view.getRwsId())) {
-			throw new ParameterIsWrongException("任务书进度rwsid不能为空");
-		}
+//		if (StringUtils.isBlank(view.getRwsId())) {
+//			throw new ParameterIsWrongException("任务书进度rwsid不能为空");
+//		}
 
 		if (StringUtils.isBlank(view.getSubjectId())) {
 			throw new ParameterIsWrongException("任务书进度SubjectId不能为空");
@@ -265,9 +265,9 @@ public class SubjectRwsSupport extends SportSupport {
 			throw new ParameterIsWrongException("任务书项目承担人员为空");
 		}
 
-		if (StringUtils.isBlank(view.getRwsId())) {
-			throw new ParameterIsWrongException("任务书rwsid不能为空");
-		}
+//		if (StringUtils.isBlank(view.getRwsId())) {
+//			throw new ParameterIsWrongException("任务书rwsid不能为空");
+//		}
 
 		if (StringUtils.isBlank(view.getSubjectId())) {
 			throw new ParameterIsWrongException("任务书SubjectId不能为空");

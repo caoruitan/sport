@@ -45,6 +45,8 @@ public class SubjectSbsProposerView {
 	 * 申报人学历
 	 */
 	private String degrees;
+
+	private String xuewei;
 	/**
 	 * 申报人毕业院校
 	 */
@@ -213,4 +215,11 @@ public class SubjectSbsProposerView {
 		this.name = name;
 	}
 
+	public String getXuewei() {
+		return xuewei;
+	}
+
+	public void setXuewei(String xuewei) {
+		this.xuewei = xuewei;
+	}
 }

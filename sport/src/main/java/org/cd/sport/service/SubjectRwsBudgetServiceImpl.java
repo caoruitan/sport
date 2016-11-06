@@ -46,13 +46,13 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 		}
 		String rwsId = view.getRwsId();
 		// 处理收入
-		List<Budget> incomes = view.getIncome();
-		NullableUtils.clean(incomes);
-		if (incomes != null && !incomes.isEmpty()) {
-			for (Budget in : incomes) {
-				this.create(rwsId, view.getSubjectId(), in.getCode(), in.getCost(), in.getName(), in.getReason());
-			}
-		}
+//		List<Budget> incomes = view.getIncome();
+//		NullableUtils.clean(incomes);
+//		if (incomes != null && !incomes.isEmpty()) {
+//			for (Budget in : incomes) {
+//				this.create(rwsId, view.getSubjectId(), in.getCode(), in.getCost(), in.getName(), in.getReason());
+//			}
+//		}
 		// 处理支出
 		List<Budget> costs = view.getCost();
 		NullableUtils.clean(costs);

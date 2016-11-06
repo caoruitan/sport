@@ -17,6 +17,8 @@ public interface SubjectSbsProposerDao extends IBaseDao {
 
 	public boolean deleteById(String[] id);
 
+	public int findMaxSort(String primary);
+
 	public List<SubjectSbsProposer> findBySbsId(String sbsId);
 
 	public List<SubjectSbsProposer> findBySbsId(String sbsId, int start, int limit);

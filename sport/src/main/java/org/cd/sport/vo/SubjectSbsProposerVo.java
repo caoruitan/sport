@@ -48,6 +48,12 @@ public class SubjectSbsProposerVo {
 	 * 申报人学历
 	 */
 	private String degrees;
+
+	/**
+	 * 申请人学位
+	 */
+	private String xuewei;
+
 	/**
 	 * 申报人毕业院校
 	 */
@@ -209,5 +215,13 @@ public class SubjectSbsProposerVo {
 
 	public void setBackdrop(String backdrop) {
 		this.backdrop = backdrop;
+	}
+
+	public String getXuewei() {
+		return xuewei;
+	}
+
+	public void setXuewei(String xuewei) {
+		this.xuewei = xuewei;
 	}
 }
