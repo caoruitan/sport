@@ -122,6 +122,10 @@ public class SubjectSbsSupport extends SportSupport {
 		if (dic != null) {
 			viewDomain.setZw(dic.getName());
 		}
+		Dic xlDic = this.dicService.getByCode(prop.getDegrees());
+		if (xlDic != null) {
+			viewDomain.setDegrees(xlDic.getName());
+		}
 		Date birthday = prop.getBirthday();
 		Calendar c = Calendar.getInstance();
 		c.setTime(birthday);
@@ -134,9 +138,9 @@ public class SubjectSbsSupport extends SportSupport {
 
 		int result;
 		if (year1 == year2) {
-			result = month1 - month2;
+			result = month2 - month1;
 		} else {
-			result = 12 * (year1 - year2) + month1 - month2;
+			result = 12 * (year2 - year1) + month2 - month1;
 		}
 		viewDomain.setAge(result / 12);
 		viewDomain.setBirthday(sdf.format(birthday));

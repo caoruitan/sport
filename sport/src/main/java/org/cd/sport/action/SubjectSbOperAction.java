@@ -5,13 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
-import org.cd.sport.domain.News;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
@@ -284,9 +284,10 @@ public class SubjectSbOperAction {
 	public void checkAndSubmit(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String basePath = request.getSession().getServletContext().getRealPath("/");
-		this.subjectSbsService.checkAndSubmit(subjectId, basePath);
+		Map<String, String> result = this.subjectSbsService.checkAndSubmit(subjectId, basePath);
 		JsonObject json = new JsonObject();
-		json.addProperty("success", true);
+		json.addProperty("success", result.get("success"));
+		json.addProperty("msg", result.get("msg"));
 		PageWrite.writeTOPage(response, json);
 	}
 	
