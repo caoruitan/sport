@@ -85,9 +85,9 @@
 					{label:'课题名称', name:'name', width:20, sortable: false},
 					{label:'课题类型', name:'type', width:10, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
 						if(value == "ZBKT") {
-							return "招标课题";
+							return "重点研究领域攻关课题";
 						} else if(value == "KYGGKT") {
-							return "科技攻关课题";
+							return "国家队科研综合攻关研究课题";
 						} else {
 							return "";
 						}

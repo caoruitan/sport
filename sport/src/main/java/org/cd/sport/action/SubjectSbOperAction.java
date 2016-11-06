@@ -15,10 +15,12 @@ import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.domain.SubjectSbsBudget;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.service.OrganizationService;
 import org.cd.sport.service.SubjectRwsService;
+import org.cd.sport.service.SubjectSbsBudgetService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
 import org.cd.sport.support.SportSupport;
@@ -55,6 +57,9 @@ public class SubjectSbOperAction {
 	
 	@Autowired
 	private SubjectSbsService subjectSbsService;
+
+	@Autowired
+	private SubjectSbsBudgetService subjectSbsBudgetService;
 	
 	@Autowired
 	private SubjectRwsService subjectRwsService;
@@ -168,6 +173,12 @@ public class SubjectSbOperAction {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		NewsVo news = newsService.getById(Constants.SubjectSbs.SUBJECT_SBS_DESCRIPTION_NEWS_ID);
+
+		List<SubjectSbsBudget> budgets = subjectSbsBudgetService.getBySbsId(sbs.getSbsId());
+		for (SubjectSbsBudget budget : budgets) {
+			request.setAttribute("D_" + budget.getCode().substring(3), budget.getReason() == null ? "" : budget.getReason());
+		}
+		
 		request.setAttribute("status", Constants.SubjectSbs.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
@@ -296,10 +307,12 @@ public class SubjectSbOperAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		NewsVo news = newsService.getById(Constants.SubjectRws.SUBJECT_RWS_DESCRIPTION_NEWS_ID);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("rws", rws);
+		request.setAttribute("news", news);
 		return "subject/sboper/rwstb";
 	}
 	

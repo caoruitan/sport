@@ -299,4 +299,18 @@ public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
 		Long count = (Long) query.uniqueResult();
 		return count == null ? 0 : count.intValue();
 	}
+
+	@Override
+	public String getMaxSubjectNum(String year, String type) {
+		String hql = "from Subject s where s.type = :type and s.num like :year order by s.num desc";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		params.put("year", year + '%');
+		List<Subject> subjects = this.getDatasByHQL(hql, params);
+		if(subjects != null && subjects.size() > 0) {
+			return subjects.get(0).getNum();
+		} else {
+			return "";
+		}
+	}
 }

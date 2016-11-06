@@ -34,33 +34,12 @@ public class SubjectRwsScheduleAction {
 		return "subject/schedule/list";
 	}
 
-	@RequestMapping(value = "/sbadmin/list.htm", method = RequestMethod.GET)
-	public String ssbadminListView(String sbsId, HttpServletRequest request) {
-		return "subject/schedule/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsadmin/list.htm", method = RequestMethod.GET)
-	public String kjsadminListView(String sbsId, HttpServletRequest request) {
-		return "subject/schedule/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsleader/list.htm", method = RequestMethod.GET)
-	public String kjsleaderListView(String sbsId, HttpServletRequest request) {
-		return "subject/schedule/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsexpert/list.htm", method = RequestMethod.GET)
-	public String kjsexpertListView(String sbsId, HttpServletRequest request) {
-		return "subject/schedule/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgadmin/list.htm", method = RequestMethod.GET)
-	public String orgadminListView(String sbsId, HttpServletRequest request) {
-		return "subject/schedule/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgoper/list.htm", method = RequestMethod.GET)
-	public String orgoperListView(String sbsId, HttpServletRequest request) {
+	@RequestMapping(value = "/listReadOnly.htm", method = RequestMethod.GET)
+	public String ssbadminListView(String rwsId, String subjectId, HttpServletRequest request) {
+		List<SubjectRwsSchedule> ssDatas = this.subjectRwsSchedulingService.getByRwsId(rwsId);
+		request.setAttribute("rwsId", rwsId);
+		request.setAttribute("ssDatas", GsonUtils.toJson(ssDatas));
+		request.setAttribute("subjectId", subjectId);
 		return "subject/schedule/list_readonly";
 	}
 
