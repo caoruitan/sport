@@ -104,7 +104,11 @@ public class NewsSupport extends SportSupport {
 		if (publishTime != null) {
 			newsVo.setPublishTime(format.format(publishTime));
 		}
-		newsVo.setContent(UBBDecoder.decode(new String(news.getContent())));
+		try {
+			newsVo.setContent(UBBDecoder.decode(new String(news.getContent(),"UTF-8")));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return newsVo;
 	}
 

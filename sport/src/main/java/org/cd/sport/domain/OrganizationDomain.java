@@ -1,6 +1,6 @@
 package org.cd.sport.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -114,7 +114,7 @@ public class OrganizationDomain {
 	/**
 	 * 注册时间
 	 */
-	private Date createTime;
+	private Timestamp createTime;
 
 	@Id
 	@Column(name = "ORG_ID")
@@ -300,11 +300,11 @@ public class OrganizationDomain {
 	}
 
 	@Column(name = "CREATE_TIME")
-	public Date getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 

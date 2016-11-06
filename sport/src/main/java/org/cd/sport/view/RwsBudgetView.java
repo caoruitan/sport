@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class RwsBudgetView {
 	private String rwsId;
+	private String subjectId;
 	private List<Budget> income;
 	private List<Budget> cost;
 
@@ -37,4 +38,13 @@ public class RwsBudgetView {
 	public void setCost(List<Budget> cost) {
 		this.cost = cost;
 	}
+
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+
 }

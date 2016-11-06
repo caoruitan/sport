@@ -30,6 +30,7 @@
 		<div class="titleBox">
 			<div class="title"><img src="<%=basePath %>/static/img/m-dw.png" />注册单位管理</div>
 			<div class="searchBtn">查询</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
 		</div>
 		<div class="searchBox">
 			<dt>单位名称</dt>
@@ -90,9 +91,10 @@
 						width: 20,
 						align: "center",
 						formatter:function(value, grid, rows, state){
+							var editUser =  "<a href='javascript:;;' class='sport-org-edit' data-id='"+rows.orgId+"'>编辑</a>";
 							var queryUser =  "<a href='javascript:;;' class='sport-org-query' data-id='"+rows.orgId+"'>查看</a>";
 							var queryOrg = "<a href='javascript:;;' class='sport-org-manager-query' data-id='"+rows.orgId+"'>查看用户</a>";
-							return queryUser+"&nbsp;&nbsp;"+queryOrg;
+							return editUser+"&nbsp;&nbsp;"+queryUser+"&nbsp;&nbsp;"+queryOrg;
 						}
 					}],
 					autowidth: true,

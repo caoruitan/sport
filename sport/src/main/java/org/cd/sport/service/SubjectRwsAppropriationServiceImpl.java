@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectRwsAppropriationDao;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsAppropriation;
 import org.cd.sport.support.SubjectRwsSupport;
 import org.cd.sport.view.SubjectRwsAppropriationView;
@@ -24,10 +25,17 @@ public class SubjectRwsAppropriationServiceImpl extends SubjectRwsSupport implem
 	@Autowired
 	private SubjectRwsAppropriationDao subjectRwsAppropriationDao;
 
+	@Autowired
+	private SubjectRwsService SubjectRwsService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectRwsAppropriationView ss) {
 		SubjectRwsAppropriation process = this.process(ss);
+		SubjectRws rws = this.SubjectRwsService.getRwsBySubjectId(ss.getSubjectId());
+		if (rws == null) {
+			this.SubjectRwsService.createSubjectRws(ss.getSubjectId());
+		}
 		this.subjectRwsAppropriationDao.save(process);
 		return true;
 	}
@@ -35,7 +43,8 @@ public class SubjectRwsAppropriationServiceImpl extends SubjectRwsSupport implem
 	@Override
 	@Transactional
 	public boolean update(SubjectRwsAppropriationView ss) {
-		SubjectRwsAppropriation entity = this.subjectRwsAppropriationDao.getEntityById(SubjectRwsAppropriation.class, ss.getApproId());
+		SubjectRwsAppropriation entity = this.subjectRwsAppropriationDao.getEntityById(SubjectRwsAppropriation.class,
+				ss.getApproId());
 		this.process(entity, ss);
 		this.subjectRwsAppropriationDao.update(entity);
 		return false;

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.cd.sport.dao.SubjectSbsBudgetDao;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
@@ -51,7 +49,7 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		NullableUtils.clean(incomes);
 		if (incomes != null && !incomes.isEmpty()) {
 			for (Budget in : incomes) {
-				this.create(sbsId, in.getCode(), in.getCost(), in.getName(), in.getReason());
+				this.create(sbsId, view.getSubjectId(), in.getCode(), in.getCost(), in.getName(), in.getReason());
 			}
 		}
 		// 处理支出
@@ -59,7 +57,7 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		NullableUtils.clean(costs);
 		if (costs != null && !costs.isEmpty()) {
 			for (Budget co : costs) {
-				this.create(sbsId, co.getCode(), co.getCost(), co.getName(), co.getReason());
+				this.create(sbsId, view.getSubjectId(), co.getCode(), co.getCost(), co.getName(), co.getReason());
 			}
 		}
 		return true;
@@ -67,12 +65,12 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean create(String sbsId, String code, String cost, String name, String reason) {
+	public boolean create(String sbsId, String subjectId, String code, String cost, String name, String reason) {
 		try {
 			BigDecimal money = new BigDecimal(cost);
-			SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
+			SubjectSbs subject = subjectSbsService.createSubjectSbs(subjectId);
 			if (subject == null) {
-				throw new EntityNotFoundException("申报书对象不存在");
+				subjectSbsService.createSubjectSbs(subjectId);
 			}
 			this.subjectSbsBudgetDao.deleteById(sbsId, code);
 			SubjectSbsBudget ssb = new SubjectSbsBudget();
@@ -91,13 +89,13 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean update(String sbsId, String code, String cost, String name, String reason) {
+	public boolean update(String sbsId, String subjectId, String code, String cost, String name, String reason) {
 		SubjectSbs subject = subjectSbsService.getSubjectSbsById(sbsId);
 		if (subject == null) {
-			throw new EntityNotFoundException("申报书对象不存在");
+			subjectSbsService.createSubjectSbs(subjectId);
 		}
 		this.subjectSbsBudgetDao.deleteById(sbsId, code);
-		return this.create(sbsId, code, cost, name, reason);
+		return this.create(sbsId, subjectId, code, cost, name, reason);
 	}
 
 	@Override

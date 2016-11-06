@@ -20,6 +20,8 @@ public interface OrganizationService {
 	public OrganizationDomain update(OrganizationView organization);
 
 	public boolean delete(String orgId);
+	
+	public boolean delete(String[] orgId);
 
 	public boolean pass(String orgId);
 

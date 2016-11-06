@@ -95,7 +95,10 @@ public class KjsadminOrgAction extends BaseOrgAction {
 
 	@RequestMapping(value = "/kjsadmin/delete.action", method = RequestMethod.POST)
 	public void delete(String orgId, HttpServletRequest request, HttpServletResponse response) {
-		boolean delete = this.organizationService.delete(orgId);
+		if(StringUtils.isBlank(orgId)){
+			throw new ParameterIsWrongException("组织机构id为空");
+		}
+		boolean delete = this.organizationService.delete(orgId.split(","));
 		PageWrite.writeTOPage(response, delete);
 	}
 
@@ -126,7 +129,7 @@ public class KjsadminOrgAction extends BaseOrgAction {
 		if (StringUtils.isBlank(orgId)) {
 			throw new ParameterIsWrongException("组织机构id为空");
 		}
-		UserVo user = this.getUserService().getMangerByOrgId(orgId);
+		UserVo user = this.getUserService().getMangerByOrgId(orgId, Constants.Role.ROLE_ORG_ADMIN);
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();
 		String pubKey = generator.generateBase64PublicKey();

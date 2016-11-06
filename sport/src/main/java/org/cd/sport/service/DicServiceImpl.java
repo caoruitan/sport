@@ -241,7 +241,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 			}
 			Node.setChildren(clids);
 			if (clids == null || clids.isEmpty()) {
-				Node.setHasChild(false);
+				Node.setParent(false);
 			}
 		}
 	}
@@ -258,7 +258,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 		}
 		node.setChildren(clids);
 		if (clids == null || clids.isEmpty()) {
-			node.setHasChild(false);
+			node.setParent(false);
 		}
 		this.findClid(clids, dics);
 	}
@@ -275,7 +275,7 @@ public class DicServiceImpl extends DicSupport implements DicService {
 				}
 				node.setChildren(clids);
 				if (clids == null || clids.isEmpty()) {
-					node.setHasChild(false);
+					node.setParent(false);
 				}
 				this.findClid(clids, dics);
 			}

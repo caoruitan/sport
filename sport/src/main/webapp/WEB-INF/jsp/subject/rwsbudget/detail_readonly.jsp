@@ -77,7 +77,7 @@
                    <c:forEach var="dic" items="${cost.children}" varStatus="status">
                        <tr>
                            <th class="level2">${dic.name }</th>
-                           <c:if test="${dic.hasChild == true}">
+                           <c:if test="${dic.parent == true}">
                             <td class="price-ly">
                                 <input name="cost[${status.index}].cost" class="price_${cost.code}" id="total_${dic.code}"  type="hidden" value="${ssbMap[dic.code].cost}" />
                                 <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
@@ -86,7 +86,7 @@
                             </td>
                             <td>/</td>
                            </c:if>
-                           <c:if test="${dic.hasChild == false}">
+                           <c:if test="${dic.parent == false}">
                             <td>
                                 <input name="cost[${status.index}].cost" class="price cost price_${cost.code}" data-pcodes="${cost.code}" type="number" placeholder="0.00" value="${ssbMap[dic.code].cost}"  readonly="readonly"/>
                                 <input name="cost[${status.index}].code" type="hidden" value="${dic.code}" />
@@ -99,7 +99,7 @@
                         <tr>
                              <c:set var="len3" value="${fn:length(cost.children) * (status.index+1)}"></c:set>
                              <th class="level3">${dic1.name }</th>
-                             <c:if test="${dic1.hasChild == true}">
+                             <c:if test="${dic1.parent == true}">
 	                            <td class="price-ly">
 	                                <input name="cost[${len3+status1.index}].cost" class="price_${dic.code}" id="total_${dic1.code}"  type="hidden" value="${ssbMap[dic1.code].cost}"/>
 	                                <input name="cost[${len3+status1.index}].code" type="hidden" value="${dic1.code}" />
@@ -108,7 +108,7 @@
 	                            </td>
 	                            <td>/</td>
                             </c:if>
-                            <c:if test="${dic1.hasChild == false}">
+                            <c:if test="${dic1.parent == false}">
 	                            <td>
 	                                <input name="cost[${len3+status1.index}].cost" class="price cost price_${dic.code}" data-pcodes="${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic1.code].cost}"  readonly="readonly"/>
 	                                <input name="cost[${len3+status1.index}].code" type="hidden" value="${dic1.code}" />
@@ -121,7 +121,7 @@
 	                        <tr>
 	                            <c:set var="len4" value="${fn:length(dic.children) * (status1.index+1) }"></c:set>
 	                            <th class="level4">${dic2.name }</th>
-	                            <c:if test="${dic2.hasChild == true}">
+	                            <c:if test="${dic2.parent == true}">
 		                            <td class="price-ly">
 		                                <input name="cost[${len3+len4+status2.index}].cost" class="price_${dic1.code}" id="total_${dic2.code}" type="hidden" value="${ssbMap[dic2.code].cost}" />
 		                                <input name="cost[${len3+len4+status2.index}].code" type="hidden" value="${dic2.code}" />
@@ -130,7 +130,7 @@
 		                            </td>
 		                            <td>/</td>
 	                            </c:if>
-	                            <c:if test="${dic2.hasChild == false}">
+	                            <c:if test="${dic2.parent == false}">
 		                            <td>
 		                                <input name="cost[${len3+len4+status2.index}].cost" class="price cost price_${dic1.code}" data-pcodes="${dic1.code},${dic.code}" type="number" placeholder="0.00" value="${ssbMap[dic2.code].cost}"  readonly="readonly"/>
 		                                <input name="cost[${len3+len4+status2.index}].code" type="hidden" value="${dic2.code}" />
@@ -143,7 +143,7 @@
 		                        <tr>
 		                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
 		                            <th class="level5">${dic3.name }</th>
-		                            <c:if test="${dic3.hasChild == true}">
+		                            <c:if test="${dic3.parent == true}">
 			                            <td class="price-ly">
 			                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price_${dic2.code}" id="total_${dic3.code}" type="hidden" value="${ssbMap[dic3.code].cost}" />
 			                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
@@ -152,7 +152,7 @@
 			                            </td>
 			                            <td>/</td>
 		                            </c:if>
-		                            <c:if test="${dic3.hasChild == false}">
+		                            <c:if test="${dic3.parent == false}">
 			                            <td>
 			                                <input name="cost[${len3+len4+len5+status3.index}].cost" class="price cost price_${dic2.code}" type="number" data-pcodes="${dic2.code},${dic1.code},${dic.code}" placeholder="0.00" value="${ssbMap[dic3.code].cost}"  readonly="readonly"/>
 			                                <input name="cost[${len3+len4+len5+status3.index}].code" type="hidden" value="${dic3.code}" />
