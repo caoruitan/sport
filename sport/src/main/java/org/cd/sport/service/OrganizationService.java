@@ -19,8 +19,10 @@ public interface OrganizationService {
 
 	public OrganizationDomain update(OrganizationView organization);
 
+	public boolean writeWord(String orgId, String basePath);
+
 	public boolean delete(String orgId);
-	
+
 	public boolean delete(String[] orgId);
 
 	public boolean pass(String orgId);

@@ -133,7 +133,9 @@ public class RegisterAction extends BaseUserAction {
 	}
 
 	@RequestMapping("/success.htm")
-	public String success(HttpServletRequest request) {
+	public String success(String orgId, HttpServletRequest request) {
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		this.organizationService.writeWord(orgId, basePath);
 		return "register/success";
 	}
 }

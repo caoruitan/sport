@@ -131,6 +131,7 @@ public class BaseUserAction extends ExceptionWrapper {
 				user.setPassword(password);
 				boolean result = this.userService.create(user);
 				json.addProperty("success", result);
+				json.addProperty("orgId", user.getOrganization());
 			} catch (SportException e) {
 				json.addProperty("success", false);
 				json.addProperty("msg", "非法操作");
@@ -171,6 +172,7 @@ public class BaseUserAction extends ExceptionWrapper {
 		if (StringUtils.isBlank(uuid) || !uuid.equals(session.getAttribute(Constants.User.UUID_KEY))) {
 			json.addProperty("success", false);
 			json.addProperty("msg", "非法操作");
+			json.addProperty("orgId", user.getOrganization());
 		} else {
 			boolean result = this.userService.update(user);
 			json.addProperty("success", result);

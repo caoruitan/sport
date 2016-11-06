@@ -1025,7 +1025,7 @@ $(function(){
 				success: function (obj) {
 					if(obj.success){
 						layer.msg("新增单位管理员成功!");
-						window.location.href = Sport.getBasePath()+"/regist/success.htm";
+						window.location.href = Sport.getBasePath()+"/regist/success.htm?orgId="+obj.orgId;
 					}else{
 						layer.msg(obj.msg);
 					}
@@ -1089,7 +1089,7 @@ $(function(){
 				success: function (obj) {
 					if(obj.success){
 						layer.msg("新增单位管理员成功!");
-						window.location.href = Sport.getBasePath()+"/regist/success.htm";
+						window.location.href = Sport.getBasePath()+"/regist/success.htm?orgId="+obj.orgId;
 					}else{
 						layer.msg(obj.msg);
 					}

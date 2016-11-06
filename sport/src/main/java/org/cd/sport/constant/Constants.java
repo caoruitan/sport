@@ -297,6 +297,10 @@ public class Constants {
 		public static final String SUBJECT_TYPE_ZBKT = "ZBKT";
 
 		public static final String SUBJECT_TYPE_KYGGKT = "KYGGKT";
+		
+		public static final String SUBJECT_TYPE_ZBKT_NUM_PREFIX = "B";
+		
+		public static final String SUBJECT_TYPE_KYGGKT_NUM_PREFIX = "A";
 
 		public static final String SUBJECT_ZBKT_SBS_END_DATE_CODE = "019002001";
 
@@ -312,8 +316,8 @@ public class Constants {
 
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put(SUBJECT_TYPE_ZBKT, "招标课题");
-			types.put(SUBJECT_TYPE_KYGGKT, "科技攻关课题");
+			types.put(SUBJECT_TYPE_ZBKT, "重点研究领域攻关课题");
+			types.put(SUBJECT_TYPE_KYGGKT, "国家队科研综合攻关研究课题");
 			return types;
 		}
 
@@ -538,6 +542,11 @@ public class Constants {
 		 * 审核未通过
 		 */
 		public static final int unpass_verify = -1;
+
+		/**
+		 * 审核未通过
+		 */
+		public static final String TEMPLATE_DOC = "/doc/register_template.doc";
 
 		/**
 		 * 解析状态值
