@@ -127,23 +127,25 @@ public class SubjectSbsSupport extends SportSupport {
 			viewDomain.setDegrees(xlDic.getName());
 		}
 		Date birthday = prop.getBirthday();
-		Calendar c = Calendar.getInstance();
-		c.setTime(birthday);
-		int year1 = c.get(Calendar.YEAR);
-		int month1 = c.get(Calendar.MONTH);
+		if (birthday != null) {
+			Calendar c = Calendar.getInstance();
+			c.setTime(birthday);
+			int year1 = c.get(Calendar.YEAR);
+			int month1 = c.get(Calendar.MONTH);
 
-		c.setTime(new Date(System.currentTimeMillis()));
-		int year2 = c.get(Calendar.YEAR);
-		int month2 = c.get(Calendar.MONTH);
+			c.setTime(new Date(System.currentTimeMillis()));
+			int year2 = c.get(Calendar.YEAR);
+			int month2 = c.get(Calendar.MONTH);
 
-		int result;
-		if (year1 == year2) {
-			result = month2 - month1;
-		} else {
-			result = 12 * (year2 - year1) + month2 - month1;
+			int result;
+			if (year1 == year2) {
+				result = month2 - month1;
+			} else {
+				result = 12 * (year2 - year1) + month2 - month1;
+			}
+			viewDomain.setAge(result / 12);
+			viewDomain.setBirthday(sdf.format(birthday));
 		}
-		viewDomain.setAge(result / 12);
-		viewDomain.setBirthday(sdf.format(birthday));
 		return viewDomain;
 	}
 }

@@ -13,6 +13,7 @@ import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.SubjectSbsProposerService;
+import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
@@ -32,6 +33,9 @@ public class SubjectSbsProposerAction {
 	private DicService dicService;
 
 	@Autowired
+	private SubjectSbsService subjectSbsService;
+
+	@Autowired
 	private SubjectSbsProposerService subjectSbsProposerService;
 
 	@RequestMapping(value = "/listReadOnly.htm", method = RequestMethod.GET)
@@ -49,8 +53,15 @@ public class SubjectSbsProposerAction {
 
 	@RequestMapping(value = "/sboper/list.htm", method = RequestMethod.GET)
 	public String sboperListView(String sbsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
+		if (StringUtils.isBlank(subjectId)) {
 			throw new ParameterIsWrongException();
+		}
+		if (StringUtils.isBlank(sbsId)) {
+			org.cd.sport.domain.SubjectSbs sbs = this.subjectSbsService.getSbsBySubjectId(subjectId);
+			if (sbs == null) {
+				sbs = this.subjectSbsService.createSubjectSbs(subjectId);
+				sbsId = sbs.getSbsId();
+			}
 		}
 		List<SubjectSbsProposerVo> primaryProposers = this.subjectSbsProposerService.getBySbsId(sbsId,
 				Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
@@ -85,7 +96,7 @@ public class SubjectSbsProposerAction {
 			throw new ParameterIsWrongException();
 		}
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
-		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
 		request.setAttribute("degrees", degrees);
 		request.setAttribute("zwDics", zwDics);
 		request.setAttribute("sbsId", sbsId);
@@ -124,7 +135,7 @@ public class SubjectSbsProposerAction {
 	@RequestMapping(value = "/sboper/update.htm", method = RequestMethod.GET)
 	public String updateView(String proposerId, HttpServletRequest request) {
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
-		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
 		SubjectSbsProposer proposer = this.subjectSbsProposerService.getById(proposerId);
 		if (proposer == null) {
 			throw new ParameterIsWrongException();

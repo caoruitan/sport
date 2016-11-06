@@ -43,7 +43,7 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	}
 
 	@Override
-	public synchronized SubjectRws createSubjectRws(String subjectId) {
+	public SubjectRws createSubjectRws(String subjectId) {
 		SubjectRws rws = new SubjectRws();
 		rws.setSubjectId(subjectId);
 		rws.setStatus(Constants.SubjectRws.SUBJECT_RWS_STATUS_SBOPER_TB);

@@ -1,5 +1,6 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path;
@@ -118,16 +119,22 @@
 			<div class="title">主要申请人</div>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-		<c:forEach var="p" items="${primaryProposers}">
+		<c:forEach var="p" items="${primaryProposers}" varStatus="status">
 			<div class="sqrBox proposerBox">
-				<p class="t">第一申请人</p>
+				<p class="t">第${status.index==0?'一':(status.index==1?'二':(status.index==2?'三':'')) }申请人</p>
 				<li><img src="<%=basePath %>/static/img/user.png" /><a>${p.name}</a> ${p.gender}</li>
 				<li>${p.zw}</li>
-				<p class="op"><img src="<%=basePath %>/static/img/del.png" data-id="${p.id}" class="proposer-delete"/><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
+				<c:if test="${status.index==0 }">
+					<p class="op"><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
+				</c:if>
+				<c:if test="${status.index!=0 }">
+					<p class="op"><img  src="<%=basePath %>/static/img/del.png" data-id="${p.id}" class="proposer-delete"/><img src="<%=basePath %>/static/img/edit.png"  data-id="${p.id}" class="proposer-edit" /></p>
+				</c:if>
 			</div>
 		</c:forEach>
-		<div class="sqrBox" id="add">
-		</div>
+		<c:if test="${fn:length(primaryProposers) < 3 }">
+			<div class="sqrBox" id="add"></div>
+		</c:if>
 		<div class="titleBox2">
 			<div class="title">其他申请人</div>
 		</div>

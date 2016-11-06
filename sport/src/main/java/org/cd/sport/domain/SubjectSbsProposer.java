@@ -87,6 +87,11 @@ public class SubjectSbsProposer {
 	 */
 	private String primary;
 
+	/**
+	 * 排序
+	 */
+	private int sort;
+
 	@Column(name = "SBS_ID")
 	public String getSbsId() {
 		return sbsId;
@@ -233,4 +238,14 @@ public class SubjectSbsProposer {
 	public void setPrimary(String primary) {
 		this.primary = primary;
 	}
+
+	@Column(name = "SORT")
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
 }

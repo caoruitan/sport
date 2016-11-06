@@ -45,7 +45,7 @@ public class SubjectSbsProposerDaoImpl extends BaseDaoImpl<SubjectSbsProposer> i
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<SubjectSbsProposer> findBySbsId(String sbsId, String primary) {
-		String queryHql = "from SubjectSbsProposer where sbsId =:sbsId and primary=:primary";
+		String queryHql = "from SubjectSbsProposer where sbsId =:sbsId and primary=:primary order by sort asc ";
 		return this.getHibernateQuery(queryHql).setParameter("sbsId", sbsId).setParameter("primary", primary).list();
 	}
 
@@ -69,6 +69,13 @@ public class SubjectSbsProposerDaoImpl extends BaseDaoImpl<SubjectSbsProposer> i
 		String queryHql = "select count(1) from SubjectSbsProposer where sbsId=:sbsId and primary=:primary";
 		Long count = (Long) this.getHibernateQuery(queryHql).setParameter("sbsId", sbsId)
 				.setParameter("primary", primary).uniqueResult();
+		return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+	public synchronized int findMaxSort(String primary) {
+		String queryHql = "select max(sort) from SubjectSbsProposer where primary=:primary";
+		Integer count = (Integer) this.getHibernateQuery(queryHql).setParameter("primary", primary).uniqueResult();
 		return count == null ? 0 : count.intValue();
 	}
 }
