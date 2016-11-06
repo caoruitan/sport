@@ -18,7 +18,6 @@ import org.cd.sport.dao.SubjectSbsDao;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
-import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.vo.SubjectSbsProposerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
