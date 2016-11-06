@@ -15,9 +15,9 @@ public interface SubjectRwsBudgetService {
 
 	public boolean create(RwsBudgetView view);
 
-	public boolean create(String rwsId, String code, String cost, String name, String reason);
+	public boolean create(String rwsId, String subjectId, String code, String cost, String name, String reason);
 
-	public boolean update(String rwsId, String code, String cost, String name, String reason);
+	public boolean update(String rwsId, String subjectId, String code, String cost, String name, String reason);
 
 	public List<SubjectRwsBudget> getByRwsId(String rwsId);
 

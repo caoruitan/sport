@@ -42,8 +42,8 @@ public class SubjectSbsBudgetAction {
 	@Autowired
 	private SubjectSbsBudgetService subjectSbsBudgetService;
 
-	private void sbsCost(String sbsId, HttpServletRequest request) {
-		if (StringUtils.isBlank(sbsId)) {
+	private void sbsCost(String sbsId, String subjectId, HttpServletRequest request) {
+		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
 			throw new ParameterIsWrongException();
 		}
 		DicType income = this.dicTypeService.getByCode(Constants.Dic.DIC_SBS_INCOME_CODE);
@@ -54,6 +54,7 @@ public class SubjectSbsBudgetAction {
 		// 查询预算
 		Map<String, SubjectSbsBudget> ssbMap = this.subjectSbsBudgetService.getMapBySbsId(sbsId);
 		request.setAttribute("sbsId", sbsId);
+		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("costTotalCode", Constants.Dic.DIC_SBS_KYCOST_TOTAL_CODE);
 		request.setAttribute("income", income);
 		request.setAttribute("cost", costs);
@@ -62,19 +63,20 @@ public class SubjectSbsBudgetAction {
 	}
 
 	@RequestMapping(value = "/sboper/cost.htm", method = RequestMethod.GET)
-	public String sboperListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
+	public String sboperListView(String sbsId, String subjectId, HttpServletRequest request) {
+		this.sbsCost(sbsId, subjectId, request);
 		return "subject/sbsbudget/detail";
 	}
 
 	@RequestMapping(value = "/costReadOnly.htm", method = RequestMethod.GET)
-	public String ssbadminListView(String sbsId, HttpServletRequest request) {
-		this.sbsCost(sbsId, request);
+	public String ssbadminListView(String sbsId, String subjectId, HttpServletRequest request) {
+		this.sbsCost(sbsId, subjectId, request);
 		return "subject/sbsbudget/detail_readonly";
 	}
 
 	@RequestMapping(value = "/sboper/create.action", method = RequestMethod.POST)
-	public void sboperCreate(SbsBudgetView budget, HttpServletRequest request, HttpServletResponse response) {
+	public void sboperCreate(SbsBudgetView budget, String subjectId, HttpServletRequest request,
+			HttpServletResponse response) {
 		boolean create = this.subjectSbsBudgetService.create(budget);
 		PageWrite.writeTOPage(response, create);
 	}

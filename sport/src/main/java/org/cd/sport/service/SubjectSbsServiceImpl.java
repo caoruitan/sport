@@ -43,7 +43,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	}
 
 	@Override
-	public SubjectSbs createSubjectSbs(String subjectId) {
+	public synchronized SubjectSbs createSubjectSbs(String subjectId) {
 		SubjectSbs sbs = new SubjectSbs();
 		sbs.setSubjectId(subjectId);
 		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_SBOPER_TB);

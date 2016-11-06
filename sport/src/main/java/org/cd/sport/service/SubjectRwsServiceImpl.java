@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class SubjectRwsServiceImpl implements SubjectRwsService {
-	
+
 	@Autowired
 	private SubjectService subjectService;
 
@@ -36,30 +36,30 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	public SubjectRws getSubjectRwsById(String id) {
 		return this.subjectRwsDao.getEntityById(SubjectRws.class, id);
 	}
-	
+
 	@Override
 	public SubjectRws getRwsBySubjectId(String subjectId) {
 		return this.subjectRwsDao.getRwsBySubjectId(subjectId);
 	}
 
 	@Override
-	public SubjectRws createSubjectRws(String subjectId) {
+	public synchronized SubjectRws createSubjectRws(String subjectId) {
 		SubjectRws rws = new SubjectRws();
 		rws.setSubjectId(subjectId);
 		rws.setStatus(Constants.SubjectRws.SUBJECT_RWS_STATUS_SBOPER_TB);
 		this.subjectRwsDao.save(rws);
 		return rws;
 	}
-	
+
 	private SubjectRws getOrCreateSubjectRws(String subjectId) {
 		SubjectRws rws = this.getRwsBySubjectId(subjectId);
-		if(rws == null) {
+		if (rws == null) {
 			return this.createSubjectRws(subjectId);
 		} else {
 			return rws;
 		}
 	}
-	
+
 	@Override
 	public void saveBaseInfo(String subjectId, String address, String phone, String cooperateOrg) {
 		SubjectRws rws = getOrCreateSubjectRws(subjectId);
@@ -116,13 +116,13 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectRws rws = this.getRwsBySubjectId(subjectId);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		FileInputStream in = null;
 		OutputStream os = null;
 		try {
 			in = new FileInputStream(new File(basePath + Constants.SubjectRws.SUBJECT_RWS_DOC_TEMPLATE_PATH));
 			HWPFDocument hdt = new HWPFDocument(in);
-			Range range = hdt.getRange();  
+			Range range = hdt.getRange();
 			range.replaceText("${subjectName}", subject.getName());
 			range.replaceText("${createUnitName}", subject.getCreateUnitName());
 			range.replaceText("${creatorName}", subject.getCreatorName());
@@ -137,7 +137,7 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 			range.replaceText("${gztj}", rws.getGztj());
 			os = new FileOutputStream(basePath + "/doc/rws_" + subject.getId() + subject.getCreator() + ".doc");
 			hdt.write(os);
-			
+
 			rws.setStatus(Constants.SubjectRws.SUBJECT_RWS_STATUS_SBADMIN_SP);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -156,10 +156,10 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	public void sbadminPass(String subjectId) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		SubjectRws rws = this.subjectRwsDao.getRwsBySubjectId(subjectId);
-		if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
+		if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
 			rws.setStatus(Constants.SubjectRws.SUBJECT_RWS_STATUS_KJS_SP);
 			this.subjectRwsDao.update(rws);
-		} else if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
+		} else if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
 			rws.setStatus(Constants.SubjectRws.SUBJECT_RWS_STATUS_ORG_SP);
 			this.subjectRwsDao.update(rws);
 		}

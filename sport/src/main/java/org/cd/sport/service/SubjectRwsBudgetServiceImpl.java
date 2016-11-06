@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectRwsBudgetDao;
 import org.cd.sport.domain.SubjectRws;
@@ -52,7 +50,7 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 		NullableUtils.clean(incomes);
 		if (incomes != null && !incomes.isEmpty()) {
 			for (Budget in : incomes) {
-				this.create(rwsId, in.getCode(), in.getCost(), in.getName(), in.getReason());
+				this.create(rwsId, view.getSubjectId(), in.getCode(), in.getCost(), in.getName(), in.getReason());
 			}
 		}
 		// 处理支出
@@ -60,7 +58,7 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 		NullableUtils.clean(costs);
 		if (costs != null && !costs.isEmpty()) {
 			for (Budget co : costs) {
-				this.create(rwsId, co.getCode(), co.getCost(), co.getName(), co.getReason());
+				this.create(rwsId, view.getSubjectId(), co.getCode(), co.getCost(), co.getName(), co.getReason());
 			}
 		}
 		return true;
@@ -68,12 +66,12 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean create(String rwsId, String code, String cost, String name, String reason) {
+	public boolean create(String rwsId, String subjectId, String code, String cost, String name, String reason) {
 		try {
-			BigDecimal money = new BigDecimal(StringUtils.isBlank(cost)?"0":cost);
-			SubjectRws subject = subjectRwsService.getSubjectRwsById(rwsId);
-			if (subject == null) {
-				throw new EntityNotFoundException("任务书对象不存在");
+			BigDecimal money = new BigDecimal(StringUtils.isBlank(cost) ? "0" : cost);
+			SubjectRws rws = subjectRwsService.getSubjectRwsById(rwsId);
+			if (rws == null) {
+				this.subjectRwsService.createSubjectRws(subjectId);
 			}
 			this.subjectRwsBudgetDao.deleteById(rwsId, code);
 			SubjectRwsBudget ssb = new SubjectRwsBudget();
@@ -92,13 +90,9 @@ public class SubjectRwsBudgetServiceImpl implements SubjectRwsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean update(String rwsId, String code, String cost, String name, String reason) {
-		SubjectRws subject = subjectRwsService.getSubjectRwsById(rwsId);
-		if (subject == null) {
-			throw new EntityNotFoundException("任务书对象不存在");
-		}
+	public boolean update(String rwsId, String subjectId, String code, String cost, String name, String reason) {
 		this.subjectRwsBudgetDao.deleteById(rwsId, code);
-		return this.create(rwsId, code, cost, name, reason);
+		return this.create(rwsId, subjectId, code, cost, name, reason);
 	}
 
 	@Override

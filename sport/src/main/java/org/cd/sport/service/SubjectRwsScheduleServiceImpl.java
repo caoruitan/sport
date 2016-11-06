@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectRwsScheduleDao;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsSchedule;
 import org.cd.sport.support.SubjectRwsSupport;
 import org.cd.sport.view.SubjectRwsScheduleView;
@@ -24,10 +25,17 @@ public class SubjectRwsScheduleServiceImpl extends SubjectRwsSupport implements 
 	@Autowired
 	private SubjectRwsScheduleDao subjectRwsSchedulingDao;
 
+	@Autowired
+	private SubjectRwsService subjectRwsService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectRwsScheduleView ss) {
 		SubjectRwsSchedule process = this.process(ss);
+		SubjectRws rws = this.subjectRwsService.getRwsBySubjectId(ss.getSubjectId());
+		if (rws == null) {
+			this.subjectRwsService.createSubjectRws(ss.getSubjectId());
+		}
 		this.subjectRwsSchedulingDao.save(process);
 		return true;
 	}

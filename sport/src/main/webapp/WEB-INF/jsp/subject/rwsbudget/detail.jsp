@@ -40,6 +40,7 @@
 		</div>
 		<div class="TBox">
 			<form id="sbs-budget-form">
+                <input name="subjectId" type="hidden" value="${subjectId}" />
                 <table class="TTable">
     				<thead>
     					<tr>

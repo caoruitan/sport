@@ -3,6 +3,7 @@ package org.cd.sport.service;
 import java.util.List;
 
 import org.cd.sport.dao.SubjectSbsProposerDao;
+import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.support.SubjectSbsSupport;
 import org.cd.sport.view.SubjectSbsProposerView;
@@ -24,11 +25,18 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsSupport implements 
 	@Autowired
 	private SubjectSbsProposerDao subjectSbsProposerDao;
 
+	@Autowired
+	private SubjectSbsService subjectSbsService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectSbsProposerView view) {
 		SubjectSbsProposer process = this.process(view);
 		process.setId(null);
+		SubjectSbs subject = this.subjectSbsService.getSbsBySubjectId(view.getSubjectId());
+		if (subject == null) {
+			this.subjectSbsService.createSubjectSbs(view.getSubjectId());
+		}
 		this.subjectSbsProposerDao.save(process);
 		return true;
 	}

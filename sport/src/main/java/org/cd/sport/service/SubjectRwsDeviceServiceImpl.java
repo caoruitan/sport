@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectRwsDeviceDao;
+import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsDevice;
 import org.cd.sport.support.SubjectRwsSupport;
 import org.cd.sport.view.SubjectRwsDeviceView;
@@ -24,10 +25,17 @@ public class SubjectRwsDeviceServiceImpl extends SubjectRwsSupport implements Su
 	@Autowired
 	private SubjectRwsDeviceDao subjectRwsDeviceDao;
 
+	@Autowired
+	private SubjectRwsService subjectRwsService;
+
 	@Override
 	@Transactional
 	public boolean create(SubjectRwsDeviceView ss) {
 		SubjectRwsDevice process = this.process(ss);
+		SubjectRws rws = this.subjectRwsService.getRwsBySubjectId(ss.getSubjectId());
+		if (rws == null) {
+			this.subjectRwsService.createSubjectRws(ss.getSubjectId());
+		}
 		this.subjectRwsDeviceDao.save(process);
 		return true;
 	}
