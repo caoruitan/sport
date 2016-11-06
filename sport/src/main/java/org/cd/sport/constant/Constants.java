@@ -312,8 +312,8 @@ public class Constants {
 
 		public static Map<String, String> getSubjectTypes() {
 			Map<String, String> types = new LinkedHashMap<String, String>();
-			types.put(SUBJECT_TYPE_ZBKT, "招标课题");
-			types.put(SUBJECT_TYPE_KYGGKT, "科技攻关课题");
+			types.put(SUBJECT_TYPE_ZBKT, "重点研究领域攻关课题");
+			types.put(SUBJECT_TYPE_KYGGKT, "国家队科研综合攻关研究课题");
 			return types;
 		}
 

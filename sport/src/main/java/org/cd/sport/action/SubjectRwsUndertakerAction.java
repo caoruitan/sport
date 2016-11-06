@@ -31,7 +31,7 @@ public class SubjectRwsUndertakerAction {
 	@Autowired
 	private SubjectRwsUndertakerService subjectRwsUndertakerService;
 
-	@RequestMapping(value = "/sbadmin/list.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/listReadOnly.htm", method = RequestMethod.GET)
 	public String sbadminListView(String rwsId, String subjectId, HttpServletRequest request) {
 		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
 			throw new ParameterIsWrongException();
@@ -53,66 +53,6 @@ public class SubjectRwsUndertakerAction {
 		request.setAttribute("rwsId", rwsId);
 		request.setAttribute("subjectId", subjectId);
 		return "subject/undertaker/list";
-	}
-
-	@RequestMapping(value = "/kjsadmin/list.htm", method = RequestMethod.GET)
-	public String kjsadminListView(String rwsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectRwsUndertakerVo> undertakers = this.subjectRwsUndertakerService.getByRwsId(rwsId);
-		request.setAttribute("undertakers", GsonUtils.toJson(undertakers));
-		request.setAttribute("rwsId", rwsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/undertaker/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsleader/list.htm", method = RequestMethod.GET)
-	public String kjsleaderListView(String rwsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectRwsUndertakerVo> undertakers = this.subjectRwsUndertakerService.getByRwsId(rwsId);
-		request.setAttribute("undertakers", GsonUtils.toJson(undertakers));
-		request.setAttribute("rwsId", rwsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/undertaker/list_readonly";
-	}
-
-	@RequestMapping(value = "/kjsexpert/list.htm", method = RequestMethod.GET)
-	public String kjsexpertListView(String rwsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectRwsUndertakerVo> undertakers = this.subjectRwsUndertakerService.getByRwsId(rwsId);
-		request.setAttribute("undertakers", GsonUtils.toJson(undertakers));
-		request.setAttribute("rwsId", rwsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/undertaker/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgadmin/list.htm", method = RequestMethod.GET)
-	public String orgadminListView(String rwsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectRwsUndertakerVo> undertakers = this.subjectRwsUndertakerService.getByRwsId(rwsId);
-		request.setAttribute("undertakers", GsonUtils.toJson(undertakers));
-		request.setAttribute("rwsId", rwsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/undertaker/list_readonly";
-	}
-
-	@RequestMapping(value = "/orgoper/list.htm", method = RequestMethod.GET)
-	public String orgoperListView(String rwsId, String subjectId, HttpServletRequest request) {
-		if (StringUtils.isBlank(rwsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
-		}
-		List<SubjectRwsUndertakerVo> undertakers = this.subjectRwsUndertakerService.getByRwsId(rwsId);
-		request.setAttribute("undertakers", GsonUtils.toJson(undertakers));
-		request.setAttribute("rwsId", rwsId);
-		request.setAttribute("subjectId", subjectId);
-		return "subject/undertaker/list_readonly";
 	}
 
 	@RequestMapping(value = "/sboper/create.htm", method = RequestMethod.GET)

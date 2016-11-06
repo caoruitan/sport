@@ -172,7 +172,7 @@
 			</div>
 			<div class="ktBox bottomBorder">
 				<div class="ktBoxTitle">
-					招标课题共 <span class="redfont">${zbkt_zs}</span> 个，其中：
+					重点研究领域攻关课题共 <span class="redfont">${zbkt_zs}</span> 个，其中：
 				</div>
 				<div class="l1">
 					<p class="a1-1"><a>${zbkt_sbs}</a>申报书填报阶段</p>
@@ -186,7 +186,7 @@
 			</div>
 			<div class="ktBox">
 				<div class="ktBoxTitle">
-					招标课题共 <span class="redfont">${kyggkt_zs}</span> 个，其中：
+					国家队科研综合攻关研究课题共 <span class="redfont">${kyggkt_zs}</span> 个，其中：
 				</div>
 				<div class="l1">
 					<p class="a1-1"><a>${kyggkt_sbs}</a>申报书填报阶段</p>

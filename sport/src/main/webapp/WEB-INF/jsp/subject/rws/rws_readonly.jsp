@@ -277,22 +277,27 @@
 		
 		$("#e-jdap").click(function(){
 			showLayout('b-jdap');
-			$(".b-jdap").load("<%=basePath%>/subject/schedule/sbadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			$(".b-jdap").load("<%=basePath%>/subject/schedule/listReadOnly.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 		
 		$("#e-sbgzmx").click(function(){
 			showLayout('b-sbgzmx');
-			$(".b-sbgzmx").load("<%=basePath%>/subject/device/sbadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			$(".b-sbgzmx").load("<%=basePath%>/subject/device/listReadOnly.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 		
 		$("#e-xbfjf").click(function(){
 			showLayout('b-xbfjf');
-			$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/sbadmin/list.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			$(".b-xbfjf").load("<%=basePath%>/subject/appropriation/listReadOnly.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+		});
+		
+		$("#e-xmcddw").click(function(){
+			showLayout('b-xmcddw');
+			$(".b-xmcddw").load("<%=basePath%>/subject/undertaker/listReadOnly.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 		
 		$("#e-jfys").click(function(){
 			showLayout('b-jfys');
-			$(".b-jfys").load("<%=basePath%>/subject/rwsbudget/sbadmin/cost.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
+			$(".b-jfys").load("<%=basePath%>/subject/rwsbudget/costReadOnly.htm?rwsId=${rws.rwsId}&subjectId=${subjectId}");
 		});
 	});
 </script>
