@@ -299,7 +299,7 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 			range.replaceText("${fax}", org.getFax());
 			range.replaceText("${email}", org.getEmail());
 			range.replaceText("${post}", org.getPost());
-			range.replaceText("${managerName", org.getManagerName());
+			range.replaceText("${managerName}", org.getManagerName());
 			range.replaceText("${managerPhone}", org.getManagerPhone());
 			range.replaceText("${managerfax}", org.getManagerfax());
 			range.replaceText("${managerEmail}", org.getManagerEmail());

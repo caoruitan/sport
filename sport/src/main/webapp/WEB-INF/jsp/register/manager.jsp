@@ -141,9 +141,9 @@
                        html += "<option value='"+data.code+"'>"+data.name+"</option>";
                     });
 				 $("#credType").empty();
-                    $("#credType").append(html);    
-                    $('#credType').selectpicker('render');
-                    $('#credType').selectpicker('refresh');
+                 $("#credType").append(html);    
+                 $('#credType').selectpicker('render');
+                 $('#credType').selectpicker('refresh');
 			}
 		});
 		

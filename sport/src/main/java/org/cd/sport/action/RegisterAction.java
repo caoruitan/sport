@@ -111,6 +111,8 @@ public class RegisterAction extends BaseUserAction {
 		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_QUALITY_CODE);
 		List<Dic> address = this.dicService.getByPcode(Constants.Dic.DIC_ADDRESS_CODE);
 		request.setAttribute("dics", dics);
+		request.setAttribute("credCode", Constants.Dic.DIC_CRED_CODE);
+		request.setAttribute("degreesCode", Constants.Dic.DIC_DEGREES_CODE);
 		request.setAttribute("address", address);
 		request.setAttribute("organization", orgId);
 		if (user != null) {
