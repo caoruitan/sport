@@ -297,6 +297,10 @@ public class Constants {
 		public static final String SUBJECT_TYPE_ZBKT = "ZBKT";
 
 		public static final String SUBJECT_TYPE_KYGGKT = "KYGGKT";
+		
+		public static final String SUBJECT_TYPE_ZBKT_NUM_PREFIX = "B";
+		
+		public static final String SUBJECT_TYPE_KYGGKT_NUM_PREFIX = "A";
 
 		public static final String SUBJECT_ZBKT_SBS_END_DATE_CODE = "019002001";
 

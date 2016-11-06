@@ -47,4 +47,6 @@ public interface SubjectDao extends IBaseDao {
 
 	public int getSubjectCountByCreatorAndStage(String creator, String stage);
 	
+	public String getMaxSubjectNum(String year, String type);
+	
 }
