@@ -287,6 +287,9 @@ public class DicServiceImpl extends DicSupport implements DicService {
 		if ("017001001004".equals(dicType.getCode())) {
 			node.setParent(false);
 		}
+		if ("017001001001".equals(dicType.getCode())) {
+			node.setParent(false);
+		}
 		node.setCode(dicType.getCode());
 		node.setName(dicType.getName());
 		return node;
@@ -295,6 +298,9 @@ public class DicServiceImpl extends DicSupport implements DicService {
 	public Node process(Dic dicType) {
 		Node node = new Node();
 		if ("017001001004".equals(dicType.getCode())) {
+			node.setParent(false);
+		}
+		if ("017001001001".equals(dicType.getCode())) {
 			node.setParent(false);
 		}
 		node.setCode(dicType.getCode());

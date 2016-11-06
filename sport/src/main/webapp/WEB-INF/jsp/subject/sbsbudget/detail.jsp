@@ -148,7 +148,7 @@
 		                            </c:if>
 		                        </tr>
 		                        <c:forEach var="dic3" items="${dic2.children}" varStatus="status3">
-			                       <c:if test="${dic2.code =='017001001004' }">
+			                       <c:if test="${dic2.code =='017001001004' || dic2.code =='017001001001'}">
 			                       		 <tr>
 				                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
 				                            <th class="level5">${dic3.name }</th>
@@ -160,7 +160,7 @@
 				                            <td><input name="cost[${len3+len4+len5+status3.index}].reason" type="text" value="${ssbMap[dic3.code].reason}"></td>
 				                        </tr>
 			                       </c:if>
-			                       <c:if test="${dic2.code !='017001001004' }">
+			                       <c:if test="${dic2.code !='017001001004' && dic2.code !='017001001001'}">
 				                        <tr>
 				                            <c:set var="len5" value="${fn:length(dic1.children) * (status2.index+1) }"></c:set>
 				                            <th class="level5">${dic3.name }</th>
@@ -239,6 +239,15 @@
 					var v2 = $("#017001001004001").val();
 					if(v2>v1){
 						layer.msg("市内交通费不能高于差旅费！");
+						return;
+					}
+					
+					var v1 = $("#017001001001001").val();
+					var v2 = $("#017001001001002").val();
+					var v3 = $("#017001001001003").val();
+					var v4 = $("#017001001001").val();
+					if(v4<(v1+v2+v3)){
+						layer.msg("购置设备费+试制设备费+设备改造与租赁费不能高于设备费总费用！");
 						return;
 					}
 					
