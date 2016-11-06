@@ -51,7 +51,6 @@
                             <input type="hidden" name="subjectId" value="${subjectId}" />
                             <input type="hidden" name="sbsId" value="${sbsId}" />
                         </td>
-            
             			<th class="required">性别</th>
             			<td>
             				<input type="radio" name="gender" value="0" checked="checked"><label for="男">男</label>
@@ -98,6 +97,10 @@
             			<th>电话</th>
             			<td><input name="phone" type="text" value="" /></td>
             		</tr>
+            		<tr>
+                        <th >学位</th>
+                        <td ><input name="xuewei" type="text" value="" /></td>
+                    </tr>
             		<tr>
                         <th class="required">研究分工</th>
                         <td colspan="3"><input name="work" type="text" value="" style="width: 560px;" /></td>

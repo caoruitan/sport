@@ -104,6 +104,10 @@
             			<td><input name="phone" type="text" value="${proposer.phone}"/></td>
             		</tr>
             		<tr>
+                        <th >学位</th>
+                        <td ><input name="xuewei" type="text" value="${proposer.xuewei}" /></td>
+                    </tr>
+            		<tr>
                         <th class="required">研究分工</th>
                         <td colspan="3"><input name="work" type="text"  style="width: 560px;" value="${proposer.work}"/></td>
                     </tr>

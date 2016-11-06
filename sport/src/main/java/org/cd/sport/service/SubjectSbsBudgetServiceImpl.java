@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.dao.SubjectSbsBudgetDao;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
@@ -45,13 +46,14 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		}
 		String sbsId = view.getSbsId();
 		// 处理收入
-		List<Budget> incomes = view.getIncome();
-		NullableUtils.clean(incomes);
-		if (incomes != null && !incomes.isEmpty()) {
-			for (Budget in : incomes) {
-				this.create(sbsId, view.getSubjectId(), in.getCode(), in.getCost(), in.getName(), in.getReason());
-			}
-		}
+		// List<Budget> incomes = view.getIncome();
+		// NullableUtils.clean(incomes);
+		// if (incomes != null && !incomes.isEmpty()) {
+		// for (Budget in : incomes) {
+		// this.create(sbsId, view.getSubjectId(), in.getCode(), in.getCost(),
+		// in.getName(), in.getReason());
+		// }
+		// }
 		// 处理支出
 		List<Budget> costs = view.getCost();
 		NullableUtils.clean(costs);
@@ -67,8 +69,8 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 	@Transactional
 	public boolean create(String sbsId, String subjectId, String code, String cost, String name, String reason) {
 		try {
-			BigDecimal money = new BigDecimal(cost);
-			SubjectSbs subject = subjectSbsService.createSubjectSbs(subjectId);
+			BigDecimal money = new BigDecimal(StringUtils.isBlank(cost) ? "0" : cost);
+			SubjectSbs subject = subjectSbsService.getSbsBySubjectId(subjectId);
 			if (subject == null) {
 				subjectSbsService.createSubjectSbs(subjectId);
 			}

@@ -41,6 +41,7 @@
    						<th width="33%">计算依据和理由</th>
    					</tr>
    				</thead>
+   				<!--  
    				<tr>
    					<th class="level1">${income.name}</th>
    					<td></td>
@@ -68,6 +69,7 @@
                            <td>/</td>
        				</tr>
                    </c:forEach>
+                   -->
    				<!--支出-->
    				<tr>
    					<th class="level1">${cost.name}</th>

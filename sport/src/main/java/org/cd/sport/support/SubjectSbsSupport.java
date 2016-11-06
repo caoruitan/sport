@@ -98,6 +98,7 @@ public class SubjectSbsSupport extends SportSupport {
 		proposer.setPhone(view.getPhone());
 		proposer.setUniversity(view.getUniversity());
 		proposer.setZw(view.getZw());
+		proposer.setXuewei(view.getXuewei());
 		return proposer;
 	}
 

@@ -47,6 +47,12 @@ public class SubjectSbsProposer {
 	 * 申报人学历
 	 */
 	private String degrees;
+
+	/**
+	 * 申请人学位
+	 */
+	private String xuewei;
+
 	/**
 	 * 申报人毕业院校
 	 */
@@ -248,4 +254,12 @@ public class SubjectSbsProposer {
 		this.sort = sort;
 	}
 
+	@Column(name = "XUE_WEI")
+	public String getXuewei() {
+		return xuewei;
+	}
+
+	public void setXuewei(String xuewei) {
+		this.xuewei = xuewei;
+	}
 }
