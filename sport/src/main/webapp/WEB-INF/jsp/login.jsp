@@ -21,7 +21,7 @@
 <body>
 	<div class="login_H ">
 		<c:if test="${news!=null }">
-			<span>公告：<a href="<%=basePath %>/news/detail/${news.id}.htm">${news.title}</a>
+			<span>公告：<a href="<%=basePath %>/news/detail/${news.id}.htm" target="_blank">${news.title}</a>
 			<img src="<%=basePath %>/static/img/login/ky-new.png"></span>
 		</c:if>
 	</div>
@@ -74,7 +74,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="login_F"><p>版权所有：国家体育总局</p></div>
+		<div class="login_F"><p>科技处联系方式&nbsp;&nbsp;
+			<c:forEach var="dic" items="${dics}" varStatus="status">
+				<c:if test="${status.index ==0 }">
+					${dic.name }&nbsp;:&nbsp;${dic.value}</br>
+				</c:if>
+				<c:if test="${status.index !=0 }">
+					${dic.name }&nbsp;:&nbsp;${dic.value}&nbsp;
+				</c:if>
+			</c:forEach>
+		</p></div>
 	</div>
 <script src="<%=basePath %>/static/js/wow.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath %>/static/js/jsencrypt.min.js" type="text/javascript" charset="utf-8"></script>

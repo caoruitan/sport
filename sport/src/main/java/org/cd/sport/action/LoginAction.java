@@ -3,6 +3,7 @@ package org.cd.sport.action;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.exception.SportException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
@@ -43,7 +46,10 @@ public class LoginAction {
 
 	@Autowired
 	private NewsService newsService;
-	
+
+	@Autowired
+	private DicService dicService;
+
 	/**
 	 * 跳转登录界面
 	 * 
@@ -53,6 +59,7 @@ public class LoginAction {
 	@RequestMapping("login")
 	public String Login(HttpServletRequest request) throws SQLException {
 		NewsVo news = newsService.getLatestNotice(Constants.News.NOTICE_NEWS);
+		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CONCAT_CODE);
 		String return_url = request.getParameter("return_url");
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();
@@ -62,6 +69,7 @@ public class LoginAction {
 		String guid = UUIDUtil.getGuid();
 		request.setAttribute("uuid", guid);
 		request.setAttribute("news", news);
+		request.setAttribute("dics", dics);
 		// 缓存 rsa对象
 		request.getSession().setAttribute(Constants.User.RSA_KEY, generator);
 		request.getSession().setAttribute(Constants.User.UUID_KEY, guid);
