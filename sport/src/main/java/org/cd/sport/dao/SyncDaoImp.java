@@ -185,26 +185,9 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 			}
 			// 回退意见处理 TODO
 			String advice = rs.getString("STB_RETURN_ADVISE");
+			subject.setComment(advice);
 			this.subjectSbsDao.save(subject);
 		}
-
-		// ID
-		// STB_SUBJECT_ID
-		// STB_REPORTOR_LOGIN_NAME
-		// STB_SUBJECT_CODE
-		// STB_SUBJECT_NAME
-		// STB_OGNI_UNITS_NAME
-		// STB_UNDERTAKE_UNITS_NAME
-		// STB_PRINCIPAL_NAME
-		// STB_MESSAGE_ADDRESS
-		// STB_PHONE
-		// STB_START_DATE
-		// STB_END_DATE
-		// STB_COOPERATION_UNIT
-		// STB_CHECK_FLAG
-		// STB_STATE
-		// STB_SUBMIT_TIME
-		// STB_RETURN_ADVISE
 	}
 
 	public static void main(String[] args) throws SQLException {

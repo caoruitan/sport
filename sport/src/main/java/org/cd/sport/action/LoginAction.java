@@ -12,13 +12,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
+import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.SportException;
+import org.cd.sport.exception.VerifieNotPassException;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsService;
+import org.cd.sport.service.OrganizationService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
 import org.cd.sport.vo.NewsVo;
+import org.cd.sport.vo.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,6 +47,9 @@ public class LoginAction {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private OrganizationService organizationService;
 
 	@Autowired
 	private NewsService newsService;
@@ -114,11 +121,21 @@ public class LoginAction {
 					}
 					break;
 				}
+				UserAuth userAuth = (UserAuth) authentication.getPrincipal();
+				OrganizationDomain org = organizationService.getById(userAuth.getOrgId());
+				if (org == null || Constants.Org.unpass_verify == org.getStatus()
+						|| Constants.Org.wait_verify == org.getStatus()) {
+					throw new VerifieNotPassException("单位尚未审核通过");
+				}
+
 				// 移除
 				session.removeAttribute(Constants.User.RSA_KEY);
 				session.removeAttribute(Constants.User.UUID_KEY);
 				json.addProperty("success", true);
 				json.addProperty("url", return_url);
+			} catch (VerifieNotPassException e) {
+				json.addProperty("success", false);
+				json.addProperty("msg", e.getMessage());
 			} catch (AuthenticationException ex) {
 				// 用户名不存在:UsernameNotFoundException;
 				// 密码错误:BadCredentialException;

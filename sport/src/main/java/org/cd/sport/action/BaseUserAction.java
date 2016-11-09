@@ -211,6 +211,7 @@ public class BaseUserAction extends ExceptionWrapper {
 		UserQuery query = new UserQuery();
 		query.setName(name);
 		query.setRole(roles);
+		query.setOrgId(userDomain.getOrganization());
 		List<UserVo> datas = this.userService.getByWhere(query, (start - 1) * Constants.Common.PAGE_SIZE,
 				Constants.Common.PAGE_SIZE);
 		long total = this.userService.getTotalByWhere(query);

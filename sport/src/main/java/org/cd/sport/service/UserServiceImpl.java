@@ -18,6 +18,7 @@ import org.cd.sport.exception.EntityNotFoundExcetion;
 import org.cd.sport.exception.ForbiddenExcetion;
 import org.cd.sport.exception.NameIsExistException;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.exception.VerifieNotPassException;
 import org.cd.sport.support.UserSupport;
 import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.Md5Util;
@@ -47,7 +48,7 @@ public class UserServiceImpl extends UserSupport implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-
+	
 	/**
 	 * 校验登录名是否重复
 	 */
@@ -87,7 +88,8 @@ public class UserServiceImpl extends UserSupport implements UserService {
 		user.setPassword(newPwd);
 	}
 
-	public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String loginName)
+			throws UsernameNotFoundException, DataAccessException, VerifieNotPassException {
 		// 得到登录用户对象
 		UserDomain user = this.getByLoginName(loginName);
 		if (user == null) {
