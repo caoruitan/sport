@@ -33,6 +33,8 @@
 		<div class="TBox">
 			<form id="sbs-budget-form">
                 <input name="subjectId" type="hidden" value="${subjectId}" />
+                <input name="rwsId" type="hidden" value="${rwsId}" />
+    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <table class="TTable">
     				<thead>
     					<tr>

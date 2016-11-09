@@ -31,10 +31,16 @@
 					<li class="txt regist-txt">恭喜你，注册成功~~</li>
 					<li class="font_red">正在提交审核，请耐心等待</li>
 					<p class="save-btn">
-						<a href=""><button class="btn-red btn-wisteria" type="">立即打印</button></a>
+						<a href=""><button class="btn-red btn-wisteria" type="button" id="download-regist">立即下载</button></a>
 						<a href="<%=basePath %>/login.htm"><button class="btn-red btn-wisteria" type="">立即登录</button></a>
 					</p>
-				</div>
+			</div>
 		</div>
+<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
+<script type="text/javascript">
+	$("#download-regist").click(function(){
+		window.open("<%=basePath%>/regist/download.action?orgId=${orgId}");
+	});
+</script>
 	</body>
 </html>

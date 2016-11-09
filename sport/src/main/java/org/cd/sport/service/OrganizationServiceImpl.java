@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
+import org.cd.sport.action.UploadAction;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.dao.OrganizationDao;
 import org.cd.sport.dao.UserDao;
@@ -347,7 +348,7 @@ public class OrganizationServiceImpl extends OrganizationSupport implements Orga
 					break;
 				}
 			}
-			os = new FileOutputStream(basePath + "/doc/" + user.getLoginName() + "register.doc");
+			os = new FileOutputStream(basePath + "/"+UploadAction.DOC_DIR+"/" + user.getLoginName() + "_register.doc");
 			hdt.write(os);
 		} catch (Exception e) {
 			e.printStackTrace();

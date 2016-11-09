@@ -13,6 +13,7 @@ import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.ParameterIsWrongException;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.OrganizationService;
+import org.cd.sport.service.UserService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
 import org.cd.sport.utils.UUIDUtil;
@@ -38,6 +39,9 @@ public class RegisterAction extends BaseUserAction {
 
 	@Autowired
 	private DicService dicService;
+
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/fullname/check.action")
 	public void orgCheck(String fullName, HttpServletRequest request, HttpServletResponse response) {
@@ -138,6 +142,22 @@ public class RegisterAction extends BaseUserAction {
 	public String success(String orgId, HttpServletRequest request) {
 		String basePath = request.getSession().getServletContext().getRealPath("/");
 		this.organizationService.writeWord(orgId, basePath);
+		request.setAttribute("orgId", orgId);
 		return "register/success";
+	}
+
+	@RequestMapping("/download.action")
+	public void download(String orgId, HttpServletRequest request, HttpServletResponse response) {
+		OrganizationDomain org = this.organizationService.getById(orgId);
+		if (org == null) {
+			throw new EntityNotFoundException("组织机构不存在");
+		}
+		UserVo user = this.userService.getMangerByOrgId(orgId, Constants.Role.ROLE_SB_ADMIN);
+		if (user == null) {
+			throw new EntityNotFoundException("组织机构管理员不存在");
+		}
+		String realPath = request.getSession().getServletContext().getRealPath("/" + UploadAction.DOC_DIR);
+		UploadAction.downloadFile(realPath + "/" + user.getLoginName() + "_register.doc", "register.doc", request,
+				response);
 	}
 }

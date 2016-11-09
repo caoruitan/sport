@@ -71,7 +71,7 @@ public class UploadAction {
 			throws IOException {
 		String realPath = request.getSession().getServletContext().getRealPath("/" + UPLOAD_DIR);
 		realPath = realPath + "/" + dataId;
-		this.downloadFile(realPath, dataName, request, response);
+		downloadFile(realPath, dataName, request, response);
 	}
 
 	@RequestMapping(value = "/sbs/download.action")
@@ -93,7 +93,7 @@ public class UploadAction {
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
 		realPath = realPath + "/sbs_" + subjectId + subject.getCreator() + ".doc";
-		this.downloadFile(realPath, "申报书_" + subject.getName() + ".doc", request, response);
+		downloadFile(realPath, "申报书_" + subject.getName() + ".doc", request, response);
 	}
 
 	public void downloadRwsById(String subjectId, HttpServletRequest request, HttpServletResponse response) {
@@ -103,10 +103,10 @@ public class UploadAction {
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
 		realPath = realPath + "/rws_" + subjectId + subject.getCreator() + ".doc";
-		this.downloadFile(realPath, "任务书_" + subject.getName() + ".doc", request, response);
+		downloadFile(realPath, "任务书_" + subject.getName() + ".doc", request, response);
 	}
 
-	public void downloadFile(String filePath, String fileName, HttpServletRequest request,
+	public static void downloadFile(String filePath, String fileName, HttpServletRequest request,
 			HttpServletResponse response) {
 		OutputStream os = null;
 		try {
