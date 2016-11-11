@@ -162,8 +162,24 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 		boolean complete = true;
 		StringBuilder msg = new StringBuilder("");
 		// 验证基本信息是否完整
+		if (sbs.getAddress() == null || sbs.getAddress().equals("")) {
+			msg.append("通讯地址未填写<br/>");
+			complete = false;
+		}
 		if (sbs.getPhone() == null || sbs.getPhone().equals("")) {
-			msg.append("联系方式未填写<br/>");
+			msg.append("联系电话未填写<br/>");
+			complete = false;
+		}
+		if (sbs.getFax() == null || sbs.getFax().equals("")) {
+			msg.append("传真未填写<br/>");
+			complete = false;
+		}
+		if (sbs.getEmail() == null || sbs.getEmail().equals("")) {
+			msg.append("电子信箱未填写<br/>");
+			complete = false;
+		}
+		if (sbs.getYears() == null || sbs.getYears().equals("")) {
+			msg.append("完成年限未填写<br/>");
 			complete = false;
 		}
 		if (sbs.getXtyj() == null || sbs.getXtyj().equals("")) {

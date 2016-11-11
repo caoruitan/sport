@@ -45,8 +45,20 @@
 						layer.msg("提交失败，请稍后重试！");
 					},
 					success: function (obj) {
+						debugger;
 						$('#tj').removeAttr("disabled");
-						layer.msg("提交成功！");
+						if(obj.success == "true") {
+							layer.msg("提交成功！");
+						} else if(obj.success == "false") {
+							$.dialog({
+								id: 'checkResult',
+								title: '校验结果',
+								content: '<div class="dlg-contentbox">' + obj.msg + '</div>',
+								width: 400,
+								height: 130,
+								ok: true
+							});
+						}
 					}
 				});
 			});

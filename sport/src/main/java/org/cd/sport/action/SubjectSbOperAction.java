@@ -392,9 +392,10 @@ public class SubjectSbOperAction {
 	public void checkAndSubmitRws(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String basePath = request.getSession().getServletContext().getRealPath("/");
-		this.subjectRwsService.checkAndSubmit(subjectId, basePath);
+		Map<String, String> result = this.subjectRwsService.checkAndSubmit(subjectId, basePath);
 		JsonObject json = new JsonObject();
-		json.addProperty("success", true);
+		json.addProperty("success", result.get("success"));
+		json.addProperty("msg", result.get("msg"));
 		PageWrite.writeTOPage(response, json);
 	}
 	

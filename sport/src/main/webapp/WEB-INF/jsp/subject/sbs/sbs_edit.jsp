@@ -25,7 +25,7 @@
 					<a title="研究目标和主要研究内容">02 研究目标和主要研究内容</a>
 				</li>
 				<li class="dot" id="e-jsgj" onclick="showLayout('b-jsgj')" >
-					<a title="本项目的技术关键与创新点">03 本项目的技术关键与创新点</a>
+					<a title="技术关键和创新点">03 技术关键和创新点</a>
 				</li>
 				<li class="dot" id="e-yjff" onclick="showLayout('b-yjff')" >
 					<a title="拟采取的研究方法、主要技术路线、主要指标及可行性分析">04 拟采取的研究方法、主要技术路...</a>
@@ -166,9 +166,9 @@
 				</p>
 			</div>
 		</div>
-		<!--03 本项目的技术关键与创新点-->
+		<!--03 技术关键和创新点-->
 		<div class="box b-jsgj">
-			<div class="t">03 本项目的技术关键与创新点</div>
+			<div class="t">03 技术关键和创新点</div>
 			<div class="c">
 				<form id="jsgjForm">
 					<input type="hidden" name="subjectId" value="${subjectId}">

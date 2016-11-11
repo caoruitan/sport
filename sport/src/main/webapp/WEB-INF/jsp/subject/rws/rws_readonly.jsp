@@ -15,16 +15,16 @@
 					<a title="任务书基本信息">任务书基本信息</a>
 				</li>
 				<li class="dot" id="e-yjmb" onclick="showLayout('b-yjmb')">
-					<a title="研究目标和主要研究内容">01 研究目标和主要研究内容</a>
+					<a title="研究目标和研究内容">01 研究目标和研究内容</a>
 				</li>
 				<li class="dot" id="e-jsgj" onclick="showLayout('b-jsgj')" >
-					<a title="本项目的技术关键与创新点">02 本项目的技术关键与创新点</a>
+					<a title="技术关键和创新点">02 技术关键和创新点</a>
 				</li>
 				<li class="dot" id="e-yjff" onclick="showLayout('b-yjff')" >
 					<a title="采取的研究方法、主要技术路线、主要指标及可行性分析">03 采取的研究方法、主要技术路...</a>
 				</li>
 				<li class="dot" id="e-syfa" onclick="showLayout('b-syfa')">
-					<a title="研究实验方案、实验地点及联合申请单位的分工">04 研究实验方案、实验地点及联合...</a>
+					<a title="研究实验方案、实验地点及协作单位的分工">04 研究实验方案、实验地点及协作...</a>
 				</li>
 				<li class="dot" id="e-yqjg" onclick="showLayout('b-yqjg')">
 					<a title="预期结果">05 预期结果</a>
@@ -125,9 +125,9 @@
 				</div>
 			</div>
 		</div>
-		<!--01 研究目标和主要研究内容-->
+		<!--01 研究目标和研究内容-->
 		<div class="box b-yjmb">
-			<div class="t">01 研究目标和主要研究内容</div>
+			<div class="t">01 研究目标和研究内容</div>
 			<div class="c">
 				<form id="yjmbForm">
 					<input type="hidden" name="subjectId" value="${subjectId}">
@@ -140,9 +140,9 @@
 				</p>
 			</div>
 		</div>
-		<!--02 本项目的技术关键与创新点-->
+		<!--02 技术关键和创新点-->
 		<div class="box b-jsgj">
-			<div class="t">02 本项目的技术关键与创新点</div>
+			<div class="t">02 技术关键和创新点</div>
 			<div class="c">
 				<form id="jsgjForm">
 					<input type="hidden" name="subjectId" value="${subjectId}">
@@ -170,9 +170,9 @@
 				</p>
 			</div>
 		</div>
-		<!--04 研究实验方案、实验地点及联合...-->
+		<!--04 研究实验方案、实验地点及协作...-->
 		<div class="box b-syfa">
-			<div class="t">04 研究实验方案、实验地点及联合...</div>
+			<div class="t">04 研究实验方案、实验地点及协作...</div>
 			<div class="c">
 				<form id="syfaForm">
 					<input type="hidden" name="subjectId" value="${subjectId}">
@@ -248,16 +248,124 @@
 		<div class="box b-gttk">
 			<div class="t">13 共同条款</div>
 			<div class="c">
-				初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
-				初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
-				初学交互设计的新人，因为没有做过任何的设计项目，所以不知道整个交互设计师的工作流程会有哪些内容，今天这篇文章请了专业科班出身的设计师来科普他们…
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					1、	甲乙双方须共同遵守《国家体育总局体育科学研究与科技服务工作管理办法》及相关规定。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					2、	甲乙双方须严格执行国家体育总局和中国奥委会有关反兴奋剂工作管理规定。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					3、	甲方根据有关规定，监督项目执行情况和经费使用情况。对不符合有关规定和任务书要求的行为，甲方负责提出处理意见，经总局审核批准后实施。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					4、	总局或甲方根据任务书的要求，保证按期拨付项目经费至乙方。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					5、	任务执行过程中，甲方无故终止任务时，所拨经费、物资不得追回，并承担善后处理所发生的费用。甲方提出变更任务书有关内容时，要与乙方协商达成书面协议，并报总局备案。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					6、	乙方必须按季度向甲方和总局报送项目执行情况，逾期不报的，总局或甲方有权暂停拨款。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					7、	乙方须保证提供完成项目任务必要的设备、房屋和研究人员的工作时间。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					8、	乙方因某种原因需要调整项目内容，应向甲方提出申请，经甲方审核后报总局批准实施。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					9、	乙方因某种原因需要终止任务，应视不同情况，部分或全部退回所拨经费。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					10、	甲乙双方若有争议，按国家有关规定和《国家体育总局体育科学研究与科技服务工作管理办法》相应条款处理。若仍不能解决争议，双方可申请仲裁委员会裁决，或向人民法院起诉。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					11、	任务书正式文本一式五份，甲乙方各一份，总局三份。
+				</span><br/>
+				<span style="margin:10px 30px;line-height:30px;font-size:14px;">
+					12、	其它条款：
+				</span><br/>
 			</div>
 		</div>
 		<!--14 国家体育总局审批意见-->
 		<div class="box b-zjspyj">
 			<div class="t">14 国家体育总局审批意见</div>
-			<div class="c contentTxt redfont">
-				同意
+			<div class="c contentTxt">
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目组织单位（甲方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目组织单位（乙方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">财务负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账户名：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账号：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">开户银行：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目组织单位（乙方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">财务负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账户名：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账号：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">开户银行：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目组织单位（乙方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">项目负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">财务负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账户名：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">账号：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">开户银行：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">资金等匹配条件落实保证方（甲方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">资金等匹配条件落实保证方（甲方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">资金等匹配条件落实保证方（甲方）：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">&nbsp;</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">国家体育总局意见：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">（公章）</div>
+				<div style="margin-top:10px;margin-left:10%;line-height:30px;font-size:14px;width:40%;float:left">负责人：</div>
+				<div style="margin-top:10px;margin-right:10%;line-height:30px;font-size:14px;width:40%;float:right">年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="height:50px;width:100%;float:left;">&nbsp;</div>
 			</div>
 		</div>
 	</div>

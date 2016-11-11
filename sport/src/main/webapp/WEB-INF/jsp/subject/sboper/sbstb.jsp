@@ -51,7 +51,7 @@
 						if(obj.success == "true") {
 							layer.msg("提交成功！");
 						} else if(obj.success == "false") {
-							$("#tj").dialog({
+							$.dialog({
 								id: 'tj',
 								title: '校验结果',
 								content: '<div class="dlg-contentbox">' + obj.msg + '</div>',

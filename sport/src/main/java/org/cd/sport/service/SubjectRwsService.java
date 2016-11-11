@@ -1,5 +1,7 @@
 package org.cd.sport.service;
 
+import java.util.Map;
+
 import org.cd.sport.domain.SubjectRws;
 
 /**
@@ -28,7 +30,7 @@ public interface SubjectRwsService {
 	
 	public void saveGztj(String subjectId, String gztj);
 	
-	public void checkAndSubmit(String subjectId, String basePath);
+	public Map<String, String> checkAndSubmit(String subjectId, String basePath);
 	
 	public void sbadminPass(String subjectId);
 	
