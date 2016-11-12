@@ -251,7 +251,6 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 					range.replaceText("${ozy" + i + "}", user.getMajor());
 					range.replaceText("${ofg" + i + "}", user.getWork());
 				} else {
-					SubjectRwsUndertakerVo user = undertakers.get(i);
 					range.replaceText("${oxm" + i + "}", "");
 					range.replaceText("${odw" + i + "}", "");
 					range.replaceText("${onl" + i + "}", "");

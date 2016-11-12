@@ -37,7 +37,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 
 	public Connection getConn() {
 		Connection conn = null;
-		String url = "jdbc:mysql://101.200.191.63:3306/finance?"
+		String url = "jdbc:mysql://192.168.101.12:3306/finance?"
 				+ "user=finance&password=123qweASDZXC&useUnicode=true&characterEncoding=UTF8";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

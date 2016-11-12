@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
@@ -48,19 +49,19 @@ public class SubjectSbOperAction {
 
 	@Autowired
 	private NewsService newsService;
-	
+
 	@Autowired
 	private OrganizationService organizationService;
-	
+
 	@Autowired
-	private SubjectService subjectService; 
-	
+	private SubjectService subjectService;
+
 	@Autowired
 	private SubjectSbsService subjectSbsService;
 
 	@Autowired
 	private SubjectSbsBudgetService subjectSbsBudgetService;
-	
+
 	@Autowired
 	private SubjectRwsService subjectRwsService;
 
@@ -71,7 +72,7 @@ public class SubjectSbOperAction {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		int endYear = Integer.parseInt(sdf.format(date));
 		List<String> years = new LinkedList<String>();
-		for(int i = 0; endYear - i >= startYear; i ++) {
+		for (int i = 0; endYear - i >= startYear; i++) {
 			years.add(String.valueOf(endYear - i));
 		}
 
@@ -89,22 +90,23 @@ public class SubjectSbOperAction {
 		String stage = request.getParameter("stage");
 		String startStr = request.getParameter("page");
 		UserVo user = AuthenticationUtils.getUser();
-		if(year == null || year.equals("")) {
+		if (year == null || year.equals("")) {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 			year = sdf.format(date);
 		}
 		int start = SportSupport.processLimit(startStr);
-		List<Subject> list = subjectService.getSubjectListByCreator(user.getLoginName(), year, type, stage, (start - 1) * Constants.Common.PAGE_SIZE, Constants.Common.PAGE_SIZE);
+		List<Subject> list = subjectService.getSubjectListByCreator(user.getLoginName(), year, type, stage,
+				(start - 1) * Constants.Common.PAGE_SIZE, Constants.Common.PAGE_SIZE);
 		long total = subjectService.getSubjectCountByCreator(user.getLoginName(), year, type, stage);
 		PageModel<Subject> page = new PageModel<Subject>();
 		page.setPage(start);
-		page.setTotal((long) Math.ceil(new Double(String.valueOf(total))/Constants.Common.PAGE_SIZE));
+		page.setTotal((long) Math.ceil(new Double(String.valueOf(total)) / Constants.Common.PAGE_SIZE));
 		page.setRecords(total);
 		page.setRows(list);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}
-	
+
 	@RequestMapping(value = "createSubject", method = RequestMethod.GET)
 	public String toCreateSubject(HttpServletRequest request) {
 		List<Dic> secretList = dicService.getByPcode(Constants.Dic.DIC_SECRET_CODE);
@@ -118,7 +120,7 @@ public class SubjectSbOperAction {
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/create";
 	}
-	
+
 	@RequestMapping(value = "createSubject", method = RequestMethod.POST)
 	public String createSubject(HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		String name = request.getParameter("name");
@@ -130,11 +132,11 @@ public class SubjectSbOperAction {
 		String endDate = request.getParameter("endDate");
 		String[] resultsList = request.getParameterValues("results");
 		String results = "";
-		if(resultsList != null && resultsList.length > 0) {
-			for(String result : resultsList) {
+		if (resultsList != null && resultsList.length > 0) {
+			for (String result : resultsList) {
 				results += result + ",";
 			}
-			if(!results.equals("")) {
+			if (!results.equals("")) {
 				results = results.substring(0, results.length() - 1);
 			}
 		}
@@ -146,14 +148,20 @@ public class SubjectSbOperAction {
 		vo.setSecurity(security);
 		vo.setOrganizationCount(organizationCount);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		vo.setBeginDate(sdf.parse(beginDate));
-		vo.setEndDate(sdf.parse(endDate));
+		if (StringUtils.isNotBlank(beginDate)) {
+			vo.setBeginDate(sdf.parse(beginDate));
+
+		}
+		if (StringUtils.isNotBlank(endDate)) {
+			vo.setBeginDate(sdf.parse(endDate));
+
+		}
 		vo.setResults(results);
 		vo.setIntegration(Boolean.valueOf(integration));
 		subjectService.createSubject(vo);
 		return "redirect:list.htm";
 	}
-	
+
 	@RequestMapping(value = "detail")
 	public String detail(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
@@ -166,7 +174,7 @@ public class SubjectSbOperAction {
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/detail";
 	}
-	
+
 	@RequestMapping(value = "sbstb")
 	public String sbstb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
@@ -176,9 +184,10 @@ public class SubjectSbOperAction {
 
 		List<SubjectSbsBudget> budgets = subjectSbsBudgetService.getBySbsId(sbs.getSbsId());
 		for (SubjectSbsBudget budget : budgets) {
-			request.setAttribute("D_" + budget.getCode().substring(3), budget.getReason() == null ? "" : budget.getReason());
+			request.setAttribute("D_" + budget.getCode().substring(3),
+					budget.getReason() == null ? "" : budget.getReason());
 		}
-		
+
 		request.setAttribute("status", Constants.SubjectSbs.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
@@ -186,7 +195,7 @@ public class SubjectSbOperAction {
 		request.setAttribute("news", news);
 		return "subject/sboper/sbstb";
 	}
-	
+
 	@RequestMapping(value = "saveBaseInfo")
 	public void saveBaseInfo(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -200,7 +209,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveXtyj")
 	public void saveXtyj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -210,7 +219,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveYjmb")
 	public void saveYjmb(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -220,7 +229,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveJsgj")
 	public void saveJsgj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -230,7 +239,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveYjff")
 	public void saveYjff(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -240,7 +249,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveSyfa")
 	public void saveSyfa(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -250,7 +259,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveJdap")
 	public void saveJdap(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -260,7 +269,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveYqjg")
 	public void saveYqjg(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -270,7 +279,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveGztj")
 	public void saveGztj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -280,7 +289,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveTjyj")
 	public void saveTjyj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -290,7 +299,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "checkAndSubmit.action")
 	public void checkAndSubmit(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -301,7 +310,7 @@ public class SubjectSbOperAction {
 		json.addProperty("msg", result.get("msg"));
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "rwstb")
 	public String rwstb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
@@ -315,7 +324,7 @@ public class SubjectSbOperAction {
 		request.setAttribute("news", news);
 		return "subject/sboper/rwstb";
 	}
-	
+
 	@RequestMapping(value = "saveRwsBaseInfo")
 	public void saveRwsBaseInfo(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -327,7 +336,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsYjmb")
 	public void saveRwsYjmb(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -337,7 +346,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsJsgj")
 	public void saveRwsJsgj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -347,7 +356,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsYjff")
 	public void saveRwsYjff(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -357,7 +366,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsSyfa")
 	public void saveRwsSyfa(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -367,7 +376,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsYqjg")
 	public void saveRwsYqjg(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -377,7 +386,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "saveRwsGztj")
 	public void saveRwsGztj(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -387,7 +396,7 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "checkAndSubmitRws.action")
 	public void checkAndSubmitRws(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -398,5 +407,5 @@ public class SubjectSbOperAction {
 		json.addProperty("msg", result.get("msg"));
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 }
