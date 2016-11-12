@@ -38,8 +38,8 @@
 				<li class="dot" id="e-xmcddw" onclick="showLayout('b-xmcddw')">
 					<a title="项目承担单位、协作单位和人员情况">08 项目承担单位、协作单位和人员...</a>
 				</li>
-				<li class="dot">
-					<a id="e-jfys" title="经费预算">09 经费预算</a>
+				<li class="dot" id="e-jfys">
+					<a  title="经费预算">09 经费预算</a>
 				</li>
 				<li class="dot" id="e-sbgzmx">
 					<a title="设备购置明细表">10 设备购置明细表</a>

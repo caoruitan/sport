@@ -35,11 +35,11 @@
 				<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
 					<a title="申报单位现有工作条件和基础">08 申报单位现有工作条件和基础</a>
 				</li>
-				<li class="dot">
-					<a id="e-sqrqk" title="申请人情况">09 申请人情况</a>
+				<li class="dot" id="e-sqrqk">
+					<a  title="申请人情况">09 申请人情况</a>
 				</li>
-				<li class="dot">
-					<a id="e-jfys" title="经费预算">10 经费预算</a>
+				<li class="dot" id="e-jfys">
+					<a  title="经费预算">10 经费预算</a>
 				</li>
 				<li class="dot" id="e-zcsm" onclick="showLayout('b-zcsm')">
 					<a title="经费来源及经费支出情况说明">11 经费来源及经费支出情况说明</a>
