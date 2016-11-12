@@ -151,9 +151,12 @@
 	});
 	
 	var datas = $.parseJSON('${undertakers}');
-	$.each(datas,function(i,v){
-		jQuery("#jqGrid-undertaker").jqGrid('addRowData', i + 1, datas[i]);
-	});
+	if(datas){
+		$.each(datas,function(i,v){
+			jQuery("#jqGrid-undertaker").jqGrid('addRowData', i + 1, datas[i]);
+		});
+	}
+	
 	
 	$(function(){
 		$(".sport-undertaker-edit").click(function(){

@@ -44,6 +44,7 @@
 						},
 						success: function (obj) {
 							$('#tj').removeAttr("disabled");
+							window.location.reload();
 							layer.msg("提交成功！");
 						}
 					});

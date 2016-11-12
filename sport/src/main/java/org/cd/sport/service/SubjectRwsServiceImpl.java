@@ -32,16 +32,16 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private SubjectRwsBudgetService subjectRwsBudgetService;
-	
+
 	@Autowired
 	private SubjectRwsScheduleService subjectRwsScheduleService;
-	
+
 	@Autowired
 	private SubjectRwsUndertakerService subjectRwsUndertakerService;
-	
+
 	@Autowired
 	private SubjectRwsAppropriationService subjectRwsAppropriationService;
 
@@ -58,7 +58,7 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 
 	@Override
 	public SubjectRws getRwsBySubjectId(String subjectId) {
-		return this.subjectRwsDao.getRwsBySubjectId(subjectId);
+		return this.getOrCreateSubjectRws(subjectId);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	}
 
 	private SubjectRws getOrCreateSubjectRws(String subjectId) {
-		SubjectRws rws = this.getRwsBySubjectId(subjectId);
+		SubjectRws rws = this.subjectRwsDao.getRwsBySubjectId(subjectId);
 		if (rws == null) {
 			return this.createSubjectRws(subjectId);
 		} else {
@@ -203,7 +203,7 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 			result.put("msg", msg.toString());
 			return result;
 		}
-		
+
 		FileInputStream in = null;
 		OutputStream os = null;
 		try {
@@ -224,9 +224,9 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 			range.replaceText("${syfa}", rws.getSyfa());
 			range.replaceText("${yqjg}", rws.getYqjg());
 			range.replaceText("${gztj}", rws.getGztj());
-			
-			for(int i = 0; i < 15; i ++) {
-				if(i < schedules.size()) {
+
+			for (int i = 0; i < 15; i++) {
+				if (i < schedules.size()) {
 					SubjectRwsSchedule schedule = schedules.get(i);
 					range.replaceText("${year" + i + "}", String.valueOf(schedule.getYear()));
 					range.replaceText("${month" + i + "}", String.valueOf(schedule.getMonth()));
@@ -239,9 +239,9 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 					range.replaceText("${goal" + i + "}", "");
 				}
 			}
-			
-			for(int i = 0; i < 20; i ++) {
-				if(i < undertakers.size()) {
+
+			for (int i = 0; i < 20; i++) {
+				if (i < undertakers.size()) {
 					SubjectRwsUndertakerVo user = undertakers.get(i);
 					range.replaceText("${oxm" + i + "}", user.getName());
 					range.replaceText("${odw" + i + "}", user.getOrg());
@@ -260,10 +260,10 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 					range.replaceText("${ofg" + i + "}", "");
 				}
 			}
-			
+
 			List<SubjectRwsAppropriation> appropriations = subjectRwsAppropriationService.getByRwsId(rws.getRwsId());
-			for(int i = 0; i < 10; i ++) {
-				if(i < appropriations.size()) {
+			for (int i = 0; i < 10; i++) {
+				if (i < appropriations.size()) {
 					SubjectRwsAppropriation appropriation = appropriations.get(i);
 					range.replaceText("${adw" + i + "}", appropriation.getGainOrg());
 					range.replaceText("${ase" + i + "}", String.valueOf(appropriation.getApproAmount()));
@@ -274,12 +274,13 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 					range.replaceText("${ayt" + i + "}", "");
 				}
 			}
-			
+
 			// 填充预算信息
 			for (SubjectRwsBudget budget : budgets) {
-				range.replaceText("${D_" + budget.getCode().substring(3) + "}", budget.getReason() == null ? "" : budget.getReason());
+				range.replaceText("${D_" + budget.getCode().substring(3) + "}",
+						budget.getReason() == null ? "" : budget.getReason());
 			}
-			
+
 			os = new FileOutputStream(basePath + "/doc/rws_" + subject.getId() + subject.getCreator() + ".doc");
 			hdt.write(os);
 
