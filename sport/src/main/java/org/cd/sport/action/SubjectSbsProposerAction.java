@@ -93,7 +93,7 @@ public class SubjectSbsProposerAction {
 	@RequestMapping(value = "/sboper/primary/create.htm", method = RequestMethod.GET)
 	public String createView(String sbsId, String subjectId, HttpServletRequest request) {
 		if (StringUtils.isBlank(sbsId) || StringUtils.isBlank(subjectId)) {
-			throw new ParameterIsWrongException();
+			throw new ParameterIsWrongException("课题id或者申报书id为空");
 		}
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
 		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
@@ -131,7 +131,7 @@ public class SubjectSbsProposerAction {
 		boolean create = this.subjectSbsProposerService.create(proposer);
 		PageWrite.writeTOPage(response, create);
 	}
-	
+
 	@RequestMapping(value = "/sboper/update.htm", method = RequestMethod.GET)
 	public String updateView(String proposerId, HttpServletRequest request) {
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);

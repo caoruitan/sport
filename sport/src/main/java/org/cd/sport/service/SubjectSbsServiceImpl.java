@@ -50,7 +50,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 
 	@Override
 	public SubjectSbs getSbsBySubjectId(String subjectId) {
-		return this.subjectSbsDao.getSbsBySubjectId(subjectId);
+		return this.getOrCreateSubjectSbs(subjectId);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 	}
 
 	private SubjectSbs getOrCreateSubjectSbs(String subjectId) {
-		SubjectSbs sbs = this.getSbsBySubjectId(subjectId);
+		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
 		if (sbs == null) {
 			return this.createSubjectSbs(subjectId);
 		} else {
@@ -394,46 +394,46 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 		SubjectSbs sbs = this.subjectSbsDao.getSbsBySubjectId(subjectId);
 		sbs.setStatus(Constants.SubjectSbs.SUBJECT_SBS_STATUS_COMPLETE);
 		this.subjectSbsDao.update(sbs);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		Date curDate = new Date();
 		String year = sdf.format(curDate);
-		if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
+		if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_ZBKT)) {
 			String maxNum = this.subjectDao.getMaxSubjectNum(year, Constants.Subject.SUBJECT_TYPE_ZBKT);
 			String num = "";
-			if(maxNum.equals("")) {
+			if (maxNum.equals("")) {
 				num = year + Constants.Subject.SUBJECT_TYPE_ZBKT_NUM_PREFIX + "001";
 			} else {
 				String count = maxNum.substring(5);
 				int curCount = Integer.parseInt(count) + 1;
-				if(curCount <= 9) {
+				if (curCount <= 9) {
 					num = year + Constants.Subject.SUBJECT_TYPE_ZBKT_NUM_PREFIX + "00" + String.valueOf(curCount);
-				} else if(curCount > 9) {
+				} else if (curCount > 9) {
 					num = year + Constants.Subject.SUBJECT_TYPE_ZBKT_NUM_PREFIX + "0" + String.valueOf(curCount);
-				} else if(curCount > 99) {
+				} else if (curCount > 99) {
 					num = year + Constants.Subject.SUBJECT_TYPE_ZBKT_NUM_PREFIX + String.valueOf(curCount);
 				}
 			}
 			subject.setNum(num);
-		} else if(subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
+		} else if (subject.getType().equals(Constants.Subject.SUBJECT_TYPE_KYGGKT)) {
 			String maxNum = this.subjectDao.getMaxSubjectNum(year, Constants.Subject.SUBJECT_TYPE_KYGGKT);
 			String num = "";
-			if(maxNum.equals("")) {
+			if (maxNum.equals("")) {
 				num = year + Constants.Subject.SUBJECT_TYPE_KYGGKT_NUM_PREFIX + "001";
 			} else {
 				String count = maxNum.substring(5);
 				int curCount = Integer.parseInt(count) + 1;
-				if(curCount <= 9) {
+				if (curCount <= 9) {
 					num = year + Constants.Subject.SUBJECT_TYPE_KYGGKT_NUM_PREFIX + "00" + String.valueOf(curCount);
-				} else if(curCount > 9) {
+				} else if (curCount > 9) {
 					num = year + Constants.Subject.SUBJECT_TYPE_KYGGKT_NUM_PREFIX + "0" + String.valueOf(curCount);
-				} else if(curCount > 99) {
+				} else if (curCount > 99) {
 					num = year + Constants.Subject.SUBJECT_TYPE_KYGGKT_NUM_PREFIX + String.valueOf(curCount);
 				}
 			}
 			subject.setNum(num);
 		}
-		
+
 		subject.setStage(Constants.Subject.SUBJECT_STAGE_RWSTB);
 		this.subjectDao.save(subject);
 	}

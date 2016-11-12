@@ -146,7 +146,7 @@ public class SubjectSbOperAction {
 		vo.setType(type);
 		vo.setOrganizationId(organizationId);
 		vo.setSecurity(security);
-		vo.setOrganizationCount(organizationCount);
+		vo.setOrganizationCount(StringUtils.isBlank(organizationCount) ? "0" : organizationCount);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (StringUtils.isNotBlank(beginDate)) {
 			vo.setBeginDate(sdf.parse(beginDate));
@@ -181,11 +181,12 @@ public class SubjectSbOperAction {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		NewsVo news = newsService.getById(Constants.SubjectSbs.SUBJECT_SBS_DESCRIPTION_NEWS_ID);
-
-		List<SubjectSbsBudget> budgets = subjectSbsBudgetService.getBySbsId(sbs.getSbsId());
-		for (SubjectSbsBudget budget : budgets) {
-			request.setAttribute("D_" + budget.getCode().substring(3),
-					budget.getReason() == null ? "" : budget.getReason());
+		if (sbs != null) {
+			List<SubjectSbsBudget> budgets = subjectSbsBudgetService.getBySbsId(sbs.getSbsId());
+			for (SubjectSbsBudget budget : budgets) {
+				request.setAttribute("D_" + budget.getCode().substring(3),
+						budget.getReason() == null ? "" : budget.getReason());
+			}
 		}
 
 		request.setAttribute("status", Constants.SubjectSbs.getSubjectSbsStatus());
