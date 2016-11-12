@@ -237,6 +237,10 @@
 					}
 					var v1 = $("#017001001004").val();
 					var v2 = $("#017001001004001").val();
+					v1 = Sport.isNull(v1)?0:parseFloat(v1);
+					v2 = Sport.isNull(v2)?0:parseFloat(v2);
+					v1 = isNaN(v1)?0:v1;
+					v2 = isNaN(v2)?0:v2;
 					if(v2>v1){
 						layer.msg("市内交通费不能高于差旅费！");
 						return;
@@ -246,9 +250,16 @@
 					var v2 = $("#017001001001002").val();
 					var v3 = $("#017001001001003").val();
 					var v4 = $("#017001001001").val();
+					v1 = Sport.isNull(v1)?0:parseFloat(v1);
+					v2 = Sport.isNull(v2)?0:parseFloat(v2);
+					v3 = Sport.isNull(v3)?0:parseFloat(v3);
+					v4 = Sport.isNull(v4)?0:parseFloat(v4);
+					v1 = isNaN(v1)?0:v1;
+					v2 = isNaN(v2)?0:v2;
+					v3 = isNaN(v3)?0:v3;
+					v4 = isNaN(v4)?0:v4;
 					
-					
-					if(v4<(parseFloat(v1)+parseFloat(v2)+parseFloat(v3))){
+					if(v4<(v1+v2+v3)){
 						layer.msg("购置设备费+试制设备费+设备改造与租赁费不能高于设备费总费用！");
 						return;
 					}
