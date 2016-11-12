@@ -117,7 +117,7 @@ public class SubjectSbsProposerAction {
 			throw new ParameterIsWrongException();
 		}
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
-		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
 		request.setAttribute("degrees", degrees);
 		request.setAttribute("zwDics", zwDics);
 		request.setAttribute("sbsId", sbsId);
