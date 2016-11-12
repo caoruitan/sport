@@ -29,7 +29,7 @@
 				<li class="dot" id="e-yqjg" onclick="showLayout('b-yqjg')">
 					<a title="预期结果">05 预期结果</a>
 				</li>
-				<li class="dot" id="e-gztj">
+				<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
 					<a title="承担单位现有工作条件和基础">06 承担单位现有工作条件和基础</a>
 				</li>
 				<li class="dot" id="e-jdap" onclick="showLayout('b-jdap')">

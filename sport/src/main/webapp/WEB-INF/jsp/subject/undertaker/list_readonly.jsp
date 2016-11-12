@@ -24,10 +24,7 @@
 			{label:"单位",name:'org', align:"center", width:15},
 			{label:"年龄",name:'age', width:20, align:"center"},
 			{label:"职务",name:'zw', width:20, align:"center",sorttype:"float"},		
-			{label:"分工",name:'work', width:30,align:"center",sorttype:"float"},		
-			{label:"操作",width:10, align:"center",sortable:false,formatter:function(value, grid, rows, state){
-				return "<a href='javascript:;;' class='sport-undertaker-edit' data-id='"+rows.id+"'>编辑</a>";
-			}}
+			{label:"分工",name:'work', width:30,align:"center",sorttype:"float"}
         ],
 		viewrecords: true,
 		width: 860,
