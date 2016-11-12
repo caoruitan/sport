@@ -30,6 +30,8 @@ public interface SubjectRwsService {
 	
 	public void saveGztj(String subjectId, String gztj);
 	
+	public void saveYsly(String subjectId, String ysly);
+	
 	public Map<String, String> checkAndSubmit(String subjectId, String basePath);
 	
 	public void sbadminPass(String subjectId);

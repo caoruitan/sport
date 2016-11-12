@@ -224,13 +224,17 @@
 		<!--11 预算来源及经费支出情况说明-->
 		<div class="box b-ysly">
 			<div class="t">11 预算来源及经费支出情况说明</div>
-			<div class="c">
-				<textarea class="ckeditor" name="editor-ysly"></textarea>
-				<p class="save-btn">
-					<button class="btn-red btn-size-big" type="">保存</button>
-					<button class="btn-wisteria btn-size-big" type="">重置</button>
-				</p>
-			</div>
+			<form id="yslyForm">
+				<input type="hidden" name="subjectId" value="${subjectId}">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<div class="c">
+					<textarea  style="width:100%;height:400px;" name="ysly">${rws.ysly}</textarea>
+					<p class="save-btn">
+						<button  id="yslyFormSubmit" class="btn-red btn-size-big" type="" onclick="saveYsly()">保存</button>
+						<button class="btn-wisteria btn-size-big" type="" onclick="reset('yslyForm')">重置</button>
+					</p>
+				</div>
+			</form>
 		</div>
 		<!--12 需拨付其他单位经费情况-->
 		<div class="box b-xbfjf"></div>
@@ -528,6 +532,33 @@
 			success: function (obj) {
 				$('#gztjFormSubmit').removeAttr("disabled");
 				$("#gztjFormSubmit").text("保存");
+				layer.msg("保存成功！");
+			}
+		});
+	}
+	
+	
+
+	var saveYsly= function() {
+		$('#yslyFormSubmit').attr("disabled",true);
+		$('#yslyFormSubmit').text('正在提交...');
+		$.ajax({
+			url: "<%=basePath%>/subject/sboper/saveRwsYsly.action",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				ysly : $("#yslyForm textarea[name='ysly']").val(),
+				subjectId : $("#yslyForm input[name='subjectId']").val(),
+				_csrf : "${_csrf.token}"
+			},
+			error: function (obj) {
+				$('#yslyFormSubmit').removeAttr("disabled");
+				$("#yslyFormSubmit").text("保存");
+				layer.msg("保存失败，请稍后重试！");
+			},
+			success: function (obj) {
+				$('#yslyFormSubmit').removeAttr("disabled");
+				$("#yslyFormSubmit").text("保存");
 				layer.msg("保存成功！");
 			}
 		});

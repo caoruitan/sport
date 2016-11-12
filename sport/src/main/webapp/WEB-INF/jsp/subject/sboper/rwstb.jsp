@@ -45,7 +45,6 @@
 						layer.msg("提交失败，请稍后重试！");
 					},
 					success: function (obj) {
-						debugger;
 						$('#tj').removeAttr("disabled");
 						if(obj.success == "true") {
 							layer.msg("提交成功！");

@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 @Table(name = "SPORT_SUBJECT_RWS")
 public class SubjectRws {
@@ -56,9 +55,13 @@ public class SubjectRws {
 	 * 承担单位现有工作条件和基础
 	 */
 	private String gztj;
+	/**
+	 * 经费来源及经费支出情况说明
+	 */
+	private String ysly;
 
 	private String status;
-	
+
 	private String comment;
 
 	@Id
@@ -197,6 +200,15 @@ public class SubjectRws {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Column(name = "RWS_YSLY")
+	public String getYsly() {
+		return ysly;
+	}
+
+	public void setYsly(String ysly) {
+		this.ysly = ysly;
 	}
 
 }

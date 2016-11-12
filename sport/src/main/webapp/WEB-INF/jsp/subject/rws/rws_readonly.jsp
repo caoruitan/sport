@@ -76,52 +76,44 @@
 			<div class="t">任务书封面</div>
 			<div class="c">
 				<div class="editBox">
-					<form id="baseInfoForm">
-						<input type="hidden" name="subjectId" value="${subjectId}">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-						<table class="editTable">
-							<tr>
-								<th>课题名称</th>
-								<td><input name="name" type="text" value="${subject.name}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题组织单位</th>
-								<td><input name="organizationName" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题承担单位</th>
-								<td><input name="createUnitName" type="text" value="${subject.createUnitName}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题负责人</th>
-								<td><input name="creatorName" type="text" value="${subject.creatorName}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题开始日期</th>
-								<td><input name="beginDate" type="text" value="${subject.beginDate}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题结束日期</th>
-								<td><input name="endDate" type="text" value="${subject.endDate}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>通信地址</th>
-								<td><input name="address" type="text" value="${rws.address}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>联系电话</th>
-								<td><input name="phone" type="text" value="${rws.phone}" disabled="disabled" /></td>
-							</tr>
-							<tr>
-								<th>课题协作单位</th>
-								<td><input name="cooperateOrg" type="text" value="${rws.cooperateOrg}" disabled="disabled" /></td>
-							</tr>
-						</table>
-					</form>
-					<p class="save-btn">
-						<button id="baseInfoFormSubmit" class="btn-red btn-size-big" onclick="saveBaseInfo()">保存</button>
-						<button class="btn-wisteria btn-size-big" onclick="reset('baseInfoForm')">重置</button>
-					</p>
+					<table class="editTable">
+						<tr>
+							<th>课题名称</th>
+							<td><input name="name" type="text" value="${subject.name}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题组织单位</th>
+							<td><input name="organizationName" type="text" value="${subject.organizationName}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题承担单位</th>
+							<td><input name="createUnitName" type="text" value="${subject.createUnitName}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题负责人</th>
+							<td><input name="creatorName" type="text" value="${subject.creatorName}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题开始日期</th>
+							<td><input name="beginDate" type="text" value="${subject.beginDate}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题结束日期</th>
+							<td><input name="endDate" type="text" value="${subject.endDate}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>通信地址</th>
+							<td><input name="address" type="text" value="${rws.address}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>联系电话</th>
+							<td><input name="phone" type="text" value="${rws.phone}" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<th>课题协作单位</th>
+							<td><input name="cooperateOrg" type="text" value="${rws.cooperateOrg}" disabled="disabled" /></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -129,90 +121,42 @@
 		<div class="box b-yjmb">
 			<div class="t">01 研究目标和研究内容</div>
 			<div class="c">
-				<form id="yjmbForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yjmb" disabled="disabled">${rws.yjmb}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yjmbFormSubmit" class="btn-red btn-size-big" onclick="saveYjmb()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yjmbForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="yjmb" disabled="disabled">${rws.yjmb}</textarea>
 			</div>
 		</div>
 		<!--02 技术关键和创新点-->
 		<div class="box b-jsgj">
 			<div class="t">02 技术关键和创新点</div>
 			<div class="c">
-				<form id="jsgjForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="jsgj" disabled="disabled">${rws.jsgj}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="jsgjFormSubmit" class="btn-red btn-size-big" onclick="saveJsgj()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('jsgjForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="jsgj" disabled="disabled">${rws.jsgj}</textarea>
 			</div>
 		</div>
 		<!--03 采取的研究方法、主要技术路...-->
 		<div class="box b-yjff">
 			<div class="t">03 采取的研究方法、主要技术路...</div>
 			<div class="c">
-				<form id="yjffForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yjff" disabled="disabled">${rws.yjff}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yjffFormSubmit" class="btn-red btn-size-big" onclick="saveYjff()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yjffForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="yjff" disabled="disabled">${rws.yjff}</textarea>
 			</div>
 		</div>
 		<!--04 研究实验方案、实验地点及协作...-->
 		<div class="box b-syfa">
 			<div class="t">04 研究实验方案、实验地点及协作...</div>
 			<div class="c">
-				<form id="syfaForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="syfa" disabled="disabled">${rws.syfa}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="syfaFormSubmit" class="btn-red btn-size-big" onclick="saveSyfa()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('syfaForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="syfa" disabled="disabled">${rws.syfa}</textarea>
 			</div>
 		</div>
 		<!--05 预期结果-->
 		<div class="box b-yqjg">
 			<div class="t">05 预期结果</div>
 			<div class="c">
-				<form id="yqjgForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yqjg" disabled="disabled">${rws.yqjg}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yqjgFormSubmit" class="btn-red btn-size-big" onclick="saveYqjg()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yqjgForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="yqjg" disabled="disabled">${rws.yqjg}</textarea>
 			</div>
 		</div>
 		<!--06 承担单位现有工作条件和基础-->
 		<div class="box b-gztj">
 			<div class="t">06 承担单位现有工作条件和基础</div>
 			<div class="c">
-				<form id="gztjForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="gztj" disabled="disabled">${rws.gztj}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="gztjFormSubmit" class="btn-red btn-size-big" onclick="saveGztj()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('gztjForm')">重置</button>
-				</p>
+				<textarea style="width:100%;height:400px;" name="gztj" disabled="disabled">${rws.gztj}</textarea>
 			</div>
 		</div>
 		<!--07 进度安排-->
@@ -235,11 +179,7 @@
 		<div class="box b-ysly">
 			<div class="t">11 预算来源及经费支出情况说明</div>
 			<div class="c">
-				<textarea class="ckeditor" name="editor-ysly" disabled="disabled"></textarea>
-				<p class="save-btn">
-					<button class="btn-red btn-size-big" type="">保存</button>
-					<button class="btn-wisteria btn-size-big" type="">重置</button>
-				</p>
+				<textarea  style="width:100%;height:400px;" disabled="disabled">${rws.ysly}</textarea>
 			</div>
 		</div>
 		<!--12 需拨付其他单位经费情况-->

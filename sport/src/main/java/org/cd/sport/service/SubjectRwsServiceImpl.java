@@ -131,6 +131,13 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	}
 
 	@Override
+	public void saveYsly(String subjectId, String ysly) {
+		SubjectRws rws = getOrCreateSubjectRws(subjectId);
+		rws.setYsly(ysly);
+		this.subjectRwsDao.update(rws);
+	}
+
+	@Override
 	public Map<String, String> checkAndSubmit(String subjectId, String basePath) {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectRws rws = this.getRwsBySubjectId(subjectId);

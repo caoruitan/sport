@@ -397,6 +397,16 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
+	
+	@RequestMapping(value = "saveRwsYsly")
+	public void saveRwsYsly(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String ysly = request.getParameter("ysly");
+		this.subjectRwsService.saveYsly(subjectId, ysly);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
 
 	@RequestMapping(value = "checkAndSubmitRws.action")
 	public void checkAndSubmitRws(HttpServletRequest request, HttpServletResponse response) {
