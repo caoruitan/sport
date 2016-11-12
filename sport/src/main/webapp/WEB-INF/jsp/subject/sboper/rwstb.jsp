@@ -48,6 +48,7 @@
 						$('#tj').removeAttr("disabled");
 						if(obj.success == "true") {
 							layer.msg("提交成功！");
+							window.location.reload();
 						} else if(obj.success == "false") {
 							$.dialog({
 								id: 'checkResult',

@@ -179,7 +179,32 @@
 		<div class="box b-ysly">
 			<div class="t">11 预算来源及经费支出情况说明</div>
 			<div class="c">
-				<textarea  style="width:100%;height:400px;" disabled="disabled">${rws.ysly}</textarea>
+				<table style="width:80%;margin-left:10%">
+					<tr>
+						<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">
+							对各科目支出的主要用途、与项目研究的相关性及测算方法、测算依据进行详细分析说明。（未对支出进行分析说明的，不予核定预算）<br/>
+							一、直接费用<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（一）设备费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001001}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（二）材料费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001002}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（三）测试化验加工费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001003}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（四）差旅费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001004}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（五）会议费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001005}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（六）出版/印刷/文献/信息传播/知识产权事务费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001006}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（七）劳务费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001007}<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;（八）专家咨询费<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001008}<br/>
+							二、直接费用<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;${D_001002}<br/>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<!--12 需拨付其他单位经费情况-->

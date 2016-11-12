@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,13 +132,6 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 	}
 
 	@Override
-	public void saveYsly(String subjectId, String ysly) {
-		SubjectRws rws = getOrCreateSubjectRws(subjectId);
-		rws.setYsly(ysly);
-		this.subjectRwsDao.update(rws);
-	}
-
-	@Override
 	public Map<String, String> checkAndSubmit(String subjectId, String basePath) {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectRws rws = this.getRwsBySubjectId(subjectId);
@@ -223,8 +217,10 @@ public class SubjectRwsServiceImpl implements SubjectRwsService {
 			range.replaceText("${creatorName}", subject.getCreatorName());
 			range.replaceText("${address}", rws.getAddress());
 			range.replaceText("${phone}", rws.getPhone());
-			range.replaceText("${beginDate}", sdf.format(subject.getBeginDate()));
-			range.replaceText("${endDate}", sdf.format(subject.getEndDate()));
+			Date beginDate = subject.getBeginDate();
+			range.replaceText("${beginDate}", beginDate != null ? sdf.format(beginDate) : "");
+			Date endDate = subject.getEndDate();
+			range.replaceText("${endDate}", endDate != null ? sdf.format(endDate) : "");
 			range.replaceText("${yjmb}", rws.getYjmb());
 			range.replaceText("${jsgj}", rws.getJsgj());
 			range.replaceText("${yjff}", rws.getYjff());

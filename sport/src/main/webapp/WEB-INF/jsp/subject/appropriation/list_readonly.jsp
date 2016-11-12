@@ -35,14 +35,6 @@
 			name: 'describe',
 			align: "center",
 			width: 25
-		}, {
-			name: '操作',
-			width: 10,
-			align: "center",
-			sortable: false,
-			formatter:function(value, grid, rows, state){
-				return "<a href='javascript:;;' class='sport-appropr-edit'  data-id='"+rows.approId+"'>编辑</a>";
-			}
 		}],
 		viewrecords: true,
 		width: 860,
