@@ -168,6 +168,42 @@
 							<p><a href="0701jdbg-tb.html" target="_blank"></a></p>
 						</li>
 					</c:if>
+					<c:if test='${subject.stage eq "JTBG"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/sboper/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/sboper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<c:if test = '${empty rws || rws.status eq "SBOPER_TB" || rws.status eq "BACK"}'>
+										<button class="btn-red btn-size-small">填报</button>
+									</c:if>
+									<c:if test = '${not empty rws && rws.status ne "SBOPER_TB" && rws.status ne "BACK"}'>
+										<button class="btn-red btn-size-small">查看</button>
+									</c:if>
+								</a>
+							</p>
+						</li>
+						<li class="cur">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/sboper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<c:if test = '${empty rws || rws.status eq "SBOPER_TB" || rws.status eq "BACK"}'>
+										<button class="btn-red btn-size-small">填报</button>
+									</c:if>
+									<c:if test = '${not empty rws && rws.status ne "SBOPER_TB" && rws.status ne "BACK"}'>
+										<button class="btn-red btn-size-small">查看</button>
+									</c:if>
+								</a>
+							
+							</p>
+						</li>
+					</c:if>
 				</div>
 			</div>
 		</div>
