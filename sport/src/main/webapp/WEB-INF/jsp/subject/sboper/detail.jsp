@@ -192,11 +192,11 @@
 							<p><b>结题报告</b></p>
 							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
 							<p>
-								<a href="<%=basePath %>/subject/sboper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
-									<c:if test = '${empty rws || rws.status eq "SBOPER_TB" || rws.status eq "BACK"}'>
+								<a href="<%=basePath %>/subject/sboper/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+									<c:if test = '${empty sc || sc.status eq "SBOPER_TB" || sc.status eq "BACK"}'>
 										<button class="btn-red btn-size-small">填报</button>
 									</c:if>
-									<c:if test = '${not empty rws && rws.status ne "SBOPER_TB" && rws.status ne "BACK"}'>
+									<c:if test = '${not empty sc && sc.status ne "SBOPER_TB" && sc.status ne "BACK"}'>
 										<button class="btn-red btn-size-small">查看</button>
 									</c:if>
 								</a>

@@ -30,4 +30,6 @@ public interface SubjectConclusionService {
 
 	public List<SubjectConclusionAttachment> getAttachmentByConclusionId(String conclusionId);
 
+	public List<SubjectConclusionAttachment> getAttachmentBySubjectId(String subjectId);
+
 }

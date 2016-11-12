@@ -22,4 +22,6 @@ public interface SubjectConclusionDao extends IBaseDao {
 
 	public List<SubjectConclusionAttachment> findAttachmentByConclusionId(String conclusionId);
 
+	public List<SubjectConclusionAttachment> findAttachmentBySubjectId(String subjectId);
+
 }

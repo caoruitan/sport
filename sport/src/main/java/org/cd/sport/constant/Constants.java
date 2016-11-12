@@ -297,9 +297,9 @@ public class Constants {
 		public static final String SUBJECT_TYPE_ZBKT = "ZBKT";
 
 		public static final String SUBJECT_TYPE_KYGGKT = "KYGGKT";
-		
+
 		public static final String SUBJECT_TYPE_ZBKT_NUM_PREFIX = "B";
-		
+
 		public static final String SUBJECT_TYPE_KYGGKT_NUM_PREFIX = "A";
 
 		public static final String SUBJECT_ZBKT_SBS_END_DATE_CODE = "019002001";
@@ -397,6 +397,32 @@ public class Constants {
 			return types;
 		}
 
+	}
+
+	public static final class SubjectConclusion {
+
+		public static final String SUBJECT_CONCLUSION_STATUS_SBOPER_TB = "SBOPER_TB";
+
+		public static final String SUBJECT_CONCLUSION_STATUS_SBADMIN_SP = "SBADMIN_SP";
+
+		public static final String SUBJECT_CONCLUSION_STATUS_ORG_SP = "ORG_SP";
+
+		public static final String SUBJECT_CONCLUSION_STATUS_KJS_SP = "KJS_SP";
+
+		public static final String SUBJECT_CONCLUSION_STATUS_COMPLETE = "COMPLETE";
+
+		public static final String SUBJECT_CONCLUSION_STATUS_BACK = "BACK";
+
+		public static Map<String, String> getSubjectSbsStatus() {
+			Map<String, String> types = new LinkedHashMap<String, String>();
+			types.put(SUBJECT_CONCLUSION_STATUS_SBOPER_TB, "申报人填报");
+			types.put(SUBJECT_CONCLUSION_STATUS_SBADMIN_SP, "已提交至本单位管理员审批");
+			types.put(SUBJECT_CONCLUSION_STATUS_ORG_SP, "已提交至组织单位审批");
+			types.put(SUBJECT_CONCLUSION_STATUS_KJS_SP, "已提交至科教司审批");
+			types.put(SUBJECT_CONCLUSION_STATUS_COMPLETE, "审批通过");
+			types.put(SUBJECT_CONCLUSION_STATUS_BACK, "已回退");
+			return types;
+		}
 	}
 
 	public static class News {

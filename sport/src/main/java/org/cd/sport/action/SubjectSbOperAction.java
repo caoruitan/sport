@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectConclusionAttachment;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsBudget;
 import org.cd.sport.domain.SubjectSbs;
@@ -21,6 +22,7 @@ import org.cd.sport.domain.SubjectSbsBudget;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsService;
 import org.cd.sport.service.OrganizationService;
+import org.cd.sport.service.SubjectConclusionService;
 import org.cd.sport.service.SubjectRwsBudgetService;
 import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsBudgetService;
@@ -63,9 +65,12 @@ public class SubjectSbOperAction {
 
 	@Autowired
 	private SubjectSbsBudgetService subjectSbsBudgetService;
-	
+
 	@Autowired
 	private SubjectRwsBudgetService subjectRwsBudgetService;
+
+	@Autowired
+	private SubjectConclusionService subjectConclusionService;
 
 	@Autowired
 	private SubjectRwsService subjectRwsService;
@@ -409,7 +414,6 @@ public class SubjectSbOperAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
 
 	@RequestMapping(value = "checkAndSubmitRws.action")
 	public void checkAndSubmitRws(HttpServletRequest request, HttpServletResponse response) {
@@ -422,4 +426,15 @@ public class SubjectSbOperAction {
 		PageWrite.writeTOPage(response, json);
 	}
 
+	@RequestMapping(value = "conclusiontb")
+	public String conclusiontb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("sas", sas);
+		return "subject/sboper/conclusiontb";
+	}
 }

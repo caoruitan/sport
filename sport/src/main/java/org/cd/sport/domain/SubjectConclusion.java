@@ -21,6 +21,7 @@ public class SubjectConclusion {
 
 	private String subjectId;
 	private String conclusionId;
+	private String status;
 
 	@Column(name = "SUBJECT_ID")
 	public String getSubjectId() {
@@ -41,6 +42,15 @@ public class SubjectConclusion {
 
 	public void setConclusionId(String conclusionId) {
 		this.conclusionId = conclusionId;
+	}
+
+	@Column(name = "STATUS")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -35,4 +35,11 @@ public class SubjectConclusionDaoImpl extends BaseDaoImpl<SubjectConclusion> imp
 		String queryHql = "from SubjectConclusionAttachment where conclusionId=:conclusionId";
 		return this.getHibernateQuery(queryHql).setParameter("conclusionId", conclusionId).list();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<SubjectConclusionAttachment> findAttachmentBySubjectId(String subjectId) {
+		String queryHql = "from SubjectConclusionAttachment where subjectId=:subjectId";
+		return this.getHibernateQuery(queryHql).setParameter("subjectId", subjectId).list();
+	}
 }

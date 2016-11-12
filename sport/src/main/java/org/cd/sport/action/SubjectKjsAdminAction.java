@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectConclusion;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.service.SubjectConclusionService;
 import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
 import org.cd.sport.service.SubjectService;
@@ -28,15 +30,18 @@ import com.google.gson.JsonObject;
 @Controller
 @RequestMapping("subject/kjsadmin")
 public class SubjectKjsAdminAction {
-	
+
 	@Autowired
-	private SubjectService subjectService; 
-	
+	private SubjectService subjectService;
+
 	@Autowired
 	private SubjectSbsService subjectSbsService;
-	
+
 	@Autowired
 	private SubjectRwsService subjectRwsService;
+
+	@Autowired
+	private SubjectConclusionService subjectConclusionService;
 
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, HttpServletResponse response) {
@@ -45,7 +50,7 @@ public class SubjectKjsAdminAction {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		int endYear = Integer.parseInt(sdf.format(date));
 		List<String> years = new LinkedList<String>();
-		for(int i = 0; endYear - i >= startYear; i ++) {
+		for (int i = 0; endYear - i >= startYear; i++) {
 			years.add(String.valueOf(endYear - i));
 		}
 
@@ -62,35 +67,38 @@ public class SubjectKjsAdminAction {
 		String type = request.getParameter("type");
 		String stage = request.getParameter("stage");
 		String startStr = request.getParameter("page");
-		if(year == null || year.equals("")) {
+		if (year == null || year.equals("")) {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 			year = sdf.format(date);
 		}
 		int start = SportSupport.processLimit(startStr);
-		List<Subject> list = subjectService.getAllSubjectList(year, type, stage, (start - 1) * Constants.Common.PAGE_SIZE, Constants.Common.PAGE_SIZE);
+		List<Subject> list = subjectService.getAllSubjectList(year, type, stage,
+				(start - 1) * Constants.Common.PAGE_SIZE, Constants.Common.PAGE_SIZE);
 		long total = subjectService.getAllSubjectCount(year, type, stage);
 		PageModel<Subject> page = new PageModel<Subject>();
 		page.setPage(start);
-		page.setTotal((long) Math.ceil(new Double(String.valueOf(total))/Constants.Common.PAGE_SIZE));
+		page.setTotal((long) Math.ceil(new Double(String.valueOf(total)) / Constants.Common.PAGE_SIZE));
 		page.setRecords(total);
 		page.setRows(list);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
 	}
-	
+
 	@RequestMapping(value = "detail")
 	public String detail(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		request.setAttribute("rws", rws);
+		request.setAttribute("sc", sc);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/kjsadmin/detail";
 	}
-	
+
 	@RequestMapping(value = "sbstb")
 	public String sbstb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
@@ -102,7 +110,7 @@ public class SubjectKjsAdminAction {
 		request.setAttribute("sbs", sbs);
 		return "subject/kjsadmin/sbstb";
 	}
-	
+
 	@RequestMapping(value = "pass.action")
 	public void pass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -111,7 +119,7 @@ public class SubjectKjsAdminAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "unpass.action")
 	public void unpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -121,7 +129,7 @@ public class SubjectKjsAdminAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "rwstb")
 	public String rwstb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
@@ -133,7 +141,7 @@ public class SubjectKjsAdminAction {
 		request.setAttribute("rws", rws);
 		return "subject/kjsadmin/rwstb";
 	}
-	
+
 	@RequestMapping(value = "rwsPass.action")
 	public void rwsPass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -142,7 +150,7 @@ public class SubjectKjsAdminAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 	@RequestMapping(value = "rwsUnpass.action")
 	public void rwsUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
@@ -152,5 +160,5 @@ public class SubjectKjsAdminAction {
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
 	}
-	
+
 }
