@@ -83,7 +83,7 @@
 				colModel: [
 					{label:'课题标号', name:'num', width:10, sortable: false, align:"center"},
 					{label:'课题名称', name:'name', width:20, sortable: false},
-					{label:'课题类型', name:'type', width:10, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
+					{label:'课题类型', name:'type', width:15, sortable: false, align:"center", formatter:function(value, grid, rows, state) {
 						if(value == "ZBKT") {
 							return "重点研究领域攻关课题";
 						} else if(value == "KYGGKT") {
@@ -109,7 +109,8 @@
 						}
 					}},
 					{label:'操作', name:'操作', width:10, sortable:false, align:"center", formatter:function(value, grid, rows, state){
-						return "<a href='<%=basePath%>/subject/kjsadmin/detail.htm?subjectId=" + rows.id + "' class='sport-user-edit'>查看</a>";
+						return "<a href='<%=basePath%>/subject/kjsadmin/updateSubject.htm?subjectId=" + rows.id + "' class='sport-user-edit'>编辑</a>&nbsp;&nbsp;"
+								+ "<a href='<%=basePath%>/subject/kjsadmin/detail.htm?subjectId=" + rows.id + "' class='sport-user-edit'>查看</a>";
 					}}
 				],
 				autowidth: true,

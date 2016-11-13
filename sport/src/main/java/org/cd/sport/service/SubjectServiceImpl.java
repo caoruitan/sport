@@ -192,4 +192,43 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		return subject;
 	}
 
+	@Override
+	public Subject updateSubject(String subjectId, SubjectVo subjectVo) {
+		Subject subject = this.getSubjectById(subjectId);
+		subject.setName(subjectVo.getName());
+		subject.setType(subjectVo.getType());
+		subject.setOrganizationId(subjectVo.getOrganizationId());
+		subject.setSecurity(subjectVo.getSecurity());
+		subject.setOrganizationCount(subjectVo.getOrganizationCount());
+		subject.setBeginDate(subjectVo.getBeginDate());
+		subject.setEndDate(subjectVo.getEndDate());
+		subject.setResults(subjectVo.getResults());
+		subject.setIntegration(subjectVo.isIntegration());
+		
+		Dic security = this.dicService.getByCode(subject.getSecurity());
+		subject.setSecurityName(security.getName());
+		
+		List<Dic> resultList = this.dicService.getByPcode(Constants.Dic.DIC_EXPECT_CODE);
+		Map<String, String> resultMap = new HashMap<String, String>();
+		for(Dic dic : resultList) {
+			resultMap.put(dic.getCode(), dic.getName());
+		}
+		
+		String results = subject.getResults();
+		if(results != null && !results.equals("")) {
+			String resultsName = "";
+			for(String result : results.split(",")) {
+				resultsName += resultMap.get(result) + ",";
+			}
+			resultsName = resultsName.substring(0, resultsName.length() - 1);
+			subject.setResultsName(resultsName);
+		}
+		
+		OrganizationDomain org = this.organizationService.getById(subject.getOrganizationId());
+		subject.setOrganizationName(org.getFullName());
+		
+		subjectDao.update(subject);
+		return subject;
+	}
+
 }

@@ -53,5 +53,7 @@ public interface SubjectService {
 	public Subject getSubjectById(String id);
 	
 	public Subject createSubject(SubjectVo subjectVo);
+
+	Subject updateSubject(String subjectId, SubjectVo subjectVo);
 	
 }
