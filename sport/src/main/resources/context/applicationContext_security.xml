@@ -55,6 +55,7 @@
 		<!--申报书、任务书下载-->
 		<intercept-url pattern="/sbs/download.action" access="isAuthenticated()"/>
 		<intercept-url pattern="/rws/download.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/jtFile/download.action" access="isAuthenticated()"/>
 		
 		<!--申报书申报人-->
 		<intercept-url pattern="/subject/proposer/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>

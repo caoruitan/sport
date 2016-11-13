@@ -22,6 +22,7 @@ public class SubjectConclusion {
 	private String subjectId;
 	private String conclusionId;
 	private String status;
+	private String comment;
 
 	@Column(name = "SUBJECT_ID")
 	public String getSubjectId() {
@@ -51,6 +52,15 @@ public class SubjectConclusion {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Column(name = "COMMENT")
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

@@ -177,4 +177,23 @@ public class SubjectOrgOperAction {
 		return "subject/orgoper/conclusiontb";
 	}
 
+	@RequestMapping(value = "jtPass.action")
+	public void jtPass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectConclusionService.sbadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+
+	@RequestMapping(value = "jtUnpass.action")
+	public void jtUnpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectConclusionService.sbadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+
 }

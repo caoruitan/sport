@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectConclusion;
+import org.cd.sport.domain.SubjectConclusionAttachment;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.service.SubjectConclusionService;
@@ -161,4 +162,34 @@ public class SubjectKjsAdminAction {
 		PageWrite.writeTOPage(response, json);
 	}
 
+	@RequestMapping(value = "conclusiontb")
+	public String conclusiontb(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("subjectId", subjectId);
+		request.setAttribute("subject", subject);
+		request.setAttribute("sas", sas);
+		return "subject/orgoper/conclusiontb";
+	}
+
+	@RequestMapping(value = "jtPass.action")
+	public void jtPass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		this.subjectConclusionService.sbadminPass(subjectId);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
+
+	@RequestMapping(value = "jtUnpass.action")
+	public void jtUnpass(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String comment = request.getParameter("comment");
+		this.subjectConclusionService.sbadminUnpass(subjectId, comment);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
 }
