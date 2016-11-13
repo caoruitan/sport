@@ -165,7 +165,7 @@ public class SubjectSbOperAction {
 
 		}
 		if (StringUtils.isNotBlank(endDate)) {
-			vo.setBeginDate(sdf.parse(endDate));
+			vo.setEndDate(sdf.parse(endDate));
 
 		}
 		vo.setResults(results);

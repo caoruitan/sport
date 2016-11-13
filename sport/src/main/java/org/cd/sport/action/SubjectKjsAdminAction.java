@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -8,12 +9,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectConclusion;
 import org.cd.sport.domain.SubjectConclusionAttachment;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
+import org.cd.sport.service.DicService;
+import org.cd.sport.service.OrganizationService;
 import org.cd.sport.service.SubjectConclusionService;
 import org.cd.sport.service.SubjectRwsService;
 import org.cd.sport.service.SubjectSbsService;
@@ -22,15 +27,24 @@ import org.cd.sport.support.SportSupport;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.vo.OrgVo;
+import org.cd.sport.vo.SubjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("subject/kjsadmin")
 public class SubjectKjsAdminAction {
+
+	@Autowired
+	private DicService dicService;
+
+	@Autowired
+	private OrganizationService organizationService;
 
 	@Autowired
 	private SubjectService subjectService;
@@ -83,6 +97,63 @@ public class SubjectKjsAdminAction {
 		page.setRecords(total);
 		page.setRows(list);
 		PageWrite.writeTOPage(response, GsonUtils.toJson(page));
+	}
+
+	@RequestMapping(value = "updateSubject", method = RequestMethod.GET)
+	public String toUpdateSubject(HttpServletRequest request) {
+		String subjectId = request.getParameter("subjectId");
+		Subject subject = subjectService.getSubjectById(subjectId);
+		List<Dic> secretList = dicService.getByPcode(Constants.Dic.DIC_SECRET_CODE);
+		List<Dic> expectList = dicService.getByPcode(Constants.Dic.DIC_EXPECT_CODE);
+		List<OrgVo> kjsList = organizationService.getbyRole(Constants.Org.KJS_ROLE);
+		List<OrgVo> orgList = organizationService.getbyRole(Constants.Org.ORG_ROLE);
+		request.setAttribute("subject", subject);
+		request.setAttribute("kjsList", kjsList);
+		request.setAttribute("orgList", orgList);
+		request.setAttribute("secretList", secretList);
+		request.setAttribute("expectList", expectList);
+		request.setAttribute("types", Constants.Subject.getSubjectTypes());
+		return "subject/kjsadmin/update";
+	}
+
+	@RequestMapping(value = "updateSubject", method = RequestMethod.POST)
+	public String updateSubject(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		String subjectId = request.getParameter("subjectId");
+		String name = request.getParameter("name");
+		String type = request.getParameter("type");
+		String organizationId = request.getParameter("organizationId");
+		String security = request.getParameter("security");
+		String organizationCount = request.getParameter("organizationCount");
+		String beginDate = request.getParameter("beginDate");
+		String endDate = request.getParameter("endDate");
+		String[] resultsList = request.getParameterValues("results");
+		String results = "";
+		if (resultsList != null && resultsList.length > 0) {
+			for (String result : resultsList) {
+				results += result + ",";
+			}
+			if (!results.equals("")) {
+				results = results.substring(0, results.length() - 1);
+			}
+		}
+		String integration = request.getParameter("integration");
+		SubjectVo vo = new SubjectVo();
+		vo.setName(name);
+		vo.setType(type);
+		vo.setOrganizationId(organizationId);
+		vo.setSecurity(security);
+		vo.setOrganizationCount(StringUtils.isBlank(organizationCount) ? "0" : organizationCount);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (StringUtils.isNotBlank(beginDate)) {
+			vo.setBeginDate(sdf.parse(beginDate));
+		}
+		if (StringUtils.isNotBlank(endDate)) {
+			vo.setEndDate(sdf.parse(endDate));
+		}
+		vo.setResults(results);
+		vo.setIntegration(Boolean.valueOf(integration));
+		subjectService.updateSubject(subjectId, vo);
+		return "redirect:list.htm";
 	}
 
 	@RequestMapping(value = "detail")
