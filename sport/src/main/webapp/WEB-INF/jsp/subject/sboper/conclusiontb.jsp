@@ -14,9 +14,6 @@
 			<c:if test='${not empty sc && (sc.status eq "SBOPER_TB" || sc.status eq "BACK")}'>
 				<button class="btn-img" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>校验提交</button>
 			</c:if>
-			<c:if test='${not empty sc && sc.status ne "SBOPER_TB"}'>
-				<button class="btn-img" id="xz"><img src="<%=basePath %>/static/img/d-xz.png"/>下载</button>
-			</c:if>
 		</div>
 	</div>
 	
