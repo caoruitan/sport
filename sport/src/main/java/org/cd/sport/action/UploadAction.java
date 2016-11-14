@@ -86,6 +86,42 @@ public class UploadAction {
 		this.downloadRwsById(subjectId, request, response);
 	}
 
+	@RequestMapping(value = "/jtFile/download.action")
+	public void downloadjtFile(String dataId, String dataName, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO 权限控制
+		this.downloadjtFileByFileId(dataId, dataName, request, response);
+	}
+
+	@RequestMapping(value = "/subject/sboper/upload.action")
+	public void subjectUpload(@RequestParam MultipartFile file, String subjectId, HttpServletRequest request,
+			HttpServletResponse response) {
+		String realPath = request.getSession().getServletContext().getRealPath("/" + UPLOAD_DIR);
+		// 原来文件名称
+		String originalFilename = file.getOriginalFilename();
+		String suffix = "";
+		if (originalFilename.indexOf(".") != -1) {
+			suffix = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
+		}
+		suffix = suffix.toUpperCase();
+		String guid = UUIDUtil.getGuid();
+		String newFileName = guid + suffix;
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		json.addProperty("id", guid);
+		json.addProperty("name", originalFilename);
+		json.addProperty("path", newFileName);
+		json.addProperty("size", file.getSize());
+		try {
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, newFileName));
+			PageWrite.writeTOPage(response, json);
+		} catch (IOException e) {
+			json.addProperty("success", false);
+			json.addProperty("msg", "文件上传失败!");
+			PageWrite.writeTOPage(response, json);
+		}
+	}
+
 	public void downloadSbsById(String subjectId, HttpServletRequest request, HttpServletResponse response) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		if (subject == null) {
@@ -99,11 +135,23 @@ public class UploadAction {
 	public void downloadRwsById(String subjectId, HttpServletRequest request, HttpServletResponse response) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		if (subject == null) {
-			throw new EntityNotFoundException("申报书不存在");
+			throw new EntityNotFoundException("课题不存在");
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
 		realPath = realPath + "/rws_" + subjectId + subject.getCreator() + ".doc";
 		downloadFile(realPath, "任务书_" + subject.getName() + ".doc", request, response);
+	}
+
+	public void downloadjtFileByFileId(String dataId, String dataName, HttpServletRequest request,
+			HttpServletResponse response) {
+		String realPath = request.getSession().getServletContext().getRealPath("/" + UPLOAD_DIR);
+		realPath = realPath + "/" + dataId;
+		String suffix = "";
+		if (dataName.indexOf(".") != -1) {
+			suffix = dataName.substring(dataName.lastIndexOf("."), dataName.length());
+		}
+		suffix = suffix.toUpperCase();
+		downloadFile(realPath + suffix, dataName, request, response);
 	}
 
 	public static void downloadFile(String filePath, String fileName, HttpServletRequest request,

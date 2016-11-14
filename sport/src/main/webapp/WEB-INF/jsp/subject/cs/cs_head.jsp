@@ -6,35 +6,18 @@
     request.setAttribute("_time", System.currentTimeMillis());
 %>
 <head>
-	<title>申报书填报</title>
+	<title>结题报告填报</title>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/base.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/sport.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>/static/css/bootstrap.min.css" />
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.min1.10.1.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/common.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/sport.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/layer/layer.js"></script>
-	
-	<!--jqgrid-->
-	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
-	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-	
-	<!--lhgdialog-->
+	<script type="text/ecmascript" src="<%=basePath %>/static/js/plugin/ajaxfileupload.js"></script>
 	<link rel="stylesheet" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/lhgdialog/lhgdialog.js"></script>
-
-	<!--checkbox-->
-	<link rel="stylesheet" href="<%=basePath %>/static/css/square/red.css">
-	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/icheck/icheck.js"></script>
-	
-	<script src="<%=basePath %>/static/js/ckeditor/ckeditor.js"></script>
-	<script src="<%=basePath %>/static/js/my97/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 	<style type="text/css">
 		body {
 			background: #F6F6F6;

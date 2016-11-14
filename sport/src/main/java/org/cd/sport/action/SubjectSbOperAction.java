@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectConclusion;
 import org.cd.sport.domain.SubjectConclusionAttachment;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectRwsBudget;
@@ -33,6 +34,7 @@ import org.cd.sport.utils.AuthenticationUtils;
 import org.cd.sport.utils.GsonUtils;
 import org.cd.sport.utils.PageModel;
 import org.cd.sport.utils.PageWrite;
+import org.cd.sport.view.SubjectConclusionView;
 import org.cd.sport.vo.NewsVo;
 import org.cd.sport.vo.OrgVo;
 import org.cd.sport.vo.SubjectVo;
@@ -430,11 +432,34 @@ public class SubjectSbOperAction {
 	public String conclusiontb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
+		request.setAttribute("sc", sc);
 		return "subject/sboper/conclusiontb";
 	}
+
+	@RequestMapping(value = "saveCsFile")
+	public void saveCsFile(SubjectConclusionView view, HttpServletRequest request, HttpServletResponse response) {
+		boolean result = this.subjectConclusionService.createConclusionAttachment(view.getConclusionId(),
+				view.getFiles());
+		JsonObject json = new JsonObject();
+		json.addProperty("success", result);
+		PageWrite.writeTOPage(response, json);
+	}
+
+	@RequestMapping(value = "checkAndSubmitJt.action")
+	public void checkAndSubmitJt(HttpServletRequest request, HttpServletResponse response) {
+		String subjectId = request.getParameter("subjectId");
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		Map<String, String> result = this.subjectConclusionService.checkAndSubmit(subjectId, basePath);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", result.get("success"));
+		json.addProperty("msg", result.get("msg"));
+		PageWrite.writeTOPage(response, json);
+	}
+
 }

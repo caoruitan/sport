@@ -125,7 +125,7 @@
 							</tr>
 							<tr>
 								<th>完成年限</th>
-								<td><input name="years" type="text" value="${sbs.years}" /></td>
+								<td><input name="years" type="text" value="${sbs.years}" onClick="WdatePicker({dateFmt:'yyyy-MM'})" readonly="readonly" /></td>
 							</tr>
 						</table>
 					</form>

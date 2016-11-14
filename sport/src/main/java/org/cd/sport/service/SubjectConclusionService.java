@@ -1,6 +1,7 @@
 package org.cd.sport.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.cd.sport.domain.SubjectConclusion;
 import org.cd.sport.domain.SubjectConclusionAttachment;
@@ -23,6 +24,20 @@ public interface SubjectConclusionService {
 	public boolean deleteAttachmentByConclusionId(String conclusionId);
 
 	public boolean deleteAttachmentByConclusionId(String conclusionId, String fileId);
+
+	public void sbadminPass(String subjectId);
+
+	public void sbadminUnpass(String subjectId, String comment);
+
+	public void orgadminPass(String subjectId);
+
+	public void orgadminUnpass(String subjectId, String comment);
+
+	public void kjsadminPass(String subjectId);
+
+	public void kjsadminUnpass(String subjectId, String comment);
+
+	public Map<String, String> checkAndSubmit(String subjectId, String basePath);
 
 	public SubjectConclusion getSubjectConclusionBySubjectId(String subjectId);
 
