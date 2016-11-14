@@ -13,10 +13,18 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
 	
+	<!--lhgdialog-->
+	<link rel="stylesheet" href="<%=basePath %>/static/js/lhgdialog/skins/discuz.css">
+	<script type="text/ecmascript" src="<%=basePath %>/static/js/lhgdialog/lhgdialog.js"></script>
+	
 	<!--select-->
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
+
+	<!--My97-->
+	<script type="text/javascript" charset="utf-8" src="<%=basePath %>/static/js/my97/WdatePicker.js"></script>
+	
 	<style type="text/css">
 		body{
 			background: #F2F2F2;
@@ -62,9 +70,7 @@
 	<div class="listBox">
 		<div class="opBtnBox">
 			<div class="fl-l">
-				<!-- <a href="<%=basePath%>/subject/sboper/createSubject.htm"><button class="btn-red">+ 申报课题</button></a> -->
-				<!-- <button class="btn-red" id="xzzj">+ 选择专家</button> -->
-				<!-- <button class="btn-red">阶段性报告设置</button> -->
+				<a href="javascript:void(0)"><button class="set-end-dates btn-red">设置课题截止日期</button></a>
 			</div>
 			<div class="fl-r">
 				<!--<button class="btn-wisteria">删除</button>-->
@@ -119,7 +125,7 @@
 				viewrecords: true,
 				height: 200,
 				rowNum: 20,
-				multiselect: false,
+				multiselect: true,
 				pager: "#jqGridPager"
 			});
 			doResize(); 
@@ -134,6 +140,57 @@
 						postData : {'year': year, 'type' : type, 'stage' : stage},
 						page : 1
 					}).trigger("reloadGrid");
+				});
+				
+				$(".set-end-dates").click(function(){
+					var selectedIds = $("#jqGrid").jqGrid("getGridParam", "selarrrow");
+					if(selectedIds.length<1){
+						layer.msg("请最少选择一行数据");
+						return;
+					}
+					var sIds = new Array();
+					for (var int = 0; int < selectedIds.length; int++) {
+						sIds.push(selectedIds[int]);
+					}
+					var form = '<div class="editBox" style="min-height:150px;"><table class="editTable">'
+						+ '<tr><th class="required">申报书截止日期</th><td>'
+						+ '<input id="sbsEndDate" name="sbsEndDate" type="text" onClick="WdatePicker()"/>'
+						+ '</td></tr>'
+						+ '<tr><th class="required">任务书截止日期</th><td>'
+						+ '<input id="rwsEndDate" name="rwsEndDate" type="text" onClick="WdatePicker()"/>'
+						+ '</td></tr>'
+						+ '<tr><th class="required">结题截止日期</th><td>'
+						+ '<input id="subjectEndDate" name="subjectEndDate" type="text" onClick="WdatePicker()"/>'
+						+ '</td></tr>'
+						+ '</div>';
+					$.dialog({
+						id: 'set-end-dates',
+						title: '设置截止日期',
+						content: form,
+						width: 430,
+						height: 200,
+						ok: function(){
+							$.ajax({
+								url: Sport.getBasePath()+"/subject/kjsadmin/setEndDates.action",
+								data: {
+									subjectIds: sIds.join(","),
+									_csrf: "${_csrf.token}",
+									sbsEndDate: $("#sbsEndDate").val(),
+									rwsEndDate: $("#rwsEndDate").val(),
+									subjectEndDate: $("#subjectEndDate").val(),
+								},
+								type:"POST",
+								success:function(data){
+									layer.msg("设置成功！");
+								},
+								error:function(){
+									layer.msg("提交失败，请稍后重试！");
+								}
+							});
+							
+						},
+						cancel: true
+					});
 				});
 			}); 
 			

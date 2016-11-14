@@ -1,5 +1,7 @@
 package org.cd.sport.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SubjectDaoImpl extends BaseDaoImpl<Subject> implements SubjectDao {
+
+	@Override
+	public void updateEndDates(String[] subjectIds, String sbsEndDate, String rwsEndDate, String subjectEndDate) {
+		String sql = "UPDATE SPORT_SUBJECT SET SUBJECT_SBS_END_DATE = :sbsEndDate, SUBJECT_RWS_END_DATE = :rwsEndDate, SUBJECT_END_DATE = :subjectEndDate WHERE SUBJECT_ID IN(:subjectIds)";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.getHibernateSqlQuery(sql)
+				.setParameter("sbsEndDate", sdf.parse(sbsEndDate)).setParameter("rwsEndDate", sdf.parse(rwsEndDate))
+				.setParameter("subjectEndDate", sdf.parse(subjectEndDate)).setParameterList("subjectIds", subjectIds).executeUpdate();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public boolean deleteSubjectById(String sId) {

@@ -7,6 +7,8 @@ import org.cd.sport.hibernate.IBaseDao;
 
 public interface SubjectDao extends IBaseDao {
 	
+	public void updateEndDates(String[] subjectIds, String sbsEndDate, String rwsEndDate, String subjectEndDate);
+	
 	public boolean deleteSubjectById(String sId);
 	
 	public List<Subject> getAllSubjectList(String year, String type, String stage, int start, int limit);
