@@ -180,9 +180,11 @@ public class SubjectSbOperAction {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		request.setAttribute("rws", rws);
+		request.setAttribute("sc", sc);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sboper/detail";
 	}
@@ -434,7 +436,7 @@ public class SubjectSbOperAction {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
-		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("status", Constants.SubjectConclusion.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);

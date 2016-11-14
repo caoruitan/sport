@@ -79,7 +79,7 @@ public class SubjectRwsUndertakerAction {
 	@RequestMapping(value = "/sboper/update.htm", method = RequestMethod.GET)
 	public String updateView(String sId, HttpServletRequest request) {
 		List<Dic> degrees = dicService.getByPcode(Constants.Dic.DIC_DEGREES_CODE);
-		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZW_CODE);
+		List<Dic> zwDics = dicService.getByPcode(Constants.Dic.DIC_ZC_CODE);
 		SubjectRwsUndertaker undertaker = this.subjectRwsUndertakerService.getById(sId);
 		if (undertaker == null) {
 			throw new ParameterIsWrongException();

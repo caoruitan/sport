@@ -268,17 +268,20 @@ public class SubjectSbsServiceImpl implements SubjectSbsService {
 					SubjectSbsProposerVo proposer = primaryProposers.get(i);
 					range.replaceText("${name" + (i + 1) + "}", proposer.getName());
 					range.replaceText("${xb" + (i + 1) + "}", proposer.getGender());
-					range.replaceText("${sr" + (i + 1) + "}", proposer.getBirthday());
+					range.replaceText("${sr" + (i + 1) + "}",
+							proposer.getBirthday() == null ? "" : proposer.getBirthday());
 					range.replaceText("${zc" + (i + 1) + "}", proposer.getZw());
 					range.replaceText("${xl" + (i + 1) + "}", proposer.getDegrees());
 					range.replaceText("${xw" + (i + 1) + "}", "");
-					range.replaceText("${byyx" + (i + 1) + "}", proposer.getUniversity());
-					range.replaceText("${sxzy" + (i + 1) + "}", proposer.getMajor());
-					range.replaceText("${dw" + (i + 1) + "}", proposer.getOrg());
-					range.replaceText("${yjfg" + (i + 1) + "}", proposer.getWork());
-					range.replaceText("${dh" + (i + 1) + "}", proposer.getPhone());
-					range.replaceText("${dzxx" + (i + 1) + "}", proposer.getEmail());
-					range.replaceText("${content" + (i + 1) + "}", proposer.getBackdrop());
+					range.replaceText("${byyx" + (i + 1) + "}",
+							proposer.getUniversity() == null ? "" : proposer.getUniversity());
+					range.replaceText("${sxzy" + (i + 1) + "}", proposer.getMajor() == null ? "" : proposer.getMajor());
+					range.replaceText("${dw" + (i + 1) + "}", proposer.getOrg() == null ? "" : proposer.getOrg());
+					range.replaceText("${yjfg" + (i + 1) + "}", proposer.getWork() == null ? "" : proposer.getWork());
+					range.replaceText("${dh" + (i + 1) + "}", proposer.getPhone() == null ? "" : proposer.getPhone());
+					range.replaceText("${dzxx" + (i + 1) + "}", proposer.getEmail() == null ? "" : proposer.getEmail());
+					range.replaceText("${content" + (i + 1) + "}",
+							proposer.getBackdrop() == null ? "" : proposer.getBackdrop());
 				} else {
 					range.replaceText("${name" + (i + 1) + "}", "");
 					range.replaceText("${xb" + (i + 1) + "}", "");

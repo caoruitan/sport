@@ -172,6 +172,63 @@
 							<p><a href="0701jdbg-tb.html" target="_blank"></a></p>
 						</li>
 					</c:if>
+					<c:if test='${subject.stage eq "JTBG"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/kjsadmin/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/kjsadmin/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+						<li class="cur">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<c:if test='${not empty sc}'>
+									<a href="<%=basePath %>/subject/kjsadmin/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+										<c:if test='${sc.status ne "KJS_SP"}'>
+											<button class="btn-red btn-size-small">查看</button>
+										</c:if>
+										<c:if test='${sc.status eq "KJS_SP"}'>
+											<button class="btn-red btn-size-small">审批</button>
+										</c:if>
+									</a>
+								</c:if>
+							</p>
+						</li>
+					</c:if>
+					<c:if test='${subject.stage eq "JTEND"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/kjsadmin/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/kjsadmin/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+						<li class="ok">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/kjsadmin/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+					</c:if>
 				</div>
 			</div>
 		</div>

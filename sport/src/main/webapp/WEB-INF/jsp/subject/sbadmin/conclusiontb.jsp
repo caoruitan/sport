@@ -32,7 +32,7 @@
 			height: 130,
 			ok: function() {
 				$.ajax({
-					url: "<%=basePath%>/subject/sbadmin/pass.action",
+					url: "<%=basePath%>/subject/sbadmin/jtPass.action",
 					type: "POST",
 					dataType: "JSON",
 					data: {
@@ -61,7 +61,7 @@
 			height: 230,
 			ok: function() {
 				$.ajax({
-					url: "<%=basePath%>/subject/sbadmin/unpass.action",
+					url: "<%=basePath%>/subject/sbadmin/jtUnpass.action",
 					type: "POST",
 					dataType: "JSON",
 					data: {
@@ -76,6 +76,7 @@
 					success: function (obj) {
 						$('#tj').removeAttr("disabled");
 						layer.msg("提交成功！");
+						window.location.reload();
 					}
 				});
 			},

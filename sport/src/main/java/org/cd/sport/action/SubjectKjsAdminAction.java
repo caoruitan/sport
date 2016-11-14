@@ -238,17 +238,19 @@ public class SubjectKjsAdminAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
-		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
+		request.setAttribute("status", Constants.SubjectConclusion.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
-		return "subject/orgoper/conclusiontb";
+		request.setAttribute("sc", sc);
+		return "subject/kjsadmin/conclusiontb";
 	}
 
 	@RequestMapping(value = "jtPass.action")
 	public void jtPass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
-		this.subjectConclusionService.sbadminPass(subjectId);
+		this.subjectConclusionService.kjsadminPass(subjectId);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
@@ -258,7 +260,7 @@ public class SubjectKjsAdminAction {
 	public void jtUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String comment = request.getParameter("comment");
-		this.subjectConclusionService.sbadminUnpass(subjectId, comment);
+		this.subjectConclusionService.kjsadminUnpass(subjectId, comment);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

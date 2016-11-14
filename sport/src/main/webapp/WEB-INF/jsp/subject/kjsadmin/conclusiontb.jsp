@@ -11,7 +11,7 @@
 		<div class="title">${subject.name}<span>${status[sc.status]}</span></div>
 		<div class="btnBox">
 			<c:if test='${sc.status eq "KJS_SP"}'>
-				<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>提交上一级</button>
+				<button class="btn-img" type="" id="tj"><img src="<%=basePath %>/static/img/d-tj.png"/>通过</button>
 				<button class="btn-img" type="" id="th"><img src="<%=basePath %>/static/img/d-th.png"/>退回</button>
 			</c:if>
 		</div>
@@ -42,6 +42,7 @@
 						success: function (obj) {
 							$('#tj').removeAttr("disabled");
 							layer.msg("提交成功！");
+							window.location.reload();
 						}
 					});
 				},
@@ -71,6 +72,7 @@
 						success: function (obj) {
 							$('#tj').removeAttr("disabled");
 							layer.msg("提交成功！");
+							window.location.reload();
 						}
 					});
 				},

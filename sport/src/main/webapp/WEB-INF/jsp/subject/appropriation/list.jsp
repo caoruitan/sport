@@ -11,7 +11,7 @@
 	<div class="opBtnBox" >
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="approprToken"/>
 		<div class="fl-l">
-			<button class="btn-red" id="bf">+ 新增</button>
+			<button class="btn-red" id="bfJF">+ 新增</button>
 		</div>
 		<div class="fl-r">
 			<button class="btn-wisteria appropr-delete">删除</button>
@@ -24,8 +24,8 @@
 </div>
 <script type="text/javascript">
 	//进度
-	$('#bf').dialog({
-		id: 'bf',
+	$('#bfJF').dialog({
+		id: 'bfJF',
 		title: '需拨付其他单位经费情况新增',
 		content: 'url:'+Sport.getBasePath()+"/subject/appropriation/sboper/create.htm?rwsId=${rwsId}&subjectId=${subjectId}",
 		width: 800,

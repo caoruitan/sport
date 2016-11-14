@@ -28,7 +28,7 @@
 				height: 130,
 				ok: function() {
 					$.ajax({
-						url: "<%=basePath%>/subject/orgoper/jtPass.action",
+						url: "<%=basePath%>/subject/orgadmin/jtPass.action",
 						type: "POST",
 						dataType: "JSON",
 						data: {
@@ -42,6 +42,7 @@
 						success: function (obj) {
 							$('#tj').removeAttr("disabled");
 							layer.msg("提交成功！");
+							window.loction.reload();
 						}
 					});
 				},
@@ -56,7 +57,7 @@
 				height: 230,
 				ok: function() {
 					$.ajax({
-						url: "<%=basePath%>/subject/orgoper/jtUnpass.action",
+						url: "<%=basePath%>/subject/orgadmin/jtUnpass.action",
 						type: "POST",
 						dataType: "JSON",
 						data: {

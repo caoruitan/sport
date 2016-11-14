@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.cd.sport.constant.Constants;
 import org.cd.sport.domain.Subject;
+import org.cd.sport.domain.SubjectConclusion;
 import org.cd.sport.domain.SubjectConclusionAttachment;
 import org.cd.sport.domain.SubjectRws;
 import org.cd.sport.domain.SubjectSbs;
@@ -93,9 +94,11 @@ public class SubjectSbAdminAction {
 		Subject subject = subjectService.getSubjectById(subjectId);
 		SubjectSbs sbs = subjectSbsService.getSbsBySubjectId(subjectId);
 		SubjectRws rws = subjectRwsService.getRwsBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sbs", sbs);
 		request.setAttribute("rws", rws);
+		request.setAttribute("sc", sc);
 		request.setAttribute("types", Constants.Subject.getSubjectTypes());
 		return "subject/sbadmin/detail";
 	}
@@ -166,12 +169,14 @@ public class SubjectSbAdminAction {
 	public String conclusiontb(HttpServletRequest request) {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
-		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
+		request.setAttribute("status", Constants.SubjectConclusion.getSubjectSbsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
-		return "subject/orgoper/conclusiontb";
+		request.setAttribute("sc", sc);
+		return "subject/sbadmin/conclusiontb";
 	}
 
 	@RequestMapping(value = "jtPass.action")

@@ -23,4 +23,52 @@
 	<c:if test='${not empty sc && sbs.status ne "SBOPER_TB" && sbs.status ne "BACK"}'>
 		<jsp:include page="../cs/cs_readonly.jsp"></jsp:include>
 	</c:if>
+<script type="text/javascript">
+	$(function(){
+		$("#tj").click(function() {
+			$.ajax({
+				url: "<%=basePath%>/subject/sboper/checkAndSubmitJt.action",
+				type: "POST",
+				dataType: "JSON",
+				data: {
+					subjectId : "${subjectId}",
+					_csrf : "${_csrf.token}"
+				},
+				error: function (obj) {
+					$('#tj').removeAttr("disabled");
+					layer.msg("提交失败，请稍后重试！");
+				},
+				success: function (obj) {
+					$('#tj').removeAttr("disabled");
+					if(obj.success == "true") {
+						layer.msg("提交成功！");
+						window.location.reload();
+					} else if(obj.success == "false") {
+						$.dialog({
+							id: 'tj',
+							title: '校验结果',
+							content: '<div class="dlg-contentbox">' + obj.msg + '</div>',
+							width: 400,
+							height: 130,
+							ok: true
+						});
+					}
+				}
+			});
+		});
+		
+		$("#xz").click(function() {
+			window.open("<%=basePath%>/sbs/download.action?subjectId=${subjectId}");
+		});
+		
+		$("#viewComment").dialog({
+			id: 'tj',
+			title: '审批意见',
+			content: '<div class="dlg-contentbox">${sbs.comment}</div>',
+			width: 400,
+			height: 130,
+			ok: true
+		});
+	});
+</script>
 </body>

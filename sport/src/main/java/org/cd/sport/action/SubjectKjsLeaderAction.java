@@ -127,10 +127,12 @@ public class SubjectKjsLeaderAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
-		return "subject/orgoper/conclusiontb";
+		request.setAttribute("sc", sc);
+		return "subject/kjsleader/conclusiontb";
 	}
 }

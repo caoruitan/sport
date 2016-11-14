@@ -149,7 +149,7 @@ public class SubjectOrgAdminAction {
 	@RequestMapping(value = "rwsPass.action")
 	public void rwsPass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
-		this.subjectSbsService.orgadminPass(subjectId);
+		this.subjectRwsService.orgadminPass(subjectId);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
@@ -159,7 +159,7 @@ public class SubjectOrgAdminAction {
 	public void rwsUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String comment = request.getParameter("comment");
-		this.subjectSbsService.orgadminUnpass(subjectId, comment);
+		this.subjectRwsService.orgadminUnpass(subjectId, comment);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
@@ -170,17 +170,19 @@ public class SubjectOrgAdminAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
-		return "subject/orgoper/conclusiontb";
+		request.setAttribute("sc", sc);
+		return "subject/orgadmin/conclusiontb";
 	}
 
 	@RequestMapping(value = "jtPass.action")
 	public void jtPass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
-		this.subjectConclusionService.sbadminPass(subjectId);
+		this.subjectConclusionService.orgadminPass(subjectId);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
@@ -190,7 +192,7 @@ public class SubjectOrgAdminAction {
 	public void jtUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String comment = request.getParameter("comment");
-		this.subjectConclusionService.sbadminUnpass(subjectId, comment);
+		this.subjectConclusionService.orgadminUnpass(subjectId, comment);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

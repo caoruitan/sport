@@ -159,6 +159,7 @@ public class SubjectConclusionServiceImpl implements SubjectConclusionService {
 	}
 
 	@Override
+	@Transactional
 	public void sbadminPass(String subjectId) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
@@ -172,6 +173,7 @@ public class SubjectConclusionServiceImpl implements SubjectConclusionService {
 	}
 
 	@Override
+	@Transactional
 	public void sbadminUnpass(String subjectId, String comment) {
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
 		rws.setStatus(Constants.SubjectConclusion.SUBJECT_CONCLUSION_STATUS_BACK);
@@ -180,6 +182,7 @@ public class SubjectConclusionServiceImpl implements SubjectConclusionService {
 	}
 
 	@Override
+	@Transactional
 	public void orgadminPass(String subjectId) {
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
 		rws.setStatus(Constants.SubjectConclusion.SUBJECT_CONCLUSION_STATUS_KJS_SP);
@@ -187,6 +190,7 @@ public class SubjectConclusionServiceImpl implements SubjectConclusionService {
 	}
 
 	@Override
+	@Transactional
 	public void orgadminUnpass(String subjectId, String comment) {
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
 		rws.setStatus(Constants.SubjectConclusion.SUBJECT_CONCLUSION_STATUS_BACK);
@@ -195,16 +199,18 @@ public class SubjectConclusionServiceImpl implements SubjectConclusionService {
 	}
 
 	@Override
+	@Transactional
 	public void kjsadminPass(String subjectId) {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
 		rws.setStatus(Constants.SubjectConclusion.SUBJECT_CONCLUSION_STATUS_COMPLETE);
 		this.subjectConclusionDao.update(rws);
-		subject.setStage(Constants.Subject.SUBJECT_STAGE_JTBG);
+		subject.setStage(Constants.Subject.SUBJECT_STAGE_JTEND);
 		this.subjectDao.save(subject);
 	}
 
 	@Override
+	@Transactional
 	public void kjsadminUnpass(String subjectId, String comment) {
 		SubjectConclusion rws = this.getSubjectConclusionBySubjectId(subjectId);
 		rws.setStatus(Constants.SubjectConclusion.SUBJECT_CONCLUSION_STATUS_BACK);

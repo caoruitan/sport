@@ -45,6 +45,7 @@
 						success: function (obj) {
 							$('#tj').removeAttr("disabled");
 							layer.msg("提交成功！");
+							window.loction.reload();
 						}
 					});
 				},

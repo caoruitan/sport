@@ -7,18 +7,14 @@
 %>
 <head>
 	<title>课题查看</title>
-	<!--jqgrid-->
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/i18n/grid.locale-cn.js"></script>
 	<script type="text/ecmascript" src="<%=basePath %>/static/js/jqgrid/jquery.jqGrid.min.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/ui.jqgrid.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>/static/js/jqgrid/css/my.jqgrid.css" />
-	
-	<!--select-->
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/bootstrap-select.css">
 	<link rel="stylesheet" href="<%=basePath %>/static/js/jqselect/my.select.css">
 	<script type="text/javascript" src="<%=basePath %>/static/js/jqselect/bootstrap-select.js"></script>
-	
 	<style type="text/css">
 		body {
 			background: #F2F2F2;
@@ -160,6 +156,60 @@
 							<p><b>结题报告</b></p>
 							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
 							<p><a href="0701jdbg-tb.html" target="_blank"></a></p>
+						</li>
+					</c:if>
+					<c:if test='${subject.stage eq "JTBG"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/kjsleader/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<c:if test='${not empty rws}'>
+									<a href="<%=basePath %>/subject/kjsleader/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+										<button class="btn-red btn-size-small">查看</button>
+									</a>
+								</c:if>
+							</p>
+						</li>
+						<li class="cur">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/kjsleader/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+					</c:if>
+					<c:if test='${subject.stage eq "JTEND"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/kjsleader/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<c:if test='${not empty rws}'>
+									<a href="<%=basePath %>/subject/kjsleader/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+										<button class="btn-red btn-size-small">查看</button>
+									</a>
+								</c:if>
+							</p>
+						</li>
+						<li class="ok">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/kjsleader/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
 						</li>
 					</c:if>
 				</div>

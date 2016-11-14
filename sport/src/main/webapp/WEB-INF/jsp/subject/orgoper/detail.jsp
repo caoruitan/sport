@@ -123,10 +123,10 @@
 							<p>
 								<c:if test='${not empty sbs}'>
 									<a href="<%=basePath %>/subject/orgoper/sbstb.shtm?subjectId=${subject.id}" target="_blank">
-										<c:if test='${sbs.status ne "ORGADMIN_SP"}'>
+										<c:if test='${sbs.status ne "ORG_SP"}'>
 											<button class="btn-red btn-size-small">查看</button>
 										</c:if>
-										<c:if test='${sbs.status eq "ORGADMIN_SP"}'>
+										<c:if test='${sbs.status eq "ORG_SP"}'>
 											<button class="btn-red btn-size-small">审批</button>
 										</c:if>
 									</a>
@@ -156,10 +156,10 @@
 							<p>
 								<c:if test='${not empty rws}'>
 									<a href="<%=basePath %>/subject/orgoper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
-										<c:if test='${rws.status ne "ORGADMIN_SP"}'>
+										<c:if test='${rws.status ne "ORG_SP"}'>
 											<button class="btn-red btn-size-small">查看</button>
 										</c:if>
-										<c:if test='${rws.status eq "ORGADMIN_SP"}'>
+										<c:if test='${rws.status eq "ORG_SP"}'>
 											<button class="btn-red btn-size-small">审批</button>
 										</c:if>
 									</a>
@@ -170,6 +170,63 @@
 							<p><b>结题报告</b></p>
 							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
 							<p><a href="0701jdbg-tb.html" target="_blank"></a></p>
+						</li>
+					</c:if>
+					<c:if test='${subject.stage eq "JTBG"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/orgoper/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/orgoper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+						<li class="cur">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<c:if test='${not empty sc}'>
+									<a href="<%=basePath %>/subject/orgoper/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+										<c:if test='${sc.status ne "ORG_SP"}'>
+											<button class="btn-red btn-size-small">查看</button>
+										</c:if>
+										<c:if test='${sc.status eq "ORG_SP"}'>
+											<button class="btn-red btn-size-small">审批</button>
+										</c:if>
+									</a>
+								</c:if>
+							</p>
+						</li>
+					</c:if>
+					<c:if test='${subject.stage eq "JTEND"}'>
+						<li class="ok">
+							<p><b>申报书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.sbsEndDate}" type="date"/></p>
+							<p><a href="<%=basePath %>/subject/orgoper/sbstb.shtm?subjectId=${subject.id}" target="_blank"><button class="btn-red btn-size-small">查看</button></a></p>
+						</li>
+						<li class="ok">
+							<p><b>任务书填报与评审</b></p>
+							<p>截止 <fmt:formatDate value="${subject.rwsEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/orgoper/rwstb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
+						</li>
+						<li class="ok">
+							<p><b>结题报告</b></p>
+							<p>截止 <fmt:formatDate value="${subject.subjectEndDate}" type="date"/></p>
+							<p>
+								<a href="<%=basePath %>/subject/orgoper/conclusiontb.shtm?subjectId=${subject.id}" target="_blank">
+									<button class="btn-red btn-size-small">查看</button>
+								</a>
+							</p>
 						</li>
 					</c:if>
 				</div>

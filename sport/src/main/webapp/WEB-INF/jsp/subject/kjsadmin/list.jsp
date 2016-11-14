@@ -104,6 +104,8 @@
 							return "阶段报告";
 						} else if(value == "JTBG") {
 							return "结题报告";
+						} else if(value == "JTEND"){
+							return "审批通过";
 						} else {
 							return "";
 						}

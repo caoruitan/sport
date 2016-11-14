@@ -170,17 +170,19 @@ public class SubjectOrgOperAction {
 		String subjectId = request.getParameter("subjectId");
 		Subject subject = subjectService.getSubjectById(subjectId);
 		List<SubjectConclusionAttachment> sas = subjectConclusionService.getAttachmentBySubjectId(subjectId);
+		SubjectConclusion sc = this.subjectConclusionService.getSubjectConclusionBySubjectId(subjectId);
 		request.setAttribute("status", Constants.SubjectRws.getSubjectRwsStatus());
 		request.setAttribute("subjectId", subjectId);
 		request.setAttribute("subject", subject);
 		request.setAttribute("sas", sas);
+		request.setAttribute("sc", sc);
 		return "subject/orgoper/conclusiontb";
 	}
 
 	@RequestMapping(value = "jtPass.action")
 	public void jtPass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
-		this.subjectConclusionService.sbadminPass(subjectId);
+		this.subjectConclusionService.orgadminPass(subjectId);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);
@@ -190,7 +192,7 @@ public class SubjectOrgOperAction {
 	public void jtUnpass(HttpServletRequest request, HttpServletResponse response) {
 		String subjectId = request.getParameter("subjectId");
 		String comment = request.getParameter("comment");
-		this.subjectConclusionService.sbadminUnpass(subjectId, comment);
+		this.subjectConclusionService.orgadminUnpass(subjectId, comment);
 		JsonObject json = new JsonObject();
 		json.addProperty("success", true);
 		PageWrite.writeTOPage(response, json);

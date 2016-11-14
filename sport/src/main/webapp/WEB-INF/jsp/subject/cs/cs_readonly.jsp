@@ -15,7 +15,7 @@
 					<a title="填写说明">填写说明</a>
 				</li>
 				<li class="dot" id="e-sbsfm" onclick="showLayout('b-sbsfm')" >
-					<a title="申报书封面">上传附件</a>
+					<a title="附件">附件</a>
 				</li>
 			</div>
 		</div>
@@ -42,29 +42,19 @@
 		</div>
 		<!--申报书封面-->
 		<div class="box b-sbsfm wow bounceInDown">
-			<div class="t">上传附件</div>
+			<div class="t">附件</div>
 			<div class="c">
 				<div class="editBox">
 					<table class="editTable">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdToken"/>
-						<th >附件</th>
-						<td style="width:100%;">
-							<div class="upload-file-wrap" style="float:left;width:100px;">
-								<input type="file" class="file-uploader" id="FileUploader" />
-								<div class="upload-wrap">
-									<a href="javascript:void(0)" class="upload-btn"></a>
+						<div class="news-file-container">
+							<c:forEach items="${sas}" var="file" varStatus="status">
+								<div class="sport-news-file" data-index="${status.index}">
+				            	 	<span style="text-align:left;display:inline-block;width:90%;line-height: 25px;color:#1e5494;">${file.fileName}</span>
+				            	 	<span style="text-align:right;display:inline-block;width:8%;line-height: 25px;color:#1e5494;cursor:pointer;" data-id="${file.fileId}" data-name="${file.fileName}" class="jt-download">下载</span>
 								</div>
-							</div>
-							<div style="clear:both"></div>
-							<div class="news-file-container">
-								<c:forEach items="${sas}" var="file" varStatus="status">
-									<div class="sport-news-file" data-index="${status.index}">
-					            	 	<span style="text-align:left;display:inline-block;width:90%;line-height: 25px;color:#1e5494;">${file.fileName}</span>
-					            	 	<span style="text-align:right;display:inline-block;width:8%;line-height: 25px;color:#1e5494;cursor:pointer;" data-id="${file.fileId}" data-name="${file.fileName}" class="jt-download">下载</span>
-									</div>
-								</c:forEach>
-							</div>
-						</td>
+							</c:forEach>
+						</div>
 					</table>
 				</div>
 			</div>
