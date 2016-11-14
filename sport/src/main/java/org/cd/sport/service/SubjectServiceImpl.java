@@ -231,4 +231,13 @@ public class SubjectServiceImpl extends SubjectSupport implements SubjectService
 		return subject;
 	}
 
+	@Override
+	public void setEndDates(String subjectIds, String sbsEndDate, String rwsEndDate, String subjectEndDate) {
+		String[] subjectIdArray = new String[0];
+		if(subjectIds != null && !subjectIds.equals("")) {
+			subjectIdArray = subjectIds.split(",");
+		} 
+		this.subjectDao.updateEndDates(subjectIdArray, sbsEndDate, rwsEndDate, subjectEndDate);
+	}
+
 }

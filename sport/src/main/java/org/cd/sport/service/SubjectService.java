@@ -54,6 +54,8 @@ public interface SubjectService {
 	
 	public Subject createSubject(SubjectVo subjectVo);
 
-	Subject updateSubject(String subjectId, SubjectVo subjectVo);
+	public Subject updateSubject(String subjectId, SubjectVo subjectVo);
+	
+	public void setEndDates(String subjectIds, String sbsEndDate, String rwsEndDate, String subjectEndDate);
 	
 }

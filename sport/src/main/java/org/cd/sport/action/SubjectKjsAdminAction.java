@@ -154,6 +154,18 @@ public class SubjectKjsAdminAction {
 		subjectService.updateSubject(subjectId, vo);
 		return "redirect:list.htm";
 	}
+	
+	@RequestMapping(value = "setEndDates.action")
+	public void setEndDates(HttpServletRequest request, HttpServletResponse response) {
+		String subjectIds = request.getParameter("subjectIds");
+		String sbsEndDate = request.getParameter("sbsEndDate");
+		String rwsEndDate = request.getParameter("rwsEndDate");
+		String subjectEndDate = request.getParameter("subjectEndDate");
+		subjectService.setEndDates(subjectIds, sbsEndDate, rwsEndDate, subjectEndDate);
+		JsonObject json = new JsonObject();
+		json.addProperty("success", true);
+		PageWrite.writeTOPage(response, json);
+	}
 
 	@RequestMapping(value = "detail")
 	public String detail(HttpServletRequest request) {
