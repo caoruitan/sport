@@ -95,19 +95,19 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 
 	@Transactional
 	public void sync() throws SQLException, UnsupportedEncodingException {
-		 this.importUser();
-		 this.importOrg();
-		 this.importNews();
-		this.importRwsAppropriation();
-		 this.importRwsBudget();
-		 this.importRwsDevice();
-		 this.importRwsSchedule();
-		 this.importRwsUndertaker();
+//		 this.importUser();
+//		 this.importOrg();
+//		 this.importNews();
+//		this.importRwsAppropriation();
+//		 this.importRwsBudget();
+//		 this.importRwsDevice();
+//		 this.importRwsSchedule();
+//		 this.importRwsUndertaker();
 		 this.importSbsBudget();
 		 this.importSbsProposer();
-		 this.importSubject();
-		 this.importSubjectRws();
-		 this.importSubjectSbs();
+//		 this.importSubject();
+//		 this.importSubjectRws();
+//		 this.importSubjectSbs();
 	}
 
 	@Transactional

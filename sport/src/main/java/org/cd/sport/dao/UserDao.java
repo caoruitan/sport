@@ -17,6 +17,8 @@ public interface UserDao extends IBaseDao {
 
 	public boolean deleteById(String id);
 
+	public boolean deleteByLoginName(String loginName);
+
 	public boolean deleteById(String[] id);
 
 	public boolean deleteByOrgId(String org);

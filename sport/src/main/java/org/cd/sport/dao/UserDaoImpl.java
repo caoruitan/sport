@@ -326,4 +326,10 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements UserDao {
 		return this.getHibernateQuery(deleteHql).setParameter("organization", organization).executeUpdate() != 0;
 	}
 
+	@Override
+	public boolean deleteByLoginName(String loginName) {
+		String deleteHql = "delete from UserDomain where loginName=:loginName";
+		return this.getHibernateQuery(deleteHql).setParameter("loginName", loginName).executeUpdate() != 0;
+	}
+
 }
