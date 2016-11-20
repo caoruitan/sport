@@ -24,18 +24,18 @@ import org.cd.sport.domain.SubjectRwsDevice;
 import org.cd.sport.domain.SubjectRwsSchedule;
 import org.cd.sport.domain.SubjectRwsUndertaker;
 import org.cd.sport.domain.SubjectSbs;
-import org.cd.sport.domain.SubjectSbsBudget;
 import org.cd.sport.domain.SubjectSbsProposer;
 import org.cd.sport.domain.UserDomain;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsAttachmentService;
+import org.cd.sport.service.SubjectSbsBudgetService;
 import org.cd.sport.view.FileView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service(value = "SyncDao")
+@Service
 public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 
 	@Autowired
@@ -71,9 +71,6 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 	private SubjectRwsUndertakerDao subjectRwsUndertakerDao;
 
 	@Autowired
-	private SubjectSbsBudgetDao subjectSbsBudgetDao;
-
-	@Autowired
 	private SubjectSbsProposerDao subjectSbsProposerDao;
 	private static volatile Connection conn = null;
 
@@ -93,21 +90,33 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 		return conn;
 	}
 
-	@Transactional
+	public Connection getNewConn() {
+		Connection conn = null;
+		String url = "jdbc:mysql://101.200.191.63:3306/sport?"
+				+ "user=sport&password=123qweASDZXC&useUnicode=true&characterEncoding=UTF8";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
+
 	public void sync() throws SQLException, UnsupportedEncodingException {
-//		 this.importUser();
-//		 this.importOrg();
-//		 this.importNews();
-//		this.importRwsAppropriation();
-//		 this.importRwsBudget();
-//		 this.importRwsDevice();
-//		 this.importRwsSchedule();
-//		 this.importRwsUndertaker();
-		 this.importSbsBudget();
-		 this.importSbsProposer();
-//		 this.importSubject();
-//		 this.importSubjectRws();
-//		 this.importSubjectSbs();
+		this.importUser();
+		this.importOrg();
+		this.importNews();
+		this.importRwsAppropriation();
+		this.importRwsBudget();
+		this.importRwsDevice();
+		this.importRwsSchedule();
+		this.importRwsUndertaker();
+		this.importSbsBudget();
+		this.importSbsProposer();
+		this.importSubject();
+		this.importSubjectRws();
+		this.importSubjectSbs();
 	}
 
 	@Transactional
@@ -519,6 +528,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 	 * 
 	 * @throws SQLException
 	 */
+	@Transactional
 	public void importRwsAppropriation() throws SQLException {
 		String sql = "select * from to_other_unit_funds t left join subject_task_book b ON t.TOUF_SUBJECT_TASK_ID=b.ID";
 		PreparedStatement ps = getConn().prepareStatement(sql);
@@ -547,24 +557,49 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 		String sql = "select * from funds_budget";
 		PreparedStatement ps = getConn().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
+		// while (rs.next()) {
+		// this.subjectSbsBudgetService.deleteById(rs.getString("FB_DECLARATION_ID"),
+		// rs.getString("FB_APPLY_OPTION_CODE"));
+		// SubjectSbsBudget subject = new SubjectSbsBudget();
+		// // subject.setSubjectId(rs.getString("SD_SUBJECT_ID"));
+		// subject.setCode(rs.getString("FB_APPLY_OPTION_CODE"));
+		// subject.setSbsId(rs.getString("FB_DECLARATION_ID"));
+		// subject.setCost(rs.getBigDecimal("FB_MONEY"));
+		// subject.setName(rs.getString("FB_TYPE"));
+		// subject.setReason(rs.getString("FB_COUNT_ACCORD_REASON"));
+		// this.subjectSbsBudgetService.create(subject);
+		// }
+
+		Connection newConn = this.getNewConn();
+		newConn.setAutoCommit(false);
+		int count = 0;
 		while (rs.next()) {
-			this.subjectSbsBudgetDao.deleteById(rs.getString("FB_DECLARATION_ID"),
-					rs.getString("FB_APPLY_OPTION_CODE"));
-			SubjectSbsBudget subject = new SubjectSbsBudget();
-			// subject.setSubjectId(rs.getString("SD_SUBJECT_ID"));
-			subject.setCode(rs.getString("FB_APPLY_OPTION_CODE"));
-			subject.setSbsId(rs.getString("FB_DECLARATION_ID"));
-			subject.setCost(rs.getBigDecimal("FB_MONEY"));
-			subject.setName(rs.getString("FB_TYPE"));
-			subject.setReason(rs.getString("FB_COUNT_ACCORD_REASON"));
-			this.subjectSbsBudgetDao.save(subject);
+			String code = rs.getString("FB_APPLY_OPTION_CODE");
+			String sbsId = rs.getString("FB_DECLARATION_ID");
+			sql = "delete from SPORT_SUBJECT_SBS_BUDGET where CODE='" + code + "' and SBS_ID='" + sbsId + "'";
+			PreparedStatement delete = newConn.prepareStatement(sql);
+			delete.execute();
+			// newConn.commit();
+			String big = rs.getString("FB_MONEY");
+			String name = rs.getString("FB_TYPE");
+			String reason = rs.getString("FB_COUNT_ACCORD_REASON");
+			sql = "insert into SPORT_SUBJECT_SBS_BUDGET (CODE,SBS_ID,COST,NAME,REASON) " + " values('" + code + "','"
+					+ sbsId + "','" + big + "','" + name + "','" + reason + "')";
+			PreparedStatement pss = newConn.prepareStatement(sql);
+			pss.executeUpdate();
+			count++;
+			if (count % 500 == 0) {
+				newConn.commit();
+			}
 		}
+		newConn.commit();
+		newConn.close();
 	}
 
 	@Transactional
 	public void importSbsProposer() throws SQLException {
 		// 主要申请人
-		String sql = "select * from major_declarant_info t left join subject_declaration d on t.MDI_DECLARATION_ID=d.SD_SUBJECT_ID";
+		String sql = "select * from major_declarant_info t left join subject_declaration d on t.MDI_DECLARATION_ID=d.SD_ID";
 		PreparedStatement ps = getConn().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
@@ -592,7 +627,7 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 		}
 
 		// 其他申请人
-		sql = "select * from other_declarant_info t left join subject_declaration d on t.ODI_DECLARATION_ID=d.SD_SUBJECT_ID";
+		sql = "select * from other_declarant_info t left join subject_declaration d on t.ODI_DECLARATION_ID=d.SD_ID";
 		PreparedStatement pss = getConn().prepareStatement(sql);
 		ResultSet rss = pss.executeQuery();
 		while (rss.next()) {
@@ -611,10 +646,14 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 			subject.setXuewei(rss.getString("ODI_EDUCATION"));
 			String age = rss.getString("ODI_AGE");
 			Date bir = rss.getDate("SD_DECLA_TIME");
-			if (bir != null && StringUtils.isBlank(age)) {
+			if (bir != null && StringUtils.isNotBlank(age)) {
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(bir);
-				calendar.add(Calendar.YEAR, -Integer.parseInt(age));
+				long parseLong = Long.parseLong(age);
+				if (parseLong > 200) {
+					parseLong = 200;
+				}
+				calendar.add(Calendar.YEAR, -(int) parseLong);
 				subject.setBirthday(new Date(calendar.getTime().getTime()));
 			}
 			this.subjectSbsProposerDao.save(subject);

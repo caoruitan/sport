@@ -112,4 +112,15 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 		}
 		return maps;
 	}
+
+	@Override
+	public boolean deleteById(String sbsId, String code) {
+		return this.subjectSbsBudgetDao.deleteById(sbsId, code);
+	}
+
+	@Override
+	public boolean create(SubjectSbsBudget budget) {
+		this.subjectSbsBudgetDao.save(budget);
+		return true;
+	}
 }

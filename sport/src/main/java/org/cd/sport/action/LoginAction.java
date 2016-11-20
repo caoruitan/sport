@@ -1,5 +1,6 @@
 package org.cd.sport.action;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.dao.SyncDao;
+import org.cd.sport.dao.SyncDaoImp;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.SportException;
@@ -57,14 +60,32 @@ public class LoginAction {
 	@Autowired
 	private DicService dicService;
 
+	@Autowired
+	private SyncDao syncDao;
+
 	/**
 	 * 跳转登录界面
 	 * 
 	 * @return
 	 * @throws SQLException
+	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("login")
-	public String Login(HttpServletRequest request) throws SQLException {
+	public String Login(HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
+//		syncDao.importUser();
+//		syncDao.importOrg();
+//		syncDao.importNews();
+//		syncDao.importRwsAppropriation();
+//		syncDao.importRwsBudget();
+//		syncDao.importRwsDevice();
+//		syncDao.importRwsSchedule();
+//		syncDao.importRwsUndertaker();
+//		syncDao.importSbsBudget();
+//		syncDao.importSbsProposer();
+//		syncDao.importSubject();
+//		syncDao.importSubjectRws();
+//		syncDao.importSubjectSbs();
+
 		NewsVo news = newsService.getLatestNotice(Constants.News.NOTICE_NEWS);
 		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CONCAT_CODE);
 		String return_url = request.getParameter("return_url");
