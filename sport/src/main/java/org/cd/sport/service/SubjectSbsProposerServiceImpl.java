@@ -1,5 +1,6 @@
 package org.cd.sport.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cd.sport.constant.Constants;
@@ -84,8 +85,31 @@ public class SubjectSbsProposerServiceImpl extends SubjectSbsSupport implements 
 	}
 
 	@Override
+	@Transactional
 	public List<SubjectSbsProposerVo> getBySbsId(String sbsId, String primary) {
 		List<SubjectSbsProposer> ps = this.subjectSbsProposerDao.findBySbsId(sbsId, primary);
+		if (Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY.equals(primary) && (ps == null || ps.isEmpty())) {
+			ps = new ArrayList<SubjectSbsProposer>();
+			// 创建第一申请人
+			SubjectSbs sbs = this.subjectSbsService.getSubjectSbsById(sbsId);
+			Subject subject = this.subjectService.getSubjectById(sbs.getSubjectId());
+			UserDomain user = this.userService.getByLoginName(subject.getCreator());
+			SubjectSbsProposer sp = new SubjectSbsProposer();
+			sp.setSubjectId(sbs.getSubjectId());
+			sp.setSbsId(sbs.getSbsId());
+			sp.setName(user.getUserName());
+			sp.setGender(user.getGender());
+			sp.setBirthday(user.getBirthday());
+			sp.setDegrees(user.getDegrees());
+			sp.setEmail(user.getEmail());
+			sp.setPrimary(Constants.SubjectSbs.SUBJECT_SBS_PROPOSER_PRIMARY);
+			sp.setZw(user.getZw());
+			sp.setMajor(user.getMajor());
+			sp.setPhone(user.getPhone());
+			sp.setSort(0);
+			this.subjectSbsProposerDao.save(sp);
+			ps.add(sp);
+		}
 		return this.processVo(ps);
 	}
 
