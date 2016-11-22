@@ -119,7 +119,10 @@
 						align: "center",
 						sortable: false,
 						formatter:function(value, grid, rows, state){
-							return "<a href='javascript:;;' class='sport-news-edit' data-id='"+rows.id+"'>编辑</a>";
+							if(rows.status!=1){
+								return "<a href='javascript:;;' class='sport-news-edit' data-id='"+rows.id+"'>编辑</a>";
+							}
+							return "";
 						}
 					}],
 					autowidth: true,

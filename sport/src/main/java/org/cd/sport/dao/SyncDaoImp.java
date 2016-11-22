@@ -29,7 +29,6 @@ import org.cd.sport.domain.UserDomain;
 import org.cd.sport.hibernate.BaseDaoImpl;
 import org.cd.sport.service.DicService;
 import org.cd.sport.service.NewsAttachmentService;
-import org.cd.sport.service.SubjectSbsBudgetService;
 import org.cd.sport.view.FileView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -300,7 +299,8 @@ public class SyncDaoImp extends BaseDaoImpl<Subject> implements SyncDao {
 			subject.setSbsEndDate(rs.getDate("SI_TENDER_END_TIME"));
 			subject.setRwsEndDate(rs.getDate("SI_TASK_END_TIME"));
 			subject.setSubjectEndDate(rs.getDate("SI_OVER_END_TIME"));
-			subject.setNewState(rs.getInt("NEW_STATE"));
+			String int1 = rs.getString("NEW_STATE");
+			subject.setNewState(StringUtils.isNotBlank(int1) ? 2 : 0);
 			// 状态值处理
 			int state = rs.getInt("SI_STATE");
 			if (state == 0) {

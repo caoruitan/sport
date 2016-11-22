@@ -117,9 +117,9 @@
 				top: -70px;
 				margin-left: -30px;
 				display: inline-block;
-				width: 60px;
-				height: 60px;
-				line-height: 60px;
+				width: 69px;
+				height: 69px;
+				line-height: 69px;
 				border-radius: 40px;
 				border: 2px solid #F96A66;
 				text-align: center;
