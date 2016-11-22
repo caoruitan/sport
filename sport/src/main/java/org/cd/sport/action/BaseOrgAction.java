@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
+import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.ParameterIsWrongException;
+import org.cd.sport.service.DicService;
 import org.cd.sport.service.OrganizationService;
 import org.cd.sport.service.UserService;
 import org.cd.sport.support.SportSupport;
@@ -33,6 +35,9 @@ public class BaseOrgAction {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DicService dicService;
 
 	public OrganizationService getOrganizationService() {
 		return organizationService;
@@ -95,6 +100,13 @@ public class BaseOrgAction {
 	public String orgDetail(HttpServletRequest request) {
 		String orgId = request.getParameter("orgId");
 		OrganizationDomain org = this.organizationService.getById(orgId);
+		if (org == null) {
+			throw new EntityNotFoundException("单位不存在");
+		}
+		Dic dic = this.dicService.getByCode(org.getQuality());
+		if (dic != null) {
+			org.setQuality(dic.getName());
+		}
 		request.setAttribute("org", org);
 		return "sborg/detail";
 	}
