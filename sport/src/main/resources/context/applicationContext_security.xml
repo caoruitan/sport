@@ -95,6 +95,7 @@
 		<intercept-url pattern="/news/orgadmin/**" access="hasRole('ROLE_ORG_ADMIN')"/>
 		<intercept-url pattern="/news/orgoper/**" access="hasRole('ROLE_ORG_OPER')"/>
 		<intercept-url pattern="/news/detail/*.htm" access="permitAll()"/>
+		<intercept-url pattern="/news/download.action" access="permitAll()"/>
 		
 		<!-- 数据字典权限 -->
 		<intercept-url pattern="/dic/**" access="hasRole('ROLE_KJS_ADMIN')"/>

@@ -66,7 +66,7 @@ public class UploadAction {
 		}
 	}
 
-	@RequestMapping(value = "/news/kjsadmin/download.action")
+	@RequestMapping(value = "/news/download.action")
 	public void download(String dataId, String dataName, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String realPath = request.getSession().getServletContext().getRealPath("/" + UPLOAD_DIR);

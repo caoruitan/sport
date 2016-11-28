@@ -76,8 +76,8 @@ var Sport = {
 		return encrypt.encrypt(pwd);
 	},
 	getBasePath:function(){
-		var location = (window.location+'').split('/'); 
-		return location[0]+'//'+location[2]+'/'+location[3]; 
+		var local = window.location;
+		return local.protocol+"//"+local.host;
 	},
 	isNull:function(s){
         if(s == null || s == undefined){
@@ -659,7 +659,7 @@ $(function(){
 	}).on("click",".sport-download",function(){
 		var dataId = $(this).attr("data-id");
 		var dataName = $(this).attr("data-name");
-		window.open(Sport.getBasePath()+"/news/kjsadmin/download.action?dataId="+dataId+"&dataName="+encodeURI(dataName));
+		window.open(Sport.getBasePath()+"/news/download.action?dataId="+dataId+"&dataName="+encodeURI(dataName));
 	}).on("change","#news-column",function(){
 		$(".column-error").text("");
 	}).on("click",".sport-lm li",function(){
