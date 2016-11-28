@@ -7,7 +7,7 @@
 <jsp:include page="../cs/cs_head.jsp"></jsp:include>
 <body>
 	<div class="titleBox1">
-		<div class="tip">任务书填报</div>
+		<div class="tip">结题报告</div>
 		<div class="title">${subject.name}<span>${status[sc.status]}</span></div>
 		<div class="btnBox">
 			<c:if test='${sc.status eq "KJS_SP"}'>

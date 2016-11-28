@@ -128,7 +128,11 @@ public class UploadAction {
 			throw new EntityNotFoundException("申报书不存在");
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
-		realPath = realPath + "/sbs_" + subjectId + subject.getCreator() + ".doc";
+		if(subject.getNewState() == 0 || subject.getNewState() == 1) {
+			realPath = realPath + "/sbs" + subjectId + subject.getCreator() + ".doc";
+		} else if (subject.getNewState() == 2) {
+			realPath = realPath + "/sbs_" + subjectId + subject.getCreator() + ".doc";
+		}
 		downloadFile(realPath, "申报书_" + subject.getName() + ".doc", request, response);
 	}
 
@@ -138,7 +142,11 @@ public class UploadAction {
 			throw new EntityNotFoundException("课题不存在");
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/" + DOC_DIR);
-		realPath = realPath + "/rws_" + subjectId + subject.getCreator() + ".doc";
+		if(subject.getNewState() == 0 || subject.getNewState() == 1) {
+			realPath = realPath + "/rws" + subjectId + subject.getCreator() + ".doc";
+		} else if (subject.getNewState() == 2) {
+			realPath = realPath + "/rws_" + subjectId + subject.getCreator() + ".doc";
+		}
 		downloadFile(realPath, "任务书_" + subject.getName() + ".doc", request, response);
 	}
 
