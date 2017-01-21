@@ -6,6 +6,7 @@
 %>
 <div class="ktview">
 	<div class="kt-left">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrfToken"/>
 		<div class="lc">
 			<div class="line">
 				<li class="ok" id="e-txsm" onclick="showLayout('b-txsm')" >
@@ -14,23 +15,8 @@
 				<li class="dot" id="e-rwsfm" onclick="showLayout('b-rwsfm')" >
 					<a title="任务书基本信息">任务书基本信息</a>
 				</li>
-				<li class="dot" id="e-yjmb" onclick="showLayout('b-yjmb')">
-					<a title="研究目标和研究内容">01 研究目标和研究内容</a>
-				</li>
-				<li class="dot" id="e-jsgj" onclick="showLayout('b-jsgj')" >
-					<a title="技术关键和创新点">02 技术关键和创新点</a>
-				</li>
-				<li class="dot" id="e-yjff" onclick="showLayout('b-yjff')" >
-					<a title="采取的研究方法、主要技术路线、主要指标及可行性分析">03 采取的研究方法、主要技术路...</a>
-				</li>
-				<li class="dot" id="e-syfa" onclick="showLayout('b-syfa')">
-					<a title="研究实验方案、实验地点及协作单位的分工">04 研究实验方案、实验地点及协作...</a>
-				</li>
-				<li class="dot" id="e-yqjg" onclick="showLayout('b-yqjg')">
-					<a title="预期结果">05 预期结果</a>
-				</li>
-				<li class="dot" id="e-gztj" onclick="showLayout('b-gztj')">
-					<a title="承担单位现有工作条件和基础">06 承担单位现有工作条件和基础</a>
+				<li class="dot" id="e-xtyj" >
+					<a title="一到六项文档性内容填报">一到六项文档性内容填报</a>
 				</li>
 				<li class="dot" id="e-jdap">
 					<a title="进度安排">07 进度安排</a>
@@ -44,7 +30,7 @@
 				<li class="dot" id="e-sbgzmx">
 					<a title="设备购置明细表">10 设备购置明细表</a>
 				</li>
-				<li class="dot" id="e-ysly" onclick="showLayout('b-ysly')">
+				<li class="dot" id="e-ysly">
 					<a title="预算来源及经费支出情况说明">11 预算来源及经费支出情况说明</a>
 				</li>
 				<li class="dot" id="e-xbfjf">
@@ -123,95 +109,10 @@
 				</div>
 			</div>
 		</div>
-		<!--01 研究目标和研究内容-->
-		<div class="box b-yjmb">
-			<div class="t">01 研究目标和研究内容</div>
-			<div class="c">
-				<form id="yjmbForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yjmb">${rws.yjmb}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yjmbFormSubmit" class="btn-red btn-size-big" onclick="saveYjmb()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yjmbForm')">重置</button>
-				</p>
-			</div>
-		</div>
-		<!--02 技术关键和创新点-->
-		<div class="box b-jsgj">
-			<div class="t">02 技术关键和创新点</div>
-			<div class="c">
-				<form id="jsgjForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="jsgj">${rws.jsgj}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="jsgjFormSubmit" class="btn-red btn-size-big" onclick="saveJsgj()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('jsgjForm')">重置</button>
-				</p>
-			</div>
-		</div>
-		<!--03 采取的研究方法、主要技术路...-->
-		<div class="box b-yjff">
-			<div class="t">03 采取的研究方法、主要技术路...</div>
-			<div class="c">
-				<form id="yjffForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yjff">${rws.yjff}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yjffFormSubmit" class="btn-red btn-size-big" onclick="saveYjff()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yjffForm')">重置</button>
-				</p>
-			</div>
-		</div>
-		<!--04 研究实验方案、实验地点及协作...-->
-		<div class="box b-syfa">
-			<div class="t">04 研究实验方案、实验地点及协作...</div>
-			<div class="c">
-				<form id="syfaForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="syfa">${rws.syfa}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="syfaFormSubmit" class="btn-red btn-size-big" onclick="saveSyfa()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('syfaForm')">重置</button>
-				</p>
-			</div>
-		</div>
-		<!--05 预期结果-->
-		<div class="box b-yqjg">
-			<div class="t">05 预期结果</div>
-			<div class="c">
-				<form id="yqjgForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="yqjg">${rws.yqjg}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="yqjgFormSubmit" class="btn-red btn-size-big" onclick="saveYqjg()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('yqjgForm')">重置</button>
-				</p>
-			</div>
-		</div>
-		<!--06 承担单位现有工作条件和基础-->
-		<div class="box b-gztj">
-			<div class="t">06 承担单位现有工作条件和基础</div>
-			<div class="c">
-				<form id="gztjForm">
-					<input type="hidden" name="subjectId" value="${subjectId}">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="csrdId"/>
-					<textarea style="width:100%;height:400px;" name="gztj">${rws.gztj}</textarea>
-				</form>
-				<p class="save-btn">
-					<button id="gztjFormSubmit" class="btn-red btn-size-big" onclick="saveGztj()">保存</button>
-					<button class="btn-wisteria btn-size-big" onclick="reset('gztjForm')">重置</button>
-				</p>
-			</div>
+		<!--01 选题依据-->
+		<div class="box b-xtyj">
+			<div class="t">一到六项文档性内容填报</div>
+			<div class="xtyj-container sport-container"></div>
 		</div>
 		<!--07 进度安排-->
 		<div class="box b-jdap"></div>
@@ -224,34 +125,7 @@
 		<!--11 预算来源及经费支出情况说明-->
 		<div class="box b-ysly">
 			<div class="t">11 预算来源及经费支出情况说明</div>
-			<div class="c">
-				<table style="width:80%;margin-left:10%">
-					<tr>
-						<td style="border:1px solid #000000;width:100%;padding:5px;" colspan="4">
-							对各科目支出的主要用途、与项目研究的相关性及测算方法、测算依据进行详细分析说明。（未对支出进行分析说明的，不予核定预算）<br/>
-							一、直接费用<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（一）设备费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001001}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（二）材料费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001002}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（三）测试化验加工费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001003}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（四）差旅费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001004}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（五）会议费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001005}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（六）出版/印刷/文献/信息传播/知识产权事务费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001006}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（七）劳务费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001007}<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;（八）专家咨询费<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${D_001001008}<br/>
-							二、直接费用<br/>
-							&nbsp;&nbsp;&nbsp;&nbsp;${D_001002}<br/>
-						</td>
-					</tr>
-				</table>
-			</div>
+			<div class="ysly-container sport-container"></div>
 		</div>
 		<!--12 需拨付其他单位经费情况-->
 		<div class="box b-xbfjf"></div>
@@ -567,6 +441,20 @@
 		$('.line li').click(function(){
 			$('.line li').removeClass('b-active');
 			$(this).addClass("b-active");
+		});
+		
+		// 一到八项文档性内容填报
+		$("#e-xtyj").click(function(){
+			showLayout('b-xtyj');
+			$(".sport-container").children().remove();
+			$(".xtyj-container").load("<%=basePath%>/word/sboper/open",{fileId:"rws${subjectId}${subject.creator}_01.doc",title:"一到六项文档性内容填报",_csrf:$("#csrfToken").val(),readonly:false});
+		});
+		
+		// 一到八项文档性内容填报
+		$("#e-ysly").click(function(){
+			showLayout('b-ysly');
+			$(".sport-container").children().remove();
+			$(".ysly-container").load("<%=basePath%>/word/sboper/open",{fileId:"rws${subjectId}${subject.creator}_11.doc",title:"11 预算来源及经费支出情况说明",_csrf:$("#csrfToken").val(),readonly:false});
 		});
 		
 		$("#e-jdap").click(function(){

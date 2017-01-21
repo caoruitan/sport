@@ -332,7 +332,7 @@ public class Constants {
 	}
 
 	public static final class SubjectSbs {
-
+		
 		public static final String SUBJECT_SBS_STATUS_SBOPER_TB = "SBOPER_TB";
 
 		public static final String SUBJECT_SBS_STATUS_SBADMIN_SP = "SBADMIN_SP";
@@ -346,6 +346,19 @@ public class Constants {
 		public static final String SUBJECT_SBS_STATUS_BACK = "BACK";
 
 		public static final String SUBJECT_SBS_DOC_TEMPLATE_PATH = "/doc/sbs_template.doc";
+		
+		public static final String SUBJECT_SBS_FM_TEMPLATE_PATH = "/doc/sbs_new_template_000.doc";
+		
+		public static final String SUBJECT_SBS_DOC_CONTENT_TEMPLATE_PATH = "/doc/sbs_new_template_001.doc";
+		
+		public static final String SUBJECT_SBS_PROPOSERS_TEMPLATE_PATH = "/doc/sbs_new_template_009.doc";
+		
+		public static final String SUBJECT_SBS_BUDGET_TEMPLATE_PATH = "/doc/sbs_new_template_010.doc";
+		
+		public static final String SUBJECT_SBS_BUDGET_REASON_TEMPLATE_PATH = "/doc/sbs_new_template_011.doc";
+		
+		public static final String SUBJECT_SBS_ORG_TEMPLATE_PATH = "/doc/sbs_new_template_012.doc";
+
 
 		public static final String SUBJECT_SBS_DESCRIPTION_NEWS_ID = "402881e42cc658b4012cc66387a70002";
 		/**
@@ -384,6 +397,18 @@ public class Constants {
 		public static final String SUBJECT_RWS_STATUS_BACK = "BACK";
 
 		public static final String SUBJECT_RWS_DOC_TEMPLATE_PATH = "/doc/rws_template.doc";
+		
+		public static final String SUBJECT_RWS_FM_TEMPLATE_PATH = "/doc/rws_template_00.doc";
+		
+		public static final String SUBJECT_RWS_SCHEDULE_TEMPLATE_PATH = "/doc/rws_template_scheduling.doc";
+		
+		public static final String SUBJECT_RWS_UNDERTAKERS_TEMPLATE_PATH = "/doc/rws_template_projectPerson.doc";
+		
+		public static final String SUBJECT_RWS_APPROPRIATION_TEMPLATE_PATH = "/doc/rws_template_toOhterUnitFunds.doc";
+		
+		public static final String SUBJECT_RWS_BUDGET_TEMPLATE_PATH = "/doc/rws_template_budget.doc";
+		
+		public static final String SUBJECT_RWS_BUDGET_REASON_TEMPLATE_PATH = "/doc/rws_template_11.doc";
 
 		public static final String SUBJECT_RWS_DESCRIPTION_NEWS_ID = "402881e42cc658b4012cc663c22f0003";
 

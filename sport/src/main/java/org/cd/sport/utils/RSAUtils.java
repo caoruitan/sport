@@ -95,7 +95,7 @@ public class RSAUtils {
 		String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIDyEluJ1dKoaRI3MutPblpyfRL7mlDPgdMlLadW4npxMtqW/2/4w7/5kKACW1Hgu5ovzyWzTjLOZqEFYlpSvGzK4FI9Sxkf3uxrVnS8Gr0a8pzPJF97ZLjNIZXIBtg6h+zylr+je+rr89+DGxt9KPSuWUS2QBwCFJkjmdCCKgFdAgMBAAECgYB0V/ZwWYFwPTvwj5WF83liaoKnqhSmbVR6KsVyg1Z9m72CtVNsuEwG3yq69OVojxk2GYUSQyJ/fPPkvXLshFI1l4dD5Kzrc/ut4dJfV3kdP11SRfApn4+qkcThB0LO+j8lkkROMfxP7Jo5mZeK/PrZxRGGq3Ms/ebKqIod1drwAQJBAOHAosiSZW+QIAvOyejrX7YiK4lD6OCxK8uMjp1CLhu5kBgUc/Q4AmhRIxF4dxdDbS1I9Fuh/arCW7dpN1heJwECQQCSOO+z9dktL5E+66tEZx+ABpYTP4TtQ57fDdaBUfr8rpqQ3j93UeRsYv/Ta6hYFjsMkvS1Cj7BFAi/IsTWW9ZdAkAveWlCMLcwLOjwUr5XQxhPnwP0y9kvV1LUbWyYWZCEuBM7XSG9XAH1mgp75A93TvCos0zf8EL+I/1RpsjCxpoBAkAQthUfGh/h/Ce7ay+9t5NwDFCmjoHgo/PKRkiXqwjmTAY6PExAlMloYcAfJ5SrzI6fF0SEVFFru6BsR8r7PK+5AkEAvu/n8VshN770Myg6sGBXYoEwTwxqV8IuFYXwAu6J6NILyj+BN8f+OjNmhNrn6tQlKiYoib96jQmPR9SxcP4Qrg==";
 		String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCA8hJbidXSqGkSNzLrT25acn0S+5pQz4HTJS2nVuJ6cTLalv9v+MO/+ZCgAltR4LuaL88ls04yzmahBWJaUrxsyuBSPUsZH97sa1Z0vBq9GvKczyRfe2S4zSGVyAbYOofs8pa/o3vq6/PfgxsbfSj0rllEtkAcAhSZI5nQgioBXQIDAQAB";
 
-		String encrypt = encrypt("biddinghall123qwe", publicKey);
+		String encrypt = encrypt("@Kjsb-main#", publicKey);
 		System.out.println("加密后：" + encrypt);
 
 		System.out.println("解密后：" + decrypt(encrypt, privateKey));

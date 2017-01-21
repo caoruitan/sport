@@ -1,12 +1,20 @@
 package org.cd.sport.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.usermodel.Range;
 import org.cd.sport.dao.SubjectSbsBudgetDao;
+import org.cd.sport.domain.Subject;
 import org.cd.sport.domain.SubjectSbs;
 import org.cd.sport.domain.SubjectSbsBudget;
 import org.cd.sport.exception.ParameterIsWrongException;
@@ -33,6 +41,9 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 	@Autowired
 	private SubjectSbsService subjectSbsService;
 
+	@Autowired
+	private SubjectService subjectService;
+
 	@Override
 	public List<SubjectSbsBudget> getBySbsId(String sbsId) {
 		return this.subjectSbsBudgetDao.findBySbsId(sbsId);
@@ -40,7 +51,7 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 
 	@Override
 	@Transactional
-	public boolean create(SbsBudgetView view) {
+	public boolean create(SbsBudgetView view, String basePath) throws IOException {
 		if (view == null) {
 			return false;
 		}
@@ -61,6 +72,32 @@ public class SubjectSbsBudgetServiceImpl implements SubjectSbsBudgetService {
 			for (Budget co : costs) {
 				this.create(sbsId, view.getSubjectId(), co.getCode(), co.getCost(), co.getName(), co.getReason());
 			}
+		}
+
+		Subject subject = this.subjectService.getSubjectById(view.getSubjectId());
+		String sbs_prefix = "";
+		if (subject.getNewState() == 2) {
+			sbs_prefix = "/doc/sbs_new_";
+		} else {
+			sbs_prefix = "/doc/sbs_";
+		}
+
+		File file = new File(basePath + sbs_prefix + subject.getId() + subject.getCreator() + "_011.doc");
+		if (!file.exists()) {
+			// 封面信息修改
+			FileInputStream fmIs = new FileInputStream(new File(basePath + sbs_prefix + "template_011.doc"));
+			HWPFDocument hdt = new HWPFDocument(fmIs);
+			Range range = hdt.getRange();
+			// 填充预算信息
+			for (Budget budget : view.getCost()) {
+				range.replaceText("${D_" + budget.getCode().substring(3) + "}",
+						budget.getReason() == null ? "" : budget.getReason());
+			}
+			OutputStream os = new FileOutputStream(
+					basePath + sbs_prefix + subject.getId() + subject.getCreator() + "_011.doc");
+			fmIs.close();
+			hdt.write(os);
+			os.close();
 		}
 		return true;
 	}

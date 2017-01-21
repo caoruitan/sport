@@ -14,6 +14,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<listener>
+		<listener-class>org.cd.sport.filter.SportListener</listener-class>
+	</listener>
     
 	<!-- 配置SPRING-MVC入口SERVLET，负责请求过滤与转发，并配置其私有容器 -->
 	<servlet>
@@ -33,21 +37,25 @@
 	</servlet-mapping>
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<filter-class>org.cd.sport.filter.SecurityFilter</filter-class>
+		<init-param>    
+			<param-name>excludedUrl</param-name>    
+			<param-value>/poserver.zz,/poserver.cab,/poserver.do,/popdf.cab,/sealsetup.exe,/posetup.exe,/word/SaveFile,/adminseal.do,/loginseal.do</param-value>    
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter>
-        <filter-name>XssSqlFilter</filter-name>
-        <filter-class>org.cd.sport.filter.XssFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>XssSqlFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+		<filter-name>XssSqlFilter</filter-name>
+		<filter-class>org.cd.sport.filter.XssFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XssSqlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 	<!-- 集成sitemesh 可以装饰请求  -->
 	<filter>
 		<filter-name>sitemesh</filter-name>
@@ -74,6 +82,60 @@
 		<filter-name>Set Character Encoding</filter-name>
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
+    
+	<servlet>
+		<servlet-name>poserver</servlet-name> 
+		<servlet-class>com.zhuozhengsoft.pageoffice.poserver.Server</servlet-class> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/poserver.zz</url-pattern> 
+	</servlet-mapping> 
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/poserver.do</url-pattern> 
+	</servlet-mapping> 
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/pageoffice.cab</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/popdf.cab</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/sealsetup.exe</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>poserver</servlet-name> 
+		<url-pattern>/posetup.exe</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminseal</servlet-name> 
+		<servlet-class>com.zhuozhengsoft.pageoffice.poserver.AdminSeal</servlet-class> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>adminseal</servlet-name> 
+		<url-pattern>/adminseal.do</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>adminseal</servlet-name> 
+		<url-pattern>/loginseal.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>adminseal</servlet-name> 
+		<url-pattern>/sealimage.do</url-pattern>
+	</servlet-mapping>
+	<mime-mapping>  
+		<extension>mht</extension>  
+		<mime-type>message/rfc822</mime-type>  
+	</mime-mapping>
+	<context-param>
+		<param-name>adminseal-password</param-name>
+		<param-value>111111</param-value>
+	</context-param>
     
 	<!-- 登陆页面及错误页面 -->
 	<welcome-file-list>

@@ -1,5 +1,6 @@
 package org.cd.sport.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +14,14 @@ import org.cd.sport.view.SbsBudgetView;
  */
 public interface SubjectSbsBudgetService {
 
-	public boolean create(SbsBudgetView view);
-	
+	public boolean create(SbsBudgetView view, String basePath) throws IOException ;
+
 	public boolean create(SubjectSbsBudget budget);
 
 	public boolean create(String sbsId, String subjectId, String code, String cost, String name, String reason);
-	
+
 	public boolean deleteById(String sbsId, String code);
-	
+
 	public boolean update(String sbsId, String subjectId, String code, String cost, String name, String reason);
 
 	public List<SubjectSbsBudget> getBySbsId(String sbsId);

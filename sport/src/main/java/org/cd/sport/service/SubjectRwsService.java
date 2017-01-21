@@ -16,6 +16,8 @@ public interface SubjectRwsService {
 	
 	public SubjectRws createSubjectRws(String subjectId);
 	
+	public void copyRwsFile(String sujectId);
+	
 	public void saveBaseInfo(String subjectId, String address, String phone, String cooperateOrg);
 	
 	public void saveYjmb(String subjectId, String yjmb);

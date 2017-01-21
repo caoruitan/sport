@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.cd.sport.constant.Constants;
-import org.cd.sport.dao.SyncDao;
-import org.cd.sport.dao.SyncDaoImp;
 import org.cd.sport.domain.Dic;
 import org.cd.sport.domain.OrganizationDomain;
 import org.cd.sport.exception.SportException;
@@ -60,8 +58,8 @@ public class LoginAction {
 	@Autowired
 	private DicService dicService;
 
-	@Autowired
-	private SyncDao syncDao;
+//	@Autowired
+//	private SyncDao syncDao;
 
 	/**
 	 * 跳转登录界面

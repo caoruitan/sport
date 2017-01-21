@@ -14,9 +14,21 @@
 		</headers>
 		<!-- 登陆、登出 -->
 		<intercept-url pattern="/login" access="permitAll()"/>
+		<intercept-url pattern="/word/**" access="permitAll()"/>
 		<intercept-url pattern="/logout" access="permitAll()"/>
 		<intercept-url pattern="/doLogin" access="permitAll()"/>
 		<intercept-url pattern="/download.action" access="isAuthenticated()"/>
+		<intercept-url pattern="/adminseal.do" access="isAuthenticated()"/>
+		
+		<!--wrod相关-->
+		<intercept-url pattern="/word/kjsadmin/**" access="hasAnyRole('ROLE_KJS_ADMIN')"/>
+		<intercept-url pattern="/word/kjsleader/**" access="hasAnyRole('ROLE_KJS_LEADER')"/>
+		<intercept-url pattern="/word/kjsexpert/**" access="hasAnyRole('ROLE_KJS_EXPERT')"/>
+		<intercept-url pattern="/word/sbadmin/**" access="hasAnyRole('ROLE_SB_ADMIN')"/>
+		<intercept-url pattern="/word/sboper/**" access="hasAnyRole('ROLE_SB_OPER')"/>
+		<intercept-url pattern="/word/orgadmin/**" access="hasAnyRole('ROLE_ORG_ADMIN')"/>
+		<intercept-url pattern="/word/orgoper/**" access="hasAnyRole('ROLE_ORG_OPER')"/>
+		
 		
 		<!-- 注册相关-->
 		<intercept-url pattern="/regist/**" access="permitAll()"/>
