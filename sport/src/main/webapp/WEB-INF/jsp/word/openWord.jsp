@@ -17,7 +17,7 @@
 	poCtrl.setServerPage(request.getContextPath()+"/poserver.zz");
 	WordDocument wordDoc = new WordDocument();
 	// 设置水印
-	//wordDoc.getWaterMark().setText("国家体育总局");
+	wordDoc.getWaterMark().setText("国家体育总局");
 	//wordDoc.getTemplate().defineDataRegion("PO_FM","封面");
 	//poCtrl.addCustomToolButton("定义数据区域", "ShowDefineDataRegions()", 3);
 	
