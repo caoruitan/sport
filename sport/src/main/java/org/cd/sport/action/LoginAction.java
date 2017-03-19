@@ -21,6 +21,7 @@ import org.cd.sport.service.NewsService;
 import org.cd.sport.service.OrganizationService;
 import org.cd.sport.utils.PageWrite;
 import org.cd.sport.utils.RSAGenerator;
+import org.cd.sport.utils.URLValidateUtils;
 import org.cd.sport.utils.UUIDUtil;
 import org.cd.sport.vo.NewsVo;
 import org.cd.sport.vo.UserAuth;
@@ -58,8 +59,8 @@ public class LoginAction {
 	@Autowired
 	private DicService dicService;
 
-//	@Autowired
-//	private SyncDao syncDao;
+	// @Autowired
+	// private SyncDao syncDao;
 
 	/**
 	 * 跳转登录界面
@@ -70,28 +71,28 @@ public class LoginAction {
 	 */
 	@RequestMapping("login")
 	public String Login(HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
-//		syncDao.importUser();
-//		syncDao.importOrg();
-//		syncDao.importNews();
-//		syncDao.importRwsAppropriation();
-//		syncDao.importRwsBudget();
-//		syncDao.importRwsDevice();
-//		syncDao.importRwsSchedule();
-//		syncDao.importRwsUndertaker();
-//		syncDao.importSbsBudget();
-//		syncDao.importSbsProposer();
-//		syncDao.importSubject();
-//		syncDao.importSubjectRws();
-//		syncDao.importSubjectSbs();
+		// syncDao.importUser();
+		// syncDao.importOrg();
+		// syncDao.importNews();
+		// syncDao.importRwsAppropriation();
+		// syncDao.importRwsBudget();
+		// syncDao.importRwsDevice();
+		// syncDao.importRwsSchedule();
+		// syncDao.importRwsUndertaker();
+		// syncDao.importSbsBudget();
+		// syncDao.importSbsProposer();
+		// syncDao.importSubject();
+		// syncDao.importSubjectRws();
+		// syncDao.importSubjectSbs();
 
 		NewsVo news = newsService.getLatestNotice(Constants.News.NOTICE_NEWS);
 		List<Dic> dics = this.dicService.getByPcode(Constants.Dic.DIC_CONCAT_CODE);
-		String return_url = request.getParameter("return_url");
+		// String return_url = request.getParameter("return_url");
 		// 初始化公钥
 		RSAGenerator generator = new RSAGenerator();
 		String pubKey = generator.generateBase64PublicKey();
 		request.setAttribute("pubKey", pubKey);
-		request.setAttribute("return_url", return_url);
+		request.setAttribute("return_url", URLValidateUtils.validate(request));
 		String guid = UUIDUtil.getGuid();
 		request.setAttribute("uuid", guid);
 		request.setAttribute("news", news);
@@ -135,9 +136,7 @@ public class LoginAction {
 				while (iterator.hasNext()) {
 					SimpleGrantedAuthority next = iterator.next();
 					String authority = next.getAuthority();
-					if (StringUtils.isBlank(return_url)) {
-						return_url = Constants.User.urlMapping.get(authority);
-					}
+					return_url = URLValidateUtils.validate(request, authority);
 					break;
 				}
 				UserAuth userAuth = (UserAuth) authentication.getPrincipal();
