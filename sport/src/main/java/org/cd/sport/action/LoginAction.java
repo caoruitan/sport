@@ -62,6 +62,11 @@ public class LoginAction {
 	// @Autowired
 	// private SyncDao syncDao;
 
+	@RequestMapping("/")
+	public String sportIndex(HttpServletRequest request) {
+		return "redirect:/login";
+	}
+
 	/**
 	 * 跳转登录界面
 	 * 
@@ -70,7 +75,7 @@ public class LoginAction {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("login")
-	public String Login(HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
+	public String Login(HttpServletRequest request) {
 		// syncDao.importUser();
 		// syncDao.importOrg();
 		// syncDao.importNews();
