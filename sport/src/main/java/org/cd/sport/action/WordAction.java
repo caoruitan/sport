@@ -4,16 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.cd.sport.utils.AuthenticationUtils;
-import org.cd.sport.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.zhuozhengsoft.pageoffice.FileSaver;
-import com.zhuozhengsoft.pageoffice.OpenModeType;
-import com.zhuozhengsoft.pageoffice.PageOfficeCtrl;
-import com.zhuozhengsoft.pageoffice.wordwriter.DataRegion;
-import com.zhuozhengsoft.pageoffice.wordwriter.WordDocument;
 
 @Controller
 @RequestMapping("word")
