@@ -154,6 +154,22 @@
 		<error-code>500</error-code>  
 		<location>/500.jsp</location>  
 	</error-page> 
+	<!--禁用webdav-->
+	<security-constraint>     
+		<web-resource-collection>     
+			<url-pattern>/*</url-pattern>     
+			<http-method>PUT</http-method>     
+			<http-method>DELETE</http-method>     
+			<http-method>HEAD</http-method>     
+			<http-method>OPTIONS</http-method>     
+			<http-method>TRACE</http-method>
+		</web-resource-collection>     
+		<auth-constraint>     
+		</auth-constraint>     
+	</security-constraint>     
+	<login-config>     
+		<auth-method>BASIC</auth-method>     
+	</login-config>  
     
 	<!-- 登陆页面及错误页面 -->
 	<welcome-file-list>

@@ -18,6 +18,7 @@
     <mvc:resources location="/static/js/" mapping="/static/js/**"></mvc:resources>
     <mvc:resources location="/static/img/" mapping="/static/img/**"></mvc:resources>
     <mvc:resources location="/static/layer/" mapping="/static/layer/**"></mvc:resources>
+    <mvc:resources location="/static/fonts/" mapping="/static/fonts/**"></mvc:resources>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
      
